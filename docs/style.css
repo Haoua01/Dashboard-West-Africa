@@ -1,13 +1,13 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #AFEEEE;
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
     color: #333;
 }
 
 header {
-    background: #4CAF50;
+    background: #AFEEEE;
     color: white;
     padding: 40px 20px;
     text-align: center;
@@ -64,7 +64,7 @@ nav a:hover {
 }
 
 h2 {
-    color: #4CAF50;
+    color: #AFEEEE;
     font-size: 1.8em;
     margin-bottom: 10px;
 }
@@ -80,7 +80,7 @@ p {
     width: 100%;
     margin: 15px 0;
     padding: 20px;
-    background: #4CAF50;
+    background: #AFEEEE;
     color: white;
     text-align: center;
     text-decoration: none;
@@ -98,7 +98,7 @@ p {
 }
 
 footer {
-    background: #4CAF50;
+    background: #AFEEEE;
     color: white;
     text-align: center;
     padding: 20px;
