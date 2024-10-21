@@ -92,7 +92,7 @@ p {
 }
 
 .map-link:hover {
-    background: #45a049;
+    background: #008080;
     transform: translateY(-3px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
@@ -114,4 +114,21 @@ footer p {
     font-size: 1em;
     font-weight: 500;
     color: #f9f9f9;
+}
+
+.back-button {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #008080; /* Same green background */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #008080; /* Darker green on hover */
 }
