@@ -17,24 +17,24 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('map1').style.display = 'block'; // Show map1
     document.getElementById('map3').style.display = 'block'; // Show map3
 
-    // Attach event listeners for toggling maps
-    document.getElementById('toggle1a').addEventListener('click', function() {
-        toggleMap('map1', 'map2'); // Show map1, hide map2
-    });
-
-    document.getElementById('toggle1b').addEventListener('click', function() {
-        toggleMap('map2', 'map1'); // Show map2, hide map1
-    });
-
-    document.getElementById('toggle2a').addEventListener('click', function() {
-        toggleMap('map3', 'map4'); // Show map3, hide map4
-    });
-
-    document.getElementById('toggle2b').addEventListener('click', function() {
-        toggleMap('map4', 'map3'); // Show map4, hide map3
-    });
 });
 
 
 
+// Function to toggle visibility of the maps
+function toggleMap(mapId, show = false) {
+    // Hide all maps
+    var maps = document.getElementsByClassName('map');
+    for (var i = 0; i < maps.length; i++) {
+        maps[i].style.display = 'none';
+    }
+    
+    // Show the selected map if show is true
+    if (show) {
+        document.getElementById(mapId).style.display = 'block';
+    } else {
+        // If not showing, show the selected map normally
+        document.getElementById(mapId).style.display = 'block';
+    }
+}
 
