@@ -165,7 +165,7 @@ footer p {
 }
 
 .toggle-buttons button {
-    background: #007BFF; /* Button background color */
+    background: #003747; /* Button background color */
     color: #fff; /* Button text color */
     border: none;
     padding: 10px 15px;
@@ -176,7 +176,7 @@ footer p {
 }
 
 .toggle-buttons button:hover {
-    background: #007BFF; /* Darker shade on hover */
+    background: #003747; /* Darker shade on hover */
     transform: translateY(-5px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
