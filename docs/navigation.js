@@ -12,28 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
         // Insert the button at the end of the container
         container.appendChild(backButton);
     }
-
-    // Show map1 and map3 by default
-    document.getElementById('map1').style.display = 'block'; // Show map1
-    document.getElementById('map3').style.display = 'block'; // Show map3
-
-    // Attach event listeners for toggling maps in group 1
-    document.getElementById('toggle1a').addEventListener('click', function() {
-        toggleMap('map1', 'group1'); // Show map1, hide map2
-    });
-
-    document.getElementById('toggle1b').addEventListener('click', function() {
-        toggleMap('map2', 'group1'); // Show map2, hide map1
-    });
-
-    // Attach event listeners for toggling maps in group 2
-    document.getElementById('toggle2a').addEventListener('click', function() {
-        toggleMap('map3', 'group2'); // Show map3, hide map4
-    });
-
-    document.getElementById('toggle2b').addEventListener('click', function() {
-        toggleMap('map4', 'group2'); // Show map4, hide map3
-    });
 });
 
 
