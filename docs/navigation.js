@@ -16,6 +16,23 @@ document.addEventListener("DOMContentLoaded", function() {
     // Show map1 and map3 by default
     document.getElementById('map1').style.display = 'block'; // Show map1
     document.getElementById('map3').style.display = 'block'; // Show map3
+
+    // Attach event listeners for toggling maps
+    document.getElementById('toggle1a').addEventListener('click', function() {
+        toggleMap('map1', 'map2'); // Show map1, hide map2
+    });
+
+    document.getElementById('toggle1b').addEventListener('click', function() {
+        toggleMap('map2', 'map1'); // Show map2, hide map1
+    });
+
+    document.getElementById('toggle2a').addEventListener('click', function() {
+        toggleMap('map3', 'map4'); // Show map3, hide map4
+    });
+
+    document.getElementById('toggle2b').addEventListener('click', function() {
+        toggleMap('map4', 'map3'); // Show map4, hide map3
+    });
 });
 
 // Function to toggle visibility of the maps
