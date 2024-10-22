@@ -76,6 +76,12 @@ p {
     font-size: 1.1em;
 }
 
+.map {
+    width: 100%;
+    height: 600px; /* Ensure a fixed height for visibility */
+    display: none; /* Initially hidden, except for the active map */
+}
+
 .map-link {
     display: inline-block;
     width: calc(100% - 40px);
