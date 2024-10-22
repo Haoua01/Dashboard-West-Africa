@@ -55,20 +55,29 @@ nav a:hover {
     align-items: center; /* Center content horizontally inside */
 }
 
-.card {
-    background: #f8f8f8;
-    width: 80%;
-    margin-bottom: 20px;
+/* Card styling with consistent width and margin */
+.card, .indicator-header {
+    width: 80%; /* Same width for both elements */
+    margin-bottom: 20px; /* Consistent margin between elements */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+/* Card specific styles */
+.card {
+    background: #f8f8f8;
 }
+
+/* Indicator header specific styles */
+.indicator-header {
+    background-color: #008080; /* Turquoise background */
+    color: white; /* White text */
+    font-weight: bold;
+    text-align: center; /* Centered text */
+}
+
 
 h2 {
     color: #008080;
@@ -125,32 +134,6 @@ footer p {
     font-size: 1em;
     font-weight: 500;
     color: #f9f9f9;
-}
-
-
-.indicator-header {
-    width: 80%;
-    display: inline-block;
-    margin: 10px;
-    padding: 20px;
-    background-color: #008080; /* Same green background */
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: bold;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-
-.card {
-    background: #f8f8f8;
-    width: 80%;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .back-button {
