@@ -13,10 +13,6 @@ document.addEventListener("DOMContentLoaded", function() {
         container.appendChild(backButton);
     }
 
-    // Show map1 and map3 by default
-    toggleMap('map1', true); // Show map1 and keep it visible
-    toggleMap('map3', true); // Show map3 and keep it visible
-
     // Add event listeners for the first set of toggle buttons
     const toggleButtons1 = document.querySelectorAll('.toggle-buttons:first-of-type button');
     toggleButtons1.forEach((button) => {
@@ -25,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
             toggleMap(mapId);
         });
     });
+    toggleMap('map1', true); // Show map1 and keep it visible
 
     // Add event listeners for the second set of toggle buttons
     const toggleButtons2 = document.querySelectorAll('.toggle-buttons:last-of-type button');
@@ -34,6 +31,8 @@ document.addEventListener("DOMContentLoaded", function() {
             toggleMap(mapId);
         });
     });
+
+    toggleMap('map3', true); // Show map3 and keep it visible
 });
 
 // Function to toggle visibility of the maps
