@@ -31,6 +31,8 @@
         <div class="toggle-buttons">
             <button onclick="toggleMap('map1')">Normalisation par pays</button>
             <button onclick="toggleMap('map2')">Normalisation globale</button>
+            <button onclick="toggleMap('map3')">Résultats globaux</button>
+            <button onclick="toggleMap('map4')">Régions dépourvues d'agences</button>
         </div>
 
         <!-- Map containers -->
@@ -48,18 +50,12 @@
             Ce deuxième indicateur, plus intuitif, est utilisé dans la plupart des études sur l'inclusion financière car il permet de se rendre compte de l'accès direct des populations aux agences bancaires.
         </p>
 
-        <!-- Toggle buttons -->
-        <div class="toggle-buttons">
-            <button onclick="toggleMap('map1')">Résultats globaux</button>
-            <button onclick="toggleMap('map2')">Régions dépourvues d'agences</button>
-        </div>
-
         <!-- Map containers -->
-        <div id="map1" class="map">
+        <div id="map3" class="map">
             <iframe src="indicateur_demographique.html" width="100%" height="600px"></iframe>
         </div>
         
-        <div id="map2" class="map" style="display: none;">
+        <div id="map4" class="map" style="display: none;">
             <iframe src="no_agencies.html" width="100%" height="600px"></iframe>
         </div>
 
