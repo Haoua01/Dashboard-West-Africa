@@ -20,8 +20,20 @@
             </p>
         </div>
 
-        <a href="isibf_benin_togo_civ_norm.html" class="map-link">Score d'Accès aux Agences Bancaires (V1)</a>
-        <a href="isibf_benin_togo_civ.html" class="map-link">Score d'Accès aux Agences Bancaires (V2)</a>
+        <!-- Toggle buttons -->
+        <div class="toggle-buttons">
+            <button onclick="toggleMap('map1')">Normalisation par pays</button>
+            <button onclick="toggleMap('map2')">Normalisation globale</button>
+        </div>
+
+        <!-- Map containers -->
+        <div id="map1" class="map">
+            <iframe src="isibf_benin_togo_civ_norm.html" width="100%" height="600px"></iframe>
+        </div>
+        
+        <div id="map2" class="map" style="display: none;">
+            <iframe src="isibf_benin_togo_civ.html" width="100%" height="600px"></iframe>
+        </div>
     </div>
 
     <footer>
