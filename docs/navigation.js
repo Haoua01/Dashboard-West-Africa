@@ -13,8 +13,12 @@ document.addEventListener("DOMContentLoaded", function() {
         container.appendChild(backButton);
     }
 
+    // Show map1 and map3 by default
+    toggleMap('map1', true); // Show map1 and keep it visible
+    toggleMap('map3', true); // Show map3 and keep it visible
+
     // Add event listeners for the first set of toggle buttons
-    const toggleButtons1 = document.querySelectorAll('.toggle-buttons button');
+    const toggleButtons1 = document.querySelectorAll('.toggle-buttons:first-of-type button');
     toggleButtons1.forEach((button) => {
         button.addEventListener('click', function() {
             const mapId = this.textContent.includes('Normalisation par pays') ? 'map1' : 'map2';
@@ -23,31 +27,28 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Add event listeners for the second set of toggle buttons
-    const toggleButtons2 = document.querySelectorAll('.toggle-buttons + .toggle-buttons button');
+    const toggleButtons2 = document.querySelectorAll('.toggle-buttons:last-of-type button');
     toggleButtons2.forEach((button) => {
         button.addEventListener('click', function() {
             const mapId = this.textContent.includes('Résultats globaux') ? 'map3' : 'map4';
             toggleMap(mapId);
         });
     });
-
-    // Initialize map1 and map3 as visible
-    toggleMap('map1'); // Show the first map of the first indicator
-    toggleMap('map3'); // Show the first map of the second indicator
 });
 
 // Function to toggle visibility of the maps
-function toggleMap(mapId) {
+function toggleMap(mapId, show = false) {
     // Hide all maps
     var maps = document.getElementsByClassName('map');
     for (var i = 0; i < maps.length; i++) {
         maps[i].style.display = 'none';
     }
-    // Show the selected map
-    document.getElementById(mapId).style.display = 'block';
     
-    // Display map3 if map1 is visible
-    if (mapId === 'map1') {
-        document.getElementById('map3').style.display = 'block';
+    // Show the selected map if show is true
+    if (show) {
+        document.getElementById(mapId).style.display = 'block';
+    } else {
+        // If not showing, show the selected map normally
+        document.getElementById(mapId).style.display = 'block';
     }
 }
