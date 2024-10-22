@@ -20,7 +20,7 @@
             </p>
         </div>
 
-        <h3 class="indicator-header">Indicateur 1 : score d'accès</h3>
+        <h3 class="indicator-header">Indicateur 1 : Score d'accès</h3>
         <p>
             Le premier indicateur se propose d'établir un score d'accès aux agences bancaires dans chaque régions des pays d'Afrique de l'Ouest, dépendant du nombre d'équipements dans chaque territoires, mais aussi de la distance entre territoires.
             L'avantage de cette méthodologie est de pouvoir prendre en compte les équipements dans la mesure de l'accès aux services financiers.
@@ -29,9 +29,10 @@
 
         <!-- Toggle buttons -->
         <div class="toggle-buttons">
-            <button onclick="toggleMap('map1')">Normalisation par pays</button>
-            <button onclick="toggleMap('map2')">Normalisation globale</button>
+            <button id="toggle1a">Normalisation par pays</button>
+            <button id="toggle1b">Normalisation globale</button>
         </div>
+        
 
         <!-- Map containers -->
         <div id="map1" class="map group1">
@@ -45,13 +46,13 @@
         <h3 class="indicator-header">Indicateur 2 : Nombre d'équipements</h3>
         <p>
             Le second indicateur se propose d'évaluer le nombre d'agences bancaires dans chaque régions pour 100.000 habitants. Cet indicateur démographique ne dépend que du nombre d'équipements et de la population d'adultes de plus de 15 ans susceptible d'utiliser ces services.
-            Ce deuxième indicateur, plus intuitif, est utilisé dans la plupart des études sur l'inclusion financière car il permet de se rendre compte de l'accès direct des populations aux agences bancaires.
+            Ce deuxième indicateur, plus intuitif, est utilisé dans la majorité des études sur l'inclusion financière car il permet de rendre compte de l'accès direct des populations aux agences bancaires.
         </p>
 
         <!-- Toggle buttons -->
         <div class="toggle-buttons">
-            <button onclick="toggleMap('map3')">Résultats globaux</button>
-            <button onclick="toggleMap('map4')">Régions dépourvues d'agences</button>
+            <button id="toggle2a">Résultats globaux</button>
+            <button id="toggle2b">Régions dépourvues d'agences</button>
         </div>
 
         <!-- Map containers -->
