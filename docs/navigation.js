@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Initialize the first map as visible
     toggleMap('map1'); // Show the first map by default
+    toggleMap('map3'); // Show the second map by default
 });
 
 // Function to toggle visibility of the maps
