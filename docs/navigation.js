@@ -35,11 +35,22 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+
 // Function to toggle visibility of the maps
-function toggleMap(showMapId, hideMapId) {
-    // Hide the specified map
-    document.getElementById(hideMapId).style.display = 'none';
+function toggleMap(mapId, show = false) {
+    // Hide all maps
+    var maps = document.getElementsByClassName('map');
+    for (var i = 0; i < maps.length; i++) {
+        maps[i].style.display = 'none';
+    }
     
-    // Show the specified map
-    document.getElementById(showMapId).style.display = 'block';
+    // Show the selected map if show is true
+    if (show) {
+        document.getElementById(mapId).style.display = 'block';
+    } else {
+        // If not showing, show the selected map normally
+        document.getElementById(mapId).style.display = 'block';
+    }
 }
+
