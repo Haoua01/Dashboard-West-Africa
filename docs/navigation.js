@@ -13,21 +13,27 @@ document.addEventListener("DOMContentLoaded", function() {
         container.appendChild(backButton);
     }
 
-    // Add event listener for the toggle
-    const mapToggle = document.getElementById("map-toggle");
-    if (mapToggle) {
-        mapToggle.addEventListener("change", function() {
-            if (this.checked) {
-                toggleMap('map2'); // Show the second map when checked
-            } else {
-                toggleMap('map1'); // Show the first map when unchecked
-            }
+    // Add event listeners for the first set of toggle buttons
+    const toggleButtons1 = document.querySelectorAll('.toggle-buttons button');
+    toggleButtons1.forEach((button) => {
+        button.addEventListener('click', function() {
+            const mapId = this.textContent.includes('Normalisation par pays') ? 'map1' : 'map2';
+            toggleMap(mapId);
         });
-    }
+    });
 
-    // Initialize the first map as visible
-    toggleMap('map1'); // Show the first map by default
-    toggleMap('map3'); // Show the second map by default
+    // Add event listeners for the second set of toggle buttons
+    const toggleButtons2 = document.querySelectorAll('.toggle-buttons + .toggle-buttons button');
+    toggleButtons2.forEach((button) => {
+        button.addEventListener('click', function() {
+            const mapId = this.textContent.includes('Résultats globaux') ? 'map3' : 'map4';
+            toggleMap(mapId);
+        });
+    });
+
+    // Initialize map1 and map3 as visible
+    toggleMap('map1'); // Show the first map of the first indicator
+    toggleMap('map3'); // Show the first map of the second indicator
 });
 
 // Function to toggle visibility of the maps
@@ -39,4 +45,9 @@ function toggleMap(mapId) {
     }
     // Show the selected map
     document.getElementById(mapId).style.display = 'block';
+    
+    // Display map3 if map1 is visible
+    if (mapId === 'map1') {
+        document.getElementById('map3').style.display = 'block';
+    }
 }
