@@ -31,8 +31,6 @@
         <div class="toggle-buttons">
             <button onclick="toggleMap('map1')">Normalisation par pays</button>
             <button onclick="toggleMap('map2')">Normalisation globale</button>
-            <button onclick="toggleMap('map3')">Résultats globaux</button>
-            <button onclick="toggleMap('map4')">Régions dépourvues d'agences</button>
         </div>
 
         <!-- Map containers -->
@@ -49,6 +47,12 @@
             Le second indicateur se propose d'évaluer le nombre d'agences bancaires dans chaque régions pour 100.000 habitants. Cet indicateur démographique ne dépend que du nombre d'équipements et de la population d'adultes de plus de 15 ans susceptible d'utiliser ces services.
             Ce deuxième indicateur, plus intuitif, est utilisé dans la plupart des études sur l'inclusion financière car il permet de se rendre compte de l'accès direct des populations aux agences bancaires.
         </p>
+
+        <!-- Toggle buttons -->
+        <div class="toggle-buttons">
+            <button onclick="toggleMap('map3')">Résultats globaux</button>
+            <button onclick="toggleMap('map4')">Régions dépourvues d'agences</button>
+        </div>
 
         <!-- Map containers -->
         <div id="map3" class="map">
