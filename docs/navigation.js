@@ -37,16 +37,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-// Function to toggle visibility of the maps
-function toggleMap(mapId, show = false) {
-
-    
-    // Show the selected map if show is true
-    if (show) {
-        document.getElementById(mapId).style.display = 'block';
-    } else {
-        // If not showing, show the selected map normally
-        document.getElementById(mapId).style.display = 'block';
-    }
-}
 
