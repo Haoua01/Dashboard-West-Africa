@@ -1,10 +1,9 @@
 body {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
-    height: 100vh;           /* Take full height of the viewport */
-    margin: 0;               /* Remove default margin */
+    font-family: 'Arial', sans-serif;
     background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
 }
 
 header {
@@ -42,42 +41,29 @@ nav a:hover {
 }
 
 .container {
-    width: 80%; /* Make the container take 80% of the window width */
+    width: 80%; /* Full width */
     height: calc(100vh - 100px); /* Adjust height based on header and footer */
     padding: 20px;
     background: white;
-    border-radius: 0; /* Remove border radius */
+    border-radius: 0; /* Remove border radius to fit flush */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     overflow: auto; /* Allow scrolling if content overflows */
-    display: flex; /* Flexbox for inner alignment */
-    flex-direction: column; /* Align inner content in a column */
-    justify-content: center; /* Center content vertically inside */
-    align-items: center; /* Center content horizontally inside */
 }
 
-/* Card styling with consistent width and margin */
-.card, .indicator-header {
-    width: 80%; /* Same width for both elements */
-    margin-bottom: 20px; /* Consistent margin between elements */
+.card {
+    background: #f8f8f8;
+    width: 80%;
+    margin-bottom: 20px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Card specific styles */
-.card {
-    background: #f8f8f8;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
-
-/* Indicator header specific styles */
-.indicator-header {
-    background-color: #008080; /* Turquoise background */
-    color: white; /* White text */
-    font-weight: bold;
-    text-align: center; /* Centered text */
-}
-
 
 h2 {
     color: #008080;
@@ -135,6 +121,22 @@ footer p {
     font-weight: 500;
     color: #f9f9f9;
 }
+
+
+.indicator-header {
+    width: 80%;
+    display: inline-block;
+    margin: 10px;
+    padding: 20px;
+    background-color: #008080; /* Same green background */
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
 
 .back-button {
     display: inline-block;
