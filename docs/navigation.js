@@ -20,21 +20,18 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
 // Function to toggle visibility of the maps
-function toggleMap(mapId, show = false) {
-    // Hide all maps
-    var maps = document.getElementsByClassName('map');
-    for (var i = 0; i < maps.length; i++) {
-        maps[i].style.display = 'none';
+function toggleMap(showMapId, group) {
+    // Hide maps that are not part of the specified group
+    const maps = document.getElementsByClassName('map');
+    for (let i = 0; i < maps.length; i++) {
+        if (!maps[i].classList.contains(group)) {
+            maps[i].style.display = 'none'; // Hide maps not in the current group
+        }
     }
-    
-    // Show the selected map if show is true
-    if (show) {
-        document.getElementById(mapId).style.display = 'block';
-    } else {
-        // If not showing, show the selected map normally
-        document.getElementById(mapId).style.display = 'block';
-    }
+
+    // Show the specified map
+    document.getElementById(showMapId).style.display = 'block';
 }
+
 
