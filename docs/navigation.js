@@ -13,3 +13,19 @@ document.addEventListener("DOMContentLoaded", function() {
         container.appendChild(backButton);
     }
 });
+
+// Function to toggle visibility of the maps
+function toggleMap(mapId) {
+    // Hide all maps
+    var maps = document.getElementsByClassName('map');
+    for (var i = 0; i < maps.length; i++) {
+        maps[i].style.display = 'none';
+    }
+    // Show the selected map
+    document.getElementById(mapId).style.display = 'block';
+}
+
+// Initialize the first map as visible
+window.onload = function() {
+    toggleMap('map1'); // Show the first map by default
+}
