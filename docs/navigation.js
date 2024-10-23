@@ -51,5 +51,7 @@ function showCountryMap() {
         iframe.src = 'isibf_togo.html';
     } else if (countrySelect === 'coteivoire') {
         iframe.src = 'isibf_civ.html';
+    } else if (countrySelect === 'combined') {
+        iframe.src = 'isibf_benin_togo_civ_norm.html';
     }
 }
