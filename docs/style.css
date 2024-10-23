@@ -182,58 +182,66 @@ footer p {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
-
-
-/* Style for the dropdown */
+/* Style for the dropdown container */
 .country-dropdown {
-    width: 90%; /* Width similar to the container for symmetry */
-    margin: 20px auto; /* Center the dropdown */
-    padding: 10px;
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    font-size: 1.1em;
+    width: 80%; /* Adjusted width for better alignment */
+    margin: 20px auto;
+    padding: 15px; /* More padding for a spacious look */
+    background-color: #f1f1f1; /* Softer background */
+    border: 1px solid #ddd; /* Lighter border */
+    border-radius: 10px; /* Rounded corners for a smoother look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    font-size: 1.2em;
     color: #333;
+    transition: box-shadow 0.3s ease;
 }
 
-/* Dropdown select */
+.country-dropdown:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+/* Dropdown select styling */
 .country-dropdown select {
     width: 100%;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 12px 15px;
+    border-radius: 8px; /* Rounded input for a modern look */
     border: 1px solid #ccc;
     font-size: 1em;
-    background-color: white;
-    transition: border-color 0.3s ease;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    appearance: none; /* Remove default dropdown arrow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
 }
 
 .country-dropdown select:focus {
-    border-color: #008080; /* Turquoise border on focus */
+    border-color: #008080; /* Turquoise focus */
+    box-shadow: 0 0 6px rgba(0, 128, 128, 0.5); /* Glow effect on focus */
     outline: none;
 }
 
 /* Dropdown option styles */
 .country-dropdown option {
-    padding: 10px;
+    padding: 12px;
     font-size: 1em;
     color: #333;
 }
 
-/* Styling for the button to show map based on country */
+/* Button styling */
 .country-dropdown button {
-    background: #008080;
+    background: linear-gradient(135deg, #008080, #00a3a3); /* Gradient for a modern look */
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 20px;
+    border-radius: 8px;
     cursor: pointer;
-    margin-top: 10px;
-    transition: background 0.3s ease;
+    margin-top: 15px;
+    font-size: 1.1em;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .country-dropdown button:hover {
-    background: #006666; /* Slightly darker turquoise on hover */
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #006666, #008080); /* Darker gradient on hover */
+    transform: translateY(-4px); /* Lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
 }
+
