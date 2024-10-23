@@ -12,9 +12,11 @@ document.addEventListener("DOMContentLoaded", function() {
         // Insert the button at the end of the container
         container.appendChild(backButton);
     }
+
+    // Initial hide of country map and dropdown until 'Normalisation par pays' is clicked
+    document.getElementById('countryDropdown').style.display = 'none';
+    document.getElementById('map1').style.display = 'none';
 });
-
-
 
 // Function to toggle visibility of the maps
 function toggleMap(showMapId, group) {
@@ -28,6 +30,26 @@ function toggleMap(showMapId, group) {
 
     // Show the specified map
     document.getElementById(showMapId).style.display = 'block';
+
+    // Display the dropdown only for 'Normalisation par pays' (map1)
+    if (showMapId === 'map1') {
+        document.getElementById('countryDropdown').style.display = 'block';
+    } else {
+        document.getElementById('countryDropdown').style.display = 'none';
+    }
 }
 
+// Function to update the map based on the selected country
+function showCountryMap() {
+    const countrySelect = document.getElementById('country-select').value;
+    const iframe = document.getElementById('map-frame');
 
+    // Change the iframe source based on the selected country
+    if (countrySelect === 'benin') {
+        iframe.src = 'isibf_benin.html';
+    } else if (countrySelect === 'togo') {
+        iframe.src = 'isibf_togo.html';
+    } else if (countrySelect === 'coteivoire') {
+        iframe.src = 'isibf_civ.html';
+    }
+}

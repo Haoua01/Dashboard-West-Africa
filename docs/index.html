@@ -33,9 +33,18 @@
             <button onclick="toggleMap('map2')">Normalisation globale</button>
         </div>
 
+        <div id="countryDropdown" style="display: none;">
+            <label for="country-select">Choisir un pays :</label>
+            <select id="country-select" onchange="showCountryMap()">
+                <option value="benin">Bénin</option>
+                <option value="togo">Togo</option>
+                <option value="coteivoire">Côte d'Ivoire</option>
+            </select>
+        </div>
+
         <!-- Map containers -->
-        <div id="map1" class="map group1">
-            <iframe src="isibf_benin_togo_civ_norm.html" width="100%" height="600px"></iframe>
+        <div id="map1" class="map group1" style="display: none;">
+            <iframe id="map-frame" src="" width="100%" height="600px"></iframe>
         </div>
         
         <div id="map2" class="map group1" style="display: none;">
