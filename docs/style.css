@@ -152,7 +152,14 @@ footer p {
     background-color: #008080; /* Darker turquoise on hover */
 }
 
-
+.map {
+    margin: 20px 0;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: white;
+}
 
 /* Toggle button styles */
 .toggle-buttons {
