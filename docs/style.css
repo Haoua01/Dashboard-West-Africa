@@ -110,7 +110,7 @@ header h1 {
     color: white;
     padding: 0 15px; /* Réduit le padding vertical */
     border-radius: 10px;
-    margin: 5px 0;
+    margin: 7px 0;
     margin-bottom: 40px; /* Ajoute un espace plus large en dessous */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
