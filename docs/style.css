@@ -6,7 +6,7 @@ body {
     padding: 0;
     color: #333;
     overflow-x: hidden; /* Disable horizontal scrolling */
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 header {
