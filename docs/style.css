@@ -61,7 +61,7 @@ header h1 {
 
 .service-card {
     width: 220px;
-    background: #8B0000;
+    background: #FFA500;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -95,9 +95,9 @@ header h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.service-section h2 {
+.service-section h1 {
     font-size: 1.8em;
-    color: #8B0000;
+    color: #FFA500;
     margin-bottom: 15px;
 }
 
