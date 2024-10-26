@@ -28,22 +28,21 @@
         </p>
 
         <!-- Toggle buttons -->
-        <div class="toggle-banner">
-            <div class="toggle-buttons">
-                <button onclick="toggleMap('map1')">Normalisation par pays</button>
-                <button onclick="toggleMap('map2')">Normalisation globale</button>
-            </div>
+        <div class="toggle-buttons">
+            <button onclick="toggleMap('map1')">Normalisation par pays</button>
+            <button onclick="toggleMap('map2')">Normalisation globale</button>
         </div>
-        
-
-        <div id="countryDropdown" style="display: none;">
-            <label for="country-select">Choisir un pays :</label>
-            <select id="country-select" onchange="showCountryMap()">
-                <option value="benin">Bénin</option>
-                <option value="togo">Togo</option>
-                <option value="coteivoire">Côte d'Ivoire</option>
-                <option value="combined">Combiné</option>
-            </select>
+    
+        <div class="toggle-banner">
+            <div id="countryDropdown" style="display: none;">
+                <label for="country-select">Choisir un pays :</label>
+                <select id="country-select" onchange="showCountryMap()">
+                    <option value="benin">Bénin</option>
+                    <option value="togo">Togo</option>
+                    <option value="coteivoire">Côte d'Ivoire</option>
+                    <option value="combined">Combiné</option>
+                </select>
+            </div>
         </div>
 
         <!-- Map containers -->
@@ -61,22 +60,22 @@
             Ce deuxième indicateur, plus intuitif, est utilisé dans la majorité des études sur l'inclusion financière car il permet de rendre compte de l'accès direct des populations aux agences bancaires.
         </p>
                     <!-- Toggle buttons -->
-        <div class="toggle-banner">
-            <div class="toggle-buttons">
-                <button onclick="toggleMap('map3')">Équipements par pays</button>
-                <button onclick="toggleMap('map4')">Régions sans agences</button>
-            </div>
+        <div class="toggle-buttons">
+            <button onclick="toggleMap('map3')">Équipements par pays</button>
+            <button onclick="toggleMap('map4')">Régions sans agences</button>
         </div>
 
         <!-- Conteneur pour le choix des pays de la deuxième carte -->
-        <div id="countryDropdown2" style="display: none;">
-            <label for="country-select2">Choisir un pays :</label>
-            <select id="country-select2" onchange="showCountryMap2()">
-                <option value="benin">Bénin</option>
-                <option value="togo">Togo</option>
-                <option value="coteivoire">Côte d'Ivoire</option>
-                <option value="combined">Combiné</option>
-            </select>
+        <div class="toggle-banner">
+            <div id="countryDropdown2" style="display: none;">
+                <label for="country-select2">Choisir un pays :</label>
+                <select id="country-select2" onchange="showCountryMap2()">
+                    <option value="benin">Bénin</option>
+                    <option value="togo">Togo</option>
+                    <option value="coteivoire">Côte d'Ivoire</option>
+                    <option value="combined">Combiné</option>
+                </select>
+            </div>
         </div>
 
         <!-- Conteneur de la deuxième carte -->
