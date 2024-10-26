@@ -42,16 +42,13 @@ function toggleMap(showMapId) {
     setActiveButton(showMapId);
 
     // Contrôle de la visibilité des dropdowns
-    if (showMapId === 'map1') {
+    if (showMapId === 'map1' || showMapId === 'map2') {
         document.getElementById('countryDropdown').style.display = 'block';
-        document.getElementById('countryDropdown2').style.display = 'none';
-    } else if (showMapId === 'chart3') {
         document.getElementById('countryDropdown2').style.display = 'block';
-        document.getElementById('countryDropdown').style.display = 'none';
-    } else {
-        document.getElementById('countryDropdown').style.display = 'none';
-        document.getElementById('countryDropdown2').style.display = 'none';
-    }
+    } else if (showMapId === 'chart3' || showMapId === 'chart4') {
+        document.getElementById('countryDropdown2').style.display = 'block';
+        document.getElementById('countryDropdown').style.display = 'block';
+    } 
 
     // Assurez-vous que map4 n'est affiché que lorsqu'il est explicitement sélectionné
     if (showMapId === 'map4') {
