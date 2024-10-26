@@ -40,3 +40,10 @@ function showCountryMap() {
     // Change the iframe source based on the selected country
     iframe.src = `isibf_${countrySelect}.html`;
 }
+
+// Fonction pour afficher le pays sélectionné dans la deuxième carte
+function showCountryMap2() {
+    const countrySelect2 = document.getElementById('country-select2').value;
+    const iframe2 = document.getElementById('map-frame2');
+    iframe2.src = `indicateur_demographique_${countrySelect2}.html`;
+}

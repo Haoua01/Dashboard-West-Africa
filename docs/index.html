@@ -60,20 +60,32 @@
             Le second indicateur se propose d'évaluer le nombre d'agences bancaires dans chaque régions pour 100.000 habitants. Cet indicateur démographique ne dépend que du nombre d'équipements et de la population d'adultes de plus de 15 ans susceptible d'utiliser ces services.
             Ce deuxième indicateur, plus intuitif, est utilisé dans la majorité des études sur l'inclusion financière car il permet de rendre compte de l'accès direct des populations aux agences bancaires.
         </p>
-
-        <!-- Toggle buttons -->
-        <div class="toggle-buttons">
-            <button onclick="toggleMap('map3')">Résultats globaux</button>
-            <button onclick="toggleMap('map4')">Régions dépourvues d'agences</button>
+                    <!-- Toggle buttons -->
+        <div class="toggle-banner">
+            <div class="toggle-buttons">
+                <button onclick="toggleMap('map3')">Équipements par pays</button>
+                <button onclick="toggleMap('map4')">Régions sans agences</button>
+            </div>
         </div>
 
-        <!-- Map containers -->
+        <!-- Conteneur pour le choix des pays de la deuxième carte -->
+        <div id="countryDropdown2" style="display: none;">
+            <label for="country-select2">Choisir un pays :</label>
+            <select id="country-select2" onchange="showCountryMap2()">
+                <option value="benin">Bénin</option>
+                <option value="togo">Togo</option>
+                <option value="coteivoire">Côte d'Ivoire</option>
+                <option value="combined">Combiné</option>
+            </select>
+        </div>
+
+        <!-- Conteneur de la deuxième carte -->
         <div id="map3" class="map group2">
-            <iframe src="indicateur_demographique.html" width="100%" height="600px"></iframe>
+            <iframe id="map-frame2" src="" width="100%" height="600px"></iframe>
         </div>
         
-        <div id="map4" class="map group2" style="display: none;">
-            <iframe src="no_agencies.html" width="100%" height="600px"></iframe>
+        <div id="map4" class="map group2">
+            <iframe id="map-frame2" src="no_agencies.html" width="100%" height="600px"></iframe>
         </div>
 
     </div>
