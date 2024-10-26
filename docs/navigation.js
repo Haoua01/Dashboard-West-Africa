@@ -30,19 +30,16 @@ function toggleMap(showMapId) {
 
     // Activer le bouton correspondant
     setActiveButton(showMapId);
-
     // Contrôle de la visibilité des dropdowns
-    if (showMapId === 'map1') {
+    if (showMapId === 'map1' || showMapId === 'map2') {
         document.getElementById('countryDropdown').style.display = 'block';
         document.getElementById('countryDropdown2').style.display = 'block';
-    } else if (showMapId === 'chart3') {
+    } else if (showMapId === 'chart3' || showMapId === 'map4') {
         document.getElementById('countryDropdown2').style.display = 'block';
         document.getElementById('countryDropdown').style.display = 'block';
-    } else {
-        document.getElementById('countryDropdown').style.display = 'block';
-        document.getElementById('countryDropdown2').style.display = 'none';
-    }
+    } 
 }
+
 
 // Fonction pour activer le style du bouton actif
 function setActiveButton(activeId) {
