@@ -6,6 +6,7 @@ body {
     padding: 0;
     color: #333;
     overflow-x: hidden; /* Disable horizontal scrolling */
+    overflow-y: auto;
 }
 
 header {
@@ -161,27 +162,29 @@ footer p {
     background-color: white;
 }
 
+.map iframe {
+    border-radius: 10px;
+    padding: 10px;
+    background: #f4f4f4;
+}
+
+
 /* Toggle button styles */
 .toggle-buttons {
     margin: 20px 0;
 }
 
 .toggle-buttons button {
-    background: #003747; /* Button background color */
-    color: #fff; /* Button text color */
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px; /* Space between buttons */
-    transition: background 0.3s ease; /* Smooth background transition */
+    border: 1px solid #004d4d; /* Bordure pour accentuer les boutons */
 }
 
-.toggle-buttons button:hover {
-    background: #003747; /* Darker shade on hover */
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+.toggle-buttons button:hover, .map-link:hover, .back-button:hover, .country-dropdown button:hover {
+    background: #006666; /* Ajusté pour une cohérence sur tous les boutons */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
+
 /* Style for the dropdown container */
 .country-dropdown {
     width: 80%; /* Adjusted width for better alignment */
@@ -245,3 +248,6 @@ footer p {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
 }
 
+.container, .card, .indicator-header, .map, .country-dropdown {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
