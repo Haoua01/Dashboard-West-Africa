@@ -6,7 +6,7 @@ body {
     padding: 0;
     color: #333;
     overflow-x: hidden; /* Disable horizontal scrolling */
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 header {
@@ -15,6 +15,7 @@ header {
     padding: 40px 20px;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    overflow-y: hidden;
 }
 
 header h1 {
@@ -174,8 +175,25 @@ footer p {
     margin: 20px 0;
 }
 
+/* Style amélioré pour les boutons de normalisation */
 .toggle-buttons button {
-    border: 1px solid #004d4d; /* Bordure pour accentuer les boutons */
+    background: linear-gradient(135deg, #008080, #00a3a3); /* Dégradé turquoise */
+    color: #fff;
+    border: 2px solid #006666; /* Bordure contrastante */
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Animation douce */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombre légère */
+}
+
+.toggle-buttons button:hover {
+    background: linear-gradient(135deg, #006666, #008080); /* Dégradé plus foncé */
+    transform: translateY(-3px); /* Animation de survol */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus intense */
 }
 
 
