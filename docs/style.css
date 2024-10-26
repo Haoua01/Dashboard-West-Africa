@@ -175,26 +175,38 @@ footer p {
     margin: 20px 0;
 }
 
-/* Style amélioré pour les boutons de normalisation */
-.toggle-buttons button {
-    background: linear-gradient(135deg, #008080, #00a3a3); /* Dégradé turquoise */
-    color: #fff;
-    border: 2px solid #006666; /* Bordure contrastante */
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-right: 10px;
-    font-size: 1.1em;
-    font-weight: bold;
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Animation douce */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombre légère */
+/* Conteneur de la bannière */
+.toggle-banner {
+    background-color: #e0f7f7; /* Couleur de fond douce pour la bannière */
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.toggle-buttons button:hover {
-    background: linear-gradient(135deg, #006666, #008080); /* Dégradé plus foncé */
-    transform: translateY(-3px); /* Animation de survol */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus intense */
+/* Style des boutons de normalisation avec taille réduite */
+.toggle-buttons button {
+    background: linear-gradient(135deg, #008080, #00a3a3);
+    color: #fff;
+    border: 1px solid #006666;
+    padding: 8px 12px; /* Taille réduite */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em; /* Taille de texte réduite */
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-right: 8px; /* Moins d'espace entre les boutons */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
+
+/* Effet de survol pour les boutons */
+.toggle-buttons button:hover {
+    background: linear-gradient(135deg, #006666, #008080);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 
 
 .toggle-buttons button:hover, .map-link:hover, .back-button:hover, .country-dropdown button:hover {
@@ -204,52 +216,68 @@ footer p {
 }
 
 /* Style for the dropdown container */
+/* Style pour le conteneur de sélection du pays */
 .country-dropdown {
-    width: 80%; /* Adjusted width for better alignment */
+    width: 80%;
     margin: 20px auto;
-    padding: 15px; /* More padding for a spacious look */
-    background-color: #f1f1f1; /* Softer background */
-    border: 1px solid #ddd; /* Lighter border */
-    border-radius: 10px; /* Rounded corners for a smoother look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    padding: 20px;
+    background-color: #f4f9f9; /* Couleur de fond douce */
+    border: 1px solid #008080; /* Bordure turquoise pour accentuer */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-size: 1.2em;
     color: #333;
+    text-align: center;
     transition: box-shadow 0.3s ease;
 }
 
 .country-dropdown:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée au survol */
 }
 
-/* Dropdown select styling */
+/* Style pour le menu déroulant */
 .country-dropdown select {
     width: 100%;
-    padding: 12px 15px;
-    border-radius: 8px; /* Rounded input for a modern look */
-    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #00a3a3; /* Bordure turquoise */
     font-size: 1em;
+    color: #333;
     background-color: #fff;
+    appearance: none; /* Enlève la flèche par défaut */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    appearance: none; /* Remove default dropdown arrow */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    cursor: pointer;
 }
 
+/* Apparence personnalisée de la flèche du menu déroulant */
+.country-dropdown select::after {
+    content: '▼';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    color: #008080;
+}
+
+/* Style du menu déroulant en focus */
 .country-dropdown select:focus {
-    border-color: #008080; /* Turquoise focus */
-    box-shadow: 0 0 6px rgba(0, 128, 128, 0.5); /* Glow effect on focus */
+    border-color: #008080;
+    box-shadow: 0 0 6px rgba(0, 128, 128, 0.4);
     outline: none;
 }
 
-/* Dropdown option styles */
+/* Style des options du menu */
 .country-dropdown option {
     padding: 12px;
     font-size: 1em;
     color: #333;
 }
 
-/* Button styling */
+/* Bouton de validation du pays */
 .country-dropdown button {
-    background: linear-gradient(135deg, #008080, #00a3a3); /* Gradient for a modern look */
+    background: linear-gradient(135deg, #008080, #00a3a3);
     color: #fff;
     border: none;
     padding: 12px 20px;
@@ -261,10 +289,11 @@ footer p {
 }
 
 .country-dropdown button:hover {
-    background: linear-gradient(135deg, #006666, #008080); /* Darker gradient on hover */
-    transform: translateY(-4px); /* Lift effect */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+    background: linear-gradient(135deg, #006666, #008080);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
 
 .container, .card, .indicator-header, .map, .country-dropdown {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
