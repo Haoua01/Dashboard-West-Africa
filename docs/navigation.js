@@ -74,7 +74,7 @@ function showCountryMap() {
 // Fonction pour afficher le graphique de barres correspondant au pays sélectionné dans chart3
 function showCountryChart() {
     const countrySelect2 = document.getElementById('country-select2').value;
-    const iframe2 = document.getElementById('chart-frame');
+    const iframe2 = document.getElementById('chart-frame2');
 
     // Changer la source de l'iframe en fonction du pays sélectionné
     iframe2.src = `indicateur_demographique_${countrySelect2}.html`;
