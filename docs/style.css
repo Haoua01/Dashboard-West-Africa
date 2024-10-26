@@ -9,6 +9,7 @@ body {
     overflow-y: auto;
 }
 
+/* En-tête */
 header {
     background: #008080;
     color: white;
@@ -34,6 +35,7 @@ header h1 {
     background: white;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* Section d'accueil */
@@ -48,14 +50,17 @@ header h1 {
     margin-bottom: 20px;
 }
 
+/* Style des cartes de service */
 .services {
     display: flex;
     justify-content: center;
     gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
 }
 
 .service-card {
-    width: 200px;
+    width: 220px;
     background: #f8f8f8;
     padding: 20px;
     border-radius: 10px;
@@ -102,13 +107,70 @@ header h1 {
     margin-bottom: 10px;
 }
 
-/* Bannières et boutons */
-.toggle-banner {
-    background-color: #e0f7f7;
-    padding: 15px;
+/* Carte de présentation */
+.card {
+    background: #f8f8f8;
+    width: 90%;
+    margin: 0 auto 20px;
+    padding: 20px;
     border-radius: 10px;
-    margin: 20px 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+h2 {
+    color: #008080;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+p {
+    line-height: 1.7;
+    color: #666;
+    font-size: 1.1em;
+}
+
+/* Liens pour les cartes */
+.map-link {
+    display: inline-block;
+    width: calc(100% - 40px);
+    margin: 15px 0;
+    padding: 20px;
+    background: #008080;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.map-link:hover {
+    background: #006666;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+footer {
+    background: #008080;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 40px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1em;
+    font-weight: 500;
+    color: #f9f9f9;
 }
 
 /* Boutons de bascule */
@@ -116,6 +178,14 @@ header h1 {
     display: flex;
     gap: 10px;
     margin: 20px 0;
+}
+
+.toggle-banner {
+    background-color: #e0f7f7;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .toggle-buttons button {
