@@ -41,8 +41,11 @@ header h1 {
 /* Section d'accueil */
 .home-page .about {
     text-align: center;
-    margin-bottom: 40px;
+    margin: 0 auto 40px; /* Centrage horizontal et marge inférieure */
+    max-width: 800px; /* Limite la largeur pour éviter que le texte ne s’étire trop */
+    padding: 0 20px; /* Marges internes gauche et droite */
 }
+
 
 .home-page h2 {
     font-size: 1.8em;
