@@ -15,6 +15,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // Charger la carte du Bénin dans map1 par défaut
     const iframe = document.getElementById('map-frame');
     iframe.src = 'isibf_benin.html'; // Carte par défaut pour le Bénin
+
+    // Définir Bénin comme pays par défaut pour la deuxième cellule et afficher son histogramme
+    document.getElementById('country-select2').value = 'benin';
+    showCountryChart(); // Charger l'histogramme pour le Bénin par défaut
 });
 
 // Fonction pour basculer l'affichage des cartes et des histogrammes
@@ -51,11 +55,9 @@ function toggleMap(showMapId) {
 
 // Fonction pour activer le style du bouton actif
 function setActiveButton(activeId) {
-    // Supprimer la classe active de tous les boutons
     const buttons = document.querySelectorAll('.toggle-buttons button');
     buttons.forEach(button => button.classList.remove('active'));
 
-    // Ajouter la classe active au bouton correspondant à l'élément affiché
     const activeButton = document.querySelector(`.toggle-buttons button[onclick="toggleMap('${activeId}')"]`);
     if (activeButton) {
         activeButton.classList.add('active');
@@ -66,8 +68,6 @@ function setActiveButton(activeId) {
 function showCountryMap() {
     const countrySelect = document.getElementById('country-select').value;
     const iframe = document.getElementById('map-frame');
-
-    // Changer la source de l'iframe en fonction du pays sélectionné
     iframe.src = `isibf_${countrySelect}.html`;
 }
 
@@ -75,7 +75,5 @@ function showCountryMap() {
 function showCountryChart() {
     const countrySelect2 = document.getElementById('country-select2').value;
     const iframe2 = document.getElementById('chart-frame2');
-
-    // Changer la source de l'iframe en fonction du pays sélectionné
     iframe2.src = `indicateur_demographique_${countrySelect2}.html`;
 }
