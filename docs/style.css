@@ -61,17 +61,18 @@ header h1 {
 
 .service-card {
     width: 220px;
-    background: #f8f8f8;
+    background: #8B0000;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
+    color: white;
 }
 
 .service-card a {
     text-decoration: none;
-    color: #333;
+    color: white;
 }
 
 .service-card h3 {
