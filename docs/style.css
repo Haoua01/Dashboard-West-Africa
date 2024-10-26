@@ -102,6 +102,7 @@ header h1 {
     font-size: 1.8em;
     color: #FFA500;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 /* Style pour le groupe d'indicateurs */
