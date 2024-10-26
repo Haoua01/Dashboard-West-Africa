@@ -41,19 +41,9 @@ function showCountryMap() {
     iframe.src = `isibf_${countrySelect}.html`;
 }
 
-// Fonction pour afficher le pays sélectionné dans le deuxième diagramme en barres
-function showCountryChart() {
+// Fonction pour afficher le pays sélectionné dans la deuxième carte
+function showCountryMap2() {
     const countrySelect2 = document.getElementById('country-select2').value;
-    const iframe2 = document.getElementById('chart-frame2');
-
-    // Mapping des fichiers HTML pour chaque pays
-    const chartFiles = {
-        'benin': 'indicateur_demographique_benin.html',
-        'togo': 'indicateur_demographique_togo.html',
-        'civ': 'indicateur_demographique_civ.html',
-        'combined': 'indicateur_demographique_combined.html'
-    };
-
-    // Mettre à jour la source de l'iframe avec le fichier correspondant au pays sélectionné
-    iframe2.src = chartFiles[countrySelect2] || 'default.html';  // 'default.html' si le pays sélectionné n'est pas trouvé
+    const iframe2 = document.getElementById('map-frame2');
+    iframe2.src = `indicateur_demographique_${countrySelect2}.html`;
 }

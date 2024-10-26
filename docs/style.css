@@ -169,44 +169,46 @@ footer p {
     background: #f4f4f4;
 }
 
+.chart {
+    margin: 20px 0;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: white;
+}
+
+.chart iframe {
+    border-radius: 10px;
+    padding: 10px;
+    background: #f4f4f4;
+}
 
 /* Toggle button styles */
 .toggle-buttons {
     margin: 20px 0;
 }
 
-/* Conteneur de la bannière */
-.toggle-banner {
-    background-color: #e0f7f7; /* Couleur de fond douce pour la bannière */
-    padding: 15px;
-    border-radius: 10px;
-    margin: 20px 0;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Style des boutons de normalisation avec taille réduite */
+/* Style amélioré pour les boutons de normalisation */
 .toggle-buttons button {
-    background: linear-gradient(135deg, #008080, #00a3a3);
+    background: linear-gradient(135deg, #008080, #00a3a3); /* Dégradé turquoise */
     color: #fff;
-    border: 1px solid #006666;
-    padding: 8px 12px; /* Taille réduite */
-    border-radius: 5px;
+    border: 2px solid #006666; /* Bordure contrastante */
+    padding: 12px 20px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.9em; /* Taille de texte réduite */
+    margin-right: 10px;
+    font-size: 1.1em;
     font-weight: bold;
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    margin-right: 8px; /* Moins d'espace entre les boutons */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Animation douce */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombre légère */
 }
 
-/* Effet de survol pour les boutons */
 .toggle-buttons button:hover {
-    background: linear-gradient(135deg, #006666, #008080);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #006666, #008080); /* Dégradé plus foncé */
+    transform: translateY(-3px); /* Animation de survol */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus intense */
 }
-
 
 
 .toggle-buttons button:hover, .map-link:hover, .back-button:hover, .country-dropdown button:hover {
@@ -297,54 +299,4 @@ footer p {
 
 .container, .card, .indicator-header, .map, .country-dropdown {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Conteneur pour le graphique en barres */
-.chart-container, .map-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-/* Styles pour le conteneur du graphique (chart3) */
-#chart3 {
-    margin-top: 20px;
-    padding: 10px;
-}
-
-#chart3 iframe {
-    border: none;
-    width: 100%;
-    height: 600px;
-}
-
-/* Styles pour le conteneur de la carte (map4) */
-#map4 {
-    margin-top: 20px;
-    padding: 10px;
-}
-
-#map4 iframe {
-    border: none;
-    width: 100%;
-    height: 600px;
-}
-
-/* Bouton de sélection avec effet au survol */
-#country-select2 {
-    transition: background-color 0.3s, color 0.3s;
-}
-
-#country-select2:hover {
-    background-color: #f1f1f1;
-    color: #4C78A8;
-}
-
-/* Ajustement des marges pour les sections */
-.chart, .map {
-    margin-bottom: 40px;
 }
