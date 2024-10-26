@@ -54,7 +54,7 @@ function toggleMap(showMapId) {
     if (showMapId === 'map1') {
         document.getElementById('countryDropdown').style.display = 'block';
     } else if (showMapId === 'chart3') {
-        document.getElementById('countryDropdown').style.display = 'block';
+        document.getElementById('countryDropdown2').style.display = 'block';
     } else {
         document.getElementById('countryDropdown').style.display = 'none';
         document.getElementById('countryDropdown2').style.display = 'none';
