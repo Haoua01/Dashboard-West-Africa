@@ -25,7 +25,7 @@ function toggleMap(showMapId) {
         element.style.display = 'none';
     });
     
-    // Afficher la carte ou l'histogramme sélectionné
+    // Afficher la carte ou le graphique sélectionné
     document.getElementById(showMapId).style.display = 'block';
 
     // Activer le bouton correspondant
@@ -41,11 +41,6 @@ function toggleMap(showMapId) {
     } else {
         document.getElementById('countryDropdown').style.display = 'none';
         document.getElementById('countryDropdown2').style.display = 'none';
-    }
-
-    // Assurez-vous que map4 n'est affiché que lorsqu'il est explicitement sélectionné
-    if (showMapId === 'map4') {
-        document.getElementById('map4').style.display = 'block';
     }
 }
 
