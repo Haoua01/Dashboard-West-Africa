@@ -28,16 +28,32 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Fonction pour basculer l'affichage des cartes et des histogrammes
-function toggleMap(showMapId) {
+function toggleGroup1(showMapId) {
+
     // Masquer tous les éléments de group1 et de group2 
-    const maps = document.querySelectorAll('.map');
+    const maps = document.querySelectorAll('.group1');
     maps.forEach(element => {
         if (element.id !== showMapId) {
             element.style.display = 'none';
         }
     });
 
-    const charts = document.querySelectorAll('.chart');
+    // Afficher la carte sélectionnée
+    document.getElementById(showMapId).style.display = 'block';
+
+    // Activer le bouton correspondant
+    setActiveButton(showMapId);
+
+    // Contrôle de la visibilité des dropdowns
+    if (showMapId === 'map1') {
+        document.getElementById('countryDropdown').style.display = 'block';
+    } else {
+        document.getElementById('countryDropdown').style.display = 'none';
+    }
+}
+
+function toggleGroup2(showMapId) {
+    const charts = document.querySelectorAll('.group2');
     charts.forEach(element => {
         if (element.id !== showMapId) {
             element.style.display = 'none';
@@ -51,12 +67,9 @@ function toggleMap(showMapId) {
     setActiveButton(showMapId);
 
     // Contrôle de la visibilité des dropdowns
-    if (showMapId === 'map1') {
-        document.getElementById('countryDropdown').style.display = 'block';
-    } else if (showMapId === 'chart3') {
+    if (showMapId === 'chart3') {
         document.getElementById('countryDropdown2').style.display = 'block';
     } else {
-        document.getElementById('countryDropdown').style.display = 'none';
         document.getElementById('countryDropdown2').style.display = 'none';
     }
 
@@ -67,11 +80,13 @@ function toggleMap(showMapId) {
 }
 
 // Fonction pour activer le style du bouton actif
-function setActiveButton(activeId) {
-    const buttons = document.querySelectorAll('.toggle-buttons button');
+function setActiveButton(activeId, group) {
+    // Supprimer la classe active de tous les boutons du groupe spécifié
+    const buttons = document.querySelectorAll(`.${group} .toggle-buttons button`);
     buttons.forEach(button => button.classList.remove('active'));
 
-    const activeButton = document.querySelector(`.toggle-buttons button[onclick="toggleMap('${activeId}')"]`);
+    // Ajouter la classe active au bouton correspondant à l'élément affiché
+    const activeButton = document.querySelector(`.${group} .toggle-buttons button[onclick*="${activeId}"]`);
     if (activeButton) {
         activeButton.classList.add('active');
     }
