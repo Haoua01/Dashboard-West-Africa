@@ -298,3 +298,53 @@ footer p {
 .container, .card, .indicator-header, .map, .country-dropdown {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+
+/* Conteneur pour le graphique en barres */
+.chart-container, .map-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Styles pour le conteneur du graphique (chart3) */
+#chart3 {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#chart3 iframe {
+    border: none;
+    width: 100%;
+    height: 600px;
+}
+
+/* Styles pour le conteneur de la carte (map4) */
+#map4 {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#map4 iframe {
+    border: none;
+    width: 100%;
+    height: 600px;
+}
+
+/* Bouton de sélection avec effet au survol */
+#country-select2 {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#country-select2:hover {
+    background-color: #f1f1f1;
+    color: #4C78A8;
+}
+
+/* Ajustement des marges pour les sections */
+.chart, .map {
+    margin-bottom: 40px;
+}
