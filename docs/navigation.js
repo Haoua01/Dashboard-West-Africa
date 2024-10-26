@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('chart3').style.display = 'block'; // Afficher le premier histogramme par défaut
     document.getElementById('countryDropdown2').style.display = 'block'; // Afficher le menu déroulant associé
 
+
+    // Assurez-vous que map4 n'est affiché que lorsqu'il est explicitement sélectionné
+    if (showMapId === 'map4') {
+        document.getElementById('map4').style.display = 'none';
+    }
+    
     // Activer le bouton par défaut pour 'map1'
     setActiveButton('map1');
     setActiveButton('chart3');
@@ -46,10 +52,6 @@ function toggleMap(showMapId) {
         document.getElementById('countryDropdown2').style.display = 'none';
     }
 
-    // Assurez-vous que map4 n'est affiché que lorsqu'il est explicitement sélectionné
-    if (showMapId === 'map4') {
-        document.getElementById('map4').style.display = 'block';
-    }
 }
 
 // Fonction pour activer le style du bouton actif
