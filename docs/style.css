@@ -189,6 +189,14 @@ footer p {
     margin: 20px 0;
 }
 
+.toggle-banner {
+    background-color: #e0f7f7; /* Couleur de fond douce pour la bannière */
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* Style amélioré pour les boutons de normalisation */
 .toggle-buttons button {
     background: linear-gradient(135deg, #008080, #00a3a3); /* Dégradé turquoise */
