@@ -210,6 +210,12 @@ footer p {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus intense */
 }
 
+.toggle-buttons button.active {
+    background: linear-gradient(135deg, #006666, #004c4c); /* Couleur plus foncée */
+    color: #ffffff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus intense */
+    transform: translateY(-2px);
+}
 
 .toggle-buttons button:hover, .map-link:hover, .back-button:hover, .country-dropdown button:hover {
     background: #006666; /* Ajusté pour une cohérence sur tous les boutons */
