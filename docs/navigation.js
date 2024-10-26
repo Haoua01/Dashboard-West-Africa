@@ -3,11 +3,9 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('map1').style.display = 'block'; // Afficher la première carte par défaut
     document.getElementById('countryDropdown').style.display = 'block'; // Afficher le menu déroulant associé
 
-    // Masquer tous les éléments de group2 au démarrage
-    const group2Elements = document.querySelectorAll('.group2');
-    group2Elements.forEach(element => {
-        element.style.display = 'none';
-    });
+    // Afficher uniquement 'chart3' de group2 au démarrage
+    document.getElementById('chart3').style.display = 'block'; // Afficher le premier histogramme par défaut
+    document.getElementById('countryDropdown2').style.display = 'block'; // Afficher le menu déroulant associé
 
     // Activer le bouton par défaut pour 'map1'
     setActiveButton('map1');
@@ -20,10 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Charger l'histogramme du Bénin dans chart3 par défaut
     const iframe2 = document.getElementById('chart-frame2');
     iframe2.src = 'indicateur_demographique_benin.html'; // Histogramme par défaut pour le Bénin
-
-    // Définir Bénin comme pays par défaut pour la deuxième cellule et afficher son histogramme
-    document.getElementById('country-select2').value = 'benin';
-    showCountryChart(); // Charger l'histogramme pour le Bénin par défaut
 });
 
 // Fonction pour basculer l'affichage des cartes et des histogrammes
