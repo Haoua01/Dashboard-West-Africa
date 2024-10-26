@@ -29,10 +29,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Fonction pour basculer l'affichage des cartes et des histogrammes
 function toggleMap(showMapId) {
-    // Masquer tous les éléments de group1 et group2
-    const mapsAndCharts = document.querySelectorAll('.map, .chart');
-    mapsAndCharts.forEach(element => {
-        element.style.display = 'none';
+    // Masquer tous les éléments de group1 et de group2 
+    const maps = document.querySelectorAll('.map');
+    maps.forEach(element => {
+        if (element.id !== showMapId) {
+            element.style.display = 'none';
+        }
+    });
+
+    const charts = document.querySelectorAll('.chart');
+    charts.forEach(element => {
+        if (element.id !== showMapId) {
+            element.style.display = 'none';
+        }
     });
     
     // Afficher la carte ou l'histogramme sélectionné
@@ -44,10 +53,8 @@ function toggleMap(showMapId) {
     // Contrôle de la visibilité des dropdowns
     if (showMapId === 'map1') {
         document.getElementById('countryDropdown').style.display = 'block';
-        document.getElementById('countryDropdown2').style.display = 'block';
     } else if (showMapId === 'chart3') {
-        document.getElementById('countryDropdown2').style.display = 'block';
-        document.getElementById('countryDropdown').style.display = 'none';
+        document.getElementById('countryDropdown').style.display = 'block';
     } else {
         document.getElementById('countryDropdown').style.display = 'none';
         document.getElementById('countryDropdown2').style.display = 'none';
