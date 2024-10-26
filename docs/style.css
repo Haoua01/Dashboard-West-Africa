@@ -108,7 +108,7 @@ header h1 {
 .service-banner {
     background-color: #FF7F00;
     color: white;
-    padding: 3px 15px; /* Réduit le padding vertical */
+    padding: 1px 15px; /* Réduit le padding vertical */
     border-radius: 10px;
     margin: 10px 0;
     margin-bottom: 40px; /* Ajoute un espace plus large en dessous */
