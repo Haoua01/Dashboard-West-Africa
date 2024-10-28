@@ -53,7 +53,7 @@ function toggleGroup1(showMapId) {
         document.getElementById('countryDropdown12').style.display = 'block'; // Afficher dropdown pour map2
         // Charger la carte par défaut dans map2
         const iframe = document.getElementById('map2-frame');
-        iframe.src = 'benin_map.html'; // ou une autre carte par défaut
+        iframe.src = 'isibf2_benin.html'; // ou une autre carte par défaut
     }
 }
 
