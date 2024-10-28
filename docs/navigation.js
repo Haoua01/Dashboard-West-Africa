@@ -29,13 +29,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Fonction pour basculer l'affichage des cartes et des histogrammes
 function toggleGroup1(showMapId) {
-
-    // Masquer tous les éléments de group1 et de group2 
+    // Masquer tous les éléments de group1
     const maps = document.querySelectorAll('.group1');
     maps.forEach(element => {
-        if (element.id !== showMapId) {
-            element.style.display = 'none';
-        }
+        element.style.display = 'none';
     });
 
     // Afficher la carte sélectionnée
@@ -47,15 +44,17 @@ function toggleGroup1(showMapId) {
     // Contrôle de la visibilité des dropdowns
     if (showMapId === 'map1') {
         document.getElementById('countryDropdown11').style.display = 'block'; // Afficher dropdown pour map1
-        document.getElementById('countryDropdown12').style.display = 'none'; // Masquer dropdown pour map2
+        document.getElementById('countryDropdown12').style.display = 'none';  // Masquer dropdown pour map2
     } else if (showMapId === 'map2') {
-        document.getElementById('countryDropdown11').style.display = 'none'; // Masquer dropdown pour map1
+        document.getElementById('countryDropdown11').style.display = 'none';  // Masquer dropdown pour map1
         document.getElementById('countryDropdown12').style.display = 'block'; // Afficher dropdown pour map2
+        
         // Charger la carte par défaut dans map2
         const iframe = document.getElementById('map2-frame');
-        iframe.src = 'isibf2_benin.html'; // ou une autre carte par défaut
+        iframe.src = 'isibf2_benin.html'; // Assurez-vous que ce chemin est correct
     }
 }
+
 
 function toggleGroup2(showMapId) {
     const charts = document.querySelectorAll('.group2');
