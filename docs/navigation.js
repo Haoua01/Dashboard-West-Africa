@@ -102,7 +102,7 @@ function showCountryMap1() {
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
 function showCountryMap2() {
     const countrySelect = document.getElementById('country-select').value;
-    const iframe = document.getElementById('map-frame');
+    const iframe = document.getElementById('map2-frame');
     iframe.src = `isibf2_${countrySelect}.html`;
 }
 
