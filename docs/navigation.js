@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Afficher uniquement 'map1' de group1 au démarrage
     document.getElementById('map1').style.display = 'block'; // Afficher la première carte par défaut
-    document.getElementById('countryDropdown').style.display = 'block'; // Afficher le menu déroulant associé
+    document.getElementById('countryDropdown11').style.display = 'block'; // Afficher le menu déroulant associé
 
     // Afficher uniquement 'chart3' de group2 au démarrage
     document.getElementById('chart3').style.display = 'block'; // Afficher le premier histogramme par défaut
-    document.getElementById('countryDropdown2').style.display = 'block'; // Afficher le menu déroulant associé
+    document.getElementById('countryDropdown21').style.display = 'block'; // Afficher le menu déroulant associé
 
     // Masquer tous les éléments de group2 au démarrage
     const group2Elements = document.querySelectorAll('.group2');
@@ -46,9 +46,11 @@ function toggleGroup1(showMapId) {
 
     // Contrôle de la visibilité des dropdowns
     if (showMapId === 'map1') {
-        document.getElementById('countryDropdown').style.display = 'block';
-    } else {
-        document.getElementById('countryDropdown').style.display = 'none';
+        document.getElementById('countryDropdown11').style.display = 'block'; // Afficher dropdown pour map1
+        document.getElementById('countryDropdown12').style.display = 'none'; // Masquer dropdown pour map2
+    } else if (showMapId === 'map2') {
+        document.getElementById('countryDropdown11').style.display = 'none'; // Masquer dropdown pour map1
+        document.getElementById('countryDropdown12').style.display = 'block'; // Afficher dropdown pour map2
     }
 }
 
@@ -68,9 +70,9 @@ function toggleGroup2(showMapId) {
 
     // Contrôle de la visibilité des dropdowns
     if (showMapId === 'chart3') {
-        document.getElementById('countryDropdown2').style.display = 'block';
+        document.getElementById('countryDropdown21').style.display = 'block'; // Afficher dropdown pour chart3
     } else {
-        document.getElementById('countryDropdown2').style.display = 'none';
+        document.getElementById('countryDropdown21').style.display = 'none'; // Masquer dropdown pour chart3
     }
 
     // Assurez-vous que map4 n'est affiché que lorsqu'il est explicitement sélectionné
