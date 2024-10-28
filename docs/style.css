@@ -227,12 +227,16 @@ footer p {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+
+
 .toggle-buttons button.active {
-    background: linear-gradient(135deg, #006666, #004c4c);
-    color: #ffffff;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    transform: translateY(-2px);
+    background: #006666; /* Couleur de fond pour le bouton actif */
+    color: #ffffff; /* Couleur du texte pour le bouton actif */
+    border: 2px solid #004c4c; /* Éventuellement une bordure plus prononcée */
+    transform: translateY(-2px); /* Élévation pour un effet 3D */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre pour plus de profondeur */
 }
+
 
 /* Conteneur pour sélection de pays */
 .country-dropdown {
