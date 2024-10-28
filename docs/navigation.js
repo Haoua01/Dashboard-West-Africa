@@ -99,21 +99,21 @@ function setActiveButton(activeId) {
 
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
 function showCountryMap1() {
-    const countrySelect = document.getElementById('country-select').value;
+    const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
     iframe.src = `isibf_${countrySelect}.html`;
 }
 
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
 function showCountryMap2() {
-    const countrySelect = document.getElementById('country-select').value;
+    const countrySelect = document.getElementById('country-select12').value;
     const iframe = document.getElementById('map2-frame');
     iframe.src = `isibf2_${countrySelect}.html`;
 }
 
 // Fonction pour afficher le graphique de barres correspondant au pays sélectionné dans chart3
 function showCountryChart() {
-    const countrySelect2 = document.getElementById('country-select2').value;
+    const countrySelect2 = document.getElementById('country-select21').value;
     const iframe2 = document.getElementById('chart-frame2');
     iframe2.src = `indicateur_demographique_${countrySelect2}.html`;
 }
