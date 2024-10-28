@@ -82,17 +82,18 @@ function toggleGroup2(showMapId) {
 }
 
 // Fonction pour activer le style du bouton actif
-function setActiveButton(activeId, group) {
-    // Supprimer la classe active de tous les boutons du groupe spécifié
-    const buttons = document.querySelectorAll(`.${group} .toggle-buttons button`);
+function setActiveButton(activeId) {
+    // Supprimer la classe active de tous les boutons
+    const buttons = document.querySelectorAll('.toggle-buttons button');
     buttons.forEach(button => button.classList.remove('active'));
 
     // Ajouter la classe active au bouton correspondant à l'élément affiché
-    const activeButton = document.querySelector(`.${group} .toggle-buttons button[onclick*="${activeId}"]`);
+    const activeButton = Array.from(buttons).find(button => button.onclick.toString().includes(activeId));
     if (activeButton) {
         activeButton.classList.add('active');
     }
 }
+
 
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
 function showCountryMap1() {
