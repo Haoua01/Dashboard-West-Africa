@@ -51,7 +51,7 @@ function toggleGroup1(showMapId) {
         
         // Charger la carte par défaut dans map2
         const iframe = document.getElementById('map2-frame');
-        iframe.src = 'isibf2_benin.html'; // Assurez-vous que ce chemin est correct
+        iframe.src = 'isibf2_benin.html'; 
     }
 }
 
