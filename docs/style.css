@@ -105,16 +105,17 @@ header h1 {
     text-align: center;
 }
 
-.service-banner {
-    background-color: #FF7F00;
-    color: white;
-    padding: 0 15px; /* Réduit le padding vertical */
-    border-radius: 10px;
-    margin: 10px 0;
-    margin-bottom: 40px; /* Ajoute un espace plus large en dessous */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
+
+.service-banner {
+    background: #FF7F00;
+    color: white;
+    padding: 0 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
 
 
 
