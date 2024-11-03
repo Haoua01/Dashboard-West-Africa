@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Inclusion Financière</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Dashboard Afrique de l'Ouest</h1>
+    </header>
+
+    <!-- Page d'accueil avec description et cartes de services -->
+    <main class="home-page">
+        <section class="about">
+            <h2>À propos de ce Projet</h2>
+            <p>
+                Ce projet vise à fournir une cartographie complète de l'accès aux équipements bancaires et non bancaires en Afrique de l'Ouest, afin de modéliser la relation entre l'accès à ces infrastructures et 
+                le développement économique de la sous-région.
+            </p>
+        </section>
+        
+        <!-- Section des cartes de services -->
+        <section class="services">
+            <div class="service-card">
+                <a href="#banques">
+                    <h3>Banques</h3>
+                </a>
+            </div>
+            <div class="service-card">
+                <a href="#mobile-money">
+                    <h3>Mobile Money</h3>
+                </a>
+            </div>
+            <div class="service-card">
+                <a href="#microfinance">
+                    <h3>Microfinance</h3>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <div class="container">
+        <!-- Section Banques avec les indicateurs et les cartes -->
+        <section id="banques" class="service-section">
+            <div class="service-banner"><h1>Banques</h1></div>
+
+            <!-- Indicateur 1 -->
+            <div class="indicator-group">
+                <h3>Indicateur 1 : Score d'accès</h3>
+                <p>
+                    Le premier indicateur se propose d'établir un score d'accès aux agences bancaires dans chaque région des pays d'Afrique de l'Ouest, dépendant du nombre d'équipements dans chaque territoire et de la distance entre eux.
+                    Le score obtenu est normalisé entre 0 (accès faible) et 1 (accès élevé), soit au sein de chaque pays, soit à l'échelle de la sous-région.
+                </p>
+            </div>
+
+            <!-- Boutons de bascule pour Normalisation -->
+            <div class="toggle-buttons">
+                <button onclick="toggleGroup1('map1')">Normalisation par pays</button>
+                <button onclick="toggleGroup1('map2')">Normalisation globale</button>
+            </div>
+            
+            <!-- Menu déroulant pour choix des pays -->
+            <div class="toggle-banner" id="countryDropdown11" style="display: block;">
+                <label for="country-select11">Choisir un pays :</label>
+                <select id="country-select11" onchange="showCountryMap1()">
+                    <option value="benin">Bénin</option>
+                    <option value="togo">Togo</option>
+                    <option value="civ">Côte d'Ivoire</option>
+                    <option value="combined">Combiné</option>
+                </select>
+            </div>
+
+            <!-- Conteneurs de cartes -->
+            <div id="map1" class="map group1">
+                <iframe id="map-frame" src="" width="100%" height="600px"></iframe>
+            </div>
+
+            <div class="toggle-banner" id="countryDropdown12" style="display: none;">
+                <label for="country-select12">Choisir un pays :</label>
+                <select id="country-select12" onchange="showCountryMap2()">
+                    <option value="benin">Bénin</option>
+                    <option value="togo">Togo</option>
+                    <option value="civ">Côte d'Ivoire</option>
+                    <option value="combined">Combiné</option>
+                </select>
+            </div>
+
+            <div id="map2" class="map group1" style="display: none;">
+                <iframe id="map2-frame" src="" width="100%" height="600px"></iframe>
+            </div>
+
+            <!-- Indicateur 2 -->
+            <div class="indicator-group">
+                <h3>Indicateur 2 : Nombre d'équipements</h3>
+                <p>
+                    Le second indicateur évalue le nombre d'agences bancaires dans chaque région pour 100 000 habitants. Cet indicateur démographique ne dépend que du nombre d'équipements et de la population adulte (>15 ans).
+                </p>
+            </div>
+
+            <!-- Boutons de bascule pour Indicateur 2 -->
+            <div class="toggle-buttons">
+                <button onclick="toggleGroup2('chart3')">Équipements par pays</button>
+                <button onclick="toggleGroup2('map4')">Régions sans agences</button>
+            </div>
+
+            <!-- Menu déroulant pour choix des pays (Indicateur 2) -->
+            <div class="toggle-banner" id="countryDropdown21" style="display: block;">
+                <label for="country-select21">Choisir un pays :</label>
+                <select id="country-select21" onchange="showCountryChart()">
+                    <option value="benin">Bénin</option>
+                    <option value="togo">Togo</option>
+                    <option value="civ">Côte d'Ivoire</option>
+                    <option value="combined">Combiné</option>
+                </select>
+            </div>
+
+            <!-- Conteneur du diagramme en barres pour Indicateur 2 -->
+            <div id="chart3" class="chart group2">
+                <iframe id="chart-frame2" src="" width="100%" height="600px"></iframe>
+            </div>
+
+            <!-- Conteneur pour la carte des régions sans agences -->
+            <div id="map4" class="map group2">
+                <iframe src="no_agencies.html" width="100%" height="600px"></iframe>
+            </div>
+        </section>
+
+        <!-- Autres sections (Placeholders pour Mobile Money et Microfinance) -->
+        <section id="mobile-money" class="service-section"><div class="service-banner"><h1>Mobile Money</h1></div></section>
+        <section id="microfinance" class="service-section"><div class="service-banner"><h1>Microfinance</h1></div></section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Dashboard Afrique de l'Ouest. Tous droits réservés.</p>
+    </footer>
+
+    <script src="navigation.js"></script>
+</body>
+</html>
