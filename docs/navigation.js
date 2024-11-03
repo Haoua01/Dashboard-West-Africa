@@ -120,9 +120,10 @@ function showCountryChart3() {
     iframe2.src = `results/demographic_indicator_${countrySelect2}.html`;
 }
 
-// Fonction pour afficher le graphique de barres correspondant au pays sélectionné dans chart3
+/* Fonction pour afficher le graphique de barres correspondant au pays sélectionné dans chart3
 function showCountryChart4() {
     const countrySelect2 = document.getElementById('country-select22').value;
     const iframe2 = document.getElementById('chart-frame2');
     iframe2.src = `results/spatial_demographic_indicator_${countrySelect2}.html`;
 }
+*/
