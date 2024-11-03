@@ -101,14 +101,15 @@
 
             <!-- Boutons de bascule pour Indicateur 2 -->
             <div class="toggle-buttons">
-                <button onclick="toggleGroup2('chart3')">Équipements par pays</button>
-                <button onclick="toggleGroup2('map4')">Régions sans agences</button>
+                <button onclick="toggleGroup2('chart3')">Équipements par ville</button>
+                <button onclick="toggleGroup2('chart4')">Équipements par agglomération</button>
+                <button onclick="toggleGroup2('map3')">Régions sans agences</button>
             </div>
 
             <!-- Menu déroulant pour choix des pays (Indicateur 2) -->
             <div class="toggle-banner" id="countryDropdown21" style="display: block;">
                 <label for="country-select21">Choisir un pays :</label>
-                <select id="country-select21" onchange="showCountryChart()">
+                <select id="country-select21" onchange="showCountryChart3()">
                     <option value="benin">Bénin</option>
                     <option value="togo">Togo</option>
                     <option value="civ">Côte d'Ivoire</option>
@@ -121,8 +122,23 @@
                 <iframe id="chart-frame2" src="" width="100%" height="600px"></iframe>
             </div>
 
+            <!-- Menu déroulant pour choix des pays (Indicateur 2) -->
+            <div class="toggle-banner" id="countryDropdown22" style="display: block;">
+                <label for="country-select22">Choisir un pays :</label>
+                <select id="country-select22" onchange="showCountryChart4()">
+                    <option value="benin">Bénin</option>
+                    <option value="togo">Togo</option>
+                    <option value="civ">Côte d'Ivoire</option>
+                    <option value="combined">Combiné</option>
+                </select>
+            </div>
+            <!-- Conteneur du diagramme en barres pour Indicateur 2 -->
+            <div id="chart4" class="chart group2">
+                <iframe id="chart-frame2" src="" width="100%" height="600px"></iframe>
+            </div>
+
             <!-- Conteneur pour la carte des régions sans agences -->
-            <div id="map4" class="map group2">
+            <div id="map3" class="map group2">
                 <iframe src="no_agencies.html" width="100%" height="600px"></iframe>
             </div>
         </section>

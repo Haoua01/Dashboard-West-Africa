@@ -20,11 +20,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Charger la carte du Bénin dans map1 par défaut
     const iframe = document.getElementById('map-frame');
-    iframe.src = 'results/ISIBF_benin.html'; // Carte par défaut pour le Bénin
+    iframe.src = 'docs/results/ISIBF_benin.html'; // Carte par défaut pour le Bénin
 
     // Charger l'histogramme du Bénin dans chart3 par défaut
     const iframe2 = document.getElementById('chart-frame2');
-    iframe2.src = 'results/demographic_indicator_benin.html'; // Histogramme par défaut pour le Bénin
+    iframe2.src = 'docs/results/demographic_indicator_benin.html'; // Histogramme par défaut pour le Bénin
 });
 
 // Fonction pour basculer l'affichage des cartes et des histogrammes
@@ -51,7 +51,7 @@ function toggleGroup1(showMapId) {
         
         // Charger la carte par défaut dans map2
         const iframe = document.getElementById('map2-frame');
-        iframe.src = 'results/ISIBF2_benin.html'; 
+        iframe.src = 'docs/results/ISIBF2_benin.html'; 
     }
 }
 
@@ -73,13 +73,15 @@ function toggleGroup2(showMapId) {
     // Contrôle de la visibilité des dropdowns
     if (showMapId === 'chart3') {
         document.getElementById('countryDropdown21').style.display = 'block'; // Afficher dropdown pour chart3
-    } else {
+        document.getElementById('countryDropdown22').style.display = 'none'; 
+    } else if (showMapId === 'chart4') {
         document.getElementById('countryDropdown21').style.display = 'none'; // Masquer dropdown pour chart3
+        document.getElementById('countryDropdown21').style.display = 'block'; // Masquer dropdown pour chart3
     }
 
-    // Assurez-vous que map4 n'est affiché que lorsqu'il est explicitement sélectionné
-    if (showMapId === 'map4') {
-        document.getElementById('map4').style.display = 'block';
+    // Assurez-vous que map3 n'est affiché que lorsqu'il est explicitement sélectionné
+    if (showMapId === 'map3') {
+        document.getElementById('map3').style.display = 'block';
     }
 }
 
@@ -101,19 +103,26 @@ function setActiveButton(activeId) {
 function showCountryMap1() {
     const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
-    iframe.src = `results/ISIBF_${countrySelect}.html`;
+    iframe.src = `docs/results/ISIBF_${countrySelect}.html`;
 }
 
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
 function showCountryMap2() {
     const countrySelect = document.getElementById('country-select12').value;
     const iframe = document.getElementById('map2-frame');
-    iframe.src = `results/ISIBF2_${countrySelect}.html`;
+    iframe.src = `docs/results/ISIBF2_${countrySelect}.html`;
 }
 
 // Fonction pour afficher le graphique de barres correspondant au pays sélectionné dans chart3
-function showCountryChart() {
+function showCountryChart3() {
     const countrySelect2 = document.getElementById('country-select21').value;
     const iframe2 = document.getElementById('chart-frame2');
-    iframe2.src = `results/demographic_indicator_${countrySelect2}.html`;
+    iframe2.src = `docs/results/demographic_indicator_${countrySelect2}.html`;
+}
+
+// Fonction pour afficher le graphique de barres correspondant au pays sélectionné dans chart3
+function showCountryChart4() {
+    const countrySelect2 = document.getElementById('country-select22').value;
+    const iframe2 = document.getElementById('chart-frame2');
+    iframe2.src = `docs/results/spatial_demographic_indicator_${countrySelect2}.html`;
 }

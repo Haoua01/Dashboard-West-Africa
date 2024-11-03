@@ -74,3 +74,29 @@ class IndicatorCalculator:
                 demo_indicator[city] = None  # Or handle as you prefer
         return demo_indicator
 
+
+    def spatial_demographic_indicator(self, nb_inhabitants, threshold):
+        """Calculates the spatial demographic indicator (number of agencies per 100,000 inhabitants within a threshold).
+
+        Returns:
+            dict: A dictionary with regions as keys and the spatial demographic indicator as values.
+        """
+        spatial_demo_indicator = {}
+        for city in self.agency_counts:
+            total = 0
+            if city in self.population and self.population[city] > 0:
+                # Include the own contribution for the city
+                numerator = self.agency_counts[city] 
+                denominator = self.population[city]
+            
+            for neighbor, distance in self.neighbors.get(city, {}).items():
+                if distance <= threshold:
+                    if neighbor in self.agency_counts and neighbor in self.population and self.population[neighbor] > 0:
+                        numerator += self.agency_counts[neighbor] 
+                        denominator += self.population[neighbor]
+            if denominator > 0:
+                total += numerator / denominator
+            
+            spatial_demo_indicator[city] = total * nb_inhabitants
+        return spatial_demo_indicator
+

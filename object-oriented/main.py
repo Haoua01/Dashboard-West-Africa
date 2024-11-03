@@ -148,7 +148,15 @@ def main():
     demo_indicator_combined = {**demo_indicator_benin, **demo_indicator_togo, **demo_indicator_civ}
     print(demo_indicator_combined)
 
-    # Create and save bar charts
+    # calculate spatial demographic indicators
+    spatial_demo_indicator_benin = round_scores(indicator_calculator_benin.spatial_demographic_indicator(REF_INHABITANTS_BENIN, THRESHOLD))
+    spatial_demo_indicator_togo = round_scores(indicator_calculator_togo.spatial_demographic_indicator(REF_INHABITANTS_TOGO, THRESHOLD))
+    spatial_demo_indicator_civ = round_scores(indicator_calculator_civ.spatial_demographic_indicator(REF_INHABITANTS_CIV, THRESHOLD))
+    spatial_demo_indicator_combined = {**spatial_demo_indicator_benin, **spatial_demo_indicator_togo, **spatial_demo_indicator_civ}
+    print(spatial_demo_indicator_combined)
+
+    """Charts for demographic indicators"""
+    # demographic indicators 
     chart_visualizer_benin = ChartVisualizer(demo_indicator_benin, title=f"Nombres d'agences pour {REF_INHABITANTS_BENIN} habitants par ville", label="demographic_indicator", country="benin")
     chart_visualizer_benin.create_bar_chart()
 
@@ -158,7 +166,21 @@ def main():
     chart_visualizer_civ = ChartVisualizer(demo_indicator_civ, title=f"Nombres d'agences pour {REF_INHABITANTS_CIV} habitants par ville", label="demographic_indicator", country="civ")
     chart_visualizer_civ.create_bar_chart()
 
-    chart_visualizer_combined = ChartVisualizer(demo_indicator_combined, title=f"Nombres d'agences pour combiné", label="demographic_indicator", country="combined")
+    chart_visualizer_combined = ChartVisualizer(demo_indicator_combined, title=f"Nombres d'agences combiné", label="demographic_indicator", country="combined")
+    chart_visualizer_combined.create_bar_chart()
+
+
+    # spatial demographic indicators
+    chart_visualizer_benin = ChartVisualizer(spatial_demo_indicator_benin, title=f"Nombres d'agences pour {REF_INHABITANTS_BENIN} habitants pour l'agglomération urbaine", label="spatial_demographic_indicator", country="benin")
+    chart_visualizer_benin.create_bar_chart()
+
+    chart_visualizer_togo = ChartVisualizer(spatial_demo_indicator_togo, title=f"Nombres d'agences pour {REF_INHABITANTS_TOGO} habitants pour l'agglomération urbaine", label="spatial_demographic_indicator",  country="togo")
+    chart_visualizer_togo.create_bar_chart()
+
+    chart_visualizer_civ = ChartVisualizer(spatial_demo_indicator_civ, title=f"Nombres d'agences pour {REF_INHABITANTS_CIV} habitants pour l'agglomération urbaine", label="spatial_demographic_indicator", country="civ")
+    chart_visualizer_civ.create_bar_chart()
+
+    chart_visualizer_combined = ChartVisualizer(spatial_demo_indicator_combined, title=f"Nombres d'agences combiné", label="spatial_demographic_indicator", country="combined")
     chart_visualizer_combined.create_bar_chart()
     
 
