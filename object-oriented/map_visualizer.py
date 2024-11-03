@@ -82,7 +82,7 @@ class MapVisualizer:
         )
 
         # Save as HTML
-        html_file_path = f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard/{self.label}_{self.country}.html'
+        html_file_path = f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard/results/{self.label}_{self.country}.html'
 
         # Save the map as HTML
         fig.write_html(html_file_path)
