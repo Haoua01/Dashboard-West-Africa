@@ -119,7 +119,7 @@ def main():
     map_visualizer_togo = MapVisualizer(togo, isibf_togo_norm, label="ISIBF", lat=8.6, lon=0.9, country="togo")
     map_visualizer_togo.create_choropleth()
 
-    map_visualizer_civ = MapVisualizer(civ, isibf_civ_norm, label="ISIBF", lat=5.34, lon=-4.03, country="civ")
+    map_visualizer_civ = MapVisualizer(civ, isibf_civ_norm, label="ISIBF", lat=7.5, lon=-5.5, country="civ")
     map_visualizer_civ.create_choropleth()
 
     map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", lat=8.5, lon=-2, country="combined")
