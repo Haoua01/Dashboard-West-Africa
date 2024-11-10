@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (civSelect.value === 'civ') {
         // Initially, show the map by districts (default selection)
         const iframe = document.getElementById('map-frame');
-        iframe.src = 'results/ISIBF_civ_districts.html'; // Map by districts
+        iframe.src = 'docs/results/ISIBF_civ_districts.html'; // Map by districts
     }
 });
 
@@ -114,9 +114,9 @@ function showCountryMap1() {
         // If "CIV" is selected, load the map based on the toggle value
         const toggleValue = document.getElementById('toggle-civ').value;
         if (toggleValue === 'districts') {
-            iframe.src = 'results/ISIBF_civ_districts.html'; // Default map by districts
+            iframe.src = 'docs/results/ISIBF_civ_districts.html'; // Default map by districts
         } else if (toggleValue === 'departments') {
-            iframe.src = 'results/ISIBF_civ_departments.html'; // Map by departments
+            iframe.src = 'docs/results/ISIBF_civ_departments.html'; // Map by departments
         }
     } else {
         // For other countries, load the default map
@@ -146,9 +146,9 @@ function toggleMapView() {
     const iframe = document.getElementById('map-frame');
 
     if (toggleValue === 'districts') {
-        iframe.src = 'results/ISIBF_civ_districts.html'; // Load the map for districts
+        iframe.src = 'docs/results/ISIBF_civ_districts.html'; // Load the map for districts
     } else if (toggleValue === 'departments') {
-        iframe.src = 'results/ISIBF_civ_departments.html'; // Load the map for departments
+        iframe.src = 'docs/results/ISIBF_civ_departments.html'; // Load the map for departments
     }
 }
 
