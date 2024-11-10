@@ -284,3 +284,38 @@ footer p {
     padding: 10px;
     background: #f4f4f4;
 }
+
+/* Style for the toggle switch */
+.toggle-switch {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.toggle-switch label {
+    font-weight: bold;
+    color: #006666;
+}
+
+.toggle-switch select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #00a3a3;
+    background-color: #fff;
+    font-size: 1.1em;
+    cursor: pointer;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.toggle-switch select:hover {
+    border-color: #008080;
+    box-shadow: 0 0 6px rgba(0, 128, 128, 0.4);
+}
+
+.toggle-switch select:focus {
+    outline: none;
+    border-color: #008080;
+    box-shadow: 0 0 6px rgba(0, 128, 128, 0.4);
+}

@@ -69,15 +69,16 @@
                     <option value="togo">Togo</option>
                     <option value="civ">Côte d'Ivoire</option>
                     <option value="combined">Combiné</option>
+                </select>               
+            </div>
+
+            <!-- Bouton de bascule pour affichage par districts ou départements pour la Cote d'Ivoire -->
+            <div id="toggle-switch-civ" class="toggle-switch">
+                <label for="toggle-civ">Affichage par :</label>
+                <select id="toggle-civ" onchange="toggleMapView()">
+                    <option value="districts">Districts</option>
+                    <option value="departments">Départements</option>
                 </select>
-                <div id="toggle-switch-civ" class="toggle-switch">
-                    <label for="toggle-civ">Affichage par :</label>
-                    <select id="toggle-civ" onchange="toggleMapView()">
-                        <option value="districts">Districts</option>
-                        <option value="departments">Départements</option>
-                    </select>
-                </div>
-                
             </div>
 
             <!-- Conteneurs de cartes -->
