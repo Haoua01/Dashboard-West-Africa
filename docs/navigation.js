@@ -37,20 +37,27 @@ function showCountryMap1(countrySelect) {
     const iframe = document.getElementById('map-frame');
     const sliderContainer = document.getElementById('slider-civ-container');
     
+    // Check if the country is CIV (Côte d'Ivoire)
     if (countrySelect === 'civ') {
-        // Show the slider when 'CIV' is selected
+        // Show the slider for CIV
         sliderContainer.style.display = 'block';
         
-        // Set the map based on the slider value
-        toggleMapView(); // This function will check the slider's value
+        // Set the default map for CIV as "Par districts"
+        iframe.src = 'results/ISIBF_civ_districts.html'; // Default map for CIV
+        console.log('Loading map for Côte d\'Ivoire (Par districts)'); // Debug log
+
+        // Initialize the slider and load the map based on the slider value
+        toggleMapView(); // This function will check the slider's value and update the map
     } else {
         // Hide the slider for other countries
         sliderContainer.style.display = 'none';
         
-        // Load the default map for the selected country
-        iframe.src = `results/ISIBF_${countrySelect}.html`;
+        // Load the default map for the selected country (non-CIV)
+        iframe.src = `results/ISIBF_${countrySelect}.html`; // Map based on the selected country
+        console.log(`Loading map for ${countrySelect}`); // Debug log
     }
 }
+
 
 // Function to update the map based on country selection in the second dropdown (map2)
 function showCountryMap2() {
