@@ -33,6 +33,9 @@ document.addEventListener("DOMContentLoaded", function() {
         // Initially, show the map by districts (default selection)
         const iframe = document.getElementById('map-frame');
         iframe.src = 'results/ISIBF_civ_districts.html'; // Map by districts
+        showSliderForCiv(true);  // Show the slider for CIV
+    } else {
+        showSliderForCiv(false); // Hide slider for other countries
     }
 });
 
@@ -108,16 +111,40 @@ function setActiveButton(activeId) {
 function showCountryMap1() {
     const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
-
+ 
     if (countrySelect === 'civ') {
-        toggleMapView(); // Toggle between "Par districts" and "Par départements"
+        // If "CIV" is selected, load the map based on the slider value
+        const toggleValue = document.getElementById('slider').value;
+        updateSliderValue(toggleValue); // Update the slider value based on the selected toggle
+        if (toggleValue == 0) {
+            iframe.src = 'results/ISIBF_civ_districts.html'; // Map by districts
+        } else if (toggleValue == 1) {
+            iframe.src = 'results/ISIBF_civ_departments.html'; // Map by departments
+        }
+        showSliderForCiv(true);  // Show the slider for CIV
     } else {
         // For other countries, load the default map
         iframe.src = `results/ISIBF_${countrySelect}.html`;
+        showSliderForCiv(false);  // Hide the slider for non-CIV countries
     }
 }
 
+// Function to show/hide the slider based on the selected country
+function showSliderForCiv(show) {
+    const sliderContainer = document.getElementById('toggle-switch-civ');
+    if (show) {
+        sliderContainer.style.display = 'block';  // Show the slider
+    } else {
+        sliderContainer.style.display = 'none';  // Hide the slider
+    }
+}
 
+// Function to update the slider value when the slider is adjusted
+function updateSliderValue() {
+    const slider = document.getElementById('slider');
+    const valueDisplay = document.getElementById('slider-value');
+    valueDisplay.textContent = slider.value == 0 ? 'Districts' : 'Départements';  // Update the display based on slider value
+}
 
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le deuxième menu déroulant
 function showCountryMap2() {
@@ -134,14 +161,3 @@ function showCountryChart() {
 }
 
 
-// Function to toggle between "Par districts" and "Par départements"
-function toggleMapView() {
-    const toggleValue = document.getElementById('toggle-civ').value;
-    const iframe = document.getElementById('map-frame');
-
-    if (toggleValue === 'districts') {
-        iframe.src = 'results/ISIBF_civ_districts.html'; // Load the map for districts
-    } else if (toggleValue === 'departments') {
-        iframe.src = 'results/ISIBF_civ_departments.html'; // Load the map for departments
-    }
-}
