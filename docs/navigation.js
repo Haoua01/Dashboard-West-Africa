@@ -86,9 +86,9 @@ function toggleMapView() {
 function updateSliderLabel(sliderValue) {
     const sliderLabel = document.getElementById('slider-label');
     if (sliderValue === '0') {
-        sliderLabel.textContent = 'Par districts'; // Show "Par districts"
+        sliderLabel.textContent = 'Districts'; // Show "Par districts"
     } else if (sliderValue === '1') {
-        sliderLabel.textContent = 'Par départements'; // Show "Par départements"
+        sliderLabel.textContent = 'Départements'; // Show "Par départements"
     }
 }
 
