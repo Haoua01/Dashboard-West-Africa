@@ -285,84 +285,37 @@ footer p {
     background: #f4f4f4;
 }
 
-/* Style for the slider toggle */
-.toggle-slider {
+/* Style for the toggle switch */
+.toggle-switch {
     margin: 20px 0;
     text-align: center;
     font-size: 1.2em;
 }
 
-.toggle-slider label {
+.toggle-switch label {
     font-weight: bold;
     color: #006666;
-    margin-right: 10px;
 }
 
-.toggle-slider input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 8px;
-    background: #00a3a3;
-    border-radius: 5px;
-    outline: none;
+.toggle-switch select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #00a3a3;
+    background-color: #fff;
+    font-size: 1.1em;
+    cursor: pointer;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
-.toggle-slider input[type="range"]:focus {
-    background: #008080;
+.toggle-switch select:hover {
+    border-color: #008080;
+    box-shadow: 0 0 6px rgba(0, 128, 128, 0.4);
 }
 
-.toggle-slider input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    background: #ffffff;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.toggle-slider input[type="range"]:focus::-webkit-slider-thumb {
-    background: #008080;
-}
-
-.toggle-slider input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: #ffffff;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.toggle-slider #slider-label {
-    margin-left: 10px;
-    font-weight: normal;
-    color: #006666;
-}
-
-/* Styling for the slider container (visible only for CIV) */
-#slider-civ-container {
-    display: none; /* Initially hidden */
-    margin-top: 20px;
-    background-color: #e0f7f7;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Additional styling for the slider container when it's visible */
-#slider-civ-container.show {
-    display: block;
-}
-
-/* Adding a hover effect on the range slider thumb */
-.toggle-slider input[type="range"]::-webkit-slider-thumb:hover {
-    background: #006666;
-}
-
-.toggle-slider input[type="range"]::-moz-range-thumb:hover {
-    background: #006666;
+.toggle-switch select:focus {
+    outline: none;
+    border-color: #008080;
+    box-shadow: 0 0 6px rgba(0, 128, 128, 0.4);
 }
