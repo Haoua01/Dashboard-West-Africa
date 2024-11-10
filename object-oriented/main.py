@@ -7,6 +7,7 @@ from data.civ_data import CIVData
 from map_visualizer import MapVisualizer
 from chart_visualizer import ChartVisualizer
 from utils import normalize_scores, format_scores, round_scores
+from data.civ_department_data import CIVDepartmentData
 
 # Import necessary Python libraries
 import geopandas as gpd
@@ -47,6 +48,23 @@ def load_shapefiles():
     combined = pd.concat([benin, togo, civ], ignore_index=True)
 
     return benin, togo, civ, combined
+
+def load_department_shapefiles():
+    civ= gpd.read_file('/Users/haouabenaliabbo/Downloads/civ_admbnda_adm2_cntig_ocha_itos_20180706 (2)/civ_admbnda_adm2_cntig_ocha_itos_20180706.shp')
+    civ = civ.rename(columns={'ADM2_FR': 'admin1Name'})
+    civ['admin1Name'] = civ['admin1Name'].replace('Béttié', 'Bettié')
+    civ['admin1Name'] = civ['admin1Name'].replace('Djekanou', 'Djékanou')
+    civ['admin1Name'] = civ['admin1Name'].replace('Didievi', 'Didiévi')
+    civ['admin1Name'] = civ['admin1Name'].replace('San Pédro', 'San-Pédro')
+    civ['admin1Name'] = civ['admin1Name'].replace('Odienne', 'Odienné')
+    civ['admin1Name'] = civ['admin1Name'].replace('Gbeleban', 'Gbéléban')
+    civ['admin1Name'] = civ['admin1Name'].replace('Tengrela', 'Tengréla')
+    civ['admin1Name'] = civ['admin1Name'].replace('Toulepleu', 'Toulépleu')
+    civ['admin1Name'] = civ['admin1Name'].replace('Sandegue', 'Sandégué')
+    civ['admin1Name'] = civ['admin1Name'].replace('Koun Fao', 'Koun-Fao')
+
+    return civ
+
 
 def main():
 
@@ -182,7 +200,44 @@ def main():
 
     chart_visualizer_combined = ChartVisualizer(spatial_demo_indicator_combined, title=f"Nombres d'agences combiné", label="spatial_demographic_indicator", country="combined")
     chart_visualizer_combined.create_bar_chart()
-    
 
+
+def main2():
+    '''Generic functions and initialisation'''
+    # Load geographic data
+    civ2 = load_department_shapefiles()
+
+    # Initialize data classes
+    civ_data2 = CIVDepartmentData(service_type='bank')
+
+    # Initialize BankAgencies instances
+    bank_agencies_civ2 = BankAgencies(
+        civ_data2.get_agency_counts(),
+        civ_data2.get_department_mapping(),
+        civ_data2.get_coordinates()
+    )
+
+    geographic_data_civ2 = GeographicData(civ_data2.get_coordinates())
+
+    neighbors_civ2 = geographic_data_civ2.compute_neighbors(distance_threshold=THRESHOLD)
+
+    '''Indicator 1 : ISIBF score'''
+
+    # Calculate ISIBF values
+    indicator_calculator_civ2 = IndicatorCalculator(bank_agencies_civ2.get_agency_counts(), neighbors_civ2, civ_data2.get_adult_population(), alpha=ALPHA_CIV, threshold=THRESHOLD, department_mapping=civ_data2.get_department_mapping())
+    isibf_civ2 = indicator_calculator_civ2.calculate_isibf2()
+
+
+    # Normalize for each countries and format
+    isibf_civ_norm2 = format_scores(normalize_scores(isibf_civ2))
+
+
+    '''Map visualization for ISIBF score'''
+
+    # Maps for normalization by countries
+    map_visualizer_civ = MapVisualizer(civ2, isibf_civ_norm2, label="ISIBF", lat=7.5, lon=-5.5, country="civ_department")
+    map_visualizer_civ.create_choropleth()
+
+   
 if __name__ == "__main__":
     main()

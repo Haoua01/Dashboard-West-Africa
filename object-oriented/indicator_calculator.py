@@ -56,6 +56,31 @@ class IndicatorCalculator:
                 isibf_dep[department] += value  # Accumulate values for each department
 
         return isibf_dep  # Return the department-level ISIBF values
+    
+    def calculate_isibf2(self):
+        """Calculates the ISIBF based on agency counts and neighboring distances."""
+        neighbors_contributions = {}
+        own_contribution = {}
+        isibf_values = {}
+
+        for city in self.agency_counts:
+            total = 0
+            
+            # Calculate contribution from neighbors
+            for neighbor, distance in self.neighbors.get(city, {}).items():
+                if distance > 0:
+                    total += np.log2(self.agency_counts[neighbor] + 1) / self.alpha ** distance
+            
+            # Calculate own contribution
+            own_contribution[city] = np.log2(self.agency_counts[city] + 1)
+            neighbors_contributions[city] = total
+            
+            # Calculate total ISIBF value for the city
+            isibf_values[city] = total + own_contribution[city]
+            
+        return isibf_values  # Return the city-level ISIBF values
+
+
 
     def demographic_indicator(self,nb_inhabitants):
         """Calculates the demographic indicator (number of agencies per 10,000 inhabitants).
