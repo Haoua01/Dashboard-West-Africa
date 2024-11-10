@@ -313,7 +313,7 @@ input[type="checkbox"]{
     position: absolute;
     width: 22px; /* Increased width of the circle */
     height: 22px; /* Increased height of the circle */
-    left: 0px; /* Adjust the left margin to keep the circle inside the box */
+    left: 4px; /* Adjust the left margin to keep the circle inside the box */
     background-color: #fff;
     border-radius: 50%; /* Keep the circle perfectly round */
     margin: 4px; /* Space inside the box */
@@ -322,6 +322,6 @@ input[type="checkbox"]{
 
 /* When the checkbox is checked, the circle moves to the right */
 input[type="checkbox"]:checked + .circle {
-    left: 34px; /* Moves the circle to the right */
+    left: 4px; /* Moves the circle to the right */
 }
 
