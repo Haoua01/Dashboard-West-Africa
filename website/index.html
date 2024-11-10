@@ -72,13 +72,16 @@
                 </select>               
             </div>
 
-            <!-- Bouton de bascule pour affichage par districts ou départements pour la Cote d'Ivoire -->
             <div id="toggle-switch-civ" class="toggle-switch">
                 <label for="toggle-civ">Affichage par :</label>
-                <select id="toggle-civ" onchange="toggleMapView()">
-                    <option value="districts">Districts</option>
-                    <option value="departments">Départements</option>
-                </select>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-civ" onchange="toggleMapView()">
+                    <span class="slider"></span>
+                </label>
+                <div class="switch-options">
+                    <span id="left-label">Districts</span>
+                    <span id="right-label">Départements</span>
+                </div>
             </div>
 
             <!-- Conteneurs de cartes -->

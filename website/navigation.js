@@ -25,16 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Charger l'histogramme du Bénin dans chart3 par défaut
     const iframe2 = document.getElementById('chart-frame2');
     iframe2.src = 'results/demographic_indicator_benin.html'; // Histogramme par défaut pour le Bénin
-
-    // Default settings for map1 when the country is "CIV"
-    const civSelect = document.getElementById('country-select11');
-    if (civSelect.value === 'civ') {
-        // Initially, show the map by districts (default selection)
-        const iframe = document.getElementById('map-frame');
-        iframe.src = 'results/ISIBF_civ.html'; // Map by districts
-    }
 });
-
 
 // Fonction pour basculer l'affichage des cartes et des histogrammes
 function toggleGroup1(showMapId) {
@@ -105,23 +96,19 @@ function setActiveButton(activeId) {
     }
 }
 
-// Update the iframe when the country changes
+
+// Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
 function showCountryMap1() {
     const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
 
     if (countrySelect === 'civ') {
-        // If "CIV" is selected, load the map based on the toggle value
-        const toggleValue = document.getElementById('toggle-civ').value;
-        if (toggleValue === 'districts') {
-            iframe.src = 'results/ISIBF_civ.html'; // Default map by districts
-        } else if (toggleValue === 'departments') {
-            iframe.src = 'docs/results/ISIBF_civ_departments.html'; // Map by departments
-        }
+        iframe.src = `results/ISIBF_civ_districts.html`;
     } else {
-        // For other countries, load the default map
         iframe.src = `results/ISIBF_${countrySelect}.html`;
     }
+
+
 }
 
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
@@ -136,19 +123,5 @@ function showCountryChart() {
     const countrySelect2 = document.getElementById('country-select21').value;
     const iframe2 = document.getElementById('chart-frame2');
     iframe2.src = `results/demographic_indicator_${countrySelect2}.html`;
-}
-
-
-
-// Function to toggle between "Par districts" and "Par départements"
-function toggleMapView() {
-    const toggleValue = document.getElementById('toggle-civ').value;
-    const iframe = document.getElementById('map-frame');
-
-    if (toggleValue === 'districts') {
-        iframe.src = 'results/ISIBF_civ.html'; // Load the map for districts
-    } else if (toggleValue === 'departments') {
-        iframe.src = 'docs/results/ISIBF_civ_departments.html'; // Load the map for departments
-    }
 }
 

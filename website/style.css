@@ -290,32 +290,85 @@ footer p {
     margin: 20px 0;
     text-align: center;
     font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.toggle-switch label {
+/* Label for the toggle switch */
+.switch-label {
     font-weight: bold;
     color: #006666;
+    margin-bottom: 10px;
 }
 
-.toggle-switch select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 2px solid #00a3a3;
-    background-color: #fff;
-    font-size: 1.1em;
+/* Style for the switch container */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
     cursor: pointer;
-    color: #333;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
 }
 
-.toggle-switch select:hover {
-    border-color: #008080;
-    box-shadow: 0 0 6px rgba(0, 128, 128, 0.4);
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
 }
 
-.toggle-switch select:focus {
-    outline: none;
-    border-color: #008080;
-    box-shadow: 0 0 6px rgba(0, 128, 128, 0.4);
+/* When the checkbox is checked (slide to the right) */
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+/* Move the circle to the right when checked */
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Style for the labels on either side */
+.switch-options {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1em;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.switch-options span {
+    width: 50%;
+    padding: 0 5px;
+}
+
+#left-label {
+    text-align: left;
+}
+
+#right-label {
+    text-align: right;
 }
