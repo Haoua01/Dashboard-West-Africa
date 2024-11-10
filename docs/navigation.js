@@ -27,7 +27,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const iframe2 = document.getElementById('chart-frame2');
     iframe2.src = 'results/demographic_indicator_benin.html'; // Histogramme par défaut pour le Bénin
 
-
+    // Show the toggle switch for 'CIV' if it's selected
+    const civSelect = document.getElementById('country-select11');
+    showCountryMap1(civSelect.value); // Initialize map view based on default country
 });
 
 // Fonction pour basculer l'affichage des cartes et des histogrammes
@@ -98,51 +100,31 @@ function setActiveButton(activeId) {
     }
 }
 
-// Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
-function showCountryMap1() {
-    const countrySelect = document.getElementById('country-select11').value;
+// Function to show or hide the toggle and update map based on the country selection
+function showCountryMap1(countrySelect) {
     const iframe = document.getElementById('map-frame');
- 
+    const toggleSwitch = document.getElementById('toggle-switch-civ');
+    
     if (countrySelect === 'civ') {
-        // If "CIV" is selected, load the map based on the slider value
-        const toggleValue = document.getElementById('slider').value;
-        updateSliderValue(toggleValue); // Update the slider value based on the selected toggle
-        if (toggleValue == 0) {
-            iframe.src = 'results/ISIBF_civ_districts.html'; // Map by districts
-        } else if (toggleValue == 1) {
-            iframe.src = 'results/ISIBF_civ_departments.html'; // Map by departments
-        }
-        showSliderForCiv(true);  // Show the slider for CIV
+        // Show the toggle switch when 'CIV' is selected
+        toggleSwitch.style.display = 'block';
+        
+        // Set the default map for CIV as "Par districts"
+        iframe.src = 'results/ISIBF_civ_districts.html'; // Default map for CIV
+        console.log('Loading map for Côte d\'Ivoire (Par districts)'); // Debug log
+
+        // Update toggle state and map accordingly
+        updateToggleState(); // Ensure the correct map is loaded based on the toggle
     } else {
-        // For other countries, load the default map
+        // Hide the toggle switch for other countries
+        toggleSwitch.style.display = 'none';
+        
+        // Load the default map for the selected country (non-CIV)
         iframe.src = `results/ISIBF_${countrySelect}.html`;
-        showSliderForCiv(false);  // Hide the slider for non-CIV countries
+        console.log(`Loading map for ${countrySelect}`); // Debug log
     }
 }
 
-// Function to show/hide the slider based on the selected country
-function showSliderForCiv(show) {
-    const sliderContainer = document.getElementById('toggle-switch-civ');
-    if (show) {
-        sliderContainer.style.display = 'block';  // Show the slider
-    } else {
-        sliderContainer.style.display = 'none';  // Hide the slider
-    }
-}
-
-// Function to update the slider value when the slider is adjusted
-function updateSliderValue() {
-    const slider = document.getElementById('slider');
-    const valueDisplay = document.getElementById('slider-value');
-    valueDisplay.textContent = slider.value == 0 ? 'Districts' : 'Départements';  // Update the display based on slider value
-}
-
-// Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le deuxième menu déroulant
-function showCountryMap2() {
-    const countrySelect = document.getElementById('country-select12').value;
-    const iframe = document.getElementById('map2-frame');
-    iframe.src = `results/ISIBF2_${countrySelect}.html`;
-}
 
 // Fonction pour afficher le graphique de barres correspondant au pays sélectionné dans chart3
 function showCountryChart() {
@@ -152,3 +134,23 @@ function showCountryChart() {
 }
 
 
+// Function to update the map based on toggle switch (checkbox) state
+function updateSliderValue() {
+    const iframe = document.getElementById('map-frame');
+    const checkbox = document.getElementById('checkbox');
+    const districtLabel = document.getElementById('district-label');
+    const departmentLabel = document.getElementById('department-label');
+
+    // Check if checkbox is checked (1 = "Par départements", 0 = "Par districts")
+    if (checkbox.checked) {
+        iframe.src = 'results/ISIBF_civ_departments.html'; // Map by departments
+        departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
+        districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
+        console.log('Loading "Par départements" map'); // Debug log
+    } else {
+        iframe.src = 'results/ISIBF_civ_districts.html'; // Map by districts
+        districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
+        departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
+        console.log('Loading "Par districts" map'); // Debug log
+    }
+}

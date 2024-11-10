@@ -72,18 +72,20 @@
                 </select> 
             </div>
 
-            <!-- The slider is initially hidden -->
-            <div id="toggle-switch-civ" class="toggle-switch" style="display: none;">
-                <label for="slider">Map View:</label>
-                <input type="range" id="slider" min="0" max="1" value="0" onchange="updateSliderValue()">
-                <span id="slider-value">Districts</span>
 
-                <!-- Labels for the slider -->
+
+            <div id="toggle-switch-civ" class="background_box" style="display: none;">
+                <!-- toggle button -->
+                <label class="toggle_box">
+                    <input type="checkbox" id="checkbox" onchange="updateSliderValue()">
+                    <div class="circle"></div>
+                </label>
                 <div class="slider-labels">
                     <span id="district-label">Districts</span>
                     <span id="department-label" style="margin-left: 60px;">Départements</span>
                 </div>
             </div>
+
 
             <!-- Conteneurs de cartes -->
             <div id="map1" class="map group1">

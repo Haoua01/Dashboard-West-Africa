@@ -285,79 +285,41 @@ footer p {
     background: #f4f4f4;
 }
 
-/* Slider container */
-#toggle-switch-civ {
-    display: none; /* Hidden by default, will be shown when CIV is selected */
-    text-align: center;
-    margin-top: 20px;
-}
-
-/* Slider styles */
-input[type="range"] {
-    width: 300px;
-    margin: 20px 0;
-    appearance: none;
-    background-color: #ddd;
-    border-radius: 5px;
-    height: 10px;
-    outline: none;
-}
-
-/* Slider thumb */
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    background-color: #4CAF50;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-input[type="range"]::-webkit-slider-thumb:hover {
-    background-color: #45a049;
-}
-
-/* Display the slider value */
-#slider-value {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-    margin-left: 10px;
-}
-
-/* Labels for the slider */
-.slider-labels {
+.background_box{
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
     display: flex;
-    justify-content: space-between;
-    width: 300px; /* Match the width of the slider */
-    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    transition-delay: 0.4s;
 }
-
-#district-label {
-    text-align: left;
-}
-
-#department-label {
-    text-align: right;
-}
-
-/* Active Button Styling */
-.toggle-buttons button.active {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.toggle-buttons button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px;
+.toggle_box{
+    width: 200px;
+    height: 100px;
+    display: block;
+    background-color: #006666;
+    border-radius: 1000px;
     cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #f1f1f1;
+    position: relative;
+    transition: 0.5s;
 }
+input[type="checkbox"]{
+    display: none;
+}
+.circle{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 0px;
+    background-color: #fff;
+    border-radius: 1000px;
+    /* margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px; */
+    margin: 10px;
+    transition: 0.5s;
 
-.toggle-buttons button:hover {
-    background-color: #ddd;
 }
