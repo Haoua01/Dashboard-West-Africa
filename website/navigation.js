@@ -100,26 +100,14 @@ function setActiveButton(activeId) {
 function showCountryMap11() {
     const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
-
-    if (countrySelect === 'civ') {
-        // Carte spécifique pour la Côte d'Ivoire
-        iframe.src = 'results/ISIBF_civ_districts.html';
-    } else {
-        iframe.src = `results/ISIBF_${countrySelect}.html`;
-    }
+    iframe.src = `results/ISIBF_${countrySelect}.html`;
 }
 
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
 function showCountryMap12() {
     const countrySelect = document.getElementById('country-select12').value;
     const iframe = document.getElementById('map-frame');
-
-    if (countrySelect === 'civ') {
-        // Carte spécifique pour la Côte d'Ivoire
-        iframe.src = 'results/ISIBF_civ_departments.html';
-    } else {
-        iframe.src = `results/ISIBF_${countrySelect}.html`;
-    }
+    iframe.src = `results/ISIBF_${countrySelect}.html`;
 }
 
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le deuxième menu déroulant
