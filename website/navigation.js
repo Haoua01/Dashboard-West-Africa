@@ -103,7 +103,7 @@ function showCountryMap1() {
     const iframe = document.getElementById('map-frame');
 
     if (countrySelect === 'civ') {
-        iframe.src = `results/ISIBF_civ_districts.html`;
+        iframe.src = `results/ISIBF_civ.html`;
     } else {
         iframe.src = `results/ISIBF_${countrySelect}.html`;
     }
