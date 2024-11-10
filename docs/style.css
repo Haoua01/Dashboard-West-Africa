@@ -313,7 +313,8 @@ input[type="checkbox"]{
     position: absolute;
     width: 26px; /* Increased width of the circle */
     height: 26px; /* Increased height of the circle */
-    left: 0px; /* Adjust the left margin to keep the circle inside the box */
+    left: 4px; /* Adjust the left margin to keep the circle inside the box */
+    right: 4px; /* Adjust the right margin to keep the circle inside the box */
     background-color: #fff;
     border-radius: 50%; /* Keep the circle perfectly round */
     margin: 2px; /* Space inside the box */
