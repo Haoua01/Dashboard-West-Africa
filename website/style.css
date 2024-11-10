@@ -285,24 +285,19 @@ footer p {
     background: #f4f4f4;
 }
 
-/* Style for the toggle switch */
-.toggle-switch {
-    margin: 20px 0;
-    text-align: center;
-    font-size: 1.2em;
+.switch-options {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
-/* Label for the toggle switch */
-.switch-label {
-    font-weight: bold;
-    color: #006666;
-    margin-bottom: 10px;
+.switch-options span {
+    cursor: pointer;
+    transition: font-weight 0.3s ease;
 }
 
-/* Style for the switch container */
 .switch {
     position: relative;
     display: inline-block;
@@ -340,35 +335,10 @@ footer p {
     transition: 0.4s;
 }
 
-/* When the checkbox is checked (slide to the right) */
 input:checked + .slider {
-    background-color: #4CAF50;
+    background-color: #2196F3;
 }
 
-/* Move the circle to the right when checked */
 input:checked + .slider:before {
     transform: translateX(26px);
-}
-
-/* Style for the labels on either side */
-.switch-options {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    font-size: 1em;
-    margin-top: 5px;
-    text-align: center;
-}
-
-.switch-options span {
-    width: 50%;
-    padding: 0 5px;
-}
-
-#left-label {
-    text-align: left;
-}
-
-#right-label {
-    text-align: right;
 }

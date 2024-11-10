@@ -63,23 +63,31 @@
             
             <!-- Menu déroulant pour choix des pays -->
             <div class="toggle-banner" id="countryDropdown11" style="display: block;">
+                <!-- Par régions -->
+                <label for="type-select11">Par régions</label>
                 <label for="country-select11">Choisir un pays :</label>
-                <select id="country-select11" onchange="showCountryMap1()">
+                <select id="country-select11" onchange="showCountryMap11()">
                     <option value="benin">Bénin</option>
                     <option value="togo">Togo</option>
                     <option value="civ">Côte d'Ivoire</option>
                     <option value="combined">Combiné</option>
-                </select>               
-            </div>
+                </select> 
 
-            <div id="toggle-switch-civ" class="toggle-switch">
+                <!-- Par départements -->
+                <label for="type-select12">Par départements</label>
+                <label for="country-select12">Choisir un pays :</label>
+                <select id="country-select12" onchange="showCountryMap12()">
+                    <option value="civ_dep">Côte d'Ivoire</option>
+                </select>
+
+                <!-- Toggle switch for selecting between "Regions" and "Departments" -->
                 <label for="toggle-civ">Affichage par :</label>
                 <label class="switch">
                     <input type="checkbox" id="toggle-civ" onchange="toggleMapView()">
                     <span class="slider"></span>
                 </label>
                 <div class="switch-options">
-                    <span id="left-label">Districts</span>
+                    <span id="left-label">Régions</span>
                     <span id="right-label">Départements</span>
                 </div>
             </div>
