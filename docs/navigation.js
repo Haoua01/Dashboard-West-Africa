@@ -102,12 +102,15 @@ function setActiveButton(activeId) {
 function showCountryMap1() {
     const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
+    const toggleSwitch = document.getElementById('toggle-switch-civ');
  
     if (countrySelect === 'civ') {
         updateSliderValue();
+        toggleSwitch.style.display = 'block';
     } else {
         // For other countries, load the default map
         iframe.src = `results/ISIBF_${countrySelect}.html`;
+        toggleSwitch.style.display = 'none';
     }
 }
 
