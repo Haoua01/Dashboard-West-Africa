@@ -72,12 +72,11 @@
                 </select> 
             </div>
 
-            <div id="toggle-switch-civ" class="toggle-switch">
-                <label for="toggle-civ">Affichage par :</label>
-                <select id="toggle-civ" onchange="toggleMapView()">
-                    <option value="districts">Districts</option>
-                    <option value="departments">Départements</option>
-                </select>
+            <!-- Slider for selecting Par districts or Par départements (visible only for CIV) -->
+            <div id="slider-civ-container" class="toggle-slider" style="display: none;">
+                <label for="slider-civ">Affichage par :</label>
+                <input type="range" id="slider-civ" min="0" max="1" step="1" value="0" onchange="toggleMapView()">
+                <span id="slider-label">Districts</span>
             </div>
 
             <!-- Conteneurs de cartes -->
