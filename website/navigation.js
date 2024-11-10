@@ -25,7 +25,16 @@ document.addEventListener("DOMContentLoaded", function() {
     // Charger l'histogramme du Bénin dans chart3 par défaut
     const iframe2 = document.getElementById('chart-frame2');
     iframe2.src = 'results/demographic_indicator_benin.html'; // Histogramme par défaut pour le Bénin
+
+    // Default settings for map1 when the country is "CIV"
+    const civSelect = document.getElementById('country-select11');
+    if (civSelect.value === 'civ') {
+        // Initially, show the map by districts (default selection)
+        const iframe = document.getElementById('map-frame');
+        iframe.src = 'results/ISIBF_civ_districts.html'; // Map by districts
+    }
 });
+
 
 // Fonction pour basculer l'affichage des cartes et des histogrammes
 function toggleGroup1(showMapId) {
@@ -129,15 +138,7 @@ function showCountryChart() {
     iframe2.src = `results/demographic_indicator_${countrySelect2}.html`;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Default settings for map1 when the country is "CIV"
-    const civSelect = document.getElementById('country-select11');
-    if (civSelect.value === 'civ') {
-        // Initially, show the map by districts (default selection)
-        const iframe = document.getElementById('map-frame');
-        iframe.src = 'results/ISIBF_civ_districts.html'; // Map by districts
-    }
-});
+
 
 // Function to toggle between "Par districts" and "Par départements"
 function toggleMapView() {
