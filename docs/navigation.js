@@ -27,16 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const iframe2 = document.getElementById('chart-frame2');
     iframe2.src = 'results/demographic_indicator_benin.html'; // Histogramme par défaut pour le Bénin
 
-    // Default settings for map1 when the country is "CIV"
-    const civSelect = document.getElementById('country-select11');
-    if (civSelect.value === 'civ') {
-        // Initially, show the map by districts (default selection)
-        const iframe = document.getElementById('map-frame');
-        iframe.src = 'results/ISIBF_civ_districts.html'; // Map by districts
-        showSliderForCiv(true);  // Show the slider for CIV
-    } else {
-        showSliderForCiv(false); // Hide slider for other countries
-    }
+
 });
 
 // Fonction pour basculer l'affichage des cartes et des histogrammes
