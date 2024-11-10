@@ -285,71 +285,37 @@ footer p {
     background: #f4f4f4;
 }
 
-/* Style for the toggle switch inside the dropdown */
-.background_box {
-    width: 80px;  /* Increase the width to provide more space for the toggle */
-    height: 30px; /* Adjust the height for a larger toggle */
-    background-color: #e0f7f7;  /* Background color of the toggle */
+.background_box{
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50px; /* Make it fully rounded */
-    transition: background-color 0.5s; /* Smooth background transition */
+    transition: 0.5s;
+    transition-delay: 0.4s;
 }
-
-.toggle_box {
-    width: 50px;  /* Adjust the width of the toggle box */
-    height: 24px;  /* Adjust the height for a larger toggle switch */
-    background-color: #006666; /* Toggle background color */
-    border-radius: 50px; /* Fully rounded corners */
-    position: relative;
+.toggle_box{
+    width: 60px;
+    height: 30px;
+    display: block;
+    background-color: #000;
+    border-radius: 100px;
     cursor: pointer;
-    transition: 0.3s; /* Smooth transition for background color */
+    position: relative;
+    transition: 0.5s;
 }
-
-/* Hide the checkbox */
-input[type="checkbox"] {
+input[type="checkbox"]{
     display: none;
 }
 
-/* The toggle circle that moves inside the box */
 .circle {
     position: absolute;
-    width: 20px;  /* Increase the size of the circle */
-    height: 20px; /* Increase the size of the circle */
-    background-color: #fff; /* White color for the circle */
-    border-radius: 50%; /* Round shape */
-    top: 50%;
-    left: 4px; /* Position to the left initially */
-    transform: translateY(-50%);  /* Vertically center it */
-    transition: 0.3s; /* Smooth transition for moving the circle */
-}
-
-/* Move the circle to the right when checked */
-input[type="checkbox"]:checked + .toggle_box .circle {
-    left: 26px;  /* Move the circle to the right */
-}
-
-/* Optional: Change background color when checked */
-input[type="checkbox"]:checked + .toggle_box {
-    background-color: #00a3a3;  /* Change the background when checked */
-}
-
-.slider-labels {
-    font-size: 1.2em;
-    color: #006666;
-    margin-left: 10px; /* Add margin to the left for better spacing */
-}
-
-.slider-labels span {
-    font-weight: normal;
-}
-
-#district-label {
-    font-weight: bold;
-}
-
-#department-label {
-    font-weight: normal;
-    margin-left: 20px;
+    width: 26px; /* Increased width of the circle */
+    height: 26px; /* Increased height of the circle */
+    left: 4px; /* Adjust the left margin to keep the circle inside the box */
+    background-color: #fff;
+    border-radius: 50%; /* Keep the circle perfectly round */
+    margin: 2px; /* Space inside the box */
+    transition: 0.5s; /* Smooth transition for the movement */
 }
