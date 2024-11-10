@@ -29,17 +29,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Default settings for map1 when the country is "CIV"
     const civSelect = document.getElementById('country-select11');
-    // Check if the default country is 'CIV'
     if (civSelect.value === 'civ') {
-        // Show the slider if 'CIV' is selected
-        sliderContainer.style.display = 'block';
-        
-        // Set the map to "Par districts" by default
+        // Initially, show the map by districts (default selection)
         const iframe = document.getElementById('map-frame');
-        iframe.src = 'results/ISIBF_civ_districts.html';
-        
-        // Update the label based on the slider's initial value
-        updateSliderLabel(slider.value);
+        iframe.src = 'results/ISIBF_civ_districts.html'; // Map by districts
     }
 });
 
@@ -117,13 +110,7 @@ function showCountryMap1() {
     const iframe = document.getElementById('map-frame');
 
     if (countrySelect === 'civ') {
-        // If "CIV" is selected, load the map based on the toggle value
-        const toggleValue = document.getElementById('toggle-civ').value;
-        if (toggleValue === 'districts') {
-            iframe.src = 'results/ISIBF_civ_districts.html'; // Default map by districts
-        } else if (toggleValue === 'departments') {
-            iframe.src = 'results/ISIBF_civ_departments.html'; // Map by departments
-        }
+        toggleMapView(); // Toggle between "Par districts" and "Par départements"
     } else {
         // For other countries, load the default map
         iframe.src = `results/ISIBF_${countrySelect}.html`;
