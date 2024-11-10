@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const group2Elements = document.querySelectorAll('.group2');
     group2Elements.forEach(element => {
         if (element.id !== 'chart3') {
-            element.style.display = 'none';}
+            element.style.display = 'none';
+        }
     });
 
     // Activer le bouton par défaut pour 'map1'
@@ -55,7 +56,6 @@ function toggleGroup1(showMapId) {
     }
 }
 
-
 function toggleGroup2(showMapId) {
     const charts = document.querySelectorAll('.group2');
     charts.forEach(element => {
@@ -73,15 +73,13 @@ function toggleGroup2(showMapId) {
     // Contrôle de la visibilité des dropdowns
     if (showMapId === 'chart3') {
         document.getElementById('countryDropdown21').style.display = 'block'; // Afficher dropdown pour chart3
-        document.getElementById('countryDropdown22').style.display = 'none'; 
-    } else if (showMapId === 'chart4') {
+    } else {
         document.getElementById('countryDropdown21').style.display = 'none'; // Masquer dropdown pour chart3
-        document.getElementById('countryDropdown21').style.display = 'block'; // Masquer dropdown pour chart3
     }
 
-    // Assurez-vous que map3 n'est affiché que lorsqu'il est explicitement sélectionné
-    if (showMapId === 'map3') {
-        document.getElementById('map3').style.display = 'block';
+    // Assurez-vous que map4 n'est affiché que lorsqu'il est explicitement sélectionné
+    if (showMapId === 'map4') {
+        document.getElementById('map4').style.display = 'block';
     }
 }
 
@@ -98,15 +96,21 @@ function setActiveButton(activeId) {
     }
 }
 
-
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
-function showCountryMap1() {
+function showCountryMap11() {
     const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
     iframe.src = `results/ISIBF_${countrySelect}.html`;
 }
 
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
+function showCountryMap12() {
+    const countrySelect = document.getElementById('country-select12').value;
+    const iframe = document.getElementById('map-frame');
+    iframe.src = `results/ISIBF_${countrySelect}.html`;
+}
+
+// Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le deuxième menu déroulant
 function showCountryMap2() {
     const countrySelect = document.getElementById('country-select12').value;
     const iframe = document.getElementById('map2-frame');
@@ -114,16 +118,33 @@ function showCountryMap2() {
 }
 
 // Fonction pour afficher le graphique de barres correspondant au pays sélectionné dans chart3
-function showCountryChart3() {
+function showCountryChart() {
     const countrySelect2 = document.getElementById('country-select21').value;
     const iframe2 = document.getElementById('chart-frame2');
     iframe2.src = `results/demographic_indicator_${countrySelect2}.html`;
 }
 
-/* Fonction pour afficher le graphique de barres correspondant au pays sélectionné dans chart3
-function showCountryChart4() {
-    const countrySelect2 = document.getElementById('country-select22').value;
-    const iframe2 = document.getElementById('chart-frame2');
-    iframe2.src = `results/spatial_demographic_indicator_${countrySelect2}.html`;
+// Function to toggle between "Régions" and "Départements" for Côte d'Ivoire
+function toggleMapView() {
+    const selectedCountry = document.getElementById('country-select11').value;
+    const iframe = document.getElementById('map-frame');
+
+    if (selectedCountry === 'civ') {
+        var map1 = document.getElementById('map1');
+        var regionsLabel = document.getElementById('left-label');
+        var departementsLabel = document.getElementById('right-label');
+
+        // Switch between regions and departments maps for Côte d'Ivoire
+        if (document.getElementById('toggle-civ').checked) {
+            map1.style.display = 'none';  // Hide regions map
+            iframe.src = 'results/ISIBF_civ_departments.html'; // Show departments map
+            regionsLabel.style.fontWeight = 'normal';
+            departementsLabel.style.fontWeight = 'bold';
+        } else {
+            map1.style.display = 'block'; // Show regions map
+            iframe.src = 'results/ISIBF_civ.html'; // Show regions map
+            regionsLabel.style.fontWeight = 'bold';
+            departementsLabel.style.fontWeight = 'normal';
+        }
+    }
 }
-*/
