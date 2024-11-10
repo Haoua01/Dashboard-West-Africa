@@ -285,20 +285,21 @@ footer p {
     background: #f4f4f4;
 }
 
+/* Style for the toggle switch inside the dropdown */
 .background_box {
-    width: 60px;  /* Increase the width for a more typical toggle size */
-    height: 30px; /* Increase the height to match the width */
+    width: 80px;  /* Increase the width to provide more space for the toggle */
+    height: 30px; /* Adjust the height for a larger toggle */
     background-color: #e0f7f7;  /* Background color of the toggle */
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50px; /* Make it rounded */
+    border-radius: 50px; /* Make it fully rounded */
     transition: background-color 0.5s; /* Smooth background transition */
 }
 
 .toggle_box {
-    width: 40px;  /* Adjust the width for a standard toggle switch */
-    height: 20px;  /* Adjust the height for the toggle switch */
+    width: 50px;  /* Adjust the width of the toggle box */
+    height: 24px;  /* Adjust the height for a larger toggle switch */
     background-color: #006666; /* Toggle background color */
     border-radius: 50px; /* Fully rounded corners */
     position: relative;
@@ -314,8 +315,8 @@ input[type="checkbox"] {
 /* The toggle circle that moves inside the box */
 .circle {
     position: absolute;
-    width: 16px;  /* Increase the size of the circle */
-    height: 16px; /* Increase the size of the circle */
+    width: 20px;  /* Increase the size of the circle */
+    height: 20px; /* Increase the size of the circle */
     background-color: #fff; /* White color for the circle */
     border-radius: 50%; /* Round shape */
     top: 50%;
@@ -326,10 +327,29 @@ input[type="checkbox"] {
 
 /* Move the circle to the right when checked */
 input[type="checkbox"]:checked + .toggle_box .circle {
-    left: 20px;  /* Move the circle to the right */
+    left: 26px;  /* Move the circle to the right */
 }
 
 /* Optional: Change background color when checked */
 input[type="checkbox"]:checked + .toggle_box {
     background-color: #00a3a3;  /* Change the background when checked */
+}
+
+.slider-labels {
+    font-size: 1.2em;
+    color: #006666;
+    margin-left: 10px; /* Add margin to the left for better spacing */
+}
+
+.slider-labels span {
+    font-weight: normal;
+}
+
+#district-label {
+    font-weight: bold;
+}
+
+#department-label {
+    font-weight: normal;
+    margin-left: 20px;
 }
