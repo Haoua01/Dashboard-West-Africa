@@ -311,17 +311,17 @@ input[type="checkbox"]{
 
 .circle {
     position: absolute;
-    width: 26px; /* Increased width of the circle */
-    height: 26px; /* Increased height of the circle */
+    width: 22px; /* Increased width of the circle */
+    height: 22px; /* Increased height of the circle */
     left: 0px; /* Adjust the left margin to keep the circle inside the box */
     background-color: #fff;
     border-radius: 50%; /* Keep the circle perfectly round */
-    margin: 2px; /* Space inside the box */
+    margin: 4px; /* Space inside the box */
     transition: 0.5s; /* Smooth transition for the movement */
 }
 
 /* When the checkbox is checked, the circle moves to the right */
 input[type="checkbox"]:checked + .circle {
-    left: 70px; /* Moves the circle to the right */
+    left: 34px; /* Moves the circle to the right */
 }
 
