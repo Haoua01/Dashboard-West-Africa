@@ -287,7 +287,7 @@ footer p {
 
 .background_box{
     width: 100%;
-    height: 100vh;
+    height: 20px;
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -296,11 +296,11 @@ footer p {
     transition-delay: 0.4s;
 }
 .toggle_box{
-    width: 200px;
-    height: 100px;
+    width: 20px;
+    height: 10px;
     display: block;
     background-color: #006666;
-    border-radius: 1000px;
+    border-radius: 100px;
     cursor: pointer;
     position: relative;
     transition: 0.5s;
@@ -310,11 +310,11 @@ input[type="checkbox"]{
 }
 .circle{
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 8px;
+    height: 8px;
     left: 0px;
     background-color: #fff;
-    border-radius: 1000px;
+    border-radius: 100px;
     /* margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 10px;
