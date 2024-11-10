@@ -27,9 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const iframe2 = document.getElementById('chart-frame2');
     iframe2.src = 'results/demographic_indicator_benin.html'; // Histogramme par défaut pour le Bénin
 
-    // Show the toggle switch for 'CIV' if it's selected
-    const civSelect = document.getElementById('country-select11');
-    showCountryMap1(civSelect.value); // Initialize map view based on default country
+
 });
 
 // Fonction pour basculer l'affichage des cartes et des histogrammes
@@ -100,30 +98,26 @@ function setActiveButton(activeId) {
     }
 }
 
-// Function to show or hide the toggle and update map based on the country selection
-function showCountryMap1(countrySelect) {
+// Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
+function showCountryMap1() {
+    const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
-    const toggleSwitch = document.getElementById('toggle-switch-civ');
-    
+ 
     if (countrySelect === 'civ') {
-        // Show the toggle switch when 'CIV' is selected
-        toggleSwitch.style.display = 'block';
-        
-        // Set the default map for CIV as "Par districts"
-        iframe.src = 'results/ISIBF_civ_districts.html'; // Default map for CIV
-        console.log('Loading map for Côte d\'Ivoire (Par districts)'); // Debug log
-
-        // Update toggle state and map accordingly
-        updateToggleState(); // Ensure the correct map is loaded based on the toggle
+        // If "CIV" is selected, load the map based on the slider value
+        const toggleValue = document.getElementById('checkbox').checked ? 1 : 0;
+        if (toggleValue == 0) {
+            iframe.src = 'results/ISIBF_civ_districts.html'; // Map by districts
+        } else if (toggleValue == 1) {
+            iframe.src = 'results/ISIBF_civ_departments.html'; // Map by departments
+        }
+        showSliderForCiv(true);  // Show the slider for CIV
     } else {
-        // Hide the toggle switch for other countries
-        toggleSwitch.style.display = 'none';
-        
-        // Load the default map for the selected country (non-CIV)
+        // For other countries, load the default map
         iframe.src = `results/ISIBF_${countrySelect}.html`;
-        console.log(`Loading map for ${countrySelect}`); // Debug log
     }
 }
+
 
 
 // Fonction pour afficher le graphique de barres correspondant au pays sélectionné dans chart3
