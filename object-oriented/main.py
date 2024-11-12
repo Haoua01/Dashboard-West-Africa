@@ -6,7 +6,7 @@ from data.togo_data import TogoData
 from data.civ_data import CIVData
 from map_visualizer import MapVisualizer
 from chart_visualizer import ChartVisualizer
-from utils import normalize_scores, format_scores, round_scores
+from utils import normalize_scores, format_scores, round_scores, mean_scores
 from data.civ_department_data import CIVDepartmentData
 
 # Import necessary Python libraries
@@ -19,8 +19,8 @@ ALPHA_BENIN = 1.04  # Alpha value for ISIBF calculation in Benin
 ALPHA_TOGO = 1.009  # Alpha value for ISIBF calculation in Togo
 ALPHA_CIV = 1.02  # Alpha value for ISIBF calculation in Côte d'Ivoire
 REF_INHABITANTS_BENIN = 100000  # Reference number of inhabitants for Benin
-REF_INHABITANTS_TOGO = 70000  # Reference number of inhabitants for Togo
-REF_INHABITANTS_CIV = 350000  # Reference number of inhabitants for Côte d'Ivoire
+REF_INHABITANTS_TOGO = 100000  # Reference number of inhabitants for Togo
+REF_INHABITANTS_CIV = 100000  # Reference number of inhabitants for Côte d'Ivoire
 
 def load_shapefiles():
     benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/ben_adm_1m_salb_2019_shapes') #change path once folder updated on GitHub
@@ -66,11 +66,15 @@ def load_department_shapefiles():
     return civ
 
 
+# Load geographic data
+benin, togo, civ, combined = load_shapefiles()
+civ2 = load_department_shapefiles()  
+
+
+
 def main():
 
     '''Generic functions and initialisation'''
-    # Load geographic data
-    benin, togo, civ, combined = load_shapefiles()
 
     # Initialize data classes
     benin_data = BeninData(service_type='bank')
@@ -131,30 +135,30 @@ def main():
     '''Map visualization for ISIBF score'''
 
     # Maps for normalization by countries
-    map_visualizer_benin = MapVisualizer(benin, isibf_benin_norm, label="ISIBF", lat=9.5, lon=2.3, country="benin")
+    map_visualizer_benin = MapVisualizer(benin, isibf_benin_norm, label="ISIBF", type="régions", lat=9.5, lon=2.3, country="benin")
     map_visualizer_benin.create_choropleth()
 
-    map_visualizer_togo = MapVisualizer(togo, isibf_togo_norm, label="ISIBF", lat=8.6, lon=0.9, country="togo")
+    map_visualizer_togo = MapVisualizer(togo, isibf_togo_norm, label="ISIBF", type="régions", lat=8.6, lon=0.9, country="togo")
     map_visualizer_togo.create_choropleth()
 
-    map_visualizer_civ = MapVisualizer(civ, isibf_civ_norm, label="ISIBF", lat=7.5, lon=-5.5, country="civ")
+    map_visualizer_civ = MapVisualizer(civ, isibf_civ_norm, label="ISIBF", type="districts", lat=7.5, lon=-5.5, country="civ")
     map_visualizer_civ.create_choropleth()
 
-    map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", lat=8.5, lon=-2, country="combined")
+    map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="régions", lat=8.5, lon=-2, country="combined")
     map_visualizer_combined.create_choropleth()
 
 
     # Maps for global normalization
-    map_visualizer_benin = MapVisualizer(benin, isibf_all_norm, label="ISIBF2", lat=9.5, lon=2.3, country="benin")
+    map_visualizer_benin = MapVisualizer(benin, isibf_all_norm, label="ISIBF2", type="régions", lat=9.5, lon=2.3, country="benin")
     map_visualizer_benin.create_choropleth()
 
-    map_visualizer_togo = MapVisualizer(togo, isibf_all_norm, label="ISIBF2", lat=8.6, lon=0.9, country="togo")
+    map_visualizer_togo = MapVisualizer(togo, isibf_all_norm, label="ISIBF2",  type="régions", lat=8.6, lon=0.9, country="togo")
     map_visualizer_togo.create_choropleth()
 
-    map_visualizer_civ = MapVisualizer(civ, isibf_all_norm, label="ISIBF2", lat=7.5, lon=-5.5, country="civ")
-    map_visualizer_civ.create_choropleth()
+    map_visualizer_civ = MapVisualizer(civ, isibf_all_norm, label="ISIBF2",  type="districts", lat=7.5, lon=-5.5, country="civ")
+    #map_visualizer_civ.create_choropleth()
 
-    map_visualizer_combined = MapVisualizer(combined, isibf_all_norm, label="ISIBF2", lat=8.5, lon=-2, country="combined")
+    map_visualizer_combined = MapVisualizer(combined, isibf_all_norm, label="ISIBF2", type="régions", lat=8.5, lon=-2, country="combined")
     map_visualizer_combined.create_choropleth()
 
 
@@ -164,48 +168,46 @@ def main():
     demo_indicator_togo = round_scores(indicator_calculator_togo.demographic_indicator(REF_INHABITANTS_TOGO))
     demo_indicator_civ = round_scores(indicator_calculator_civ.demographic_indicator(REF_INHABITANTS_CIV))
     demo_indicator_combined = {**demo_indicator_benin, **demo_indicator_togo, **demo_indicator_civ}
-    print(demo_indicator_combined)
+    #print(demo_indicator_combined)
 
     # calculate spatial demographic indicators
     spatial_demo_indicator_benin = round_scores(indicator_calculator_benin.spatial_demographic_indicator(REF_INHABITANTS_BENIN, THRESHOLD))
     spatial_demo_indicator_togo = round_scores(indicator_calculator_togo.spatial_demographic_indicator(REF_INHABITANTS_TOGO, THRESHOLD))
     spatial_demo_indicator_civ = round_scores(indicator_calculator_civ.spatial_demographic_indicator(REF_INHABITANTS_CIV, THRESHOLD))
     spatial_demo_indicator_combined = {**spatial_demo_indicator_benin, **spatial_demo_indicator_togo, **spatial_demo_indicator_civ}
-    print(spatial_demo_indicator_combined)
+    #print(spatial_demo_indicator_combined)
 
     """Charts for demographic indicators"""
     # demographic indicators 
-    chart_visualizer_benin = ChartVisualizer(demo_indicator_benin, title=f"Nombres d'agences pour {REF_INHABITANTS_BENIN} habitants par ville", label="demographic_indicator", country="benin")
+    chart_visualizer_benin = ChartVisualizer(demo_indicator_benin, type="régions", label="demographic_indicator", country="benin")
     chart_visualizer_benin.create_bar_chart()
 
-    chart_visualizer_togo = ChartVisualizer(demo_indicator_togo, title=f"Nombres d'agences pour {REF_INHABITANTS_TOGO} habitants par ville", label="demographic_indicator",  country="togo")
+    chart_visualizer_togo = ChartVisualizer(demo_indicator_togo, type="régions", label="demographic_indicator", country="togo")
     chart_visualizer_togo.create_bar_chart()
 
-    chart_visualizer_civ = ChartVisualizer(demo_indicator_civ, title=f"Nombres d'agences pour {REF_INHABITANTS_CIV} habitants par ville", label="demographic_indicator", country="civ")
-    chart_visualizer_civ.create_bar_chart()
+    chart_visualizer_civ = ChartVisualizer(demo_indicator_civ, type='régions', label="demographic_indicator", country="civ")
+    #chart_visualizer_civ.create_bar_chart()
 
-    chart_visualizer_combined = ChartVisualizer(demo_indicator_combined, title=f"Nombres d'agences combiné", label="demographic_indicator", country="combined")
+    chart_visualizer_combined = ChartVisualizer(demo_indicator_combined, type="régions", label="demographic_indicator", country="combined")
     chart_visualizer_combined.create_bar_chart()
 
 
     # spatial demographic indicators
-    chart_visualizer_benin = ChartVisualizer(spatial_demo_indicator_benin, title=f"Nombres d'agences pour {REF_INHABITANTS_BENIN} habitants pour l'agglomération urbaine", label="spatial_demographic_indicator", country="benin")
-    chart_visualizer_benin.create_bar_chart()
+    #chart_visualizer_benin = ChartVisualizer(spatial_demo_indicator_benin, title=f"Nombres d'agences pour {REF_INHABITANTS_BENIN} habitants pour l'agglomération urbaine", label="spatial_demographic_indicator", country="benin")
+    #chart_visualizer_benin.create_bar_chart()
 
-    chart_visualizer_togo = ChartVisualizer(spatial_demo_indicator_togo, title=f"Nombres d'agences pour {REF_INHABITANTS_TOGO} habitants pour l'agglomération urbaine", label="spatial_demographic_indicator",  country="togo")
-    chart_visualizer_togo.create_bar_chart()
+    #chart_visualizer_togo = ChartVisualizer(spatial_demo_indicator_togo, title=f"Nombres d'agences pour {REF_INHABITANTS_TOGO} habitants pour l'agglomération urbaine", label="spatial_demographic_indicator",  country="togo")
+    #chart_visualizer_togo.create_bar_chart()
 
-    chart_visualizer_civ = ChartVisualizer(spatial_demo_indicator_civ, title=f"Nombres d'agences pour {REF_INHABITANTS_CIV} habitants pour l'agglomération urbaine", label="spatial_demographic_indicator", country="civ")
-    chart_visualizer_civ.create_bar_chart()
+    #chart_visualizer_civ = ChartVisualizer(spatial_demo_indicator_civ, title=f"Nombres d'agences pour {REF_INHABITANTS_CIV} habitants pour l'agglomération urbaine", label="spatial_demographic_indicator", country="civ")
+    #chart_visualizer_civ.create_bar_chart()
 
-    chart_visualizer_combined = ChartVisualizer(spatial_demo_indicator_combined, title=f"Nombres d'agences combiné", label="spatial_demographic_indicator", country="combined")
-    chart_visualizer_combined.create_bar_chart()
+    #chart_visualizer_combined = ChartVisualizer(spatial_demo_indicator_combined, title=f"Nombres d'agences combiné", label="spatial_demographic_indicator", country="combined")
+    #chart_visualizer_combined.create_bar_chart()
 
 
 def main2():
     '''Generic functions and initialisation'''
-    # Load geographic data
-    civ2 = load_department_shapefiles()
 
     # Initialize data classes
     civ_data2 = CIVDepartmentData(service_type='bank')
@@ -231,13 +233,32 @@ def main2():
     # Normalize for each countries and format
     isibf_civ_norm2 = format_scores(normalize_scores(isibf_civ2))
 
+    # Mean ISIBF using department scores
+    isibf_civ_regions = format_scores(mean_scores(normalize_scores(isibf_civ2), civ_data2.get_department_mapping()))
+
 
     '''Map visualization for ISIBF score'''
 
     # Maps for normalization by countries
-    map_visualizer_civ = MapVisualizer(civ2, isibf_civ_norm2, label="ISIBF", lat=7.5, lon=-5.5, country="civ_department")
+    map_visualizer_civ = MapVisualizer(civ2, isibf_civ_norm2, label="ISIBF", type="départements", lat=7.5, lon=-5.5, country="civ")
     map_visualizer_civ.create_choropleth()
+
+    map_visualizer_civ_regions = MapVisualizer(civ, isibf_civ_regions, label="ISIBF", type="districts", lat=7.5, lon=-5.5, country="civ")
+    map_visualizer_civ_regions.create_choropleth()
+
+
+
+    """"Indicator 2 : Demographic indicator"""
+
+    # demographic indicators
+
+    demo_indicator_civ_regions=format_scores(mean_scores(indicator_calculator_civ2.demographic_indicator(REF_INHABITANTS_CIV), civ_data2.get_department_mapping()))
+
+    chart_visualizer_civ = ChartVisualizer(demo_indicator_civ_regions, type="districts", label="demographic_indicator", country="civ")
+    chart_visualizer_civ.create_bar_chart()
+
 
    
 if __name__ == "__main__":
     main()
+    main2()

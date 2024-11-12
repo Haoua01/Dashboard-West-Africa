@@ -98,6 +98,10 @@ class IndicatorCalculator:
             else:
                 demo_indicator[city] = None  # Or handle as you prefer
         return demo_indicator
+    
+    def demographic_indicator2(self,nb_inhabitants):
+        """Calculates the mean of the demographic indicator for each district and returns the result per 100,000 inhabitants."""
+
 
 
     def spatial_demographic_indicator(self, nb_inhabitants, threshold):

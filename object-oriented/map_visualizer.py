@@ -13,13 +13,15 @@ class MapVisualizer:
         create_choropleth(values, title): Creates a choropleth map with the given values and title.
     """
     
-    def __init__(self, geo_data, scores, label, lat, lon, country):
+    def __init__(self, geo_data, scores, label, type, lat, lon, country):
         self.geo_data = geo_data
         self.lat = lat
         self.lon = lon
         self.scores = scores
         self.label = label
+        self.type = type
         self.country = country
+
 
     def create_choropleth(self):
         
@@ -56,7 +58,7 @@ class MapVisualizer:
             },
             tooltip=folium.GeoJsonTooltip(
                 fields=['admin1Name', f'{self.label}'],
-                aliases=['Region:', 'Score:'],
+                aliases=[f'{self.type}:', 'Score:'],
                 localize=True,
             )
         ).add_to(my_map)
@@ -73,16 +75,16 @@ class MapVisualizer:
             mapbox_style="carto-positron",
             zoom=5,
             center={"lat": self.lat, "lon": self.lon},
-            title="Score d'accès aux agences bancaires par régions",
+            title=f"Score d'accès aux agences bancaires par {self.type}",
             hover_name="admin1Name",  # Region names
             hover_data={f'{self.label}': True, 'admin1Name': False},  # Show score but hide original name
-            labels={'admin1Name': 'Région', f'{self.label}': 'Score'},
+            labels={'admin1Name': f'{self.type}', f'{self.label}': 'Score'},
             color_continuous_scale=px.colors.sequential.Blues,
             range_color=[0, 1]
         )
 
         # Save as HTML
-        html_file_path = f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/{self.label}_{self.country}.html'
+        html_file_path = f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/{self.label}_{self.type}_{self.country}.html'
 
         # Save the map as HTML
         fig.write_html(html_file_path)

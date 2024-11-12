@@ -45,3 +45,15 @@ def reverse_dictionary(original_dict):
     """
     return {v: k for k, v in original_dict.items()}
 
+def mean_scores(scores, department_mapping):
+    # Calculate the mean ISIBF for each district
+    district_isibf_mean = {}
+
+    for district, departments in department_mapping.items():
+        # Calculate the mean ISIBF for the district
+        total_isibf = sum(scores.get(department, 0) for department in departments)  # Sum ISIBF values of the departments
+        mean_isibf = total_isibf / len(departments) if departments else 0  # Compute mean (avoid division by zero)
+        district_isibf_mean[district] = mean_isibf
+
+    # Return the mean ISIBF for each district
+    return district_isibf_mean
