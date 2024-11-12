@@ -21,11 +21,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Charger la carte du Bénin dans map1 par défaut
     const iframe = document.getElementById('map-frame');
-    iframe.src = 'results/ISIBF_benin.html'; // Carte par défaut pour le Bénin
+    iframe.src = 'results/ISIBF_régions_benin.html'; // Carte par défaut pour le Bénin
 
     // Charger l'histogramme du Bénin dans chart3 par défaut
     const iframe2 = document.getElementById('chart-frame2');
-    iframe2.src = 'results/demographic_indicator_benin.html'; // Histogramme par défaut pour le Bénin
+    iframe2.src = 'results/demographic_indicator_régions_benin.html'; // Histogramme par défaut pour le Bénin
 
 
 });
@@ -54,7 +54,7 @@ function toggleGroup1(showMapId) {
         
         // Charger la carte par défaut dans map2
         const iframe = document.getElementById('map2-frame');
-        iframe.src = 'results/ISIBF2_benin.html'; 
+        iframe.src = 'results/ISIBF2_régions_benin.html'; 
     }
 }
 
@@ -109,7 +109,7 @@ function showCountryMap1() {
         toggleSwitch.style.display = 'block';
     } else {
         // For other countries, load the default map
-        iframe.src = `results/ISIBF_${countrySelect}.html`;
+        iframe.src = `results/ISIBF_régions_${countrySelect}.html`;
         toggleSwitch.style.display = 'none';
     }
 }
@@ -120,7 +120,11 @@ function showCountryMap1() {
 function showCountryChart() {
     const countrySelect2 = document.getElementById('country-select21').value;
     const iframe2 = document.getElementById('chart-frame2');
-    iframe2.src = `results/demographic_indicator_${countrySelect2}.html`;
+    if (countrySelect2 === 'civ') {
+        iframe2.src = `results/demographic_indicator_districts_${countrySelect2}.html`;
+    } else {
+        iframe2.src = `results/demographic_indicator_régions_${countrySelect2}.html`;
+    }
 }
 
 
@@ -133,15 +137,17 @@ function updateSliderValue() {
 
     // Check if checkbox is checked (1 = "Par départements", 0 = "Par districts")
     if (checkbox.checked) {
-        iframe.src = 'results/ISIBF_civ_departments.html'; // Map by departments
+        iframe.src = 'results/ISIBF_départements_civ.html'; // Map by departments
         departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
         districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
     } else {
-        iframe.src = 'results/ISIBF_civ_districts.html'; // Map by districts
+        iframe.src = 'results/ISIBF_districts_civ.html'; // Map by districts
         districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
         departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
     }
 }
+
+
 
 let background_box = document.querySelector(".background_box");
     let toggle_box = document.querySelector(".toggle_box");
