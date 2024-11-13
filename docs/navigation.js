@@ -144,7 +144,7 @@ function updateSliderValue() {
     const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
     const checkbox = document.getElementById('checkbox');
-    const districtLabel = document.getElementById('district-label');
+    const districtLabel = document.getElementById('region-label');
     const departmentLabel = document.getElementById('department-label');
 
     // Check if checkbox is checked (1 = "Par départements", 0 = "Par districts")
