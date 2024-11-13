@@ -102,7 +102,7 @@ function setActiveButton(activeId) {
 function showCountryMap1() {
     const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
-    const toggleSwitch = document.getElementById('toggle-switch-civ');
+    const toggleSwitch = document.getElementById('toggle-switch');
  
     if (countrySelect === 'civ') {
         updateSliderValue();
@@ -120,7 +120,6 @@ function showCountryMap1() {
 function showCountryMap2() {
     const countrySelect = document.getElementById('country-select12').value;
     const iframe = document.getElementById('map2-frame');
-    const toggleSwitch = document.getElementById('toggle-switch-benin');
 
     iframe.src = `results/ISIBF2_régions_${countrySelect}.html`;
 
