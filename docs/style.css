@@ -286,7 +286,7 @@ footer p {
 }
 
 .background_box{
-    width: 60px;
+    width: 100%;
     height: 40px;
     background-color: black;
     display: flex;
@@ -296,7 +296,7 @@ footer p {
     transition-delay: 0.4s;
 }
 .toggle_box{
-    width: 60px;
+    width: 120px;
     height: 30px;
     display: block;
     background-color: #008080;
@@ -318,11 +318,6 @@ input[type="checkbox"]{
     border-radius: 50%; /* Keep the circle perfectly round */
     margin: 4px; /* Space inside the box */
     transition: 0.5s; /* Smooth transition for the movement */
-}
-
-/* Move the circle to the right */
-input[type="checkbox"]:checked + .toggle_box .circle {
-    left: 30px; /* Move the circle to the right */
 }
 
 
