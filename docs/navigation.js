@@ -15,10 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Activer le bouton par défaut pour 'map1'
-    setActiveButton('map1');
-    setActiveButton('chart3');
-
     // Charger la carte du Bénin dans map1 par défaut
     const iframe = document.getElementById('map-frame');
     iframe.src = 'results/ISIBF_régions_benin.html'; // Carte par défaut pour le Bénin
@@ -30,33 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-// Fonction pour basculer l'affichage des cartes et des histogrammes
-function toggleGroup1(showMapId) {
-    // Masquer tous les éléments de group1
-    const maps = document.querySelectorAll('.group1');
-    maps.forEach(element => {
-        element.style.display = 'none';
-    });
 
-    // Afficher la carte sélectionnée
-    document.getElementById(showMapId).style.display = 'block';
-
-    // Activer le bouton correspondant
-    setActiveButton(showMapId);
-
-    // Contrôle de la visibilité des dropdowns
-    if (showMapId === 'map1') {
-        document.getElementById('countryDropdown11').style.display = 'block'; // Afficher dropdown pour map1
-        document.getElementById('countryDropdown12').style.display = 'none';  // Masquer dropdown pour map2
-    } else if (showMapId === 'map2') {
-        document.getElementById('countryDropdown11').style.display = 'none';  // Masquer dropdown pour map1
-        document.getElementById('countryDropdown12').style.display = 'block'; // Afficher dropdown pour map2
-        
-        // Charger la carte par défaut dans map2
-        const iframe = document.getElementById('map2-frame');
-        iframe.src = 'results/ISIBF2_régions_benin.html'; 
-    }
-}
 
 function toggleGroup2(showMapId) {
     const charts = document.querySelectorAll('.group2');
@@ -69,8 +39,6 @@ function toggleGroup2(showMapId) {
     // Afficher la carte ou l'histogramme sélectionné
     document.getElementById(showMapId).style.display = 'block';
 
-    // Activer le bouton correspondant
-    setActiveButton(showMapId);
 
     // Contrôle de la visibilité des dropdowns
     if (showMapId === 'chart3') {
@@ -85,18 +53,7 @@ function toggleGroup2(showMapId) {
     }
 }
 
-// Fonction pour activer le style du bouton actif
-function setActiveButton(activeId) {
-    // Supprimer la classe active de tous les boutons
-    const buttons = document.querySelectorAll('.toggle-buttons button');
-    buttons.forEach(button => button.classList.remove('active'));
 
-    // Ajouter la classe active au bouton correspondant à l'élément affiché
-    const activeButton = Array.from(buttons).find(button => button.onclick.toString().includes(activeId));
-    if (activeButton) {
-        activeButton.classList.add('active');
-    }
-}
 
 // Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
 function showCountryMap1() {
@@ -117,13 +74,6 @@ function showCountryMap1() {
     }
 }
 
-function showCountryMap2() {
-    const countrySelect = document.getElementById('country-select12').value;
-    const iframe = document.getElementById('map2-frame');
-
-    iframe.src = `results/ISIBF2_régions_${countrySelect}.html`;
-
-}
 
 
 

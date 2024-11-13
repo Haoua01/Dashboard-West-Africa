@@ -194,12 +194,7 @@ footer p {
     color: #f9f9f9;
 }
 
-/* Boutons de bascule */
-.toggle-buttons {
-    display: flex;
-    gap: 10px;
-    margin: 20px 0;
-}
+
 
 .toggle-banner {
     background-color: #e0f7f7;
@@ -209,34 +204,6 @@ footer p {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.toggle-buttons button {
-    background: linear-gradient(135deg, #008080, #00a3a3);
-    color: #fff;
-    border: 2px solid #006666;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.toggle-buttons button:hover {
-    background: linear-gradient(135deg, #006666, #008080);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-
-
-.toggle-buttons button.active {
-    background: #006666; /* Couleur de fond pour le bouton actif */
-    color: #ffffff; /* Couleur du texte pour le bouton actif */
-    border: 2px solid #004c4c; /* Éventuellement une bordure plus prononcée */
-    transform: translateY(-2px); /* Élévation pour un effet 3D */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre pour plus de profondeur */
-}
 
 
 /* Conteneur pour sélection de pays */
