@@ -141,30 +141,37 @@ function showCountryChart() {
 
 // Function to update the map based on toggle switch (checkbox) state
 function updateSliderValue() {
+    const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
     const checkbox = document.getElementById('checkbox');
     const districtLabel = document.getElementById('district-label');
     const departmentLabel = document.getElementById('department-label');
 
     // Check if checkbox is checked (1 = "Par départements", 0 = "Par districts")
-    if (checkbox.checked) {
-        if (iframe.src.includes('civ')) {
+    if (countrySelect === 'civ') {
+        if (checkbox.checked) {
             iframe.src = 'results/ISIBF_départements_civ.html'; // Map by departments
+            departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
+            districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
         }
-        else if (iframe.src.includes('mali')) {
-            iframe.src = 'results/ISIBF_cercles_mali.html'; // Map by departments
+        else {
+            iframe.src = 'results/ISIBF_districts_civ.html'; // Map by departments
+            districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
+            departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
         }
         departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
         districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
-    } else {
-        if (iframe.src.includes('civ')) {
-            iframe.src = 'results/ISIBF_districts_civ.html'; // Map by departments
+    } else if (countrySelect === 'mali') {
+        if (checkbox.checked) {
+            iframe.src = 'results/ISIBF_cercles_mali.html'; // Map by departments
+            departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
+            districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
         }
-        else if (iframe.src.includes('mali')) {
+        else if (countrySelect === 'mali') {
             iframe.src = 'results/ISIBF_régions_mali.html'; // Map by departments
+            districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
+            departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
         }
-        districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
-        departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
     }
 }
 
