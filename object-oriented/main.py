@@ -8,6 +8,7 @@ from map_visualizer import MapVisualizer
 from chart_visualizer import ChartVisualizer
 from utils import normalize_scores, format_scores, round_scores, mean_scores
 from data.civ_department_data import CIVDepartmentData
+from data.mali_data import MaliData
 
 # Import necessary Python libraries
 import geopandas as gpd
@@ -18,18 +19,21 @@ THRESHOLD = 200  # Distance threshold for neighbors
 ALPHA_BENIN = 1.04  # Alpha value for ISIBF calculation in Benin
 ALPHA_TOGO = 1.009  # Alpha value for ISIBF calculation in Togo
 ALPHA_CIV = 1.02  # Alpha value for ISIBF calculation in Côte d'Ivoire
-REF_INHABITANTS_BENIN = 100000  # Reference number of inhabitants for Benin
-REF_INHABITANTS_TOGO = 100000  # Reference number of inhabitants for Togo
-REF_INHABITANTS_CIV = 100000  # Reference number of inhabitants for Côte d'Ivoire
+ALPHA_MALI = 1.04  # Alpha value for ISIBF calculation in Mali
+ALPHA_ALL = max(ALPHA_BENIN, ALPHA_TOGO, ALPHA_CIV, ALPHA_MALI)  # Maximum alpha value for global normalization
+REF_INHABITANTS = 100000  # Reference number of inhabitants for demographic indicator
+
 
 def load_shapefiles():
     benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/ben_adm_1m_salb_2019_shapes') #change path once folder updated on GitHub
     togo = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/Shapefiles_togo') #change path once folder updated on GitHub
     civ = gpd.read_file("/Users/haouabenaliabbo/Downloads/202303_OSM2IGEO_COTE_D_IVOIRE_SHP_WGS84_4326/H_OSM_ADMINISTRATIF/DISTRICT.shp") #change path once folder updated on GitHub
+    mali = gpd.read_file('/Users/haouabenaliabbo/Downloads/mali_adm_ab_shp/mli_admbnda_adm1_1m_gov_20211220.shp')
 
     # Add columns for country names
     togo['ADM1_REF'] = 'Togo'
-    civ['ID'] = "Côte d'Ivoire"
+    civ['country'] = "Côte d'Ivoire"
+    mali['country'] = "Mali"
 
     # Rename columns for consistency
     benin = benin.rename(columns={'adm1_name': 'admin1Name'})
@@ -37,7 +41,7 @@ def load_shapefiles():
     togo = togo.rename(columns={'ADM1_FR': 'admin1Name'})
     togo = togo.rename(columns={'ADM1_REF': 'country'})
     civ = civ.rename(columns={'NOM': 'admin1Name'})
-    civ = civ.rename(columns={'ID': 'country'})
+    mali = mali.rename(columns={'ADM1_FR': 'admin1Name'})
 
     # Rename regions with common names to avoid conflicts
     benin['admin1Name'] = benin['admin1Name'].replace('Oueme', 'Ouémé')
@@ -45,9 +49,10 @@ def load_shapefiles():
     civ['admin1Name'] = civ['admin1Name'].replace('Savanes', 'Savanes_CIV')
 
     # Fusion shapefiles for combined maps
-    combined = pd.concat([benin, togo, civ], ignore_index=True)
+    combined = pd.concat([benin, togo, civ, mali], ignore_index=True)
+    #print(combined[['admin1Name', 'country']])
 
-    return benin, togo, civ, combined
+    return benin, togo, civ, mali, combined
 
 def load_department_shapefiles():
     civ= gpd.read_file('/Users/haouabenaliabbo/Downloads/civ_admbnda_adm2_cntig_ocha_itos_20180706 (2)/civ_admbnda_adm2_cntig_ocha_itos_20180706.shp')
@@ -63,12 +68,16 @@ def load_department_shapefiles():
     civ['admin1Name'] = civ['admin1Name'].replace('Sandegue', 'Sandégué')
     civ['admin1Name'] = civ['admin1Name'].replace('Koun Fao', 'Koun-Fao')
 
-    return civ
+    mali= gpd.read_file('/Users/haouabenaliabbo/Downloads/mali_adm_ab_shp/mli_admbnda_adm2_1m_gov_20211220.shp')
+    mali= mali.rename(columns={'ADM2_FR': 'admin1Name'})
+    mali['admin1Name'] = mali['admin1Name'].replace('Bafoulabe', 'Bafoulabé')
+
+    return civ, mali 
 
 
 # Load geographic data
-benin, togo, civ, combined = load_shapefiles()
-civ2 = load_department_shapefiles()  
+benin, togo, civ, mali, combined = load_shapefiles()
+civ2, mali2 = load_department_shapefiles()  
 
 
 
@@ -125,14 +134,9 @@ def main():
     isibf_benin_norm = format_scores(normalize_scores(isibf_benin))
     isibf_togo_norm = format_scores(normalize_scores(isibf_togo))
     isibf_civ_norm = format_scores(normalize_scores(isibf_civ))
-    isibf_combined_norm = {**isibf_benin_norm, **isibf_togo_norm, **isibf_civ_norm}
-
-    # Global normalization and formatting
-    isibf_all = {**isibf_benin, **isibf_togo, **isibf_civ}
-    isibf_all_norm = format_scores(normalize_scores(isibf_all))
 
 
-    '''Map visualization for ISIBF score'''
+    '''Map visualization for ISIBF score
 
     # Maps for normalization by countries
     map_visualizer_benin = MapVisualizer(benin, isibf_benin_norm, label="ISIBF", type="régions", lat=9.5, lon=2.3, country="benin")
@@ -143,9 +147,6 @@ def main():
 
     map_visualizer_civ = MapVisualizer(civ, isibf_civ_norm, label="ISIBF", type="districts", lat=7.5, lon=-5.5, country="civ")
     map_visualizer_civ.create_choropleth()
-
-    map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="régions", lat=8.5, lon=-2, country="combined")
-    map_visualizer_combined.create_choropleth()
 
 
     # Maps for global normalization
@@ -158,26 +159,24 @@ def main():
     map_visualizer_civ = MapVisualizer(civ, isibf_all_norm, label="ISIBF2",  type="districts", lat=7.5, lon=-5.5, country="civ")
     #map_visualizer_civ.create_choropleth()
 
-    map_visualizer_combined = MapVisualizer(combined, isibf_all_norm, label="ISIBF2", type="régions", lat=8.5, lon=-2, country="combined")
-    map_visualizer_combined.create_choropleth()
-
+    '''
 
     """"Indicator 2 : Demographic indicator"""
     # Calculate demographic indicators
-    demo_indicator_benin = round_scores(indicator_calculator_benin.demographic_indicator(REF_INHABITANTS_BENIN))
-    demo_indicator_togo = round_scores(indicator_calculator_togo.demographic_indicator(REF_INHABITANTS_TOGO))
-    demo_indicator_civ = round_scores(indicator_calculator_civ.demographic_indicator(REF_INHABITANTS_CIV))
+    demo_indicator_benin = round_scores(indicator_calculator_benin.demographic_indicator(REF_INHABITANTS))
+    demo_indicator_togo = round_scores(indicator_calculator_togo.demographic_indicator(REF_INHABITANTS))
+    demo_indicator_civ = round_scores(indicator_calculator_civ.demographic_indicator(REF_INHABITANTS))
     demo_indicator_combined = {**demo_indicator_benin, **demo_indicator_togo, **demo_indicator_civ}
     #print(demo_indicator_combined)
 
     # calculate spatial demographic indicators
-    spatial_demo_indicator_benin = round_scores(indicator_calculator_benin.spatial_demographic_indicator(REF_INHABITANTS_BENIN, THRESHOLD))
-    spatial_demo_indicator_togo = round_scores(indicator_calculator_togo.spatial_demographic_indicator(REF_INHABITANTS_TOGO, THRESHOLD))
-    spatial_demo_indicator_civ = round_scores(indicator_calculator_civ.spatial_demographic_indicator(REF_INHABITANTS_CIV, THRESHOLD))
+    spatial_demo_indicator_benin = round_scores(indicator_calculator_benin.spatial_demographic_indicator(REF_INHABITANTS, THRESHOLD))
+    spatial_demo_indicator_togo = round_scores(indicator_calculator_togo.spatial_demographic_indicator(REF_INHABITANTS, THRESHOLD))
+    spatial_demo_indicator_civ = round_scores(indicator_calculator_civ.spatial_demographic_indicator(REF_INHABITANTS, THRESHOLD))
     spatial_demo_indicator_combined = {**spatial_demo_indicator_benin, **spatial_demo_indicator_togo, **spatial_demo_indicator_civ}
     #print(spatial_demo_indicator_combined)
 
-    """Charts for demographic indicators"""
+    """Charts for demographic indicators
     # demographic indicators 
     chart_visualizer_benin = ChartVisualizer(demo_indicator_benin, type="régions", label="demographic_indicator", country="benin")
     chart_visualizer_benin.create_bar_chart()
@@ -205,9 +204,9 @@ def main():
     #chart_visualizer_combined = ChartVisualizer(spatial_demo_indicator_combined, title=f"Nombres d'agences combiné", label="spatial_demographic_indicator", country="combined")
     #chart_visualizer_combined.create_bar_chart()
 
+    """
 
-def main2():
-    '''Generic functions and initialisation'''
+    '''COTE D'IVOIRE ADJUSTMENTS : Generic functions and initialisation'''
 
     # Initialize data classes
     civ_data2 = CIVDepartmentData(service_type='bank')
@@ -227,38 +226,99 @@ def main2():
 
     # Calculate ISIBF values
     indicator_calculator_civ2 = IndicatorCalculator(bank_agencies_civ2.get_agency_counts(), neighbors_civ2, civ_data2.get_adult_population(), alpha=ALPHA_CIV, threshold=THRESHOLD, department_mapping=civ_data2.get_department_mapping())
-    isibf_civ2 = indicator_calculator_civ2.calculate_isibf2()
+    isibf_departments_civ = indicator_calculator_civ2.calculate_isibf2()
+    # Global normalization and formatting
+    isibf_regions_civ = mean_scores(isibf_departments_civ, civ_data2.get_department_mapping())
 
 
-    # Normalize for each countries and format
-    isibf_civ_norm2 = format_scores(normalize_scores(isibf_civ2))
+    # Normalization by countries
+    isibf_departments_civ_norm = format_scores(normalize_scores(isibf_departments_civ))
+    isibf_regions_civ_norm = format_scores(mean_scores(normalize_scores(isibf_departments_civ), civ_data2.get_department_mapping()))
 
-    # Mean ISIBF using department scores
-    isibf_civ_regions = format_scores(mean_scores(normalize_scores(isibf_civ2), civ_data2.get_department_mapping()))
+
+    
+
 
 
     '''Map visualization for ISIBF score'''
 
     # Maps for normalization by countries
-    map_visualizer_civ = MapVisualizer(civ2, isibf_civ_norm2, label="ISIBF", type="départements", lat=7.5, lon=-5.5, country="civ")
-    map_visualizer_civ.create_choropleth()
+    map_visualizer_civ = MapVisualizer(civ2, isibf_departments_civ_norm, label="ISIBF", type="départements", lat=7.5, lon=-5.5, country="civ")
+    #map_visualizer_civ.create_choropleth()
 
-    map_visualizer_civ_regions = MapVisualizer(civ, isibf_civ_regions, label="ISIBF", type="districts", lat=7.5, lon=-5.5, country="civ")
-    map_visualizer_civ_regions.create_choropleth()
+    map_visualizer_civ_regions = MapVisualizer(civ, isibf_regions_civ_norm, label="ISIBF", type="districts", lat=7.5, lon=-5.5, country="civ")
+    #map_visualizer_civ_regions.create_choropleth()
 
 
 
-    """"Indicator 2 : Demographic indicator"""
+    '''Indicator 2 : Demographic indicator'''
 
     # demographic indicators
 
-    demo_indicator_civ_regions=format_scores(mean_scores(indicator_calculator_civ2.demographic_indicator(REF_INHABITANTS_CIV), civ_data2.get_department_mapping()))
+    demo_indicator_civ_regions=format_scores(mean_scores(indicator_calculator_civ2.demographic_indicator(REF_INHABITANTS), civ_data2.get_department_mapping()))
 
     chart_visualizer_civ = ChartVisualizer(demo_indicator_civ_regions, type="districts", label="demographic_indicator", country="civ")
-    chart_visualizer_civ.create_bar_chart()
+    #chart_visualizer_civ.create_bar_chart()
 
+    """MALI INTRODUCTION"""
+
+    mali_data = MaliData(service_type='bank')
+
+    bank_agencies_mali = BankAgencies(
+        mali_data.get_agency_counts(),
+        mali_data.get_department_mapping(),
+        mali_data.get_coordinates()
+    )
+
+    geographic_data_mali = GeographicData(mali_data.get_coordinates())
+
+    neighbors_mali = geographic_data_mali.compute_neighbors(distance_threshold=THRESHOLD)
+
+    '''Indicator 1 : ISIBF score'''
+
+    # Calculate ISIBF values
+    indicator_calculator_mali = IndicatorCalculator(bank_agencies_mali.get_agency_counts(), neighbors_mali, mali_data.get_adult_population(), alpha=ALPHA_MALI, threshold=THRESHOLD, department_mapping=mali_data.get_department_mapping())
+    isibf_departments_mali = indicator_calculator_mali.calculate_isibf2()
+    print(isibf_departments_mali)
+
+
+    # Normalization by country
+    isibf_departments_mali_norm = format_scores(normalize_scores(isibf_departments_mali))
+    isibf_regions_mali_norm = format_scores(mean_scores(normalize_scores(isibf_departments_mali), mali_data.get_department_mapping()))
+
+    # Global normalization and formatting
+    isibf_regions_mali = mean_scores(isibf_departments_mali, mali_data.get_department_mapping())
+
+    '''Map visualization for ISIBF score'''
+
+    # Maps for normalization by countries
+    map_visualizer_mali_regions = MapVisualizer(mali, isibf_regions_mali_norm, label="ISIBF", type="régions", lat=17.5, lon=-4.5, country="mali")
+    #map_visualizer_mali_regions.create_choropleth()
+
+    map_visualizer_mali = MapVisualizer(mali2, isibf_departments_mali_norm, label="ISIBF", type="cercles", lat=17.5, lon=-4.5, country="mali")
+    #map_visualizer_mali.create_choropleth()
+    
+    """MAPS COMBINED VISUALIZATION"""
+
+    # Normalization by countries
+    isibf_combined_norm = {**isibf_benin_norm, **isibf_togo_norm, **isibf_regions_civ_norm, **isibf_regions_mali_norm}
+
+
+    # Global normalization and formatting
+    isibf_all = {**isibf_benin, **isibf_togo, **isibf_regions_civ, **isibf_regions_mali}
+    print(isibf_all)
+    isibf_all_norm = format_scores(normalize_scores(isibf_all))
+
+    # Maps for normalization by countries
+    map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="régions", lat=8.5, lon=-2, country="combined")
+    map_visualizer_combined.create_choropleth()
+
+    # Maps for global normalization
+    map_visualizer_combined = MapVisualizer(combined, isibf_all_norm, label="ISIBF2", type="régions", lat=8.5, lon=-2, country="combined")
+    map_visualizer_combined.create_choropleth()
+
+    
 
    
 if __name__ == "__main__":
     main()
-    main2()
