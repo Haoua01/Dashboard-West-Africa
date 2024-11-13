@@ -107,11 +107,23 @@ function showCountryMap1() {
     if (countrySelect === 'civ') {
         updateSliderValue();
         toggleSwitch.style.display = 'block';
+    } else if (countrySelect === 'mali') {
+        updateSliderValue();
+        toggleSwitch.style.display = 'block';
     } else {
         // For other countries, load the default map
         iframe.src = `results/ISIBF_régions_${countrySelect}.html`;
         toggleSwitch.style.display = 'none';
     }
+}
+
+function showCountryMap2() {
+    const countrySelect = document.getElementById('country-select12').value;
+    const iframe = document.getElementById('map2-frame');
+    const toggleSwitch = document.getElementById('toggle-switch-benin');
+
+    iframe.src = `results/ISIBF2_régions_${countrySelect}.html`;
+
 }
 
 
@@ -137,11 +149,21 @@ function updateSliderValue() {
 
     // Check if checkbox is checked (1 = "Par départements", 0 = "Par districts")
     if (checkbox.checked) {
-        iframe.src = 'results/ISIBF_départements_civ.html'; // Map by departments
+        if (iframe.src.includes('civ')) {
+            iframe.src = 'results/ISIBF_départements_civ.html'; // Map by departments
+        }
+        else if (iframe.src.includes('mali')) {
+            iframe.src = 'results/ISIBF_cercles_mali.html'; // Map by departments
+        }
         departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
         districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
     } else {
-        iframe.src = 'results/ISIBF_districts_civ.html'; // Map by districts
+        if (iframe.src.includes('civ')) {
+            iframe.src = 'results/ISIBF_districts_civ.html'; // Map by departments
+        }
+        else if (iframe.src.includes('mali')) {
+            iframe.src = 'results/ISIBF_régions_mali.html'; // Map by departments
+        }
         districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
         departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
     }
