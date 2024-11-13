@@ -159,8 +159,6 @@ function updateSliderValue() {
             districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
             departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
         }
-        departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
-        districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
     } else if (countrySelect === 'mali') {
         if (checkbox.checked) {
             iframe.src = 'results/ISIBF_cercles_mali.html'; // Map by departments
