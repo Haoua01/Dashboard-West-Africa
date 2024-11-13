@@ -47,10 +47,6 @@ function toggleGroup2(showMapId) {
         document.getElementById('countryDropdown21').style.display = 'none'; // Masquer dropdown pour chart3
     }
 
-    // Assurez-vous que map4 n'est affiché que lorsqu'il est explicitement sélectionné
-    if (showMapId === 'map4') {
-        document.getElementById('map4').style.display = 'block';
-    }
 }
 
 
