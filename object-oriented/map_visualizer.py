@@ -13,25 +13,26 @@ class MapVisualizer:
         create_choropleth(values, title): Creates a choropleth map with the given values and title.
     """
     
-    def __init__(self, geo_data, scores, label, type, lat, lon, country):
+    def __init__(self, geo_data, scores, label, type, lat, lon, zoom, country):
         self.geo_data = geo_data
         self.lat = lat
         self.lon = lon
+        self.zoom = zoom
         self.scores = scores
         self.label = label
         self.type = type
         self.country = country
 
 
+
     def create_choropleth(self):
-        
-        # Create a map centered on Ghana
-        my_map = folium.Map(location=[self.lat, self.lon], zoom_start=5)
 
         # Add the scores to the GeoDataFrame
 
         self.geo_data[f'{self.label}'] = self.geo_data['admin1Name'].map(self.scores)
 
+        """
+        my_map = folium.Map(location=[self.lat, self.lon], zoom_start=5)
 
         # Plot the map
         folium.Choropleth(
@@ -62,6 +63,7 @@ class MapVisualizer:
                 localize=True,
             )
         ).add_to(my_map)
+        """
 
         # Convert to GeoJSON
         geojson_data = self.geo_data.__geo_interface__
@@ -73,7 +75,7 @@ class MapVisualizer:
             featureidkey='properties.admin1Name',  # This should match the GeoJSON structure
             color=f'{self.label}',  # Fill color with scores
             mapbox_style="carto-positron",
-            zoom=5,
+            zoom=self.zoom,
             center={"lat": self.lat, "lon": self.lon},
             title=f"Score d'accès aux agences bancaires par {self.type}",
             hover_name="admin1Name",  # Region names
