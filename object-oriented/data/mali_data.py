@@ -1,5 +1,4 @@
 from financial_service import FinancialService
-from geographic_data import GeographicData
 
 class MaliData(FinancialService):
     """Class to manage data specific to Côte d'Ivoire based on the type of financial service."""
