@@ -6,29 +6,48 @@ from data.togo_data import TogoData
 from data.civ_data import CIVData
 from map_visualizer import MapVisualizer
 from chart_visualizer import ChartVisualizer
-from utils import normalize_scores, format_scores, round_scores, mean_scores
+from utils import normalize_scores, format_scores, round_scores, mean_scores, mean
 from data.civ_department_data import CIVDepartmentData
 from data.mali_data import MaliData
+from data.burkina_data import BurkinaData
 
 # Import necessary Python libraries
 import geopandas as gpd
 import pandas as pd
+import numpy as np
 
 # Constants
 THRESHOLD = 200  # Distance threshold for neighbors
-ALPHA_BENIN = 1.04  # Alpha value for ISIBF calculation in Benin
-ALPHA_TOGO = 1.009  # Alpha value for ISIBF calculation in Togo
-ALPHA_CIV = 1.02  # Alpha value for ISIBF calculation in Côte d'Ivoire
-ALPHA_MALI = 1.015  # Alpha value for ISIBF calculation in Mali
-ALPHA_ALL = max(ALPHA_BENIN, ALPHA_TOGO, ALPHA_CIV, ALPHA_MALI)  # Maximum alpha value for global normalization
+ALPHA_BENIN = 1.005  # Alpha value for ISIBF calculation in Benin 1.0345
+ALPHA_TOGO = 1.005  # Alpha value for ISIBF calculation in Togo 1.007
+ALPHA_CIV = 1.01  # Alpha value for ISIBF calculation in Côte d'Ivoire 1.01738
+ALPHA_MALI = 1.02  # Alpha value for ISIBF calculation in Mali 1.02
+ALPHA_BURKINA = 1.02 # Burkina 1.02
 REF_INHABITANTS = 100000  # Reference number of inhabitants for demographic indicator
 
+
+def load_country_shapefiles():
+    benin = gpd.read_file('/Users/haouabenaliabbo/Downloads/ben_adm_1m_salb_2019_shapes/ben_admbnda_adm0_1m_salb_20190816.shp')
+    togo = gpd.read_file('/Users/haouabenaliabbo/Downloads/Shapefiles_togo/tgo_admbnda_adm0_inseed_itos_20210107.shp')
+    civ = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/civ_admbnda_adm0_cntig_20180706/civ_admbnda_adm0_cntig_20180706.shp')
+    mali = gpd.read_file('/Users/haouabenaliabbo/Downloads/mali_adm_ab_shp/mli_admbnda_adm0_1m_gov_20211220.shp')
+    burkina = gpd.read_file('/Users/haouabenaliabbo/Downloads/bfa_adm_igb_20200323_shp/bfa_admbnda_adm0_igb_20200323.shp')
+    
+    benin['admin1Name']='Bénin'
+    togo['admin1Name']='Togo'
+    civ['admin1Name']='Côte d\'Ivoire'
+    mali['admin1Name']='Mali'
+    burkina['admin1Name']='Burkina Faso'
+    combined = pd.concat([benin, togo, civ, mali, burkina], ignore_index=True)
+
+    return combined
 
 def load_shapefiles():
     benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/ben_adm_1m_salb_2019_shapes') #change path once folder updated on GitHub
     togo = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/Shapefiles_togo') #change path once folder updated on GitHub
     civ = gpd.read_file("/Users/haouabenaliabbo/Downloads/202303_OSM2IGEO_COTE_D_IVOIRE_SHP_WGS84_4326/H_OSM_ADMINISTRATIF/DISTRICT.shp") #change path once folder updated on GitHub
     mali = gpd.read_file('/Users/haouabenaliabbo/Downloads/mali_adm_ab_shp/mli_admbnda_adm1_1m_gov_20211220.shp')
+    burkina = gpd.read_file('/Users/haouabenaliabbo/Downloads/bfa_adm_igb_20200323_shp/bfa_admbnda_adm1_igb_20200323.shp')
 
     # Add columns for country names
     togo['ADM1_REF'] = 'Togo'
@@ -42,6 +61,8 @@ def load_shapefiles():
     togo = togo.rename(columns={'ADM1_REF': 'country'})
     civ = civ.rename(columns={'NOM': 'admin1Name'})
     mali = mali.rename(columns={'ADM1_FR': 'admin1Name'})
+    burkina = burkina.rename(columns={'ADM1_FR': 'admin1Name'})
+    burkina = burkina.rename(columns={'ADM0_FR': 'country'})
 
     # Rename regions with common names to avoid conflicts
     benin['admin1Name'] = benin['admin1Name'].replace('Oueme', 'Ouémé')
@@ -49,10 +70,34 @@ def load_shapefiles():
     civ['admin1Name'] = civ['admin1Name'].replace('Savanes', 'Savanes_CIV')
 
     # Fusion shapefiles for combined maps
-    combined = pd.concat([benin, togo, civ, mali], ignore_index=True)
+    combined = pd.concat([benin, togo, civ, mali, burkina], ignore_index=True)
+    
     #print(combined[['admin1Name', 'country']])
+    """
+    # Create a column to store the border type
+    combined['border_type'] = 'internal'
 
-    return benin, togo, civ, mali, combined
+    # Check for external borders: if adjacent polygons have different country values, the border is external
+    for idx, row in combined.iterrows():
+        # Get the neighboring polygons
+        neighbors = combined[combined.geometry.touches(row['geometry'])]
+
+        # If any neighboring polygon has a different country value, mark it as an external border
+        for _, neighbor in neighbors.iterrows():
+            if row['country'] != neighbor['country']:
+                combined.at[idx, 'border_type'] = 'external'
+                break  # No need to check further once we know it's an external border
+    
+
+    # Separate internal and external borders
+    internal_borders = combined[combined['border_type'] == 'internal']
+    external_borders = combined[combined['border_type'] == 'external']
+
+    internal_borders['style'] = 'grey'  # Internal borders will be red
+    external_borders['style'] = 'black'  # External borders will be blue 
+    """
+
+    return benin, togo, civ, mali, burkina, combined
 
 def load_department_shapefiles():
     civ= gpd.read_file('/Users/haouabenaliabbo/Downloads/civ_admbnda_adm2_cntig_ocha_itos_20180706 (2)/civ_admbnda_adm2_cntig_ocha_itos_20180706.shp')
@@ -72,12 +117,98 @@ def load_department_shapefiles():
     mali= mali.rename(columns={'ADM2_FR': 'admin1Name'})
     mali['admin1Name'] = mali['admin1Name'].replace('Bafoulabe', 'Bafoulabé')
 
-    return civ, mali 
+    burkina=gpd.read_file('/Users/haouabenaliabbo/Downloads/bfa_adm_igb_20200323_shp/bfa_admbnda_adm2_igb_20200323.shp')
+    burkina = burkina.rename(columns={'ADM2_FR': 'admin1Name'})
+    burkina['admin1Name']=burkina['admin1Name'].replace('Komandjari', 'Komondjari')
+    burkina['admin1Name']=burkina['admin1Name'].replace('Kourittenga', 'Kouritenga')
+
+    return civ, mali, burkina 
 
 
 # Load geographic data
-benin, togo, civ, mali, combined = load_shapefiles()
-civ2, mali2 = load_department_shapefiles()  
+benin, togo, civ, mali, burkina, combined = load_shapefiles()
+civ2, mali2, burkina2 = load_department_shapefiles()  
+combined2 = load_country_shapefiles()
+
+"""
+import plotly.graph_objects as go
+import geopandas as gpd
+
+def plot_internal_external_borders(combined: gpd.GeoDataFrame):
+ 
+    Function to plot internal and external borders on a Plotly map.
+    
+    Args:
+        combined (GeoDataFrame): A GeoDataFrame containing the shapefile data with a 'country' column.
+        
+    Returns:
+        fig (Figure): A Plotly map figure with internal and external borders displayed.
+
+    # Create a column to store the border type
+    combined['border_type'] = 'internal'
+
+    # Check for external borders: if adjacent polygons have different country values, the border is external
+    for idx, row in combined.iterrows():
+        # Get the neighboring polygons
+        neighbors = combined[combined.geometry.touches(row['geometry'])]
+
+        # If any neighboring polygon has a different country value, mark it as an external border
+        for _, neighbor in neighbors.iterrows():
+            if row['country'] != neighbor['country']:
+                combined.loc[idx, 'border_type'] = 'external'
+                break  # No need to check further once we know it's an external border
+
+    # Separate internal and external borders
+    internal_borders = combined[combined['border_type'] == 'internal']
+    external_borders = combined[combined['border_type'] == 'external']
+
+    # Convert internal and external borders to GeoJSON
+    internal_geojson = internal_borders.geometry.to_json()
+    external_geojson = external_borders.geometry.to_json()
+
+    # Create the figure
+    fig = go.Figure()
+
+    # Add the external borders (frontiers) with a specific style (e.g., black, thick)
+    fig.add_trace(go.Choroplethmapbox(geojson=external_geojson,
+                                       locations=external_borders.index,
+                                       hoverinfo="location+z",  # Display location and value on hover
+                                       marker_line_color="blue",  # External border color
+                                       marker_line_width=3))  # External border width
+
+    # Add internal borders with a different style (e.g., red, thinner)
+    fig.add_trace(go.Choroplethmapbox(geojson=internal_geojson,
+                                       locations=internal_borders.index,
+                                       hoverinfo="location+z",  # Display location and value on hover
+                                       marker_line_color="red",  # Internal border color
+                                       marker_line_width=1))  # Internal border width
+
+    # Update traces for both internal and external borders
+    fig.update_traces(marker_line_color="blue",  # Default external border color
+                      marker_line_width=3,  # Default external border width
+                      selector=dict(type='choroplethmapbox', locationmode='geojson'))
+
+    # Update internal borders with a different style
+    fig.update_traces(marker_line_color="red",  # Internal border color
+                      marker_line_width=1,  # Internal border width
+                      selector=dict(type='choroplethmapbox', locationmode='geojson', line=dict(color='red', width=1)))
+
+    # Update layout for Mapbox
+    fig.update_layout(mapbox_style="carto-positron", 
+                      mapbox_center={"lat": 12.2383, "lon": -1.5616},  # Center the map (Burkina Faso)
+                      mapbox_zoom=6,
+                      title="Internal and External Borders")
+    
+    # Plot the map
+    fig = plot_internal_external_borders(combined)
+
+    # Show the map
+    fig.show()
+
+
+"""
+
+
 
 
 
@@ -140,13 +271,13 @@ def main():
 
     # Maps for normalization by countries
     map_visualizer_benin = MapVisualizer(benin, isibf_benin_norm, label="ISIBF", type="régions", lat=9.5, lon=2.3, zoom=5, country="benin")
-    map_visualizer_benin.create_choropleth()
+    #map_visualizer_benin.create_choropleth()
 
     map_visualizer_togo = MapVisualizer(togo, isibf_togo_norm, label="ISIBF", type="régions", lat=8.6, lon=0.9, zoom=5, country="togo")
-    map_visualizer_togo.create_choropleth()
+    #map_visualizer_togo.create_choropleth()
 
     map_visualizer_civ = MapVisualizer(civ, isibf_civ_norm, label="ISIBF", type="districts", lat=7.5, lon=-5.5, zoom=5, country="civ")
-    map_visualizer_civ.create_choropleth()
+    #map_visualizer_civ.create_choropleth()
 
     '''
     # Maps for global normalization
@@ -244,10 +375,10 @@ def main():
 
     # Maps for normalization by countries
     map_visualizer_civ = MapVisualizer(civ2, isibf_departments_civ_norm, label="ISIBF", type="départements", lat=7.5, lon=-5.5, zoom=5, country="civ")
-    map_visualizer_civ.create_choropleth()
+    #map_visualizer_civ.create_choropleth()
 
     map_visualizer_civ_regions = MapVisualizer(civ, isibf_regions_civ_norm, label="ISIBF", type="districts", lat=7.5, lon=-5.5, zoom=5, country="civ")
-    map_visualizer_civ_regions.create_choropleth()
+    #map_visualizer_civ_regions.create_choropleth()
 
 
 
@@ -292,30 +423,82 @@ def main():
 
     # Maps for normalization by countries
     map_visualizer_mali_regions = MapVisualizer(mali, isibf_regions_mali_norm, label="ISIBF", type="régions", lat=17.5, lon=-4.5, zoom=4.2, country="mali")
-    map_visualizer_mali_regions.create_choropleth()
+    #map_visualizer_mali_regions.create_choropleth()
 
     map_visualizer_mali = MapVisualizer(mali2, isibf_departments_mali_norm, label="ISIBF", type="cercles", lat=17.5, lon=-4.5, zoom=4.2, country="mali")
-    map_visualizer_mali.create_choropleth()
+    #map_visualizer_mali.create_choropleth()
+
+
+
+
+    """BURKINA FASO INTRODUCTION"""
+
+    burkina_data = BurkinaData(service_type='bank')
+
+    bank_agencies_burkina = BankAgencies(
+        burkina_data.get_agency_counts(),
+        burkina_data.get_department_mapping(),
+        burkina_data.get_coordinates()
+    )
+
+    geographic_data_burkina = GeographicData(burkina_data.get_coordinates())
+
+    neighbors_burkina = geographic_data_burkina.compute_neighbors(distance_threshold=THRESHOLD)
+
+    '''Indicator 1 : ISIBF score'''
+
+    # Calculate ISIBF values
+    indicator_calculator_burkina = IndicatorCalculator(bank_agencies_burkina.get_agency_counts(), neighbors_burkina, burkina_data.get_adult_population(), alpha=ALPHA_BURKINA, threshold=THRESHOLD, department_mapping=burkina_data.get_department_mapping())
+    isibf_departments_burkina = indicator_calculator_burkina.calculate_isibf2()
+
+
+    # Normalization by country
+    isibf_departments_burkina_norm = format_scores(normalize_scores(isibf_departments_burkina))
+    isibf_regions_burkina_norm = format_scores(mean_scores(normalize_scores(isibf_departments_burkina), burkina_data.get_department_mapping()))
+
+    # Global normalization and formatting
+    isibf_regions_burkina = mean_scores(isibf_departments_burkina, burkina_data.get_department_mapping())
+
+    '''Map visualization for ISIBF score'''
+
+    # Maps for normalization by countries
+    map_visualizer_burkina_regions = MapVisualizer(burkina, isibf_regions_burkina_norm, label="ISIBF", type="régions", lat=12, lon=-1.5, zoom=5, country="burkina")
+    #map_visualizer_burkina_regions.create_choropleth()
+
+    map_visualizer_burkina = MapVisualizer(burkina2, isibf_departments_burkina_norm, label="ISIBF", type="provinces", lat=12, lon=-1.5, zoom=5, country="burkina")
+    #map_visualizer_burkina.create_choropleth()
+
+
     
     """MAPS COMBINED VISUALIZATION"""
 
     # Normalization by countries
-    isibf_combined_norm = {**isibf_benin_norm, **isibf_togo_norm, **isibf_regions_civ_norm, **isibf_regions_mali_norm}
+    isibf_combined_norm = {**isibf_benin_norm, **isibf_togo_norm, **isibf_regions_civ_norm, **isibf_regions_mali_norm, **isibf_regions_burkina_norm}
 
 
     # Global normalization and formatting
-    isibf_all = {**isibf_benin, **isibf_togo, **isibf_regions_civ, **isibf_regions_mali}
+    isibf_all = {**isibf_benin, **isibf_togo, **isibf_regions_civ, **isibf_regions_mali, **isibf_regions_burkina}
     isibf_all_norm = format_scores(normalize_scores(isibf_all))
+
+
 
     # Maps for normalization by countries
     map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="régions", lat=15, lon=-5, zoom=3.8, country="combined")
     map_visualizer_combined.create_choropleth()
 
-    # Maps for global normalization
-    map_visualizer_combined = MapVisualizer(combined, isibf_all_norm, label="ISIBF2", type="régions", lat=15, lon=-5, zoom=3.8, country="combined")
-    map_visualizer_combined.create_choropleth()
+    #get mean values of isibf
+    isibf_mean_countries_norm=format_scores({
+        "Bénin": mean(isibf_benin_norm),
+        "Burkina Faso": mean(isibf_regions_burkina_norm),
+        "Côte d\'Ivoire": mean(isibf_regions_civ_norm),
+        "Mali": mean(isibf_regions_mali_norm),
+        "Togo": mean(isibf_togo_norm)
+    })
+    print(isibf_mean_countries_norm)
 
-    
+     # Map vizualisation for each countries using mean scores for normalized values
+    map_visualizer_combined = MapVisualizer(combined2, isibf_mean_countries_norm, label="ISIBF", type="pays", lat=15, lon=-5, zoom=3.8, country="combined")
+    map_visualizer_combined.create_choropleth()
 
    
 if __name__ == "__main__":

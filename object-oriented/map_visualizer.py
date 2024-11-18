@@ -84,6 +84,7 @@ class MapVisualizer:
             color_continuous_scale=px.colors.sequential.Blues,
             range_color=[0, 1]
         )
+         
 
         # Save as HTML
         html_file_path = f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/{self.label}_{self.type}_{self.country}.html'

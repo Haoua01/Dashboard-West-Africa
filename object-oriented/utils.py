@@ -58,3 +58,7 @@ def mean_scores(scores, department_mapping):
     # Return the mean ISIBF for each district
     return district_isibf_mean
 
+def mean(scores):
+    # calculate the mean of all scores of the dictionnary 
+    return sum(scores.values()) / len(scores) if scores else 0
+
