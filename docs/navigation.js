@@ -63,6 +63,12 @@ function showCountryMap1() {
     } else if (countrySelect === 'mali') {
         updateSliderValue();
         toggleSwitch.style.display = 'block';
+    } else if (countrySelect === 'burkina') {
+        updateSliderValue();
+        toggleSwitch.style.display = 'block';
+    } else if (countrySelect === 'combined') {
+        updateSliderValue();
+        toggleSwitch.style.display = 'block';
     } else {
         // For other countries, load the default map
         iframe.src = `results/ISIBF_régions_${countrySelect}.html`;
