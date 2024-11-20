@@ -303,7 +303,6 @@ input[type="checkbox"] {
     left: 50%;
     transform: translate(-50%, -50%); /* Center the spinner */
     text-align: center;
-    z-index: 9999; /* Make sure it appears above the content */
     display: flex;
     flex-direction: column; /* Stack the spinner and the text vertically */
     align-items: center; /* Center horizontally within the flex container */
