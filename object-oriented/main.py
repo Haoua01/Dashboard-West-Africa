@@ -22,7 +22,7 @@ import numpy as np
 THRESHOLD = 200  # Distance threshold for neighbors
 ALPHA_BENIN = 1.005  # Alpha value for ISIBF calculation in Benin 1.0345
 ALPHA_TOGO = 1.007  # Alpha value for ISIBF calculation in Togo 1.007
-ALPHA_CIV = 1.01  # Alpha value for ISIBF calculation in Côte d'Ivoire 1.01738
+ALPHA_CIV = 1.02  # Alpha value for ISIBF calculation in Côte d'Ivoire 1.01738
 ALPHA_MALI = 1.03  # Alpha value for ISIBF calculation in Mali 1.02
 ALPHA_BURKINA = 1.01 # Burkina 1.02
 ALPHA_NIGER = 1.03  # Alpha value for ISIBF calculation in Niger 1.02
