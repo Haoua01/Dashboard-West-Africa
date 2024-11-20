@@ -318,8 +318,8 @@ def main():
     #map_visualizer_civ = MapVisualizer(civ, isibf_civ_norm, label="ISIBF", type="districts", lat=7.5, lon=-5.5, zoom=5, country="civ")
     #map_visualizer_civ.create_choropleth()
 
-    map_visualizer_niger = MapVisualizer(niger, isibf_niger_norm, label="ISIBF", type="régions", lat=17.6, lon=8.1, zoom=5.5, country="niger")
-    #map_visualizer_niger.create_choropleth()
+    map_visualizer_niger = MapVisualizer(niger, isibf_niger_norm, label="ISIBF", type="régions", lat=17.6, lon=8.1, zoom=5, country="niger")
+    map_visualizer_niger.create_choropleth()
 
     map_visualizer_guinee = MapVisualizer(guinee, isibf_guinee_norm, label="ISIBF", type="régions", lat=11.8, lon=-15, zoom=8, country="guinee")
     #map_visualizer_guinee.create_choropleth()
@@ -467,11 +467,11 @@ def main():
     '''Map visualization for ISIBF score'''
 
     # Maps for normalization by countries
-    map_visualizer_mali_regions = MapVisualizer(mali, isibf_regions_mali_norm, label="ISIBF", type="régions", lat=17.5, lon=-4.5, zoom=4.9, country="mali")
-    #map_visualizer_mali_regions.create_choropleth()
+    map_visualizer_mali_regions = MapVisualizer(mali, isibf_regions_mali_norm, label="ISIBF", type="régions", lat=17.5, lon=-4.5, zoom=4.7, country="mali")
+    map_visualizer_mali_regions.create_choropleth()
 
-    map_visualizer_mali = MapVisualizer(mali2, isibf_departments_mali_norm, label="ISIBF", type="cercles", lat=17.5, lon=-4.5, zoom=4.9, country="mali")
-    #map_visualizer_mali.create_choropleth()
+    map_visualizer_mali = MapVisualizer(mali2, isibf_departments_mali_norm, label="ISIBF", type="cercles", lat=17.5, lon=-4.5, zoom=4.7, country="mali")
+    map_visualizer_mali.create_choropleth()
 
 
 
