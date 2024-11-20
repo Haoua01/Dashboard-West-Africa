@@ -77,7 +77,7 @@ class MapVisualizer:
             mapbox_style="carto-positron",
             zoom=self.zoom,
             center={"lat": self.lat, "lon": self.lon},
-            title=f"Score d'accès aux agences bancaires par {self.type}",
+            #title=f"Score d'accès aux agences bancaires par {self.type}",
             hover_name="admin1Name",  # Region names
             hover_data={f'{self.label}': True, 'admin1Name': False},  # Show score but hide original name
             labels={'admin1Name': f'{self.type}', f'{self.label}': 'Score'},
