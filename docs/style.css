@@ -98,7 +98,7 @@ header h1 {
 
 
 .service-banner {
-    width: 720px;
+    width: 760px;
     background: #FF7F00;
     color: white;
     padding: 0 15px;
@@ -106,7 +106,7 @@ header h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
-    margin: 0 auto; /* This centers the element horizontally */
+    margin: auto auto; /* This centers the element horizontally */
     display: flex;           /* Enables flexbox */
     align-items: center;     /* Vertically center the text */
 
