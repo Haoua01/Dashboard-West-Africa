@@ -31,40 +31,6 @@ class MapVisualizer:
 
         self.geo_data[f'{self.label}'] = self.geo_data['admin1Name'].map(self.scores)
 
-        """
-        my_map = folium.Map(location=[self.lat, self.lon], zoom_start=5)
-
-        # Plot the map
-        folium.Choropleth(
-            geo_data=self.geo_data,
-            name='choropleth',
-            data=self.geo_data,
-            columns=['admin1Name', f'{self.label}'],
-            key_on='feature.properties.admin1Name',
-            fill_color='YlGn',
-            fill_opacity=0.9,
-            line_opacity=0.2,
-            line_weight=2,
-            legend_name=f'{self.label}'
-        ).add_to(my_map)
-
-        # Add a tooltip to display information
-        folium.GeoJson(
-            self.geo_data.__geo_interface__,
-            style_function=lambda feature: {
-                'fillColor': 'YlGn' if feature['properties'][f'{self.label}'] is not None else 'gray',
-                'color': 'grey',
-                'weight': 0.5,
-                'fillOpacity': 0.2,
-            },
-            tooltip=folium.GeoJsonTooltip(
-                fields=['admin1Name', f'{self.label}'],
-                aliases=[f'{self.type}:', 'Score:'],
-                localize=True,
-            )
-        ).add_to(my_map)
-        """
-
         # Convert to GeoJSON
         geojson_data = self.geo_data.__geo_interface__
 
@@ -111,7 +77,7 @@ class MapVisualizer:
             data=self.geo_data,
             columns=['admin1Name', f'{self.label}'],
             key_on='feature.properties.admin1Name',
-            fill_color='YlGn',
+            fill_color='Blues',
             fill_opacity=0.9,
             line_opacity=0.2,
             line_weight=2,
@@ -122,7 +88,7 @@ class MapVisualizer:
         folium.GeoJson(
             self.geo_data.__geo_interface__,
             style_function=lambda feature: {
-                'fillColor': 'YlGn' if feature['properties'][f'{self.label}'] is not None else 'gray',
+                'fillColor': 'Blues' if feature['properties'][f'{self.label}'] is not None else 'gray',
                 'color': 'grey',
                 'weight': 0.5,
                 'fillOpacity': 0.2,
