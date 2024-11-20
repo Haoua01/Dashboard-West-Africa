@@ -46,7 +46,7 @@ header h1 {
 .home-page .about {
     text-align: center;
     margin: 0 auto 40px; /* Centrage horizontal et marge inférieure */
-    max-width: 1400px; /* Limite la largeur pour éviter que le texte ne s’étire trop */
+    max-width: 1200px; /* Limite la largeur pour éviter que le texte ne s’étire trop */
     padding: 0 20px; /* Marges internes gauche et droite */
     justify-content: center;
 }
@@ -104,6 +104,7 @@ header h1 {
 
 
 .service-banner {
+    width: 720px;
     background: #FF7F00;
     color: white;
     padding: 0 15px;
@@ -112,6 +113,7 @@ header h1 {
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
 }
+
 
 .service-banner h2 {
     font-size: 1.8em;
@@ -133,7 +135,7 @@ header h1 {
     color: #666;
     font-size: 1.1em;
     margin: 0 auto 40px; /* Centrage horizontal et marge inférieure */
-    max-width: 1400px; /* Limite la largeur pour éviter que le texte ne s’étire trop */
+    max-width: 1200px; /* Limite la largeur pour éviter que le texte ne s’étire trop */
 }
 
 /* Carte de présentation */
