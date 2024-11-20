@@ -204,8 +204,8 @@ footer p {
 
 /* Style for the select dropdown */
 #country-select11 {
-    width: 250px; /* Width of the dropdown */
-    padding: 10px;
+    width: 200px; /* Width of the dropdown */
+    padding: 8px;
     border-radius: 8px;
     border: 2px solid #008080;
     font-size: 1em;
