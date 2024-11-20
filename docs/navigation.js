@@ -15,13 +15,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Charger la carte du Bénin dans map1 par défaut
+    // Charger la carte de la Côte d'Ivoire dans map1 par défaut
     const iframe = document.getElementById('map-frame');
-    iframe.src = 'results/ISIBF_régions_benin.html'; // Carte par défaut pour le Bénin
+    iframe.src = 'results/ISIBF_départements_civ.html'; // Carte par défaut pour le Bénin
 
-    // Charger l'histogramme du Bénin dans chart3 par défaut
+    // Charger l'histogramme de la côte d'ivoire dans chart3 par défaut
     const iframe2 = document.getElementById('chart-frame2');
-    iframe2.src = 'results/demographic_indicator_régions_benin.html'; // Histogramme par défaut pour le Bénin
+    iframe2.src = 'results/demographic_indicator_régions_civ.html'; // Histogramme par défaut pour le Bénin
 
 
 });
