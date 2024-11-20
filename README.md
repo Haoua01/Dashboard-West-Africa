@@ -1,11 +1,12 @@
 # Dashboard-West-Africa
-Dashboard of acces to financial services across West Africa
+Dashboard of access to financial services across West Africa
 
 
 # Financial Inclusion Mapping in Sub-Saharan Africa 
 
 ## Overview
 
+My name is Haoua BEN ALI ABBO.
 I am currently pursuing a Master's degree (M2) in a dual program between **Université Paris Dauphine** and **Télécom Paris**, where I am working towards both a Master's and an engineering diploma. As part of my studies, I am completing a work-study program at the **Institut Louis Bachelier**, focusing on **financial inclusion** in the **Sub-Saharan African region**.
 
 ## Project
