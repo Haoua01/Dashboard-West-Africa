@@ -111,12 +111,46 @@ function updateSliderValue() {
             departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
             districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
         }
-        else if (countrySelect === 'mali') {
+        else {
             iframe.src = 'results/ISIBF_régions_mali.html'; // Map by departments
             districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
             departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
+        } 
+    } else if (countrySelect === 'burkina') {
+        if (checkbox.checked) {
+            iframe.src = 'results/ISIBF_départements_burkina.html'; // Map by departments
+            departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
+            districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
         }
-    }
+        else {
+            iframe.src = 'results/ISIBF_régions_burkina.html'; // Map by departments
+            districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
+            departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
+        } 
+    } else if (countrySelect === 'combined') {
+        if (checkbox.checked) {
+            iframe.src = 'results/ISIBF_régions_combined.html'; // Map by departments
+            departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
+            districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
+        }
+        else {
+            iframe.src = 'results/ISIBF_pays_combined.html'; // Map by departments
+            districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
+            departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
+        }
+    } 
+
+    // Dynamically change the labels based on country
+    if (countrySelect === 'civ') {
+        districtLabel.textContent = 'Districts'; // Change label for Côte d'Ivoire to "Districts"
+        departmentLabel.textContent = 'Départements'; // Keep department label as "Départements"
+    } else if (countrySelect === 'mali') {
+        districtLabel.textContent = 'Régions'; // Update region label for Mali to "Cercles"
+        departmentLabel.textContent = 'Cercles'; // Update department label for Mali to "Régions"
+    } else if (countrySelect === 'combined') {
+        districtLabel.textContent = 'Pays'; // Update region label for Mali
+        departmentLabel.textContent = 'Régions'; // Update department label for Mali
+    }    
 }
 
 

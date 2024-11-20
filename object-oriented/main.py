@@ -3,7 +3,7 @@ from geographic_data import GeographicData
 from indicator_calculator import IndicatorCalculator
 from data.benin_data import BeninData
 from data.togo_data import TogoData
-from data.civ_data import CIVData
+#from data.civ_data import CIVData
 from map_visualizer import MapVisualizer
 from chart_visualizer import ChartVisualizer
 from utils import normalize_scores, format_scores, round_scores, mean_scores, mean
