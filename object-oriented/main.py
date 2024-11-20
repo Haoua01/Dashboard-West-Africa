@@ -25,7 +25,7 @@ ALPHA_TOGO = 1.007  # Alpha value for ISIBF calculation in Togo 1.007
 ALPHA_CIV = 1.02  # Alpha value for ISIBF calculation in Côte d'Ivoire 1.01738
 ALPHA_MALI = 1.02  # Alpha value for ISIBF calculation in Mali 1.02
 ALPHA_BURKINA = 1.02 # Burkina 1.02
-ALPHA_NIGER = 1.03  # Alpha value for ISIBF calculation in Niger 1.02
+ALPHA_NIGER = 1.04  # Alpha value for ISIBF calculation in Niger 1.02
 ALPHA_GUINEE = 1.005  # Alpha value for ISIBF calculation in Guinée Bissau 1.02
 REF_INHABITANTS = 100000  # Reference number of inhabitants for demographic indicator
 
@@ -319,7 +319,7 @@ def main():
     #map_visualizer_civ.create_choropleth()
 
     map_visualizer_niger = MapVisualizer(niger, isibf_niger_norm, label="ISIBF", type="régions", lat=17.6, lon=8.1, zoom=5, country="niger")
-    #map_visualizer_niger.create_choropleth()
+    map_visualizer_niger.create_choropleth()
 
     map_visualizer_guinee = MapVisualizer(guinee, isibf_guinee_norm, label="ISIBF", type="régions", lat=11.8, lon=-15, zoom=8, country="guinee")
     #map_visualizer_guinee.create_choropleth()
