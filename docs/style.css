@@ -183,14 +183,13 @@ footer p {
 }
 
 
-/* Style for the container of the dropdown */
-.toggle-banner .background_box{
+/* Style for the container of the dropdown and toggle */
+.toggle-banner {
     display: flex;               /* Use flexbox to arrange elements in a row */
     align-items: center;         /* Vertically align the items */
-    justify-content: space-between; /* Space between label and toggle */
     margin: 20px 0;
     padding: 15px;
-    background-color: #e0f7f7; /* Background color */
+    background-color: #e0f7f7;   /* Background color */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -199,7 +198,7 @@ footer p {
 .toggle-banner label {
     font-weight: bold;
     color: #008080; /* Label color */
-    margin-right: 20px; /* Space between label and toggle */
+    margin-right: 20px; /* Space between label and dropdown */
 }
 
 /* Style for the select dropdown */
@@ -216,6 +215,7 @@ footer p {
     text-align: left;
 }
 
+
 /* Style for the select dropdown */
 #country-select21 {
     width: 200px; /* Width of the dropdown */
@@ -228,6 +228,19 @@ footer p {
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: left;
+}
+
+/* Style for the toggle container (background) */
+.toggle-banner .background_box {
+    width: 100%; /* Ensure it takes full width */
+    height: 40px;
+    background-color: #fff; /* Background color for the toggle */
+    display: flex;
+    align-items: center; /* Vertically center the circle */
+    justify-content: center; /* Horizontally center the circle */
+    transition: 0.5s;
+    transition-delay: 0.4s;
+    visibility: hidden; /* Initially hide the toggle switch */
 }
 
 /* When the toggle is checked, show the toggle button */
