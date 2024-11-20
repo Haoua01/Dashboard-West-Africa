@@ -183,13 +183,14 @@ footer p {
 }
 
 
-/* Style for the container of the dropdown and toggle */
+/* Style for the container of the dropdown */
 .toggle-banner {
     display: flex;               /* Use flexbox to arrange elements in a row */
     align-items: center;         /* Vertically align the items */
+    justify-content: space-between; /* Space between label and toggle */
     margin: 20px 0;
     padding: 15px;
-    background-color: #e0f7f7;   /* Background color */
+    background-color: #e0f7f7; /* Background color */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -198,7 +199,7 @@ footer p {
 .toggle-banner label {
     font-weight: bold;
     color: #008080; /* Label color */
-    margin-right: 20px; /* Space between label and dropdown */
+    margin-right: 20px; /* Space between label and toggle */
 }
 
 /* Style for the select dropdown */
@@ -215,7 +216,6 @@ footer p {
     text-align: left;
 }
 
-
 /* Style for the select dropdown */
 #country-select21 {
     width: 200px; /* Width of the dropdown */
@@ -230,49 +230,43 @@ footer p {
     text-align: left;
 }
 
-/* Style for the toggle container (background) */
-.toggle-banner .background_box {
-    width: 100%; /* Ensure it takes full width */
+/* Style for the toggle container */
+.background_box {
+    width: 100%;
     height: 40px;
-    background-color: #fff; /* Background color for the toggle */
+    background-color: #fff;
     display: flex;
-    align-items: center; /* Vertically center the circle */
-    justify-content: center; /* Horizontally center the circle */
+    align-items: center;
+    justify-content: center;
     transition: 0.5s;
     transition-delay: 0.4s;
-    visibility: hidden; /* Initially hide the toggle switch */
-}
-
-/* When the toggle is checked, show the toggle button */
-input[type="checkbox"]:checked + .background_box {
-    visibility: visible; /* Make the toggle visible when the checkbox is checked */
 }
 
 /* Style for the toggle button */
-.toggle-banner .toggle_box {
-    width: 130px; /* Width of the toggle switch */
-    height: 30px; /* Height of the toggle switch */
+.toggle_box {
+    width: 130px;
+    height: 30px;
     display: block;
-    background-color: #008080; /* Toggle switch color */
-    border-radius: 100px; /* Rounded corners */
+    background-color: #008080;
+    border-radius: 100px;
     cursor: pointer;
     position: relative;
     transition: 0.5s;
 }
 
-/* Hide the checkbox input (we'll control the toggle behavior with JS) */
-.toggle-banner input[type="checkbox"] {
+/* Hide the checkbox input */
+input[type="checkbox"] {
     display: none;
 }
 
 /* Style for the circle inside the toggle button */
-.toggle-banner .circle {
+.circle {
     position: absolute;
-    width: 22px; /* Size of the circle inside the toggle */
+    width: 22px;
     height: 22px;
-    left: 0px; /* Position the circle inside the toggle */
-    background-color: #fff; /* Circle color */
-    border-radius: 50%; /* Make it round */
-    margin: 4px; /* Space between circle and toggle border */
-    transition: 0.5s; /* Smooth transition */
+    left: 0px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 4px;
+    transition: 0.5s;
 }
