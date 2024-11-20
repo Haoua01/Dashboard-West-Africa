@@ -253,6 +253,13 @@ input[type="checkbox"]{
     transition: 0.5s; /* Smooth transition for the movement */
 }
 
+/* Reset margin and padding for the map container */
+#map1 {
+    margin: 0; /* Remove margin */
+    padding: 0; /* Remove padding */
+    display: block; /* Ensure the map fills the available space */
+}
+
 #map-frame {
     border: none; /* Remove the border around the iframe */
     padding: 0; /* Remove padding inside the iframe */
