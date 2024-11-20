@@ -321,8 +321,8 @@ def main():
     map_visualizer_niger = MapVisualizer(niger, isibf_niger_norm, label="ISIBF", type="régions", lat=17.6, lon=8.1, zoom=5, country="niger")
     #map_visualizer_niger.create_choropleth()
 
-    map_visualizer_guinee = MapVisualizer(guinee, isibf_guinee_norm, label="ISIBF", type="régions", lat=11.8, lon=-15, zoom=6.8, country="guinee")
-    #map_visualizer_guinee.create_choropleth()
+    map_visualizer_guinee = MapVisualizer(guinee, isibf_guinee_norm, label="ISIBF", type="régions", lat=11.8, lon=-15, zoom=7, country="guinee")
+    map_visualizer_guinee.create_choropleth()
     #map_visualizer_guinee.create_leaflet()
 
     '''
@@ -509,10 +509,10 @@ def main():
 
     # Maps for normalization by countries
     map_visualizer_burkina_regions = MapVisualizer(burkina, isibf_regions_burkina_norm, label="ISIBF", type="régions", lat=12, lon=-1.5, zoom=6, country="burkina")
-    map_visualizer_burkina_regions.create_choropleth()
+    #map_visualizer_burkina_regions.create_choropleth()
 
     map_visualizer_burkina = MapVisualizer(burkina2, isibf_departments_burkina_norm, label="ISIBF", type="provinces", lat=12, lon=-1.5, zoom=6, country="burkina")
-    map_visualizer_burkina.create_choropleth()
+    #map_visualizer_burkina.create_choropleth()
 
 
 
