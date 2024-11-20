@@ -116,7 +116,7 @@ header h1 {
 }
 
 .service-banner, .service-card {
-    height: 200px; /* Set a fixed height */
+    height: 20px; /* Set a fixed height */
 }
 
 /* Style pour le groupe d'indicateurs */
