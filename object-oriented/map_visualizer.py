@@ -93,3 +93,49 @@ class MapVisualizer:
         fig.write_html(html_file_path)
 
         print(f"Map generated and saved")
+
+    def create_leaflet(self):
+        """
+        Create a map using Leaflet with basic interactive features.
+        """
+        # Add the scores to the GeoDataFrame
+        self.geo_data[f'{self.label}'] = self.geo_data['admin1Name'].map(self.scores)
+
+        # Initialize a Folium map
+        my_map = folium.Map(location=[self.lat, self.lon], zoom_start=self.zoom)
+
+        # Plot the map with a choropleth layer
+        folium.Choropleth(
+            geo_data=self.geo_data.__geo_interface__,
+            name='choropleth',
+            data=self.geo_data,
+            columns=['admin1Name', f'{self.label}'],
+            key_on='feature.properties.admin1Name',
+            fill_color='YlGn',
+            fill_opacity=0.9,
+            line_opacity=0.2,
+            line_weight=2,
+            legend_name=f'{self.label}'
+        ).add_to(my_map)
+
+        # Add a tooltip to display information
+        folium.GeoJson(
+            self.geo_data.__geo_interface__,
+            style_function=lambda feature: {
+                'fillColor': 'YlGn' if feature['properties'][f'{self.label}'] is not None else 'gray',
+                'color': 'grey',
+                'weight': 0.5,
+                'fillOpacity': 0.2,
+            },
+            tooltip=folium.GeoJsonTooltip(
+                fields=['admin1Name', f'{self.label}'],
+                aliases=[f'{self.type}:', 'Score:'],
+                localize=True,
+            )
+        ).add_to(my_map)
+
+        # Save the map as an HTML file
+        folium_map_path = f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/{self.label}_{self.type}_{self.country}_leaflet.html'
+        my_map.save(folium_map_path)
+
+        print(f"Leaflet map generated and saved at {folium_map_path}")

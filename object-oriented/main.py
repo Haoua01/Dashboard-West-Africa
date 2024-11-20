@@ -319,10 +319,10 @@ def main():
     #map_visualizer_civ.create_choropleth()
 
     map_visualizer_niger = MapVisualizer(niger, isibf_niger_norm, label="ISIBF", type="régions", lat=17.6, lon=8.1, zoom=5, country="niger")
-    map_visualizer_niger.create_choropleth()
+    #map_visualizer_niger.create_choropleth()
 
-    map_visualizer_guinee = MapVisualizer(guinee, isibf_guinee_norm, label="ISIBF", type="régions", lat=11.8, lon=-15, zoom=8, country="guinee")
-    #map_visualizer_guinee.create_choropleth()
+    map_visualizer_guinee = MapVisualizer(guinee, isibf_guinee_norm, label="ISIBF", type="régions", lat=11.8, lon=-15, zoom=7, country="guinee")
+    map_visualizer_guinee.create_choropleth()
 
     '''
     # Maps for global normalization
@@ -531,6 +531,7 @@ def main():
     # Maps for normalization by countries
     map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="régions", lat=15, lon=-4, zoom=4.3, country="combined")
     map_visualizer_combined.create_choropleth()
+    #map_visualizer_combined.create_leaflet()
 
     #get mean values of isibf
     isibf_mean_countries_norm=format_scores({
@@ -547,6 +548,7 @@ def main():
      # Map vizualisation for each countries using mean scores for normalized values
     map_visualizer_combined = MapVisualizer(combined2, isibf_mean_countries_norm, label="ISIBF", type="pays", lat=15, lon=-4, zoom=4.3, country="combined")
     map_visualizer_combined.create_choropleth()
+    #map_visualizer_combined.create_leaflet()
 
    
 if __name__ == "__main__":
