@@ -216,6 +216,20 @@ footer p {
     text-align: left;
 }
 
+/* Style for the select dropdown */
+#country-select21 {
+    width: 200px; /* Width of the dropdown */
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid #008080;
+    font-size: 1em;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
 /* Style for the toggle container */
 .background_box {
     width: 100%;
