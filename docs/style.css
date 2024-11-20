@@ -253,4 +253,11 @@ input[type="checkbox"]{
     transition: 0.5s; /* Smooth transition for the movement */
 }
 
+#map-frame {
+    border: none; /* Remove the border around the iframe */
+    padding: 0; /* Remove padding inside the iframe */
+    margin: 0; /* Remove margin around the iframe */
+    width: 100%; /* Ensure it takes up 100% of the container width */
+    height: 100%; /* Make the iframe height fill its container */
+}
 
