@@ -105,8 +105,9 @@ header h1 {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
     text-align: center;
-    margin: auto auto; /* This centers the element horizontally */
+    margin: auto; /* This centers the element horizontally */
     align-items: center;     /* Vertically center the text */
 
 }
