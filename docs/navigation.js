@@ -56,25 +56,29 @@ function showCountryMap1() {
     const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
     const toggleSwitch = document.getElementById('toggle-switch');
- 
-    if (countrySelect === 'civ') {
-        updateSliderValue();
-        toggleSwitch.style.display = 'block';
-    } else if (countrySelect === 'mali') {
-        updateSliderValue();
-        toggleSwitch.style.display = 'block';
-    } else if (countrySelect === 'burkina') {
-        updateSliderValue();
-        toggleSwitch.style.display = 'block';
-    } else if (countrySelect === 'combined') {
+    const spinner = document.getElementById("loading-spinner-map");  // Spinner for the map
+    spinner.style.display = "block";  // Show the spinner when the map starts loading
+    
+    // Handle the countries that require the toggle switch to be shown
+    const countriesWithToggle = ['civ', 'mali', 'burkina', 'combined'];
+
+    // Check if the selected country requires showing the toggle switch
+    if (countriesWithToggle.includes(countrySelect)) {
         updateSliderValue();
         toggleSwitch.style.display = 'block';
     } else {
-        // For other countries, load the default map
+        // For other countries, load the default map and hide the toggle
         iframe.src = `results/ISIBF_régions_${countrySelect}.html`;
         toggleSwitch.style.display = 'none';
     }
+
+    // Simulate map loading process (replace with actual loading logic)
+    setTimeout(function() {
+        // Hide the spinner once the map is loaded
+        spinner.style.display = "none";
+    }, 3000);  // Simulating 3 seconds of loading time (replace with actual loading time)
 }
+
 
 
 
