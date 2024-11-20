@@ -230,9 +230,10 @@ footer p {
     text-align: left;
 }
 
-.toggle-banner .toggle-switch {
+#toggle-switch {
     display: flex;
-    align-items: right;
+    align-items: center;
+    margin-left: auto
 }
 
 /* Style for the toggle button */
