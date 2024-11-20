@@ -206,7 +206,7 @@ footer p {
     text-align: center;
 }
 
-.country-dropdown select {
+.country-dropdown .country-select {
     width: 220px;
     border-radius: 8px;
     border: 2px solid #008080;
@@ -218,12 +218,16 @@ footer p {
     text-align: left;
 }
 
-.country-dropdown select:focus {
+.country-dropdown .country-select:focus {
     border-color: #008080;
     box-shadow: 0 0 6px rgba(0, 128, 128, 0.4);
     outline: none;
 }
 
+.country-dropdown .country-select option {
+    color: #333;
+    background-color: #fff;
+}
 
 .background_box{
     width: 100%;
