@@ -289,9 +289,9 @@ input[type="checkbox"] {
     transform: translate(-50%, -50%); /* Center the spinner */
     text-align: center;
     z-index: 9999; /* Make sure it appears above the content */
-    align-items: center;
-    justify-content: center;
     display: flex;
+    flex-direction: column; /* Stack the spinner and the text vertically */
+    align-items: center; /* Center horizontally within the flex container */
 }
 
 /* Spinner animation */
