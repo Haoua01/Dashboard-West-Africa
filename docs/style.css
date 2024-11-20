@@ -193,40 +193,33 @@ footer p {
 }
 
 
-
-/* Conteneur pour sélection de pays */
-.country-dropdown {
-    margin: 20px 0;
-    padding: 20px;
-    background-color: #f4f9f9;
-    border: 1px solid #008080;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-size: 1.2em;
-    text-align: center;
+/* Style for the label inside the dropdown */
+.toggle-banner label {
+    display: block;
+    margin-bottom: 10px; /* Space between label and dropdown */
+    font-weight: bold;
+    color: #008080; /* Label color */
 }
 
-.country-dropdown .country-select {
-    width: 220px;
-    border-radius: 8px;
-    border: 2px solid #008080;
-    font-size: 1em;
-    color: #333;
-    background-color: #fff;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: left;
+/* Style for the select dropdown */
+#country-select11 {
+    width: 250px; /* Width of the dropdown */
+    padding: 10px; /* Padding for the dropdown for better space around the options */
+    border-radius: 8px; /* Rounded corners for the dropdown */
+    border: 2px solid #008080; /* Border color */
+    font-size: 1em; /* Font size for the options */
+    color: #333; /* Text color inside the dropdown */
+    background-color: #fff; /* Background color for the select dropdown */
+    cursor: pointer; /* Change cursor on hover to indicate it's clickable */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow around the dropdown */
+    text-align: left; /* Left-aligned text inside the dropdown */
 }
 
-.country-dropdown .country-select:focus {
-    border-color: #008080;
-    box-shadow: 0 0 6px rgba(0, 128, 128, 0.4);
-    outline: none;
-}
-
-.country-dropdown .country-select option {
-    color: #333;
-    background-color: #fff;
+/* Focus state for the select dropdown (when user clicks or tabs into it) */
+#country-select11:focus {
+    border-color: #008080; /* Focus border color */
+    box-shadow: 0 0 6px rgba(0, 128, 128, 0.4); /* Focus shadow */
+    outline: none; /* Remove default focus outline */
 }
 
 .background_box{
