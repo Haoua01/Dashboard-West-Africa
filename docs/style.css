@@ -267,7 +267,7 @@ input[type="checkbox"] {
 
 
 /* Style for the map container */
-#map1 #chart3 {
+#map1 {
     width: 100%;          /* Full width of the parent container */
     height: 800px;        /* Increased height for the map container */
     margin: 0 auto;       /* Centers the container horizontally */
@@ -275,7 +275,20 @@ input[type="checkbox"] {
 }
 
 /* Style for the iframe inside the container */
-#map-frame #chart-frame {
+#map-frame {
+    width: 100%;          /* Ensures the iframe takes full width of the container */
+    height: 100%;         /* Ensures the iframe takes full height of the container */
+    border: none;         /* Optional: Removes the border around the iframe */
+}
+
+#chart3 {
+    width: 100%;          /* Full width of the parent container */
+    height: 800px;        /* Increased height for the map container */
+    margin: 0 auto;       /* Centers the container horizontally */
+    position: relative;   /* Ensures the iframe stays within the container */
+}
+
+#chart-frame {
     width: 100%;          /* Ensures the iframe takes full width of the container */
     height: 100%;         /* Ensures the iframe takes full height of the container */
     border: none;         /* Optional: Removes the border around the iframe */
