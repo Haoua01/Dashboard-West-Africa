@@ -115,14 +115,6 @@ header h1 {
 }
 
 
-.service-banner h2 {
-    font-size: 1.8em;
-    color: white;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-
 /* Style pour le groupe d'indicateurs */
 .indicator-group h3 {
     font-size: 1.5em;
