@@ -15,40 +15,35 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Set default country to 'civ' (Côte d'Ivoire)
-    countrySelect.value = 'civ';  // Set dropdown to Côte d'Ivoire by default
-    
-    // Show the map for Côte d'Ivoire by default
+    // Charger la carte de la Côte d'Ivoire dans map1 par défaut
     const iframe = document.getElementById('map-frame');
-    const checkbox = document.getElementById('checkbox');
-    const toggleSwitch = document.getElementById('toggle-switch');
-    const spinner = document.getElementById("loading-spinner-map");
-    
-    iframe.src = 'results/ISIBF_départements_civ.html'; // Default map for Côte d'Ivoire
-    
-    // Set the default value of the toggle switch
-    checkbox.checked = true;  // By default, set the toggle to show "Départements"
-    updateSliderValue();  // Update map and labels based on the toggle's default state
-
-    // Show the spinner when the map starts loading
-    spinner.style.display = "block";  
-
-    // When the map has finished loading, hide the spinner
-    iframe.onload = function() {
-        spinner.style.display = "none";  // Hide spinner after loading
-    };
-
-    // Show the dropdown and toggle switch
-    toggleSwitch.style.display = 'block';  // Show the toggle switch for Côte d'Ivoire
-    document.getElementById('countryDropdown11').style.display = 'block';  // Show the dropdown for map
-
+    iframe.src = 'results/ISIBF_régions_benin.html'; // Carte par défaut pour la Côte d'Ivoire
 
     // Charger l'histogramme de la côte d'ivoire dans chart3 par défaut
     const iframe2 = document.getElementById('chart-frame2');
-    iframe2.src = 'results/demographic_indicator_districts_civ.html'; // Histogramme par défaut pour la Côte d'Ivoire
+    iframe2.src = 'results/demographic_indicator_régions_benin.html'; // Histogramme par défaut pour la Côte d'Ivoire
 
 
 });
+
+function toggleGroup1(showMapId) {
+    const maps = document.querySelectorAll('.group1');
+    maps.forEach(element => {
+        if (element.id !== showMapId) {
+            element.style.display = 'none';
+        }
+    });
+    
+    // Afficher la carte ou l'histogramme sélectionné
+    document.getElementById(showMapId).style.display = 'block';
+
+    // Contrôle de la visibilité des dropdowns
+    if (showMapId === 'map1') {
+        document.getElementById('countryDropdown11').style.display = 'block'; // Afficher dropdown pour map1
+    } else {
+        document.getElementById('countryDropdown11').style.display = 'none'; // Masquer dropdown pour map1
+    }
+}
 
 
 function toggleGroup2(showMapId) {
@@ -95,11 +90,11 @@ function showCountryMap1() {
         toggleSwitch.style.display = 'none';
     }
 
-    /// Use the onload event of the iframe to hide the spinner when the map has loaded
+    // Simulate map loading process (replace with actual loading logic)
     iframe.onload = function() {
         // Hide the spinner once the map is fully loaded
         spinner.style.display = "none";
-    }; 
+    };
 }
 
 
