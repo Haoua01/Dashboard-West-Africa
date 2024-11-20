@@ -124,7 +124,7 @@ function updateSliderValue() {
         } 
     } else if (countrySelect === 'burkina') {
         if (checkbox.checked) {
-            iframe.src = 'results/ISIBF_départements_burkina.html'; // Map by departments
+            iframe.src = 'results/ISIBF_provinces_burkina.html'; // Map by departments
             departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
             districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
         }
@@ -153,6 +153,9 @@ function updateSliderValue() {
     } else if (countrySelect === 'mali') {
         districtLabel.textContent = 'Régions'; // Update region label for Mali to "Cercles"
         departmentLabel.textContent = 'Cercles'; // Update department label for Mali to "Régions"
+    } else if (countrySelect === 'burkina') {
+        districtLabel.textContent = 'Régions'; // Update region label for Mali to "Cercles"
+        departmentLabel.textContent = 'Provinces'; // Update department label for Mali to "Régions"
     } else if (countrySelect === 'combined') {
         districtLabel.textContent = 'Pays'; // Update region label for Mali
         departmentLabel.textContent = 'Régions'; // Update department label for Mali
