@@ -15,9 +15,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    const spinner = document.getElementById("loading-spinner-map");  // Spinner for the map
+    spinner.style.display = "block";  // Show the spinner when the map starts loading
     // Charger la carte de la Côte d'Ivoire dans map1 par défaut
     const iframe = document.getElementById('map-frame');
     iframe.src = 'results/ISIBF_régions_benin.html'; // Carte par défaut pour la Côte d'Ivoire
+    iframe.onload = function() {
+        spinner.style.display = "none";
+    };
 
     // Charger l'histogramme de la côte d'ivoire dans chart3 par défaut
     const iframe2 = document.getElementById('chart-frame2');
@@ -90,7 +95,7 @@ function showCountryMap1() {
         toggleSwitch.style.display = 'none';
     }
 
-    // Simulate map loading process (replace with actual loading logic)
+    // Simulate map loading process 
     iframe.onload = function() {
         // Hide the spinner once the map is fully loaded
         spinner.style.display = "none";
@@ -120,6 +125,8 @@ function updateSliderValue() {
     const checkbox = document.getElementById('checkbox');
     const districtLabel = document.getElementById('region-label');
     const departmentLabel = document.getElementById('department-label');
+    const spinner = document.getElementById("loading-spinner-map");  // Spinner for the map
+    spinner.style.display = "block";  // Show the spinner when the map starts loading
 
     // Check if checkbox is checked (1 = "Par départements", 0 = "Par districts")
     if (countrySelect === 'civ') {
@@ -182,6 +189,12 @@ function updateSliderValue() {
         districtLabel.textContent = 'Pays'; // Update region label for Mali
         departmentLabel.textContent = 'Régions'; // Update department label for Mali
     }    
+
+    // Simulate map loading process 
+    iframe.onload = function() {
+        // Hide the spinner once the map is fully loaded
+        spinner.style.display = "none";
+    };
 }
 
 
