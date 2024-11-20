@@ -116,6 +116,12 @@ header h1 {
     font-size: 1.5em;
     color: #006666;
     margin-bottom: 10px;
+}
+
+.indicator-group p {
+    line-height: 1.7;
+    color: #666;
+    font-size: 1.1em;
     margin: 0 auto 40px; /* Centrage horizontal et marge inférieure */
     max-width: 1400px; /* Limite la largeur pour éviter que le texte ne s’étire trop */
 }
