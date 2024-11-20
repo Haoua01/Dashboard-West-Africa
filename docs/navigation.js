@@ -15,17 +15,40 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Charger la carte de la Côte d'Ivoire dans map1 par défaut
+    // Set default country to 'civ' (Côte d'Ivoire)
+    countrySelect.value = 'civ';  // Set dropdown to Côte d'Ivoire by default
+    
+    // Show the map for Côte d'Ivoire by default
     const iframe = document.getElementById('map-frame');
-    iframe.src = 'results/ISIBF_départements_civ.html'; // Carte par défaut pour le Bénin
+    const checkbox = document.getElementById('checkbox');
+    const toggleSwitch = document.getElementById('toggle-switch');
+    const spinner = document.getElementById("loading-spinner-map");
+    
+    iframe.src = 'results/ISIBF_départements_civ.html'; // Default map for Côte d'Ivoire
+    
+    // Set the default value of the toggle switch
+    checkbox.checked = true;  // By default, set the toggle to show "Départements"
+    updateSliderValue();  // Update map and labels based on the toggle's default state
+
+    // Show the spinner when the map starts loading
+    spinner.style.display = "block";  
+
+    // When the map has finished loading, hide the spinner
+    iframe.onload = function() {
+        spinner.style.display = "none";  // Hide spinner after loading
+    };
+
+    // Show the dropdown and toggle switch
+    toggleSwitch.style.display = 'block';  // Show the toggle switch for Côte d'Ivoire
+    document.getElementById('countryDropdown11').style.display = 'block';  // Show the dropdown for map
+
 
     // Charger l'histogramme de la côte d'ivoire dans chart3 par défaut
     const iframe2 = document.getElementById('chart-frame2');
-    iframe2.src = 'results/demographic_indicator_régions_civ.html'; // Histogramme par défaut pour le Bénin
+    iframe2.src = 'results/demographic_indicator_districts_civ.html'; // Histogramme par défaut pour la Côte d'Ivoire
 
 
 });
-
 
 
 function toggleGroup2(showMapId) {
@@ -72,11 +95,11 @@ function showCountryMap1() {
         toggleSwitch.style.display = 'none';
     }
 
-    // Simulate map loading process (replace with actual loading logic)
-    setTimeout(function() {
-        // Hide the spinner once the map is loaded
+    /// Use the onload event of the iframe to hide the spinner when the map has loaded
+    iframe.onload = function() {
+        // Hide the spinner once the map is fully loaded
         spinner.style.display = "none";
-    }, 3000);  // Simulating 3 seconds of loading time (replace with actual loading time)
+    }; 
 }
 
 
