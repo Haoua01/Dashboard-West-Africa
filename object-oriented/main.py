@@ -23,7 +23,7 @@ THRESHOLD = 200  # Distance threshold for neighbors
 ALPHA_BENIN = 1.0345  # Alpha value for ISIBF calculation in Benin 1.0345
 ALPHA_TOGO = 1.007  # Alpha value for ISIBF calculation in Togo 1.007
 ALPHA_CIV = 1.02  # Alpha value for ISIBF calculation in Côte d'Ivoire 1.01738
-ALPHA_MALI = 1.015  # Alpha value for ISIBF calculation in Mali 1.02
+ALPHA_MALI = 1.02  # Alpha value for ISIBF calculation in Mali 1.02
 ALPHA_BURKINA = 1.02 # Burkina 1.02
 ALPHA_NIGER = 1.03  # Alpha value for ISIBF calculation in Niger 1.02
 ALPHA_GUINEE = 1.005  # Alpha value for ISIBF calculation in Guinée Bissau 1.02
@@ -319,7 +319,7 @@ def main():
     #map_visualizer_civ.create_choropleth()
 
     map_visualizer_niger = MapVisualizer(niger, isibf_niger_norm, label="ISIBF", type="régions", lat=17.6, lon=8.1, zoom=5, country="niger")
-    map_visualizer_niger.create_choropleth()
+    #map_visualizer_niger.create_choropleth()
 
     map_visualizer_guinee = MapVisualizer(guinee, isibf_guinee_norm, label="ISIBF", type="régions", lat=11.8, lon=-15, zoom=8, country="guinee")
     #map_visualizer_guinee.create_choropleth()
@@ -468,10 +468,10 @@ def main():
 
     # Maps for normalization by countries
     map_visualizer_mali_regions = MapVisualizer(mali, isibf_regions_mali_norm, label="ISIBF", type="régions", lat=17.5, lon=-4.5, zoom=4.7, country="mali")
-    map_visualizer_mali_regions.create_choropleth()
+    #map_visualizer_mali_regions.create_choropleth()
 
     map_visualizer_mali = MapVisualizer(mali2, isibf_departments_mali_norm, label="ISIBF", type="cercles", lat=17.5, lon=-4.5, zoom=4.7, country="mali")
-    map_visualizer_mali.create_choropleth()
+    #map_visualizer_mali.create_choropleth()
 
 
 
