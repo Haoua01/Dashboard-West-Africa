@@ -95,13 +95,6 @@ header h1 {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.service-section h3 {
-    font-size: 1.4em;
-    color: white;
-    margin: 10px 0;
-    text-align: center;
-}
-
 
 
 .service-banner {
@@ -114,6 +107,13 @@ header h1 {
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
     margin: 0 auto; /* This centers the element horizontally */
+}
+
+.service-banner h3 {
+    font-size: 1.4em;
+    color: white;
+    margin: 10px 0;
+    text-align: center;
 }
 
 .service-banner, .service-card {
