@@ -183,46 +183,41 @@ footer p {
 }
 
 
-
+/* Style for the container of the dropdown */
 .toggle-banner {
-    background-color: transparent; 
-    padding: 15px;
-    border-radius: 10px;
+    display: flex;               /* Use flexbox to arrange elements in a row */
+    align-items: center;         /* Vertically align the items */
+    justify-content: space-between; /* Space between label and toggle */
     margin: 20px 0;
+    padding: 15px;
+    background-color: #e0f7f7; /* Background color */
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
 /* Style for the label inside the dropdown */
 .toggle-banner label {
-    display: block;
-    margin-bottom: 10px; /* Space between label and dropdown */
     font-weight: bold;
     color: #008080; /* Label color */
+    margin-right: 20px; /* Space between label and toggle */
 }
 
 /* Style for the select dropdown */
 #country-select11 {
     width: 250px; /* Width of the dropdown */
-    padding: 10px; /* Padding for the dropdown for better space around the options */
-    border-radius: 8px; /* Rounded corners for the dropdown */
-    border: 2px solid #008080; /* Border color */
-    font-size: 1em; /* Font size for the options */
-    color: #333; /* Text color inside the dropdown */
-    background-color: #fff; /* Background color for the select dropdown */
-    cursor: pointer; /* Change cursor on hover to indicate it's clickable */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow around the dropdown */
-    text-align: left; /* Left-aligned text inside the dropdown */
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #008080;
+    font-size: 1em;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
-/* Focus state for the select dropdown (when user clicks or tabs into it) */
-#country-select11:focus {
-    border-color: #008080; /* Focus border color */
-    box-shadow: 0 0 6px rgba(0, 128, 128, 0.4); /* Focus shadow */
-    outline: none; /* Remove default focus outline */
-}
-
-.background_box{
+/* Style for the toggle container */
+.background_box {
     width: 100%;
     height: 40px;
     background-color: #fff;
@@ -232,7 +227,9 @@ footer p {
     transition: 0.5s;
     transition-delay: 0.4s;
 }
-.toggle_box{
+
+/* Style for the toggle button */
+.toggle_box {
     width: 130px;
     height: 30px;
     display: block;
@@ -242,19 +239,20 @@ footer p {
     position: relative;
     transition: 0.5s;
 }
-input[type="checkbox"]{
+
+/* Hide the checkbox input */
+input[type="checkbox"] {
     display: none;
 }
 
+/* Style for the circle inside the toggle button */
 .circle {
     position: absolute;
-    width: 22px; /* Increased width of the circle */
-    height: 22px; /* Increased height of the circle */
-    left: 0px; /* Adjust the left margin to keep the circle inside the box */
+    width: 22px;
+    height: 22px;
+    left: 0px;
     background-color: #fff;
-    border-radius: 50%; /* Keep the circle perfectly round */
-    margin: 4px; /* Space inside the box */
-    transition: 0.5s; /* Smooth transition for the movement */
+    border-radius: 50%;
+    margin: 4px;
+    transition: 0.5s;
 }
-
-
