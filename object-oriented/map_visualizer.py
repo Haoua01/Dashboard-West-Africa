@@ -199,7 +199,7 @@ class MapVisualizer:
                 },
                 tooltip=folium.GeoJsonTooltip(
                     fields=['admin1Name', f'{self.label}'],
-                    aliases=[f'{self.type}:', 'Score:'],
+                    aliases=[f'{self.type}:', 'score:'],
                     localize=True,
                     sticky=True  # Makes the tooltip sticky on hover
                 )
