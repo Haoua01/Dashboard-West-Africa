@@ -324,9 +324,3 @@ input[type="checkbox"] {
     100% { transform: rotate(360deg); }
 }
 
-/* Style for the "Loading..." text */
-.loading-spinner p {
-    color: #008080;
-    margin-top: 10px;
-    font-size: 1.2em;
-}

@@ -10,7 +10,8 @@ class MapVisualizer:
         geo_data (GeoDataFrame): Geographic data used for visualization.
 
     Methods:
-        create_choropleth(values, title): Creates a choropleth map with the given values and title.
+        create_choropleth(): Creates a choropleth map with the given values and title.
+        create_leaflet(): Creates a cleaner map using Leaflet with Jawg Light basemap.
     """
     
     def __init__(self, geo_data, scores, label, type, lat, lon, zoom, country):
@@ -70,6 +71,13 @@ class MapVisualizer:
         # Initialize a Folium map
         my_map = folium.Map(location=[self.lat, self.lon], zoom_start=self.zoom)
 
+        # Use Jawg Light tile layer for the base map
+        folium.TileLayer(
+            tiles="https://{s}.tile.jawg.io/jawg-light/{z}/{x}/{y}.png",
+            attr="&copy; <a href='https://www.jawg.io/'>Jawg</a>",
+            name="Jawg Light"
+        ).add_to(my_map)
+
         # Plot the map with a choropleth layer
         folium.Choropleth(
             geo_data=self.geo_data.__geo_interface__,
@@ -78,9 +86,9 @@ class MapVisualizer:
             columns=['admin1Name', f'{self.label}'],
             key_on='feature.properties.admin1Name',
             fill_color='Blues',
-            fill_opacity=0.9,
+            fill_opacity=1,
             line_opacity=0.2,
-            line_weight=2,
+            line_weight=1,
             legend_name=f'{self.label}'
         ).add_to(my_map)
 
