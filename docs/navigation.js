@@ -19,14 +19,14 @@ document.addEventListener("DOMContentLoaded", function() {
     spinner.style.display = "block";  // Show the spinner when the map starts loading
     // Charger la carte de la Côte d'Ivoire dans map1 par défaut
     const iframe = document.getElementById('map-frame');
-    iframe.src = 'results/ISIBF_régions_benin_leaflet.html'; // Carte par défaut pour la Côte d'Ivoire
+    iframe.src = 'results/ISIBF_région_benin_leaflet.html'; // Carte par défaut pour la Côte d'Ivoire
     iframe.onload = function() {
         spinner.style.display = "none";
     };
 
     // Charger l'histogramme de la côte d'ivoire dans chart3 par défaut
     const iframe2 = document.getElementById('chart-frame2');
-    iframe2.src = 'results/demographic_indicator_régions_benin_leaflet.html'; // Histogramme par défaut pour la Côte d'Ivoire
+    iframe2.src = 'results/demographic_indicator_région_benin_leaflet.html'; // Histogramme par défaut pour la Côte d'Ivoire
 
 
 });
@@ -91,7 +91,7 @@ function showCountryMap1() {
         toggleSwitch.style.display = 'block';
     } else {
         // For other countries, load the default map and hide the toggle
-        iframe.src = `results/ISIBF_régions_${countrySelect}_leaflet.html`;
+        iframe.src = `results/ISIBF_région_${countrySelect}_leaflet.html`;
         toggleSwitch.style.display = 'none';
     }
 
@@ -111,9 +111,9 @@ function showCountryChart() {
     const countrySelect2 = document.getElementById('country-select21').value;
     const iframe2 = document.getElementById('chart-frame2');
     if (countrySelect2 === 'civ') {
-        iframe2.src = `results/demographic_indicator_districts_${countrySelect2}_leaflet.html`;
+        iframe2.src = `results/demographic_indicator_district_${countrySelect2}_leaflet.html`;
     } else {
-        iframe2.src = `results/demographic_indicator_régions_${countrySelect2}_leaflet.html`;
+        iframe2.src = `results/demographic_indicator_région_${countrySelect2}_leaflet.html`;
     }
 }
 
@@ -131,40 +131,40 @@ function updateSliderValue() {
     // Check if checkbox is checked (1 = "Par départements", 0 = "Par districts")
     if (countrySelect === 'civ') {
         if (checkbox.checked) {
-            iframe.src = 'results/ISIBF_départements_civ_leaflet.html'; // Map by departments
+            iframe.src = 'results/ISIBF_département_civ_leaflet.html'; // Map by departments
             departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
             districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
         }
         else {
-            iframe.src = 'results/ISIBF_districts_civ_leaflet.html'; // Map by departments
+            iframe.src = 'results/ISIBF_district_civ_leaflet.html'; // Map by departments
             districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
             departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
         }
     } else if (countrySelect === 'mali') {
         if (checkbox.checked) {
-            iframe.src = 'results/ISIBF_cercles_mali_leaflet.html'; // Map by departments
+            iframe.src = 'results/ISIBF_cercle_mali_leaflet.html'; // Map by departments
             departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
             districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
         }
         else {
-            iframe.src = 'results/ISIBF_régions_mali_leaflet.html'; // Map by departments
+            iframe.src = 'results/ISIBF_région_mali_leaflet.html'; // Map by departments
             districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
             departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
         } 
     } else if (countrySelect === 'burkina') {
         if (checkbox.checked) {
-            iframe.src = 'results/ISIBF_provinces_burkina_leaflet.html'; // Map by departments
+            iframe.src = 'results/ISIBF_province_burkina_leaflet.html'; // Map by departments
             departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
             districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
         }
         else {
-            iframe.src = 'results/ISIBF_régions_burkina_leaflet.html'; // Map by departments
+            iframe.src = 'results/ISIBF_région_burkina_leaflet.html'; // Map by departments
             districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
             departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
         } 
     } else if (countrySelect === 'combined') {
         if (checkbox.checked) {
-            iframe.src = 'results/ISIBF_régions_combined_leaflet.html'; // Map by departments
+            iframe.src = 'results/ISIBF_région_combined_leaflet.html'; // Map by departments
             departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
             districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
         }
