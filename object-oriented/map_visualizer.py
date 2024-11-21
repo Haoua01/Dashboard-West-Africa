@@ -78,7 +78,7 @@ class MapVisualizer:
         self.geo_data = self.geo_data[['geometry', 'admin1Name', 'country', f'{self.label}']]
 
         # Initialize a Folium map
-        my_map = folium.Map(location=[self.lat, self.lon], zoom_start=self.zoom)
+        my_map = folium.Map(location=[self.lat, self.lon], zoom_start=self.zoom, scrollWheelZoom=False)
 
         # Jawg access token (replace this with your own token)
         jawg_access_token = "dioMGYzKr2G5hw92MoTu8vvqmdOVm8zrb7lElgXzmBSo7pdqgvsTDCqV4UjS4hz2"
@@ -143,7 +143,8 @@ class MapVisualizer:
         my_map = folium.Map(
             location=[self.lat, self.lon],
             zoom_start=self.zoom,
-            control_scale=True
+            control_scale=True, 
+            scrollWheelZoom=False
         )
 
         # Add Jawg Light tiles with the access token
