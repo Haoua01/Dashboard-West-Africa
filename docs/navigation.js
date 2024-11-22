@@ -19,7 +19,14 @@ document.addEventListener("DOMContentLoaded", function() {
     spinner.style.display = "block";  // Show the spinner when the map starts loading
     // Charger la carte combiné dans map1 par défaut
     const iframe = document.getElementById('map-frame');
+
+    const checkbox = document.getElementById('checkbox');
+    const districtLabel = document.getElementById('region-label');
+    const departmentLabel = document.getElementById('department-label');
+
     iframe.src = 'results/ISIBF_pays_combined_leaflet.html'; // Carte par défaut
+    districtLabel.textContent = 'Pays'; 
+    departmentLabel.textContent = 'Régions'; 
     iframe.onload = function() {
         spinner.style.display = "none";
     };
@@ -170,8 +177,8 @@ function updateSliderValue() {
         }
         else {
             iframe.src = 'results/ISIBF_pays_combined_leaflet.html'; // Map by departments
-            districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
-            departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
+            districtLabel.style.fontWeight = 'bold'; 
+            departmentLabel.style.fontWeight = 'normal'; 
         }
     } 
 
