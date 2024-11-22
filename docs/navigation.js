@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
     spinner.style.display = "block";  // Show the spinner when the map starts loading
     // Charger la carte combiné dans map1 par défaut
     const iframe = document.getElementById('map-frame');
-    iframe.src = 'results/ISIBF_pays_combiné_leaflet.html'; // Carte par défaut
+    iframe.src = 'results/ISIBF_pays_combined_leaflet.html'; // Carte par défaut
     iframe.onload = function() {
         spinner.style.display = "none";
     };
