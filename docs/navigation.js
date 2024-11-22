@@ -122,9 +122,9 @@ function showCountryChart() {
     const countrySelect2 = document.getElementById('country-select21').value;
     const iframe2 = document.getElementById('chart-frame2');
     if (countrySelect2 === 'civ') {
-        iframe2.src = `results/demographic_indicator_district_${countrySelect2}_leaflet.html`;
+        iframe2.src = `results/demographic_indicator_districts_${countrySelect2}.html`;
     } else {
-        iframe2.src = `results/demographic_indicator_région_${countrySelect2}_leaflet.html`;
+        iframe2.src = `results/demographic_indicator_régions${countrySelect2}.html`;
     }
 }
 
