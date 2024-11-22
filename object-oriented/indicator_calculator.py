@@ -77,6 +77,7 @@ class IndicatorCalculator:
             
             # Calculate total ISIBF value for the city
             isibf_values[city] = total + own_contribution[city]
+            #print(own_contribution[city], neighbors_contributions[city], isibf_values[city])
             
         return isibf_values  # Return the city-level ISIBF values
 

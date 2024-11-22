@@ -17,14 +17,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const spinner = document.getElementById("loading-spinner-map");  // Spinner for the map
     spinner.style.display = "block";  // Show the spinner when the map starts loading
-    // Charger la carte de la Côte d'Ivoire dans map1 par défaut
+    // Charger la carte combiné dans map1 par défaut
     const iframe = document.getElementById('map-frame');
-    iframe.src = 'results/ISIBF_région_benin_leaflet.html'; // Carte par défaut pour la Côte d'Ivoire
+    iframe.src = 'results/ISIBF_pays_combiné_leaflet.html'; // Carte par défaut
     iframe.onload = function() {
         spinner.style.display = "none";
     };
 
-    // Charger l'histogramme de la côte d'ivoire dans chart3 par défaut
+    // Charger l'histogramme su bénin dans chart3 par défaut
     const iframe2 = document.getElementById('chart-frame2');
     iframe2.src = 'results/demographic_indicator_région_benin_leaflet.html'; // Histogramme par défaut pour la Côte d'Ivoire
 
