@@ -20,13 +20,13 @@ import numpy as np
 
 # Constants
 THRESHOLD = 200  # Distance threshold for neighbors
-ALPHA_BENIN = 1.0345  # Alpha value for ISIBF calculation in Benin 1.0345
+ALPHA_BENIN = 1.034  # Alpha value for ISIBF calculation in Benin 1.0345
 ALPHA_TOGO = 1.007  # Alpha value for ISIBF calculation in Togo 1.007
 ALPHA_CIV = 1.02  # Alpha value for ISIBF calculation in Côte d'Ivoire 1.01738
 ALPHA_MALI = 1.02  # Alpha value for ISIBF calculation in Mali 1.02
 ALPHA_BURKINA = 1.02 # Burkina 1.02
 ALPHA_NIGER = 1.04  # Alpha value for ISIBF calculation in Niger 1.02
-ALPHA_GUINEE = 1.005  # Alpha value for ISIBF calculation in Guinée Bissau 1.02
+ALPHA_GUINEE = 1.009  # Alpha value for ISIBF calculation in Guinée Bissau 1.02
 REF_INHABITANTS = 100000  # Reference number of inhabitants for demographic indicator
 
 
@@ -241,7 +241,7 @@ def main():
     isibf_niger_norm = format_scores(normalize_scores(isibf_niger))
     isibf_guinee_norm = format_scores(normalize_scores(isibf_guinee))
 
-    print(isibf_niger_norm, isibf_niger)
+    #print(isibf_niger_norm, isibf_niger)
 
 
     '''Map visualization for ISIBF score'''
@@ -249,7 +249,7 @@ def main():
     # Maps for normalization by countries
     map_visualizer_benin = MapVisualizer(benin, isibf_benin_norm, label="ISIBF", type="région", lat=9.5, lon=2.3, zoom=6.5, country="benin")
     #map_visualizer_benin.create_choropleth()
-    #map_visualizer_benin.create_leaflet()
+    map_visualizer_benin.create_leaflet()
 
     map_visualizer_togo = MapVisualizer(togo, isibf_togo_norm, label="ISIBF", type="région", lat=8.6, lon=0.9, zoom=6.5, country="togo")
     #map_visualizer_togo.create_choropleth()
@@ -263,7 +263,7 @@ def main():
     #map_visualizer_niger.create_leaflet()
 
     map_visualizer_guinee = MapVisualizer(guinee, isibf_guinee_norm, label="ISIBF", type="région", lat=11.8, lon=-15, zoom=7.5, country="guinee")
-    #map_visualizer_guinee.create_choropleth()
+    map_visualizer_guinee.create_choropleth()
     #map_visualizer_guinee.create_leaflet()
 
 
@@ -356,7 +356,6 @@ def main():
 
 
     
-
 
 
     '''Map visualization for ISIBF score'''
@@ -481,24 +480,24 @@ def main():
     # Maps for normalization by countries
     map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="région", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined.create_choropleth()
-    #map_visualizer_combined.create_leaflet()
+    map_visualizer_combined.create_leaflet()
 
     #get mean values of isibf
     isibf_mean_countries_norm=format_scores({
-        "Bénin": mean(isibf_benin_norm),
-        "Burkina Faso": mean(isibf_regions_burkina_norm),
-        "Côte d\'Ivoire": mean(isibf_regions_civ_norm),
-        "Mali": mean(isibf_regions_mali_norm),
-        "Togo": mean(isibf_togo_norm),
-        "Niger": mean(isibf_niger_norm),
-        "Guinée Bissau": mean(isibf_guinee_norm)
+        "Bénin": mean(isibf_benin),
+        "Burkina Faso": mean(isibf_regions_burkina),
+        "Côte d\'Ivoire": mean(isibf_regions_civ),
+        "Mali": mean(isibf_regions_mali),
+        "Togo": mean(isibf_togo),
+        "Niger": mean(isibf_niger),
+        "Guinée Bissau": mean(isibf_guinee)
     })
     #print(isibf_mean_countries_norm)
 
      # Map vizualisation for each countries using mean scores for normalized values
     map_visualizer_combined = MapVisualizer(combined2, isibf_mean_countries_norm, label="ISIBF", type="pays", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined.create_choropleth()
-    #map_visualizer_combined.create_leaflet()
+    map_visualizer_combined.create_leaflet()
 
    
 if __name__ == "__main__":
