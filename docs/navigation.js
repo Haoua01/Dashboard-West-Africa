@@ -124,7 +124,7 @@ function showCountryChart() {
     if (countrySelect2 === 'civ') {
         iframe2.src = `results/demographic_indicator_districts_${countrySelect2}.html`;
     } else {
-        iframe2.src = `results/demographic_indicator_régions${countrySelect2}.html`;
+        iframe2.src = `results/demographic_indicator_régions_${countrySelect2}.html`;
     }
 }
 
