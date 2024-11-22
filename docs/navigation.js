@@ -23,10 +23,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const checkbox = document.getElementById('checkbox');
     const districtLabel = document.getElementById('region-label');
     const departmentLabel = document.getElementById('department-label');
+    const toggleSwitch = document.getElementById('toggle-switch');
 
     iframe.src = 'results/ISIBF_pays_combined_leaflet.html'; // Carte par défaut
     districtLabel.textContent = 'Pays'; 
     departmentLabel.textContent = 'Régions'; 
+    districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
+    departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
+    toggleSwitch.style.display = 'block'; // Masquer le bouton bascule par défaut
     iframe.onload = function() {
         spinner.style.display = "none";
     };
