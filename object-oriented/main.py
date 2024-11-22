@@ -477,7 +477,7 @@ def main():
 
 
     # Maps for normalization by countries
-    map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="région", lat=15, lon=-4, zoom=5.5, country="combined")
+    map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="région", lat=15, lon=-4, zoom=5.3, country="combined")
     map_visualizer_combined.create_choropleth()
     map_visualizer_combined.create_leaflet()
 
@@ -494,7 +494,7 @@ def main():
     #print(isibf_mean_countries_norm)
 
      # Map vizualisation for each countries using mean scores for normalized values
-    map_visualizer_combined = MapVisualizer(combined2, isibf_mean_countries_norm, label="ISIBF", type="pays", lat=15, lon=-4, zoom=5.5, country="combined")
+    map_visualizer_combined = MapVisualizer(combined2, isibf_mean_countries_norm, label="ISIBF", type="pays", lat=15, lon=-4, zoom=5.3, country="combined")
     map_visualizer_combined.create_choropleth()
     map_visualizer_combined.create_leaflet()
 
