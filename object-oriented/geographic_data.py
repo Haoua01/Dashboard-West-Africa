@@ -30,4 +30,29 @@ class GeographicData:
         print("Neighbor's distances successfully computed.")
         return neighbors
     
+    @staticmethod
+    def get_coordinates(department_mapping, country):
+        # Initialize geolocator
+        geolocator = Nominatim(user_agent="department_coordinates")
+
+        # Dictionary to store the coordinates
+        department_coordinates = {}
+
+        # Loop through the departments in the mapping
+        for region, departments in department_mapping.items():
+            for department in departments:
+                try:
+                    # Get the coordinates of the department
+                    location = geolocator.geocode(f'{department}, {region}, {country}')
+                    if location:
+                        department_coordinates[department] = (location.latitude, location.longitude)
+                    else:
+                        print(f"Warning: {department} not found.")
+                except Exception as e:
+                    print(f"Error geocoding {department}: {e}")
+                # Pause for a few seconds to avoid overloading the server
+                time.sleep(1)
+
+        return department_coordinates
+
 

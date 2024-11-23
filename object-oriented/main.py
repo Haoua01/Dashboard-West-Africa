@@ -12,6 +12,8 @@ from data.mali_data import MaliData
 from data.burkina_data import BurkinaData
 from data.niger_data import NigerData
 from data.guinee_data import GuineeData
+from data.benin_department_data import BeninDepartmentData
+from data.togo_department_data import TogoDepartmentData
 
 # Import necessary Python libraries
 import geopandas as gpd
@@ -20,8 +22,8 @@ import numpy as np
 
 # Constants
 THRESHOLD = 200  # Distance threshold for neighbors
-ALPHA_BENIN = 1.034  # Alpha value for ISIBF calculation in Benin 1.0345
-ALPHA_TOGO = 1.007  # Alpha value for ISIBF calculation in Togo 1.007
+ALPHA_BENIN = 1.02  # Alpha value for ISIBF calculation in Benin 1.0345
+ALPHA_TOGO = 1.02  # Alpha value for ISIBF calculation in Togo 1.007
 ALPHA_CIV = 1.02  # Alpha value for ISIBF calculation in Côte d'Ivoire 1.01738
 ALPHA_MALI = 1.02  # Alpha value for ISIBF calculation in Mali 1.02
 ALPHA_BURKINA = 1.02 # Burkina 1.02
@@ -55,7 +57,11 @@ def load_country_shapefiles():
     niger['country'] = 'Niger'
     guinee['country'] = 'Guinée Bissau'
 
+
+
     combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee], ignore_index=True)
+
+
 
     return combined
 
@@ -99,6 +105,7 @@ def load_shapefiles():
     combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee], ignore_index=True)
     
     #print(combined[['admin1Name', 'country']])
+
 
     return benin, togo, civ, mali, burkina, niger, guinee, combined
 
@@ -149,12 +156,45 @@ def load_department_shapefiles():
     mali['country'] = "Mali"
     burkina['country'] = "Burkina Faso"
 
-    return civ, mali, burkina 
+    benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/ben_adm_1m_salb_2019_shapes/ben_admbnda_adm2_1m_salb_20190816.shp')
+    benin = benin.rename(columns={'adm2_name': 'admin1Name'})
+    benin['country'] = 'Bénin'
+    commune_replacements_benin = {'Djakotome': 'Djakotomey', 'Dogbo-tota': 'Dogbo-Tota', 'Kopargo': 'Copargo', 'Banikoara': 'Banikoara', 'Gogounou': 'Gogounou', 'Kandi': 'Kandi', 'Karimama': 'Karimama', 'Malanville': 'Malanville', 'Segbana': 'Segbana', 'Kerou': 'Kérou', 'Kobli': 'Cobly', 'Kouande': 'Kouandé', 'Materi': 'Matéri', 'Natitingou': 'Natitingou', 'Pehunco': 'Péhunco', 'Tanguieta': 'Tanguiéta', 'Allada': 'Allada', 'Kpomasse': 'Kpomassè', 'Ouidah': 'Ouidah', 'Toffo': 'Toffo', 'Ze': 'Zè', 'Bembereke': 'Bembéréké', 'Kalale': 'Kalalé', 'Nikki': 'Nikki', 'Parakou': 'Parakou', 'Perere': 'Pèrèrè', 'Sinende': 'Sinendé', 'Tchaourou': 'Tchaourou', 'Bante': 'Bantè', 'Glazoue': 'Glazoué', 'Ouesse': 'Ouèssè', 'Savalou': 'Savalou', 'Save': 'Savè', 'Aplahoue': 'Aplahoué', 'Klouekanme': 'Klouékanmè', 'Lalo': 'Lalo', 'Toviklin': 'Toviklin', 'Bassila': 'Bassila', 'Djougou': 'Djougou', 'Ouake': 'Ouaké', 'Cotonou': 'Cotonou', 'Athieme': 'Athiémé', 'Bopa': 'Bopa', 'Come': 'Comè', 'Houeyogbe': 'Houéyogbé', 'Lokossa': 'Lokossa', 'Adjohoun': 'Adjohoun', 'Avrankou': 'Avrankou', 'Bonou': 'Bonou', 'Dangbo': 'Dangbo', 'Ifangni': 'Ifangni', 'Ketou': 'Kétou', 'Pobe': 'Pobè', 'Sakete': 'Sakété', 'Abomey': 'Abomey', 'Agbangnizoun': 'Agbangnizoun', 'Bohicon': 'Bohicon', 'Cove': 'Covè', 'Djidja': 'Djidja', 'Ouinhi': 'Ouinhi', 'Zogbodomey': 'Zogbodomey', 'Aguegues': 'Aguégués', 'Boukoumbe': 'Boukoumbé', 'Toukountouna': 'Toucountouna', 'Abomey-calavi': 'Abomey-Calavi', 'So-ava': 'Sô-Ava', 'Tori-bossito': 'Tori-Bossito', 'Ndali': 'N\'Dali', 'Dassa': 'Dassa-Zoumé', 'Grand-popo': 'Grand-Popo', 'Adjara': 'Adjarra', 'Akpro-misserete': 'Akpro-Missérété', 'Porto-novo': 'Porto-Novo', 'Seme-kpodji': 'Sèmè-Kpodji', 'Adja-ouere': 'Adja-Ouèrè', 'Za-kpota': 'Za-Kpota', 'Zangnanado': 'Zagnanado'}
+
+
+    # Replace names in 'admin1Name' column based on the above mappings
+    for old_name, new_name in commune_replacements_benin.items():
+        benin['admin1Name'] = benin['admin1Name'].replace(old_name, new_name)
+
+    togo = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/Shapefiles_togo/tgo_admbnda_adm2_inseed_itos_20210107.shp')
+    togo = togo.rename(columns={'ADM2_FR': 'admin1Name'})
+    togo['country'] = 'Togo'
+
+    togo_names_dict = {
+        'Agoe-Nyive': 'Agoè-Nyivé',
+        'Akebou': 'Akébou',
+        'Anie': 'Anié',
+        'Ave': 'Avé',
+        'Cinkasse': 'Cinkassé',
+        'Keran': 'Kéran',
+        'Kpele': 'Kpélé',
+        'Lome Commune': 'Golfe',
+        'Plaine du Mo': 'Mô',
+        'Tandjoare': 'Tandjouaré',
+        'Tone': 'Tône',
+        'Naki-Ouest': 'Tône'
+    }
+
+    # Replace names in 'admin1Name' column based on the above mappings
+    for old_name, new_name in togo_names_dict.items():
+        togo['admin1Name'] = togo['admin1Name'].replace(old_name, new_name)
+    
+    return civ, mali, burkina, benin, togo 
 
 
 # Load geographic data
 benin, togo, civ, mali, burkina, niger, guinee, combined = load_shapefiles()
-civ2, mali2, burkina2 = load_department_shapefiles()  
+civ2, mali2, burkina2, benin2, togo2 = load_department_shapefiles()  
 combined2 = load_country_shapefiles()
 
 
@@ -325,7 +365,96 @@ def main():
 
     """
 
-    '''COTE D'IVOIRE ADJUSTMENTS : Generic functions and initialisation'''
+    '''BENIN ADJUSTMENTS'''
+
+    # Initialize data classes
+    benin_data2 = BeninDepartmentData(service_type='bank')
+
+    # Initialize BankAgencies instances
+    bank_agencies_benin2 = BankAgencies(
+        benin_data2.get_agency_counts(),
+        benin_data2.get_department_mapping(),
+        benin_data2.get_coordinates()
+    )
+
+    geographic_data_benin2 = GeographicData(benin_data2.get_coordinates())
+
+    neighbors_benin2 = geographic_data_benin2.compute_neighbors(distance_threshold=THRESHOLD)
+
+    '''Indicator 1 : ISIBF score'''
+
+    # Calculate ISIBF values
+    indicator_calculator_benin2 = IndicatorCalculator(bank_agencies_benin2.get_agency_counts(), neighbors_benin2, benin_data2.get_adult_population(), alpha=ALPHA_BENIN, threshold=THRESHOLD, department_mapping=benin_data2.get_department_mapping())
+    isibf_departments_benin = indicator_calculator_benin2.calculate_isibf2()
+    # Global normalization and formatting
+    isibf_regions_benin = mean_scores(isibf_departments_benin, benin_data2.get_department_mapping())
+
+    # Normalization by countries
+    isibf_departments_benin_norm = format_scores(normalize_scores(isibf_departments_benin))
+    isibf_regions_benin_norm = format_scores(mean_scores(normalize_scores(isibf_departments_benin), benin_data2.get_department_mapping()))
+
+    '''Map visualization for ISIBF score'''
+
+    # Maps for normalization by countries
+    map_visualizer_benin2 = MapVisualizer(benin2, isibf_departments_benin_norm, label="ISIBF", type="commune", lat=9.5, lon=2.3, zoom=6.5, country="benin")
+    #map_visualizer_benin2.create_choropleth()
+    map_visualizer_benin2.create_leaflet()
+
+    map_visualizer_benin_regions = MapVisualizer(benin, isibf_regions_benin_norm, label="ISIBF", type="départment", lat=9.5, lon=2.3, zoom=6.5, country="benin")
+    #map_visualizer_benin_regions.create_choropleth()
+    map_visualizer_benin_regions.create_leaflet()
+
+
+
+
+    ''' TOGO ADJUSTMENTS'''
+
+    # Initialize data classes
+    togo_data2 = TogoDepartmentData(service_type='bank')
+
+    # Initialize BankAgencies instances
+    bank_agencies_togo2 = BankAgencies(
+        togo_data2.get_agency_counts(),
+        togo_data2.get_department_mapping(),
+        togo_data2.get_coordinates()
+    )
+
+    geographic_data_togo2 = GeographicData(togo_data2.get_coordinates())
+
+    neighbors_togo2 = geographic_data_togo2.compute_neighbors(distance_threshold=THRESHOLD)
+
+    '''Indicator 1 : ISIBF score'''
+
+    # Calculate ISIBF values
+
+    indicator_calculator_togo2 = IndicatorCalculator(bank_agencies_togo2.get_agency_counts(), neighbors_togo2, togo_data2.get_adult_population(), alpha=ALPHA_TOGO, threshold=THRESHOLD, department_mapping=togo_data2.get_department_mapping())
+    isibf_departments_togo = indicator_calculator_togo2.calculate_isibf2()
+    # Global normalization and formatting
+    isibf_regions_togo = mean_scores(isibf_departments_togo, togo_data2.get_department_mapping())
+
+    # Normalization by countries
+    isibf_departments_togo_norm = format_scores(normalize_scores(isibf_departments_togo))
+
+    isibf_regions_togo_norm = format_scores(mean_scores(normalize_scores(isibf_departments_togo), togo_data2.get_department_mapping()))
+
+    '''Map visualization for ISIBF score'''
+
+    # Maps for normalization by countries
+
+    map_visualizer_togo2 = MapVisualizer(togo2, isibf_departments_togo_norm, label="ISIBF", type="préfecture", lat=8.6, lon=0.9, zoom=6.5, country="togo")
+    #map_visualizer_togo2.create_choropleth()
+    map_visualizer_togo2.create_leaflet()
+
+    map_visualizer_togo_regions = MapVisualizer(togo, isibf_regions_togo_norm, label="ISIBF", type="région", lat=8.6, lon=0.9, zoom=6.5, country="togo")
+    #map_visualizer_togo_regions.create_choropleth()
+    map_visualizer_togo_regions.create_leaflet()
+
+
+
+
+
+
+    '''COTE D'IVOIRE ADJUSTMENTS'''
 
     # Initialize data classes
     civ_data2 = CIVDepartmentData(service_type='bank')
@@ -411,13 +540,13 @@ def main():
     '''Map visualization for ISIBF score'''
 
     # Maps for normalization by countries
-    map_visualizer_mali_regions = MapVisualizer(mali, isibf_regions_mali_norm, label="ISIBF", type="région", lat=17.5, lon=-4.5, zoom=4.7, country="mali")
+    map_visualizer_mali_regions = MapVisualizer(mali, isibf_regions_mali_norm, label="ISIBF", type="région", lat=17.5, lon=-4.5, zoom=5.5, country="mali")
     #map_visualizer_mali_regions.create_choropleth()
-    #map_visualizer_mali_regions.create_leaflet()
+    map_visualizer_mali_regions.create_leaflet()
 
-    map_visualizer_mali = MapVisualizer(mali2, isibf_departments_mali_norm, label="ISIBF", type="cercle", lat=17.5, lon=-4.5, zoom=4.7, country="mali")
+    map_visualizer_mali = MapVisualizer(mali2, isibf_departments_mali_norm, label="ISIBF", type="cercle", lat=17.5, lon=-4.5, zoom=5.5, country="mali")
     #map_visualizer_mali.create_choropleth()
-    #map_visualizer_mali.create_leaflet()
+    map_visualizer_mali.create_leaflet()
 
 
 
@@ -442,7 +571,6 @@ def main():
     indicator_calculator_burkina = IndicatorCalculator(bank_agencies_burkina.get_agency_counts(), neighbors_burkina, burkina_data.get_adult_population(), alpha=ALPHA_BURKINA, threshold=THRESHOLD, department_mapping=burkina_data.get_department_mapping())
     isibf_departments_burkina = indicator_calculator_burkina.calculate_isibf2()
 
-
     # Normalization by country
     isibf_departments_burkina_norm = format_scores(normalize_scores(isibf_departments_burkina))
     isibf_regions_burkina_norm = format_scores(mean_scores(normalize_scores(isibf_departments_burkina), burkina_data.get_department_mapping()))
@@ -453,25 +581,25 @@ def main():
     '''Map visualization for ISIBF score'''
 
     # Maps for normalization by countries
-    map_visualizer_burkina_regions = MapVisualizer(burkina, isibf_regions_burkina_norm, label="ISIBF", type="région", lat=12, lon=-1.5, zoom=6.5, country="burkina")
+    map_visualizer_burkina_regions = MapVisualizer(burkina, isibf_regions_burkina_norm, label="ISIBF", type="région", lat=12.5, lon=-1.5, zoom=5.5, country="burkina")
     #map_visualizer_burkina_regions.create_choropleth()
-    #map_visualizer_burkina_regions.create_leaflet()
+    map_visualizer_burkina_regions.create_leaflet()
 
-    map_visualizer_burkina = MapVisualizer(burkina2, isibf_departments_burkina_norm, label="ISIBF", type="province", lat=12, lon=-1.5, zoom=6.5, country="burkina")
+    map_visualizer_burkina = MapVisualizer(burkina2, isibf_departments_burkina_norm, label="ISIBF", type="province", lat=12.5, lon=-1.5, zoom=5.5, country="burkina")
     #map_visualizer_burkina.create_choropleth()
-    #map_visualizer_burkina.create_leaflet()
+    map_visualizer_burkina.create_leaflet()
 
-
+    
 
     
     """MAPS COMBINED VISUALIZATION"""
 
     # Normalization by countries
-    isibf_combined_norm = {**isibf_benin_norm, **isibf_togo_norm, **isibf_regions_civ_norm, **isibf_regions_mali_norm, **isibf_regions_burkina_norm, **isibf_niger_norm, **isibf_guinee_norm}
+    isibf_combined_norm = {**isibf_regions_benin_norm, **isibf_regions_togo_norm, **isibf_regions_civ_norm, **isibf_regions_mali_norm, **isibf_regions_burkina_norm, **isibf_niger_norm, **isibf_guinee_norm}
 
     #print(isibf_regions_mali_norm, isibf_niger_norm)
     # Global normalization and formatting
-    isibf_all = {**isibf_benin, **isibf_togo, **isibf_regions_civ, **isibf_regions_mali, **isibf_regions_burkina}
+    isibf_all = {**isibf_regions_benin, **isibf_regions_togo, **isibf_regions_civ, **isibf_regions_mali, **isibf_regions_burkina}
     isibf_all_norm = format_scores(normalize_scores(isibf_all))
     
 
@@ -482,22 +610,26 @@ def main():
     #map_visualizer_combined.create_choropleth()
     map_visualizer_combined.create_leaflet()
 
-    #get mean values of isibf
-    isibf_mean_countries_norm=format_scores({
-        "Bénin": mean(isibf_benin),
-        "Burkina Faso": mean(isibf_regions_burkina),
+    mean_scores_countries={
+        "Bénin": mean(isibf_regions_benin),
+        "Togo": mean(isibf_regions_togo),
         "Côte d\'Ivoire": mean(isibf_regions_civ),
         "Mali": mean(isibf_regions_mali),
-        "Togo": mean(isibf_togo),
+        "Burkina Faso": mean(isibf_regions_burkina),
         "Niger": mean(isibf_niger),
         "Guinée Bissau": mean(isibf_guinee)
-    })
-    #print(isibf_mean_countries_norm)
+    }
 
-     # Map vizualisation for each countries using mean scores for normalized values
-    map_visualizer_combined = MapVisualizer(combined2, isibf_mean_countries_norm, label="ISIBF", type="pays", lat=15, lon=-4, zoom=5.45, country="combined")
-    #map_visualizer_combined.create_choropleth()
-    map_visualizer_combined.create_leaflet()
+    print(mean_scores_countries)
+
+    map_visualizer_combined2 = MapVisualizer(combined2, mean_scores_countries, label="ISIBF", type="pays", lat=15, lon=-4, zoom=5.45, country="combined")
+    #map_visualizer_combined2.create_choropleth()
+    map_visualizer_combined2.create_leaflet()
+
+    
+
+
+
 
    
 if __name__ == "__main__":

@@ -60,5 +60,7 @@ def mean_scores(scores, department_mapping):
 
 def mean(scores):
     # calculate the mean of all scores of the dictionnary 
-    return sum(scores.values()) / len(scores) if scores else 0
+    mean = sum(scores.values()) / len(scores) if scores else 0
+    # .2f to keep only 2 decimal
+    return round(mean, 2)
 

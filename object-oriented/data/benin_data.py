@@ -16,10 +16,8 @@ class BeninData(FinancialService):
         get_agency_counts(): Returns the agency counts for the specified service type.
         get_department_mapping(): Returns the department mapping for regions in Benin.
         get_coordinates(): Returns the geographical coordinates for cities in Benin.
-        get_total_agencies(): Returns the total number of agencies across all regions for the specified service type.
         get_adult_population(): Returns the population over 15 years old for the regions.
         get_area(): Returns the area data for the regions.
-        display_info(): Prints out the agency counts, department mapping, and coordinates.
     """
     
     def __init__(self, service_type):
