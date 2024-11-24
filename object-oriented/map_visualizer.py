@@ -100,7 +100,7 @@ class MapVisualizer:
             fill_color='Blues',
             fill_opacity=1,
             line_opacity=0.2,
-            line_weight=1,
+            line_weight=0.7,
             legend_name=f'{self.label}',
             highlight=True
         ).add_to(my_map)
@@ -110,8 +110,8 @@ class MapVisualizer:
             self.geo_data.__geo_interface__,
             style_function=lambda feature: {
                 'fillColor': 'Blues' if feature['properties'][f'{self.label}'] is not None else 'gray',
-                'color': 'black',
-                'weight': 0.5,
+                'color': 'grey',
+                'weight': 0.3,
                 'fillOpacity': 0,
             },
             tooltip=folium.GeoJsonTooltip(
@@ -164,7 +164,7 @@ class MapVisualizer:
             fill_color='Blues',  # Color scale for the choropleth
             fill_opacity=1,  # Set the opacity for internal borders
             line_opacity=0.4,  # Set the opacity for internal borders
-            line_weight=1,  # Weight for internal borders
+            line_weight=0.7,  # Weight for internal borders
             legend_name=f'{self.label}',
             highlight=True  # Make highlighted regions stand out when hovered over
         ).add_to(my_map)
