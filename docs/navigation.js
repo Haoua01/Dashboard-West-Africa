@@ -156,11 +156,11 @@ const countryMapConfig = {
     },
     'combined': {
         maps: {
-            byDepartment: 'results/ISIBF_région_combined_leaflet.html',
+            byDepartment: 'results/ISIBF_département_combined_leaflet.html',
             byDistrict: 'results/ISIBF_pays_combined_leaflet.html'
         },
         labels: {
-            department: 'Régions',
+            department: 'Départements',
             district: 'Pays'
         }
     }
