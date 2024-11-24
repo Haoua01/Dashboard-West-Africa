@@ -144,6 +144,16 @@ const countryMapConfig = {
             district: 'Régions'
         }
     },
+    'niger': {
+        maps: {
+            byDepartment: 'results/ISIBF_département_niger_leaflet.html',
+            byDistrict: 'results/ISIBF_région_niger_leaflet.html'
+        },
+        labels: {
+            department: 'Départements',
+            district: 'Régions'
+        }
+    },
     'combined': {
         maps: {
             byDepartment: 'results/ISIBF_région_combined_leaflet.html',
@@ -194,7 +204,7 @@ function showCountryMap1() {
 
     spinner.style.display = "block";  // Show the spinner when the map starts loading
 
-    const countriesWithToggle = ['benin', 'togo', 'civ', 'mali', 'burkina', 'guinee', 'combined'];
+    const countriesWithToggle = ['benin', 'togo', 'civ', 'mali', 'burkina', 'guinee', 'niger', 'combined'];
 
     if (countriesWithToggle.includes(countrySelect)) {
         updateSliderValue();
