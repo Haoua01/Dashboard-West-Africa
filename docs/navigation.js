@@ -82,131 +82,131 @@ function toggleGroup2(showMapId) {
     }
 
 }
-
-
-
-// Fonction pour mettre à jour la carte en fonction du pays sélectionné dans le premier menu déroulant
-function showCountryMap1() {
-    const countrySelect = document.getElementById('country-select11').value;
-    const iframe = document.getElementById('map-frame');
-    const toggleSwitch = document.getElementById('toggle-switch');
-    const spinner = document.getElementById("loading-spinner-map");  // Spinner for the map
-    spinner.style.display = "block";  // Show the spinner when the map starts loading
-    
-    // Handle the countries that require the toggle switch to be shown
-    const countriesWithToggle = ['civ', 'mali', 'burkina', 'combined'];
-
-    // Check if the selected country requires showing the toggle switch
-    if (countriesWithToggle.includes(countrySelect)) {
-        updateSliderValue();
-        toggleSwitch.style.display = 'block';
-    } else {
-        // For other countries, load the default map and hide the toggle
-        iframe.src = `results/ISIBF_région_${countrySelect}_leaflet.html`;
-        toggleSwitch.style.display = 'none';
+// Configuration mapping for each country
+const countryMapConfig = {
+    'benin': {
+        maps: {
+            byDepartment: 'results/ISIBF_département_benin_leaflet.html',
+            byDistrict: 'results/ISIBF_région_benin_leaflet.html'
+        },
+        labels: {
+            department: 'Départements',
+            district: 'Régions'
+        }
+    },
+    'togo': {   
+        maps: {
+            byDepartment: 'results/ISIBF_préfecture_togo_leaflet.html',
+            byDistrict: 'results/ISIBF_région_togo_leaflet.html'
+        },
+        labels: {
+            department: 'Préfectures',
+            district: 'Régions'
+        }
+    },
+    'civ': {
+        maps: {
+            byDepartment: 'results/ISIBF_département_civ_leaflet.html',
+            byDistrict: 'results/ISIBF_district_civ_leaflet.html'
+        },
+        labels: {
+            department: 'Départements',
+            district: 'Districts'
+        }
+    },
+    'mali': {
+        maps: {
+            byDepartment: 'results/ISIBF_cercle_mali_leaflet.html',
+            byDistrict: 'results/ISIBF_région_mali_leaflet.html'
+        },
+        labels: {
+            department: 'Cercles',
+            district: 'Régions'
+        }
+    },
+    'burkina': {
+        maps: {
+            byDepartment: 'results/ISIBF_province_burkina_leaflet.html',
+            byDistrict: 'results/ISIBF_région_burkina_leaflet.html'
+        },
+        labels: {
+            department: 'Provinces',
+            district: 'Régions'
+        }
+    },
+    'combined': {
+        maps: {
+            byDepartment: 'results/ISIBF_région_combined_leaflet.html',
+            byDistrict: 'results/ISIBF_pays_combined_leaflet.html'
+        },
+        labels: {
+            department: 'Régions',
+            district: 'Pays'
+        }
     }
+};
 
-    // Simulate map loading process 
-    iframe.onload = function() {
-        // Hide the spinner once the map is fully loaded
-        spinner.style.display = "none";
-    };
-}
-
-
-
-
-
-// Fonction pour afficher le graphique de barres correspondant au pays sélectionné dans chart3
-function showCountryChart() {
-    const countrySelect2 = document.getElementById('country-select21').value;
-    const iframe2 = document.getElementById('chart-frame2');
-    if (countrySelect2 === 'civ') {
-        iframe2.src = `results/demographic_indicator_districts_${countrySelect2}.html`;
-    } else {
-        iframe2.src = `results/demographic_indicator_régions_${countrySelect2}.html`;
-    }
-}
-
-
-// Function to update the map based on toggle switch (checkbox) state
+// Function to update the map based on the selected country and checkbox
 function updateSliderValue() {
     const countrySelect = document.getElementById('country-select11').value;
     const iframe = document.getElementById('map-frame');
     const checkbox = document.getElementById('checkbox');
     const districtLabel = document.getElementById('region-label');
     const departmentLabel = document.getElementById('department-label');
-    const spinner = document.getElementById("loading-spinner-map");  // Spinner for the map
+    const spinner = document.getElementById("loading-spinner-map");
     spinner.style.display = "block";  // Show the spinner when the map starts loading
 
-    // Check if checkbox is checked (1 = "Par départements", 0 = "Par districts")
-    if (countrySelect === 'civ') {
-        if (checkbox.checked) {
-            iframe.src = 'results/ISIBF_département_civ_leaflet.html'; // Map by departments
-            departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
-            districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
-        }
-        else {
-            iframe.src = 'results/ISIBF_district_civ_leaflet.html'; // Map by departments
-            districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
-            departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
-        }
-    } else if (countrySelect === 'mali') {
-        if (checkbox.checked) {
-            iframe.src = 'results/ISIBF_cercle_mali_leaflet.html'; // Map by departments
-            departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
-            districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
-        }
-        else {
-            iframe.src = 'results/ISIBF_région_mali_leaflet.html'; // Map by departments
-            districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
-            departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
-        } 
-    } else if (countrySelect === 'burkina') {
-        if (checkbox.checked) {
-            iframe.src = 'results/ISIBF_province_burkina_leaflet.html'; // Map by departments
-            departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
-            districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
-        }
-        else {
-            iframe.src = 'results/ISIBF_région_burkina_leaflet.html'; // Map by departments
-            districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
-            departmentLabel.style.fontWeight = 'normal'; // Remove highlight from "Départements"
-        } 
-    } else if (countrySelect === 'combined') {
-        if (checkbox.checked) {
-            iframe.src = 'results/ISIBF_région_combined_leaflet.html'; // Map by departments
-            departmentLabel.style.fontWeight = 'bold'; // Highlight "Départements"
-            districtLabel.style.fontWeight = 'normal'; // Remove highlight from "Districts"
-        }
-        else {
-            iframe.src = 'results/ISIBF_pays_combined_leaflet.html'; // Map by departments
-            districtLabel.style.fontWeight = 'bold'; 
-            departmentLabel.style.fontWeight = 'normal'; 
-        }
-    } 
+    const config = countryMapConfig[countrySelect];
 
-    // Dynamically change the labels based on country
-    if (countrySelect === 'civ') {
-        districtLabel.textContent = 'Districts'; // Change label for Côte d'Ivoire to "Districts"
-        departmentLabel.textContent = 'Départements'; // Keep department label as "Départements"
-    } else if (countrySelect === 'mali') {
-        districtLabel.textContent = 'Régions'; // Update region label for Mali to "Cercles"
-        departmentLabel.textContent = 'Cercles'; // Update department label for Mali to "Régions"
-    } else if (countrySelect === 'burkina') {
-        districtLabel.textContent = 'Régions'; // Update region label for Mali to "Cercles"
-        departmentLabel.textContent = 'Provinces'; // Update department label for Mali to "Régions"
-    } else if (countrySelect === 'combined') {
-        districtLabel.textContent = 'Pays'; // Update region label for Mali
-        departmentLabel.textContent = 'Régions'; // Update department label for Mali
-    }    
+    if (config) {
+        const mapSrc = checkbox.checked ? config.maps.byDepartment : config.maps.byDistrict;
+        iframe.src = mapSrc;
+
+        departmentLabel.style.fontWeight = checkbox.checked ? 'bold' : 'normal';
+        districtLabel.style.fontWeight = checkbox.checked ? 'normal' : 'bold';
+
+        departmentLabel.textContent = config.labels.department;
+        districtLabel.textContent = config.labels.district;
+    }
 
     // Simulate map loading process 
     iframe.onload = function() {
-        // Hide the spinner once the map is fully loaded
         spinner.style.display = "none";
     };
 }
+
+// Function to update the map based on the selected country from the first dropdown
+function showCountryMap1() {
+    const countrySelect = document.getElementById('country-select11').value;
+    const iframe = document.getElementById('map-frame');
+    const toggleSwitch = document.getElementById('toggle-switch');
+    const spinner = document.getElementById("loading-spinner-map");
+
+    spinner.style.display = "block";  // Show the spinner when the map starts loading
+
+    const countriesWithToggle = ['benin', 'togo', 'civ', 'mali', 'burkina', 'combined'];
+
+    if (countriesWithToggle.includes(countrySelect)) {
+        updateSliderValue();
+        toggleSwitch.style.display = 'block';
+    } else {
+        iframe.src = `results/ISIBF_région_${countrySelect}_leaflet.html`;
+        toggleSwitch.style.display = 'none';
+    }
+
+    // Simulate map loading process 
+    iframe.onload = function() {
+        spinner.style.display = "none";
+    };
+}
+
+// Function to show the chart based on the selected country from chart3
+function showCountryChart() {
+    const countrySelect2 = document.getElementById('country-select21').value;
+    const iframe2 = document.getElementById('chart-frame2');
+    iframe2.src = `results/demographic_indicator_${countrySelect2 === 'civ' ? 'districts' : 'régions'}_${countrySelect2}.html`;
+}
+
 
 
 
