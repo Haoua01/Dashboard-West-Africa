@@ -5,7 +5,7 @@ class GuineeData(FinancialService):
     
     def __init__(self, service_type):
         # Dictionary mapping regions to their respective departments
-        department_mapping = guinea_bissau_regions = {
+        department_mapping = {
             "Bafatá": "Bafatá",
             "Biombo": "Bissau",
             "Cacheu": "Cacheu",

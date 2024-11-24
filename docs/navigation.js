@@ -86,12 +86,12 @@ function toggleGroup2(showMapId) {
 const countryMapConfig = {
     'benin': {
         maps: {
-            byDepartment: 'results/ISIBF_département_benin_leaflet.html',
-            byDistrict: 'results/ISIBF_région_benin_leaflet.html'
+            byDepartment: 'results/ISIBF_commune_benin_leaflet.html',
+            byDistrict: 'results/ISIBF_département_benin_leaflet.html'
         },
         labels: {
-            department: 'Départements',
-            district: 'Régions'
+            department: 'Communes',
+            district: 'Départements'
         }
     },
     'togo': {   
@@ -131,6 +131,16 @@ const countryMapConfig = {
         },
         labels: {
             department: 'Provinces',
+            district: 'Régions'
+        }
+    },
+    'guinee': {
+        maps: {
+            byDepartment: 'results/ISIBF_secteur_guinee_leaflet.html',
+            byDistrict: 'results/ISIBF_région_guinee_leaflet.html'
+        },
+        labels: {
+            department: 'Secteurs',
             district: 'Régions'
         }
     },
@@ -184,7 +194,7 @@ function showCountryMap1() {
 
     spinner.style.display = "block";  // Show the spinner when the map starts loading
 
-    const countriesWithToggle = ['benin', 'togo', 'civ', 'mali', 'burkina', 'combined'];
+    const countriesWithToggle = ['benin', 'togo', 'civ', 'mali', 'burkina', 'guinee', 'combined'];
 
     if (countriesWithToggle.includes(countrySelect)) {
         updateSliderValue();
