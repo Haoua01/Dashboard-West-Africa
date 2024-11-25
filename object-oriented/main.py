@@ -16,6 +16,7 @@ from data.benin_department_data import BeninDepartmentData
 from data.togo_department_data import TogoDepartmentData
 from data.guinee_department_data import GuineeDepartmentData
 from data.niger_department_data import NigerDepartmentData
+from data.senegal_department_data import SenegalDepartmentData
 
 # Import necessary Python libraries
 import geopandas as gpd
@@ -31,6 +32,7 @@ ALPHA_MALI = 1.03  # Alpha value for ISIBF calculation in Mali 1.02
 ALPHA_BURKINA = 1.025 # Burkina 1.02
 ALPHA_NIGER = 1.03  # Alpha value for ISIBF calculation in Niger 1.04
 ALPHA_GUINEE = 1.015  # Alpha value for ISIBF calculation in Guinée Bissau 1.009
+ALPHA_SENEGAL = 1.01
 REF_INHABITANTS = 100000  # Reference number of inhabitants for demographic indicator
 
 
@@ -42,6 +44,7 @@ def load_country_shapefiles():
     burkina = gpd.read_file('/Users/haouabenaliabbo/Downloads/geoBoundaries-BFA-ADM0-all/geoBoundaries-BFA-ADM0_simplified.shp')
     niger = gpd.read_file('/Users/haouabenaliabbo/Downloads/ner_adm_ignn_20230720_ab_shp/NER_admbnda_adm0_IGNN_20230720.shp')
     guinee = gpd.read_file('/Users/haouabenaliabbo/Downloads/gnb_admbnda_1m_salb_20210609_shp/gnb_admbnda_adm0_1m_salb_20210609.shp')
+    senegal = gpd.read_file('/Users/haouabenaliabbo/Downloads/sen_admbnd_anat_20240520_ab_shp/sen_admbnda_adm0_anat_20240520.shp')
 
     benin['admin1Name']='Bénin'
     togo['admin1Name']='Togo'
@@ -50,6 +53,7 @@ def load_country_shapefiles():
     burkina['admin1Name']='Burkina Faso'
     niger['admin1Name']='Niger'
     guinee['admin1Name']='Guinée Bissau'
+    senegal['admin1Name']='Sénégal'
 
     togo['country'] = 'Togo'
     civ['country'] = "Côte d'Ivoire"
@@ -58,10 +62,11 @@ def load_country_shapefiles():
     benin['country'] = 'Bénin'
     niger['country'] = 'Niger'
     guinee['country'] = 'Guinée Bissau'
+    senegal['country'] = 'Sénégal'
 
 
 
-    combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee], ignore_index=True)
+    combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee, senegal], ignore_index=True)
 
 
 
@@ -75,6 +80,7 @@ def load_shapefiles():
     burkina = gpd.read_file('/Users/haouabenaliabbo/Downloads/geoBoundaries-BFA-ADM1-all/geoBoundaries-BFA-ADM1_simplified.shp')
     niger = gpd.read_file('/Users/haouabenaliabbo/Downloads/ner_adm_ignn_20230720_ab_shp/NER_admbnda_adm1_IGNN_20230720.shp')
     guinee = gpd.read_file('/Users/haouabenaliabbo/Downloads/gnb_admbnda_1m_salb_20210609_shp/gnb_admbnda_adm1_1m_salb_20210609.shp')
+    senegal = gpd.read_file('/Users/haouabenaliabbo/Downloads/sen_admbnd_anat_20240520_ab_shp/sen_admbnda_adm1_anat_20240520.shp')
 
     # Add columns for country names
     togo['country'] = 'Togo'
@@ -84,6 +90,7 @@ def load_shapefiles():
     benin['country'] = 'Bénin'
     niger['country'] = 'Niger'
     guinee['country'] = 'Guinée Bissau'
+    senegal['country'] = 'Sénégal'
 
     # Rename columns for consistency
     benin = benin.rename(columns={'adm1_name': 'admin1Name'})
@@ -95,6 +102,7 @@ def load_shapefiles():
     burkina = burkina.rename(columns={'shapeName': 'admin1Name'})
     niger = niger.rename(columns={'ADM1_FR': 'admin1Name'})
     guinee = guinee.rename(columns={'ADM1_EN': 'admin1Name'})
+    senegal = senegal.rename(columns={'ADM1_FR': 'admin1Name'})
 
     # Rename regions with common names to avoid conflicts
     benin['admin1Name'] = benin['admin1Name'].replace('Oueme', 'Ouémé')
@@ -102,14 +110,15 @@ def load_shapefiles():
     civ['admin1Name'] = civ['admin1Name'].replace('Savanes', 'Savanes_CIV')
     guinee['admin1Name'] = guinee['admin1Name'].replace('Bolama/Bijagos', 'Bolama')
     burkina['admin1Name'] = burkina['admin1Name'].replace('Plateau Central', 'Plateau-Central')
+    senegal['admin1Name'] = senegal['admin1Name'].replace('Saint-Louis', 'Saint Louis')
 
     # Fusion shapefiles for combined maps
-    combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee], ignore_index=True)
+    combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee, senegal], ignore_index=True)
     
     #print(combined[['admin1Name', 'country']])
 
 
-    return benin, togo, civ, mali, burkina, niger, guinee, combined
+    return benin, togo, civ, mali, burkina, niger, guinee, senegal, combined
 
 def load_department_shapefiles():
     civ= gpd.read_file('/Users/haouabenaliabbo/Downloads/civ_admbnda_adm2_cntig_ocha_itos_20180706 (2)/civ_admbnda_adm2_cntig_ocha_itos_20180706.shp')
@@ -217,17 +226,21 @@ def load_department_shapefiles():
     }
     for old, new in niger_department_mapping.items():
         niger['admin1Name'] = niger['admin1Name'].replace(old, new)
-    
-    combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee], ignore_index=True)
+
+    senegal=gpd.read_file('/Users/haouabenaliabbo/Downloads/sen_admbnd_anat_20240520_ab_shp/sen_admbnda_adm2_anat_20240520.shp')
+    senegal.rename(columns={'ADM2_FR': 'admin1Name'}, inplace=True)
+    senegal['country'] = 'Sénégal'
+
+    combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee, senegal], ignore_index=True)
 
     
-    return civ, mali, burkina, benin, togo, guinee, niger, combined 
+    return civ, mali, burkina, benin, togo, guinee, niger, senegal, combined 
 
 
 # Load geographic data
 combined0 = load_country_shapefiles()
-benin, togo, civ, mali, burkina, niger, guinee, combined = load_shapefiles()
-civ2, mali2, burkina2, benin2, togo2, guinee2, niger2, combined2 = load_department_shapefiles()  
+benin, togo, civ, mali, burkina, niger, guinee, senegal, combined = load_shapefiles()
+civ2, mali2, burkina2, benin2, togo2, guinee2, niger2, senegal2, combined2 = load_department_shapefiles()  
 
 
 
@@ -350,11 +363,11 @@ def main():
     # Maps for normalization by countries
     map_visualizer_benin2 = MapVisualizer(benin2, isibf_departments_benin_norm, label="ISIBF", type="commune", lat=9.5, lon=2.3, zoom=6.5, country="benin")
     #map_visualizer_benin2.create_choropleth()
-    map_visualizer_benin2.create_leaflet()
+    #map_visualizer_benin2.create_leaflet()
 
     map_visualizer_benin_regions = MapVisualizer(benin, isibf_regions_benin_norm, label="ISIBF", type="département", lat=9.5, lon=2.3, zoom=6.5, country="benin")
     #map_visualizer_benin_regions.create_choropleth()
-    map_visualizer_benin_regions.create_leaflet()
+    #map_visualizer_benin_regions.create_leaflet()
 
 
 
@@ -395,11 +408,11 @@ def main():
 
     map_visualizer_togo2 = MapVisualizer(togo2, isibf_departments_togo_norm, label="ISIBF", type="préfecture", lat=8.6, lon=0.9, zoom=6.5, country="togo")
     #map_visualizer_togo2.create_choropleth()
-    map_visualizer_togo2.create_leaflet()
+    #map_visualizer_togo2.create_leaflet()
 
     map_visualizer_togo_regions = MapVisualizer(togo, isibf_regions_togo_norm, label="ISIBF", type="région", lat=8.6, lon=0.9, zoom=6.5, country="togo")
     #map_visualizer_togo_regions.create_choropleth()
-    map_visualizer_togo_regions.create_leaflet()
+    #map_visualizer_togo_regions.create_leaflet()
 
 
 
@@ -444,11 +457,11 @@ def main():
     # Maps for normalization by countries
     map_visualizer_civ = MapVisualizer(civ2, isibf_departments_civ_norm, label="ISIBF", type="département", lat=7.5, lon=-5.5, zoom=6.5, country="civ")
     #map_visualizer_civ.create_choropleth()
-    map_visualizer_civ.create_leaflet()
+    #map_visualizer_civ.create_leaflet()
 
     map_visualizer_civ_regions = MapVisualizer(civ, isibf_regions_civ_norm, label="ISIBF", type="district", lat=7.5, lon=-5.5, zoom=6.5, country="civ")
     #map_visualizer_civ_regions.create_choropleth()
-    map_visualizer_civ_regions.create_leaflet()
+    #map_visualizer_civ_regions.create_leaflet()
 
 
 
@@ -498,11 +511,11 @@ def main():
 
     map_visualizer_guinee = MapVisualizer(guinee2, isibf_departments_guinee_norm, label="ISIBF", type="secteur", lat=11.8, lon=-15, zoom=7.5, country="guinee")
     #map_visualizer_guinee.create_choropleth()
-    map_visualizer_guinee.create_leaflet()
+    #map_visualizer_guinee.create_leaflet()
 
     map_visualizer_guinee_regions = MapVisualizer(guinee, isibf_regions_guinee_norm, label="ISIBF", type="région", lat=11.8, lon=-15, zoom=7.5, country="guinee")
     #map_visualizer_guinee_regions.create_choropleth()
-    map_visualizer_guinee_regions.create_leaflet()
+    #map_visualizer_guinee_regions.create_leaflet()
 
 
 
@@ -541,11 +554,11 @@ def main():
 
     map_visualizer_niger = MapVisualizer(niger2, isibf_departments_niger_norm, label="ISIBF", type="département", lat=17.6, lon=8.1, zoom=5.5, country="niger")
     #map_visualizer_niger.create_choropleth()
-    map_visualizer_niger.create_leaflet()
+    #map_visualizer_niger.create_leaflet()
 
     map_visualizer_niger_regions = MapVisualizer(niger, isibf_regions_niger_norm, label="ISIBF", type="région", lat=17.6, lon=8.1, zoom=5.5, country="niger")
     #map_visualizer_niger_regions.create_choropleth()
-    map_visualizer_niger_regions.create_leaflet()
+    #map_visualizer_niger_regions.create_leaflet()
 
         
 
@@ -583,11 +596,11 @@ def main():
     # Maps for normalization by countries
     map_visualizer_mali_regions = MapVisualizer(mali, isibf_regions_mali_norm, label="ISIBF", type="région", lat=17.5, lon=-4.5, zoom=5.5, country="mali")
     #map_visualizer_mali_regions.create_choropleth()
-    map_visualizer_mali_regions.create_leaflet()
+    #map_visualizer_mali_regions.create_leaflet()
 
     map_visualizer_mali = MapVisualizer(mali2, isibf_departments_mali_norm, label="ISIBF", type="cercle", lat=17.5, lon=-4.5, zoom=5.5, country="mali")
     #map_visualizer_mali.create_choropleth()
-    map_visualizer_mali.create_leaflet()
+    #map_visualizer_mali.create_leaflet()
 
 
 
@@ -624,23 +637,63 @@ def main():
     # Maps for normalization by countries
     map_visualizer_burkina_regions = MapVisualizer(burkina, isibf_regions_burkina_norm, label="ISIBF", type="région", lat=12.5, lon=-1.5, zoom=5.5, country="burkina")
     #map_visualizer_burkina_regions.create_choropleth()
-    map_visualizer_burkina_regions.create_leaflet()
+    #map_visualizer_burkina_regions.create_leaflet()
 
     map_visualizer_burkina = MapVisualizer(burkina2, isibf_departments_burkina_norm, label="ISIBF", type="province", lat=12.5, lon=-1.5, zoom=5.5, country="burkina")
     #map_visualizer_burkina.create_choropleth()
-    map_visualizer_burkina.create_leaflet()
+    #map_visualizer_burkina.create_leaflet()
 
     
+    """SENEGAL INTRODUCTION"""
+
+    senegal_data = SenegalDepartmentData(service_type='bank')
+
+    bank_agencies_senegal = BankAgencies(
+        senegal_data.get_agency_counts(),
+        senegal_data.get_department_mapping(),
+        senegal_data.get_coordinates()
+    )
+
+    geographic_data_senegal = GeographicData(senegal_data.get_coordinates())
+
+    neighbors_senegal = geographic_data_senegal.compute_neighbors(distance_threshold=THRESHOLD)
+
+    '''Indicator 1 : ISIBF score'''
+
+    # Calculate ISIBF values
+    indicator_calculator_senegal = IndicatorCalculator(bank_agencies_senegal.get_agency_counts(), neighbors_senegal, senegal_data.get_adult_population(), alpha=ALPHA_SENEGAL, threshold=THRESHOLD, department_mapping=senegal_data.get_department_mapping())
+    isibf_departments_senegal = indicator_calculator_senegal.calculate_isibf2()
+
+    # Normalization by country
+    isibf_departments_senegal_norm = format_scores(normalize_scores(isibf_departments_senegal))
+
+    isibf_regions_senegal_norm = format_scores(mean_scores(normalize_scores(isibf_departments_senegal), senegal_data.get_department_mapping()))
+
+    # Global normalization and formatting
+    isibf_regions_senegal = mean_scores(isibf_departments_senegal, senegal_data.get_department_mapping())
+
+    '''Map visualization for ISIBF score'''
+
+    # Maps for normalization by countries
+    map_visualizer_senegal_regions = MapVisualizer(senegal, isibf_regions_senegal_norm, label="ISIBF", type="région", lat=14.5, lon=-15, zoom=5.5, country="senegal")
+    #map_visualizer_senegal_regions.create_choropleth()
+    map_visualizer_senegal_regions.create_leaflet()
+
+    map_visualizer_senegal = MapVisualizer(senegal2, isibf_departments_senegal_norm, label="ISIBF", type="département", lat=14.5, lon=-15, zoom=5.5, country="senegal")
+    #map_visualizer_senegal.create_choropleth()
+    map_visualizer_senegal.create_leaflet()
+
+
 
     
     """MAPS COMBINED VISUALIZATION"""
 
     # Normalization by countries
-    isibf_combined_norm = {**isibf_regions_benin_norm, **isibf_regions_togo_norm, **isibf_regions_civ_norm, **isibf_regions_mali_norm, **isibf_regions_burkina_norm, **isibf_regions_niger_norm, **isibf_regions_guinee_norm}
+    isibf_combined_norm = {**isibf_regions_benin_norm, **isibf_regions_togo_norm, **isibf_regions_civ_norm, **isibf_regions_mali_norm, **isibf_regions_burkina_norm, **isibf_regions_niger_norm, **isibf_regions_guinee_norm, **isibf_regions_senegal_norm}
 
     #print(isibf_regions_mali_norm, isibf_niger_norm)
     # Global normalization and formatting
-    isibf_combined_department_norm = {**isibf_departments_benin_norm, **isibf_departments_togo_norm, **isibf_departments_civ_norm, **isibf_departments_mali_norm, **isibf_departments_burkina_norm, **isibf_departments_niger_norm, **isibf_departments_guinee_norm}
+    isibf_combined_department_norm = {**isibf_departments_benin_norm, **isibf_departments_togo_norm, **isibf_departments_civ_norm, **isibf_departments_mali_norm, **isibf_departments_burkina_norm, **isibf_departments_niger_norm, **isibf_departments_guinee_norm, **isibf_departments_senegal_norm}
     
     map_visualizer_combined_departments = MapVisualizer(combined2, isibf_combined_department_norm, label="ISIBF", type="département", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined_departments.create_choropleth()
@@ -661,10 +714,13 @@ def main():
         "Mali": mean(isibf_regions_mali),
         "Burkina Faso": mean(isibf_regions_burkina),
         "Niger": mean(isibf_regions_niger),
-        "Guinée Bissau": mean(isibf_regions_guinee)
+        "Guinée Bissau": mean(isibf_regions_guinee),
+        "Sénégal": mean(isibf_regions_senegal)
     }
 
-    print(mean_scores_countries)
+    mean_scores_countries = normalize_scores(mean_scores_countries)
+
+
 
     map_visualizer_combined2 = MapVisualizer(combined0, mean_scores_countries, label="ISIBF", type="pays", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined2.create_choropleth()

@@ -154,6 +154,16 @@ const countryMapConfig = {
             district: 'Régions'
         }
     },
+    'senegal': {
+        maps: {
+            byDepartment: 'results/ISIBF_département_senegal_leaflet.html',
+            byDistrict: 'results/ISIBF_région_senegal_leaflet.html'
+        },
+        labels: {
+            department: 'Départements',
+            district: 'Régions'
+        }
+    },
     'combined': {
         maps: {
             byDepartment: 'results/ISIBF_département_combined_leaflet.html',
@@ -204,7 +214,7 @@ function showCountryMap1() {
 
     spinner.style.display = "block";  // Show the spinner when the map starts loading
 
-    const countriesWithToggle = ['benin', 'togo', 'civ', 'mali', 'burkina', 'guinee', 'niger', 'combined'];
+    const countriesWithToggle = ['benin', 'togo', 'civ', 'mali', 'burkina', 'guinee', 'niger', 'senegal', 'combined'];
 
     if (countriesWithToggle.includes(countrySelect)) {
         updateSliderValue();
