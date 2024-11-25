@@ -718,8 +718,6 @@ def main():
         "Sénégal": mean(isibf_regions_senegal)
     }
 
-    mean_scores_countries = normalize_scores(mean_scores_countries)
-
 
 
     map_visualizer_combined2 = MapVisualizer(combined0, mean_scores_countries, label="ISIBF", type="pays", lat=15, lon=-4, zoom=5.45, country="combined")
