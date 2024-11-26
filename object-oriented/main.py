@@ -27,6 +27,7 @@ import numpy as np
 THRESHOLD = 200  # Distance threshold for neighbors
 REF_INHABITANTS = 100000  # Reference number of inhabitants for demographic indicator
 
+# scores for access to infrastructures https://www.integrate-africa.org/fr/classements/dimensions/integration-des-infrastructures/
 access_to_infrastructures = {
     'Benin': 0.174,
     'Togo': 0.150,
@@ -852,8 +853,8 @@ def main():
         "Togo": geo_indicator_togo,
     }
 
-    chart_visualizer_combined_geo = ChartVisualizer(geo_indicator_combined, label="geographic_indicator", title="1000 km²")
-    #chart_visualizer_combined_geo.create_bar_chart()
+    chart_visualizer_combined_geo = ChartVisualizer(geo_indicator_combined, label="geographic_indicator", title="10 000 km²")
+    chart_visualizer_combined_geo.create_bar_chart()
 
 
 
