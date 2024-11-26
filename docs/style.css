@@ -99,7 +99,7 @@ header h1 {
 
 .service-banner {
     width: 790px;
-    background: #FF7F00;
+    background: #ffa244;
     color: white;
     padding: 0 15px;
     border-radius: 10px;
@@ -114,7 +114,7 @@ header h1 {
 
 .service-banner h3 {
     font-size: 1.4em;
-    color: white;
+    color: rgba(56, 51, 51, 0.051);
     text-align: center;
 }
 
