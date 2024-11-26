@@ -110,6 +110,7 @@ header h1 {
     align-items: center;    
     justify-content: center;
     margin: 0 auto 20px;
+    margin-top: 20px;
 }
 
 .service-banner h3 {
