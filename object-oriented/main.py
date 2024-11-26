@@ -86,7 +86,7 @@ def load_country_shapefiles():
 
     combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee, senegal], ignore_index=True)
 
-
+    #combined.to_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/uemoa_countries.shp')
 
     return combined
 
@@ -132,7 +132,7 @@ def load_shapefiles():
 
     # Fusion shapefiles for combined maps
     combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee, senegal], ignore_index=True)
-    
+    #combined.to_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/uemoa_regions.shp')
     #print(combined[['admin1Name', 'country']])
 
 
@@ -250,7 +250,7 @@ def load_department_shapefiles():
     senegal['country'] = 'Sénégal'
 
     combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee, senegal], ignore_index=True)
-
+    #combined.to_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/uemoa_departments.shp')
     
     return civ, mali, burkina, benin, togo, guinee, niger, senegal, combined 
 
