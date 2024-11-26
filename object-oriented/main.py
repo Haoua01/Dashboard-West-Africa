@@ -41,6 +41,7 @@ access_to_infrastructures = {
 
 alpha_countries = alpha_values(access_to_infrastructures, 1.01, 1.03)
 
+
 #define the alpha value for each country as constants
 ALPHA_BENIN = alpha_countries['Benin']
 ALPHA_TOGO = alpha_countries['Togo']
