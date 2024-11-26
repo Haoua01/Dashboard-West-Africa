@@ -346,11 +346,6 @@ input[type="checkbox"] {
         font-size: 1.5em;
     }
 
-    .service-card {
-        width: 100%;
-        max-width: 100%; /* Full width for smaller screens */
-    }
-
     .service-banner {
         width: 100%;
         max-width: 100%; /* Full width for smaller screens */
