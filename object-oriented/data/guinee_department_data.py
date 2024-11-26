@@ -20,24 +20,12 @@ class GuineeDepartmentData(FinancialService):
 
         # Dictionary holding the geographical coordinates of cities in Togo
         coordinates = {'Bafata': (12.1723403, -14.6555027), 'Bambadinca': (12.023539, -14.860555), 'Contuboel': (12.3755089, -14.5603502), 'Galomaro': (11.9529086, -14.6371254), 'Gamamundo':(12.27132, -14.72651), 'Xitole': (11.7349442, -14.8144697), 'Bolama': (11.57763, -15.475261), 'Bubaque': (11.3000802, -15.8312425), 'Caravela': (11.53941045, -16.329990159596093), 'Uno': (11.2459664, -16.16341), 'Bigene': (12.439277, -15.535395), 'Bula': (12.108565, -15.711007), 'Cacheu': (12.274246, -16.1648911), 'Caió': (11.930685, -16.20014), 'Canchungo': (12.066422, -16.031912), 'Sao Domingos': (12.402654, -16.196593), 'Bissorã': (12.2235221, -15.4507416), 'Farim': (12.4823646, -15.2196439), 'Mansaba': (12.293782, -15.171311), 'Mansôa': (12.06661, -15.316344), 'Nhacra': (11.9589273, -15.5378614), 'Buba': (11.591979, -14.994788), 'Empada': (11.541162, -15.227461), 'Fulacunda': (11.774895, -15.1720999), 'Tite': (11.780287, -15.399514), 'Bedanda': (11.348427, -15.112394), 'Cacine': (11.12915, -15.02007), 'Catió': (11.2835568, -15.2547152), 'Komo': (11.1964101, -15.3335452), 'Quebo': (11.5388759, -14.7678444), 'Bissau': (11.861324, -15.583055), 'Boé': (11.747412, -14.210941), 'Gabú': (12.2819517, -14.2260818), 'Pitche': (12.326137, -13.954994), 'Pirada': (12.663468, -14.15473), 'Sonaco': (12.3951689, -14.4838361), 'Prábis': (11.8005341, -15.7401575), 'Quinhámel': (11.894183, -15.851309), 'Safim': (11.931923, -15.615397)}
-        # Dictionary holding the population of cities in Togo
-        population = {
-            'Lomé': 2188376,
-            'Kara': 158090,
-            'Sokodé': 115442,
-            'Atakpamé': 98193,
-            'Dapaong': 117675
-        }
+        
+        # Total population of Togo, 2022
+        population = 1533964
 
-        # Dictionary holding the area (in km²) of each region in Togo
-        area = {
-            'Maritime': 6100,
-            'Plateaux': 16975,
-            'Centrale': 13182,
-            'Kara': 11738,
-            'Savanes_Togo': 8602
-        }
-
+        # Total area (in km²) of Togo
+        area = 36125
 
         super().__init__(department_mapping, coordinates, population, area)  # Initialize the parent class
 
@@ -70,6 +58,10 @@ class GuineeDepartmentData(FinancialService):
         """Returns the geographical coordinates for cities in Benin."""
         return self.coordinates
     
+    def get_area(self):
+        """Returns the area of regions in Benin."""
+        return self.area
+    
     def get_adult_population(self):
         """Calculates and returns the population over 15 years old for the regions."""
-        return {region: 0.57 * pop for region, pop in self.population.items()}  # 57% of the total population
+        return 0.5763 * self.population  # 57.63% of the total population

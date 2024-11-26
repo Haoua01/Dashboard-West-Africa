@@ -17,13 +17,14 @@ class IndicatorCalculator:
         demographic_indicator(): Calculates the demographic indicator (number of agencies per 10,000 inhabitants).
     """
     
-    def __init__(self, agency_counts, neighbors, population, department_mapping, alpha=1.01, threshold=200):
+    def __init__(self, agency_counts, neighbors, population, area, department_mapping, alpha=1.01, threshold=200):
         self.agency_counts = agency_counts  # Dictionary containing the number of agencies
         self.neighbors = neighbors  # Dictionary containing distances to neighboring regions
         self.population = population  # Dictionary containing the population of each region
         self.department_mapping = department_mapping  # Mapping from city to department
         self.alpha = alpha  # Parameter for the ISIBF calculation
         self.threshold = threshold  # Distance threshold for the calculation
+        self.area = area  # Area of the region
 
     def calculate_isibf(self):
         """Calculates the ISIBF based on agency counts and neighboring distances."""
@@ -82,13 +83,13 @@ class IndicatorCalculator:
         return isibf_values  # Return the city-level ISIBF values
 
 
-
+    """
     def demographic_indicator(self,nb_inhabitants):
-        """Calculates the demographic indicator (number of agencies per 10,000 inhabitants).
+        Calculates the demographic indicator (number of agencies per 10,000 inhabitants).
 
         Returns:
             dict: A dictionary with regions as keys and the demographic indicator as values.
-        """
+        
         demo_indicator = {}
         for city, count in self.agency_counts.items():
             if city in self.population:
@@ -99,34 +100,21 @@ class IndicatorCalculator:
             else:
                 demo_indicator[city] = None  # Or handle as you prefer
         return demo_indicator
-    
-    def demographic_indicator2(self,nb_inhabitants):
-        """Calculates the mean of the demographic indicator for each district and returns the result per 100,000 inhabitants."""
+    """
+
+
+    def demographic_indicator_country(self):
+        """Calculates the demographic indicator for each country and returns the result per 100,000 inhabitants."""
+
+        total_agencies = sum(self.agency_counts.values())
+        return (total_agencies/self.population)*100000
 
 
 
-    def spatial_demographic_indicator(self, nb_inhabitants, threshold):
-        """Calculates the spatial demographic indicator (number of agencies per 100,000 inhabitants within a threshold).
 
-        Returns:
-            dict: A dictionary with regions as keys and the spatial demographic indicator as values.
-        """
-        spatial_demo_indicator = {}
-        for city in self.agency_counts:
-            total = 0
-            if city in self.population and self.population[city] > 0:
-                # Include the own contribution for the city
-                numerator = self.agency_counts[city] 
-                denominator = self.population[city]
-            
-            for neighbor, distance in self.neighbors.get(city, {}).items():
-                if distance <= threshold:
-                    if neighbor in self.agency_counts and neighbor in self.population and self.population[neighbor] > 0:
-                        numerator += self.agency_counts[neighbor] 
-                        denominator += self.population[neighbor]
-            if denominator > 0:
-                total += numerator / denominator
-            
-            spatial_demo_indicator[city] = total * nb_inhabitants
-        return spatial_demo_indicator
 
+
+    def geographic_indicator(self):
+        """Calculates the geographic indicator (number of agencies per 10,000 km²)."""
+        total_agencies = sum(self.agency_counts.values())
+        return (total_agencies/self.area)*10000

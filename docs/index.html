@@ -14,7 +14,7 @@
     <!-- Page d'accueil avec description et cartes de services -->
     <main class="home-page">
         <section class="about">
-            <h2>À propos de ce Projet</h2>
+            <h2>À propos de ce projet</h2>
             <p>
                 Ce projet vise à fournir une cartographie complète de l'accès aux équipements bancaires et non bancaires en Afrique de l'Ouest, afin de modéliser la relation entre l'accès à ces infrastructures et 
                 le développement économique de la sous-région.
@@ -50,8 +50,8 @@
             <div class="indicator-group">
                 <h3>Indicateur 1 : Score d'accès</h3>
                 <p>
-                    Le premier indicateur se propose d'établir un score d'accès aux agences bancaires dans chaque région des pays d'Afrique de l'Ouest, dépendant du nombre d'équipements dans chaque territoire et de la distance entre eux.
-                    Le score obtenu est normalisé entre 0 (accès faible) et 1 (accès élevé).
+                    Le premier indicateur se propose d'établir un score d'accès aux agences bancaires dans chaque région des pays d'Afrique de l'Ouest, en prenant en compte les agences présentes dans la région considérée, mais aussi celles des territoires voisins.
+                    Le score obtenu est normalisé entre 0 (accès faible) et 1 (accès élevé). Ensuite, la moyenne des scores d'accès non normalisés de chaque région d'un pays est calculée pour obtenir un score national, représenté à l'échelle de la zone UEMOA.
                 </p>
                 <p>
                     
@@ -98,37 +98,32 @@
                 <iframe id="map-frame" src="" width="100%" height="600px"></iframe>
             </div>
 
-            <!-- Indicateur 1 -->
+            <!-- Indicateur 2 -->
             <div class="indicator-group">
-                <h3>Indicateur 2 : Nombre d'équipements</h3>
+                <h3>Indicateur 2 : Taux de pénétration démographique</h3>
                 <p>
-                Le second indicateur évalue le nombre d'agences bancaires dans chaque région pour 100 000 habitants. Cet indicateur démographique ne dépend que du nombre d'équipements et de la population adulte (>15 ans).
+                Le deuxième indicateur évalue le nombre d'agences bancaires pour 100 000 habitants dans chaque pays. Il s'agit d'un taux de pénétration démographique, plus traditionnel, qui ne dépend que du nombre d'équipements et de la population adulte du pays (>15 ans).
                 </p>
             </div>
 
-
-            <!-- Menu déroulant pour choix des pays (Indicateur 2) -->
-            <div class="toggle-banner" id="countryDropdown21" style="display: block;">
-                <label for="country-select21">Choisir un pays :</label>
-                <select id="country-select21" onchange="showCountryChart()">
-                    <option value="combined">Combiné</option>
-                    <option value="benin">Bénin</option>
-                    <option value="burkina">Burkina Faso</option>
-                    <option value="civ">Côte d'Ivoire</option>
-                    <option value="guinee">Guinée Bissau</option>
-                    <option value="mali">Mali</option>
-                    <option value="niger">Niger</option>
-                    <option value="senegal">Sénégal</option>
-                    <option value="togo">Togo</option>
-                </select>
+            <!-- Conteneur du diagramme en barres pour Indicateur 2 -->
+            <div id="chart1" class="chart group2">
+            <iframe id="chart-frame1" src="" width="100%" height="600px"></iframe>
             </div>
 
+            <!-- Indicateur 3 -->
+            <div class="indicator-group">
+                <h3>Indicateur 3 : Taux de pénétration géographique</h3>
+                <p>
+                Le troisième indicateur évalue le nombre d'agences bancaires pour 10 000 km² dans chaque pays. Ce taux de pénétration géographique ne dépend que du nombre d'équipements et de la superficie totale du pays considéré.
+                </p>
+            </div>
 
             <!-- Conteneur du diagramme en barres pour Indicateur 2 -->
-            <div id="chart3" class="chart group2">
+            <div id="chart2" class="chart group2">
                 <iframe id="chart-frame2" src="" width="100%" height="600px"></iframe>
             </div>
-
+            
         </section>
 
         <!-- Autres sections (Placeholders pour Mobile Money et Microfinance) -->

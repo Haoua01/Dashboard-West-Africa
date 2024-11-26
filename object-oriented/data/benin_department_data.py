@@ -36,37 +36,11 @@ class BeninDepartmentData(FinancialService):
         # Dictionary holding the geographical coordinates of cities in Benin
         coordinates = {'Banikoara': (11.32625415, 2.473040680223342), 'Gogounou': (10.8522725, 2.7290948000000004), 'Kandi': (11.1311029, 2.9322321), 'Karimama': (11.91622705, 2.7121422370930746), 'Malanville': (11.8618128, 3.3862982), 'Segbana': (10.9762375, 3.5053446821212226), 'Boukoumbé': (10.1832167, 1.1000529), 'Cobly': (10.479186200000001, 0.936429736261758), 'Kérou': (10.8263035, 2.1128252), 'Kouandé': (10.3321794, 1.6919847), 'Matéri': (10.8214675, 1.070225078666595), 'Natitingou': (10.3051511, 1.3808554), 'Péhunco': (10.2308948, 2.0004282), 'Tanguiéta': (10.965512, 1.420338250811944), 'Toucountouna': (10.56790835, 1.4922519231480926), 'Abomey-Calavi': (6.4538637, 2.354245), 'Allada': (6.6658411, 2.1511876), 'Kpomassè': (6.479239, 2.0343745060035476), 'Ouidah': (6.3666147, 2.0853599), 'Sô-Ava': (6.5126364, 2.4436602381870856), 'Toffo': (6.8248853, 2.1865379514733916), 'Tori-Bossito': (6.502478, 2.1441704), 'Zè': (6.73078365, 2.3329072503448813), 'Bembéréké': (10.25395885, 2.750742720088743), 'Kalalé': (10.2880733, 3.3792735), "N'Dali": (9.8623108, 2.719146), 'Nikki': (9.9363383, 3.2085658), 'Parakou': (9.3400159, 2.6278258), 'Pèrèrè': (9.605063000000001, 3.0295235323064453), 'Sinendé': (10.260695, 2.367979301912146), 'Tchaourou': (8.8881676, 2.596108), 'Bantè': (8.33007795, 1.8696095473096985), 'Dassa-Zoumé': (7.7815402, 2.183606), 'Glazoué': (8.16811735, 2.2291357527306785), 'Ouèssè': (8.4919261, 2.4258417), 'Savalou': (7.9297324, 1.9780951), 'Savè': (7.9852170000000005, 2.5417577150572566), 'Bassila': (8.96666435, 1.8218396684307867), 'Copargo': (9.8817865, 1.5446319011603729), 'Djougou': (9.7106683, 1.6651614), 'Ouaké': (9.6642475, 1.3859323), 'Aplahoué': (6.9396098, 1.6751946), 'Djakotomey': (6.850139, 1.6955773826214111), 'Dogbo-Tota': (6.801846, 1.7815205), 'Klouékanmè': (7.07500005, 1.8244247611931035), 'Lalo': (6.8744445, 1.9729216960175053), 'Toviklin': (6.891787949999999, 1.8209605779941023), 'Cotonou': (6.3676953, 2.4252507), 'Athiémé': (6.53229705, 1.7414348816705576), 'Bopa': (6.5893347, 1.9668937), 'Comè': (6.4041973, 1.8840863), 'Grand-Popo': (6.2763745, 1.8067199), 'Houéyogbé': (6.5661833, 1.8547538), 'Lokossa': (6.6458524, 1.7171404), 'Adjarra': (6.493028000000001, 2.6933383052933184), 'Adjohoun': (6.6981376, 2.516410998155393), 'Aguégués': (6.4848719500000005, 2.5395829827801037), 'Akpro-Missérété': (6.5750718, 2.6099368012167643), 'Avrankou': (6.5564209, 2.6550687), 'Bonou': (6.89096245, 2.4667140256399183), 'Dangbo': (6.5662073, 2.51544769354959), 'Porto-Novo': (6.4990718, 2.6253361), 'Sèmè-Kpodji': (6.3814684, 2.6044573), 'Adja-Ouèrè': (7.01182455, 2.5983039082882566), 'Ifangni': (6.6805991, 2.718289), 'Kétou': (7.3604193, 2.6024222), 'Pobè': (6.9820238, 2.666791), 'Sakété': (6.7377567, 2.6551566), 'Abomey': (7.1820012, 1.993632), 'Agbangnizoun': (7.075825, 1.9705679), 'Bohicon': (7.1816331, 2.0695683), 'Covè': (7.2999575, 2.298927334403489), 'Djidja': (7.39911905, 1.9769064644898355), 'Ouinhi': (7.08236145, 2.4835912066427603), 'Za-Kpota': (7.22026665, 2.1908969406542544), 'Zagnanado': (7.21660735, 2.3904810986467764), 'Zogbodomey': (7.01729035, 2.20306582428993)}
 
-        # Dictionary holding the population of cities in Benin, 2013
-        population = {
-            'Kandi': 179290,
-            'Natitingou': 103843,
-            'Ouidah': 162034,
-            'Parakou': 255478,
-            'Savalou': 144549,
-            'Dogbo-Tota': 103057,
-            'Djougou': 267812,
-            'Cotonou': 679012,
-            'Lokossa': 104961,
-            'Porto-Novo': 264320,
-            'Sakété': 114088,
-            'Abomey': 92266
-        }
+        # Total population of Bénin in 2023
+        population = 12606998  # 12,606,998
 
-        # Dictionary holding the area (in km²) of regions in Benin
-        area = {
-            'Alibori': 26242,
-            'Atakora': 20499,
-            'Atlantique': 3233,
-            'Borgou': 25856,
-            'Collines': 13931,
-            'Couffo': 2404,
-            'Donga': 11126,
-            'Littoral': 79,
-            'Mono': 1605,
-            'Ouémé': 1281,
-            'Plateau': 3264,
-            'Zou': 5243
-        }
+        # Total area (in km²) of Benin
+        area = 114763 
 
         super().__init__(department_mapping, coordinates, population, area)  # Initialize the parent class
 
@@ -97,7 +71,11 @@ class BeninDepartmentData(FinancialService):
     def get_coordinates(self):
         """Returns the geographical coordinates for cities in Benin."""
         return self.coordinates
+    
+    def get_area(self):
+        """Returns the area of regions in Benin."""
+        return self.area
        
     def get_adult_population(self):
         """Calculates and returns the population over 15 years old for the regions."""
-        return {region: 0.57 * pop for region, pop in self.population.items()}  # 57% of the total population
+        return 0.5466 * self.population  # 54.66% of the total population

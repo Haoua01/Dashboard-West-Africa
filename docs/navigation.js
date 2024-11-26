@@ -2,18 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Afficher uniquement 'map1' de group1 au démarrage
     document.getElementById('map1').style.display = 'block'; // Afficher la première carte par défaut
     document.getElementById('countryDropdown11').style.display = 'block'; // Afficher le menu déroulant associé
-
-    // Afficher uniquement 'chart3' de group2 au démarrage
-    document.getElementById('chart3').style.display = 'block'; // Afficher le premier histogramme par défaut
-    document.getElementById('countryDropdown21').style.display = 'block'; // Afficher le menu déroulant associé
-
-    // Masquer tous les éléments de group2 au démarrage
-    const group2Elements = document.querySelectorAll('.group2');
-    group2Elements.forEach(element => {
-        if (element.id !== 'chart3') {
-            element.style.display = 'none';
-        }
-    });
+    
+    document.getElementById('chart-frame1').style.display = 'block'; // Masquer le premier histogramme par défaut
+    document.getElementById('chart-frame2').style.display = 'block'; // Afficher le deuxième histogramme par défaut
 
     const spinner = document.getElementById("loading-spinner-map");  // Spinner for the map
     spinner.style.display = "block";  // Show the spinner when the map starts loading
@@ -35,9 +26,13 @@ document.addEventListener("DOMContentLoaded", function() {
         spinner.style.display = "none";
     };
 
-    // Charger l'histogramme su bénin dans chart3 par défaut
-    const iframe2 = document.getElementById('chart-frame2');
-    iframe2.src = 'results/demographic_indicator_région_benin_leaflet.html'; // Histogramme par défaut pour la Côte d'Ivoire
+    // Charger l'histogramme démographique par défaut
+    const chartFrame1 = document.getElementById('chart-frame1');
+    chartFrame1.src = 'results/demographic_indicator_pays.html'; // Histogramme par défaut
+
+    // Charger l'histogramme géographique par défaut
+    const chartFrame2 = document.getElementById('chart-frame2');
+    chartFrame2.src = 'results/geographic_indicator_pays.html'; // Histogramme par défaut
 
 
 });
@@ -247,7 +242,7 @@ let background_box = document.querySelector(".background_box");
 
     toggle_box.onclick = function(){
         if(checkbox.checked){
-            circle.style.transform = "translateX(100px)";
+            circle.style.transform = "translateX(112px)";
         }else{
             circle.style.transform = "translateX(0px)";
         }

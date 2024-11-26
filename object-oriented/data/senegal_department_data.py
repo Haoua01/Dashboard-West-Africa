@@ -35,23 +35,11 @@ class SenegalDepartmentData(FinancialService):
             'Savanes_Togo': 1143520
         }
 
-        # Dictionary holding the population of cities in Togo
-        population = {
-            'Lomé': 2188376,
-            'Kara': 158090,
-            'Sokodé': 115442,
-            'Atakpamé': 98193,
-            'Dapaong': 117675
-        }
+        # Total population of Senegal
+        population = 17738795
 
-        # Dictionary holding the area (in km²) of each region in Togo
-        area = {
-            'Maritime': 6100,
-            'Plateaux': 16975,
-            'Centrale': 13182,
-            'Kara': 11738,
-            'Savanes_Togo': 8602
-        }
+        # Total area (in km²) of Senegal
+        area = 196722
 
 
         super().__init__(department_mapping, coordinates, population, area)  # Initialize the parent class
@@ -85,6 +73,10 @@ class SenegalDepartmentData(FinancialService):
         """Returns the geographical coordinates for cities in Benin."""
         return self.coordinates
     
+    def get_area(self):
+        """Returns the area of regions in Benin."""
+        return self.area
+    
     def get_adult_population(self):
         """Calculates and returns the population over 15 years old for the regions."""
-        return {region: 0.57 * pop for region, pop in self.population.items()}  # 57% of the total population
+        return 0.558 * self.population   # 57% of the total population

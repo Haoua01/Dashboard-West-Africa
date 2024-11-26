@@ -101,7 +101,7 @@ class MapVisualizer:
             fill_opacity=1,
             line_opacity=0.2,
             line_weight=0.7,
-            legend_name=f'{self.label}',
+            legend_name='Score d\'accès',
             highlight=True
         ).add_to(my_map)
 
@@ -120,6 +120,8 @@ class MapVisualizer:
                 localize=True,
             )
         ).add_to(my_map)
+
+
 
         # Save the map as an HTML file
         folium_map_path = f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/{self.label}_{self.type}_{self.country}_leaflet.html'

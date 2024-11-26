@@ -9,7 +9,7 @@ from chart_visualizer import ChartVisualizer
 from utils import normalize_scores, format_scores, round_scores, mean_scores, mean
 from data.civ_department_data import CIVDepartmentData
 from data.mali_data import MaliData
-from data.burkina_data import BurkinaData
+from data.burkina_department_data import BurkinaDepartmentData
 from data.niger_data import NigerData
 from data.guinee_data import GuineeData
 from data.benin_department_data import BeninDepartmentData
@@ -32,7 +32,7 @@ ALPHA_MALI = 1.03  # Alpha value for ISIBF calculation in Mali 1.02
 ALPHA_BURKINA = 1.025 # Burkina 1.02
 ALPHA_NIGER = 1.03  # Alpha value for ISIBF calculation in Niger 1.04
 ALPHA_GUINEE = 1.015  # Alpha value for ISIBF calculation in Guinée Bissau 1.009
-ALPHA_SENEGAL = 1.01
+ALPHA_SENEGAL = 1.02  # Alpha value for ISIBF calculation in Sénégal 1.02
 REF_INHABITANTS = 100000  # Reference number of inhabitants for demographic indicator
 
 
@@ -349,7 +349,7 @@ def main():
     '''Indicator 1 : ISIBF score'''
 
     # Calculate ISIBF values
-    indicator_calculator_benin2 = IndicatorCalculator(bank_agencies_benin2.get_agency_counts(), neighbors_benin2, benin_data2.get_adult_population(), alpha=ALPHA_BENIN, threshold=THRESHOLD, department_mapping=benin_data2.get_department_mapping())
+    indicator_calculator_benin2 = IndicatorCalculator(bank_agencies_benin2.get_agency_counts(), neighbors_benin2, benin_data2.get_adult_population(), alpha=ALPHA_BENIN, threshold=THRESHOLD, department_mapping=benin_data2.get_department_mapping(), area=benin_data2.get_area())
     isibf_departments_benin = indicator_calculator_benin2.calculate_isibf2()
     # Global normalization and formatting
     isibf_regions_benin = mean_scores(isibf_departments_benin, benin_data2.get_department_mapping())
@@ -363,11 +363,24 @@ def main():
     # Maps for normalization by countries
     map_visualizer_benin2 = MapVisualizer(benin2, isibf_departments_benin_norm, label="ISIBF", type="commune", lat=9.5, lon=2.3, zoom=6.5, country="benin")
     #map_visualizer_benin2.create_choropleth()
-    #map_visualizer_benin2.create_leaflet()
+    map_visualizer_benin2.create_leaflet()
 
     map_visualizer_benin_regions = MapVisualizer(benin, isibf_regions_benin_norm, label="ISIBF", type="département", lat=9.5, lon=2.3, zoom=6.5, country="benin")
     #map_visualizer_benin_regions.create_choropleth()
-    #map_visualizer_benin_regions.create_leaflet()
+    map_visualizer_benin_regions.create_leaflet()
+
+    '''Indicator 2 : Demographic indicator'''
+
+    # demographic indicators
+    demo_indicator_benin = round(indicator_calculator_benin2.demographic_indicator_country())
+
+    '''Indicator 3 : Geographic indicator'''
+
+    # geographic indicators
+    geo_indicator_benin = round(indicator_calculator_benin2.geographic_indicator())
+
+
+
 
 
 
@@ -392,7 +405,7 @@ def main():
 
     # Calculate ISIBF values
 
-    indicator_calculator_togo2 = IndicatorCalculator(bank_agencies_togo2.get_agency_counts(), neighbors_togo2, togo_data2.get_adult_population(), alpha=ALPHA_TOGO, threshold=THRESHOLD, department_mapping=togo_data2.get_department_mapping())
+    indicator_calculator_togo2 = IndicatorCalculator(bank_agencies_togo2.get_agency_counts(), neighbors_togo2, togo_data2.get_adult_population(), alpha=ALPHA_TOGO, threshold=THRESHOLD, department_mapping=togo_data2.get_department_mapping(), area=togo_data2.get_area())
     isibf_departments_togo = indicator_calculator_togo2.calculate_isibf2()
     # Global normalization and formatting
     isibf_regions_togo = mean_scores(isibf_departments_togo, togo_data2.get_department_mapping())
@@ -416,6 +429,15 @@ def main():
 
 
 
+    '''Indicator 2 : Demographic indicator'''
+
+    # demographic indicators
+    demo_indicator_togo=round(indicator_calculator_togo2.demographic_indicator_country())
+
+    '''Indicator 3 : Geographic indicator'''
+
+    # geographic indicators
+    geo_indicator_togo = round(indicator_calculator_togo2.geographic_indicator()) 
 
 
 
@@ -438,7 +460,7 @@ def main():
     '''Indicator 1 : ISIBF score'''
 
     # Calculate ISIBF values
-    indicator_calculator_civ2 = IndicatorCalculator(bank_agencies_civ2.get_agency_counts(), neighbors_civ2, civ_data2.get_adult_population(), alpha=ALPHA_CIV, threshold=THRESHOLD, department_mapping=civ_data2.get_department_mapping())
+    indicator_calculator_civ2 = IndicatorCalculator(bank_agencies_civ2.get_agency_counts(), neighbors_civ2, civ_data2.get_adult_population(), alpha=ALPHA_CIV, threshold=THRESHOLD, department_mapping=civ_data2.get_department_mapping(), area=civ_data2.get_area())
     isibf_departments_civ = indicator_calculator_civ2.calculate_isibf2()
     # Global normalization and formatting
     isibf_regions_civ = mean_scores(isibf_departments_civ, civ_data2.get_department_mapping())
@@ -457,22 +479,30 @@ def main():
     # Maps for normalization by countries
     map_visualizer_civ = MapVisualizer(civ2, isibf_departments_civ_norm, label="ISIBF", type="département", lat=7.5, lon=-5.5, zoom=6.5, country="civ")
     #map_visualizer_civ.create_choropleth()
-    #map_visualizer_civ.create_leaflet()
+    map_visualizer_civ.create_leaflet()
 
     map_visualizer_civ_regions = MapVisualizer(civ, isibf_regions_civ_norm, label="ISIBF", type="district", lat=7.5, lon=-5.5, zoom=6.5, country="civ")
     #map_visualizer_civ_regions.create_choropleth()
-    #map_visualizer_civ_regions.create_leaflet()
+    map_visualizer_civ_regions.create_leaflet()
 
 
 
     '''Indicator 2 : Demographic indicator'''
 
     # demographic indicators
+    demo_indicator_civ=round(indicator_calculator_civ2.demographic_indicator_country())
 
-    demo_indicator_civ_regions=format_scores(mean_scores(indicator_calculator_civ2.demographic_indicator(REF_INHABITANTS), civ_data2.get_department_mapping()))
+    #demo_indicator_civ_regions=format_scores(mean_scores(indicator_calculator_civ2.demographic_indicator(REF_INHABITANTS), civ_data2.get_department_mapping()))
 
-    chart_visualizer_civ = ChartVisualizer(demo_indicator_civ_regions, type="districts", label="demographic_indicator", country="civ")
+    #chart_visualizer_civ = ChartVisualizer(demo_indicator_civ_regions, type="districts", label="demographic_indicator", country="civ")
     #chart_visualizer_civ.create_bar_chart()
+
+    '''Indicator 3 : Geographic indicator'''
+
+    # geographic indicators
+    geo_indicator_civ = round(indicator_calculator_civ2.geographic_indicator())
+
+
 
 
 
@@ -495,7 +525,7 @@ def main():
     '''Indicator 1 : ISIBF score'''
 
     # Calculate ISIBF values
-    indicator_calculator_guinee2 = IndicatorCalculator(bank_agencies_guinee2.get_agency_counts(), neighbors_guinee2, guinee_data2.get_adult_population(), alpha=ALPHA_GUINEE, threshold=THRESHOLD, department_mapping=guinee_data2.get_department_mapping())
+    indicator_calculator_guinee2 = IndicatorCalculator(bank_agencies_guinee2.get_agency_counts(), neighbors_guinee2, guinee_data2.get_adult_population(), alpha=ALPHA_GUINEE, threshold=THRESHOLD, department_mapping=guinee_data2.get_department_mapping(), area=guinee_data2.get_area())
     isibf_departments_guinee = indicator_calculator_guinee2.calculate_isibf2()
     # Global normalization and formatting
     isibf_regions_guinee = mean_scores(isibf_departments_guinee, guinee_data2.get_department_mapping())
@@ -516,6 +546,14 @@ def main():
     map_visualizer_guinee_regions = MapVisualizer(guinee, isibf_regions_guinee_norm, label="ISIBF", type="région", lat=11.8, lon=-15, zoom=7.5, country="guinee")
     #map_visualizer_guinee_regions.create_choropleth()
     #map_visualizer_guinee_regions.create_leaflet()
+
+    '''Indicator 2 : Demographic indicator'''
+    demo_indicator_guinee=round(indicator_calculator_guinee2.demographic_indicator_country())
+
+    '''Indicator 3 : Geographic indicator'''
+
+    # geographic indicators
+    geo_indicator_guinee = round(indicator_calculator_guinee2.geographic_indicator())
 
 
 
@@ -538,7 +576,7 @@ def main():
     '''Indicator 1 : ISIBF score'''
 
     # Calculate ISIBF values
-    indicator_calculator_niger2 = IndicatorCalculator(bank_agencies_niger2.get_agency_counts(), neighbors_niger2, niger_data2.get_adult_population(), alpha=ALPHA_NIGER, threshold=THRESHOLD, department_mapping=niger_data2.get_department_mapping())
+    indicator_calculator_niger2 = IndicatorCalculator(bank_agencies_niger2.get_agency_counts(), neighbors_niger2, niger_data2.get_adult_population(), alpha=ALPHA_NIGER, threshold=THRESHOLD, department_mapping=niger_data2.get_department_mapping(), area=niger_data2.get_area())
     isibf_departments_niger = indicator_calculator_niger2.calculate_isibf2()
     # Global normalization and formatting
     isibf_regions_niger = mean_scores(isibf_departments_niger, niger_data2.get_department_mapping())
@@ -560,6 +598,16 @@ def main():
     #map_visualizer_niger_regions.create_choropleth()
     #map_visualizer_niger_regions.create_leaflet()
 
+    '''Indicator 2 : Demographic indicator'''
+
+    # demographic indicators
+    demo_indicator_niger=round(indicator_calculator_niger2.demographic_indicator_country())
+
+    '''Indicator 3 : Geographic indicator'''
+
+    # geographic indicators
+    geo_indicator_niger = round(indicator_calculator_niger2.geographic_indicator())
+
         
 
 
@@ -580,7 +628,7 @@ def main():
     '''Indicator 1 : ISIBF score'''
 
     # Calculate ISIBF values
-    indicator_calculator_mali = IndicatorCalculator(bank_agencies_mali.get_agency_counts(), neighbors_mali, mali_data.get_adult_population(), alpha=ALPHA_MALI, threshold=THRESHOLD, department_mapping=mali_data.get_department_mapping())
+    indicator_calculator_mali = IndicatorCalculator(bank_agencies_mali.get_agency_counts(), neighbors_mali, mali_data.get_adult_population(), alpha=ALPHA_MALI, threshold=THRESHOLD, department_mapping=mali_data.get_department_mapping(), area=mali_data.get_area())
     isibf_departments_mali = indicator_calculator_mali.calculate_isibf2()
 
 
@@ -602,12 +650,22 @@ def main():
     #map_visualizer_mali.create_choropleth()
     #map_visualizer_mali.create_leaflet()
 
+    '''Indicator 2 : Demographic indicator'''
+
+    # demographic indicators
+    demo_indicator_mali=round(indicator_calculator_mali.demographic_indicator_country())
+
+    '''Indicator 3 : Geographic indicator'''
+
+    # geographic indicators
+    geo_indicator_mali = round(indicator_calculator_mali.geographic_indicator())
+
 
 
 
     """BURKINA FASO INTRODUCTION"""
 
-    burkina_data = BurkinaData(service_type='bank')
+    burkina_data = BurkinaDepartmentData(service_type='bank')
 
     bank_agencies_burkina = BankAgencies(
         burkina_data.get_agency_counts(),
@@ -622,7 +680,7 @@ def main():
     '''Indicator 1 : ISIBF score'''
 
     # Calculate ISIBF values
-    indicator_calculator_burkina = IndicatorCalculator(bank_agencies_burkina.get_agency_counts(), neighbors_burkina, burkina_data.get_adult_population(), alpha=ALPHA_BURKINA, threshold=THRESHOLD, department_mapping=burkina_data.get_department_mapping())
+    indicator_calculator_burkina = IndicatorCalculator(bank_agencies_burkina.get_agency_counts(), neighbors_burkina, burkina_data.get_adult_population(), alpha=ALPHA_BURKINA, threshold=THRESHOLD, department_mapping=burkina_data.get_department_mapping(), area=burkina_data.get_area())
     isibf_departments_burkina = indicator_calculator_burkina.calculate_isibf2()
 
     # Normalization by country
@@ -643,6 +701,19 @@ def main():
     #map_visualizer_burkina.create_choropleth()
     #map_visualizer_burkina.create_leaflet()
 
+    '''Indicator 2 : Demographic indicator'''
+
+    # demographic indicators
+    demo_indicator_burkina=round(indicator_calculator_burkina.demographic_indicator_country())
+
+    '''Indicator 3 : Geographic indicator'''
+
+    # geographic indicators
+    geo_indicator_burkina = round(indicator_calculator_burkina.geographic_indicator())
+
+
+
+
     
     """SENEGAL INTRODUCTION"""
 
@@ -661,7 +732,7 @@ def main():
     '''Indicator 1 : ISIBF score'''
 
     # Calculate ISIBF values
-    indicator_calculator_senegal = IndicatorCalculator(bank_agencies_senegal.get_agency_counts(), neighbors_senegal, senegal_data.get_adult_population(), alpha=ALPHA_SENEGAL, threshold=THRESHOLD, department_mapping=senegal_data.get_department_mapping())
+    indicator_calculator_senegal = IndicatorCalculator(bank_agencies_senegal.get_agency_counts(), neighbors_senegal, senegal_data.get_adult_population(), alpha=ALPHA_SENEGAL, threshold=THRESHOLD, department_mapping=senegal_data.get_department_mapping(), area=senegal_data.get_area())
     isibf_departments_senegal = indicator_calculator_senegal.calculate_isibf2()
 
     # Normalization by country
@@ -677,11 +748,22 @@ def main():
     # Maps for normalization by countries
     map_visualizer_senegal_regions = MapVisualizer(senegal, isibf_regions_senegal_norm, label="ISIBF", type="région", lat=14.5, lon=-15, zoom=5.5, country="senegal")
     #map_visualizer_senegal_regions.create_choropleth()
-    map_visualizer_senegal_regions.create_leaflet()
+    #map_visualizer_senegal_regions.create_leaflet()
 
     map_visualizer_senegal = MapVisualizer(senegal2, isibf_departments_senegal_norm, label="ISIBF", type="département", lat=14.5, lon=-15, zoom=5.5, country="senegal")
     #map_visualizer_senegal.create_choropleth()
-    map_visualizer_senegal.create_leaflet()
+    #map_visualizer_senegal.create_leaflet()
+
+    '''Indicator 2 : Demographic indicator'''
+
+    # demographic indicators
+    demo_indicator_senegal=round(indicator_calculator_senegal.demographic_indicator_country())
+
+    '''Indicator 3 : Geographic indicator'''
+
+    # geographic indicators
+    geo_indicator_senegal = round(indicator_calculator_senegal.geographic_indicator())
+
 
 
 
@@ -697,7 +779,7 @@ def main():
     
     map_visualizer_combined_departments = MapVisualizer(combined2, isibf_combined_department_norm, label="ISIBF", type="département", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined_departments.create_choropleth()
-    map_visualizer_combined_departments.create_leaflet()
+    #map_visualizer_combined_departments.create_leaflet()
     
 
 
@@ -705,7 +787,7 @@ def main():
     # Maps for normalization by countries
     map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="région", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined.create_choropleth()
-    map_visualizer_combined.create_leaflet()
+    #map_visualizer_combined.create_leaflet()
 
     mean_scores_countries={
         "Bénin": mean(isibf_regions_benin),
@@ -724,8 +806,40 @@ def main():
     #map_visualizer_combined2.create_choropleth()
     map_visualizer_combined2.create_leaflet()
 
-    
 
+    """CHARTS COMBINED VISUALIZATION"""
+
+    # demographic indicators
+    demo_indicator_combined = {
+        "Bénin": demo_indicator_benin,
+        "Burkina Faso": demo_indicator_burkina,
+        "Côte d\'Ivoire": demo_indicator_civ,
+        "Guinée Bissau": demo_indicator_guinee,
+        "Mali": demo_indicator_mali,
+        "Niger": demo_indicator_niger,
+        "Sénégal": demo_indicator_senegal,
+        "Togo": demo_indicator_togo,
+    }
+
+
+
+    chart_visualizer_combined = ChartVisualizer(demo_indicator_combined, label="demographic_indicator", title="100 000 habitants")
+    chart_visualizer_combined.create_bar_chart()
+
+    
+    geo_indicator_combined = {
+        "Bénin": geo_indicator_benin,
+        "Burkina Faso": geo_indicator_burkina,
+        "Côte d\'Ivoire": geo_indicator_civ,
+        "Guinée Bissau": geo_indicator_guinee,
+        "Mali": geo_indicator_mali,
+        "Niger": geo_indicator_niger,
+        "Sénégal": geo_indicator_senegal,
+        "Togo": geo_indicator_togo,
+    }
+
+    chart_visualizer_combined_geo = ChartVisualizer(geo_indicator_combined, label="geographic_indicator", title="1000 km²")
+    chart_visualizer_combined_geo.create_bar_chart()
 
 
 

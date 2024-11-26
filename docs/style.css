@@ -127,6 +127,7 @@ header h1 {
     font-size: 1.5em;
     color: #006666;
     margin-bottom: 10px;
+    margin-top: 100px;
     width: 95%;
 }
 
@@ -239,7 +240,9 @@ footer p {
 /* Style for the toggle button */
 .toggle_box {
     width: 130px;
-    height: 30px;
+    height: 18px;
+    margin-top: 10px;
+    margin-left:2px;
     display: block;
     background-color: #008080;
     border-radius: 100px;
@@ -256,12 +259,13 @@ input[type="checkbox"] {
 /* Style for the circle inside the toggle button */
 .circle {
     position: absolute;
-    width: 22px;
-    height: 22px;
+    width: 12px;
+    height: 12px;
+    margin-top:3px;
+    margin-left:3px;
     left: 0px;
     background-color: #fff;
     border-radius: 50%;
-    margin: 4px;
     transition: 0.5s;
 }
 
@@ -281,19 +285,31 @@ input[type="checkbox"] {
     border: none;         /* Optional: Removes the border around the iframe */
 }
 
-#chart3 {
+#chart1 {
     width: 100%;          /* Full width of the parent container */
     height: 800px;        /* Increased height for the map container */
     margin: 0 auto;       /* Centers the container horizontally */
     position: relative;   /* Ensures the iframe stays within the container */
 }
 
-#chart-frame {
+#chart2 {
+    width: 100%;          /* Full width of the parent container */
+    height: 800px;        /* Increased height for the map container */
+    margin: 0 auto;       /* Centers the container horizontally */
+    position: relative;   /* Ensures the iframe stays within the container */
+}
+
+#chart-frame1 {
     width: 100%;          /* Ensures the iframe takes full width of the container */
     height: 100%;         /* Ensures the iframe takes full height of the container */
     border: none;         /* Optional: Removes the border around the iframe */
 }
 
+#chart-frame2 {
+    width: 100%;          /* Ensures the iframe takes full width of the container */
+    height: 100%;         /* Ensures the iframe takes full height of the container */
+    border: none;         /* Optional: Removes the border around the iframe */
+}
 
 
 /* Style for the loading spinner container */
