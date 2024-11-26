@@ -368,6 +368,6 @@ input[type="checkbox"] {
     }
 
     #map1, #chart1, #chart2 {
-        height: 300px; /* Reduced height for the map container */
+        height: 500px; /* Reduced height for the map container */
     }
 }
