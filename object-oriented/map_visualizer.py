@@ -127,7 +127,7 @@ class MapVisualizer:
         folium_map_path = f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/{self.label}_{self.type}_{self.country}_leaflet.html'
         my_map.save(folium_map_path)
 
-        print(f"Leaflet map generated and saved at {folium_map_path}")
+        print(f"Leaflet map generated")
 
     def create_leaflet_combined(self):
         """

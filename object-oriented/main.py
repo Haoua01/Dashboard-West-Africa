@@ -25,14 +25,14 @@ import numpy as np
 
 # Constants
 THRESHOLD = 200  # Distance threshold for neighbors
-ALPHA_BENIN = 1.02  # Alpha value for ISIBF calculation in Benin 1.02
-ALPHA_TOGO = 1.02  # Alpha value for ISIBF calculation in Togo 1.02
-ALPHA_CIV = 1.02  # Alpha value for ISIBF calculation in Côte d'Ivoire 1.02
-ALPHA_MALI = 1.03  # Alpha value for ISIBF calculation in Mali 1.02
-ALPHA_BURKINA = 1.025 # Burkina 1.02
-ALPHA_NIGER = 1.03  # Alpha value for ISIBF calculation in Niger 1.04
-ALPHA_GUINEE = 1.015  # Alpha value for ISIBF calculation in Guinée Bissau 1.009
-ALPHA_SENEGAL = 1.02  # Alpha value for ISIBF calculation in Sénégal 1.02
+ALPHA_BENIN = 1.0211  # Alpha value for ISIBF calculation in Benin 1.02
+ALPHA_TOGO = 1.0234  # Alpha value for ISIBF calculation in Togo 1.02
+ALPHA_CIV = 1.01  # Alpha value for ISIBF calculation in Côte d'Ivoire 1.02
+ALPHA_MALI = 1.0230  # Alpha value for ISIBF calculation in Mali 1.02
+ALPHA_BURKINA = 1.0237 # Burkina 1.02
+ALPHA_NIGER = 1.031  # Alpha value for ISIBF calculation in Niger 1.04
+ALPHA_GUINEE = 1.0299  # Alpha value for ISIBF calculation in Guinée Bissau 1.009
+ALPHA_SENEGAL = 1.0148  # Alpha value for ISIBF calculation in Sénégal 1.02
 REF_INHABITANTS = 100000  # Reference number of inhabitants for demographic indicator
 
 
@@ -421,11 +421,11 @@ def main():
 
     map_visualizer_togo2 = MapVisualizer(togo2, isibf_departments_togo_norm, label="ISIBF", type="préfecture", lat=8.6, lon=0.9, zoom=6.5, country="togo")
     #map_visualizer_togo2.create_choropleth()
-    #map_visualizer_togo2.create_leaflet()
+    map_visualizer_togo2.create_leaflet()
 
     map_visualizer_togo_regions = MapVisualizer(togo, isibf_regions_togo_norm, label="ISIBF", type="région", lat=8.6, lon=0.9, zoom=6.5, country="togo")
     #map_visualizer_togo_regions.create_choropleth()
-    #map_visualizer_togo_regions.create_leaflet()
+    map_visualizer_togo_regions.create_leaflet()
 
 
 
@@ -541,11 +541,11 @@ def main():
 
     map_visualizer_guinee = MapVisualizer(guinee2, isibf_departments_guinee_norm, label="ISIBF", type="secteur", lat=11.8, lon=-15, zoom=7.5, country="guinee")
     #map_visualizer_guinee.create_choropleth()
-    #map_visualizer_guinee.create_leaflet()
+    map_visualizer_guinee.create_leaflet()
 
     map_visualizer_guinee_regions = MapVisualizer(guinee, isibf_regions_guinee_norm, label="ISIBF", type="région", lat=11.8, lon=-15, zoom=7.5, country="guinee")
     #map_visualizer_guinee_regions.create_choropleth()
-    #map_visualizer_guinee_regions.create_leaflet()
+    map_visualizer_guinee_regions.create_leaflet()
 
     '''Indicator 2 : Demographic indicator'''
     demo_indicator_guinee=round(indicator_calculator_guinee2.demographic_indicator_country())
@@ -592,11 +592,11 @@ def main():
 
     map_visualizer_niger = MapVisualizer(niger2, isibf_departments_niger_norm, label="ISIBF", type="département", lat=17.6, lon=8.1, zoom=5.5, country="niger")
     #map_visualizer_niger.create_choropleth()
-    #map_visualizer_niger.create_leaflet()
+    map_visualizer_niger.create_leaflet()
 
     map_visualizer_niger_regions = MapVisualizer(niger, isibf_regions_niger_norm, label="ISIBF", type="région", lat=17.6, lon=8.1, zoom=5.5, country="niger")
     #map_visualizer_niger_regions.create_choropleth()
-    #map_visualizer_niger_regions.create_leaflet()
+    map_visualizer_niger_regions.create_leaflet()
 
     '''Indicator 2 : Demographic indicator'''
 
@@ -644,11 +644,11 @@ def main():
     # Maps for normalization by countries
     map_visualizer_mali_regions = MapVisualizer(mali, isibf_regions_mali_norm, label="ISIBF", type="région", lat=17.5, lon=-4.5, zoom=5.5, country="mali")
     #map_visualizer_mali_regions.create_choropleth()
-    #map_visualizer_mali_regions.create_leaflet()
+    map_visualizer_mali_regions.create_leaflet()
 
     map_visualizer_mali = MapVisualizer(mali2, isibf_departments_mali_norm, label="ISIBF", type="cercle", lat=17.5, lon=-4.5, zoom=5.5, country="mali")
     #map_visualizer_mali.create_choropleth()
-    #map_visualizer_mali.create_leaflet()
+    map_visualizer_mali.create_leaflet()
 
     '''Indicator 2 : Demographic indicator'''
 
@@ -695,11 +695,11 @@ def main():
     # Maps for normalization by countries
     map_visualizer_burkina_regions = MapVisualizer(burkina, isibf_regions_burkina_norm, label="ISIBF", type="région", lat=12.5, lon=-1.5, zoom=5.5, country="burkina")
     #map_visualizer_burkina_regions.create_choropleth()
-    #map_visualizer_burkina_regions.create_leaflet()
+    map_visualizer_burkina_regions.create_leaflet()
 
     map_visualizer_burkina = MapVisualizer(burkina2, isibf_departments_burkina_norm, label="ISIBF", type="province", lat=12.5, lon=-1.5, zoom=5.5, country="burkina")
     #map_visualizer_burkina.create_choropleth()
-    #map_visualizer_burkina.create_leaflet()
+    map_visualizer_burkina.create_leaflet()
 
     '''Indicator 2 : Demographic indicator'''
 
@@ -748,11 +748,11 @@ def main():
     # Maps for normalization by countries
     map_visualizer_senegal_regions = MapVisualizer(senegal, isibf_regions_senegal_norm, label="ISIBF", type="région", lat=14.5, lon=-15, zoom=5.5, country="senegal")
     #map_visualizer_senegal_regions.create_choropleth()
-    #map_visualizer_senegal_regions.create_leaflet()
+    map_visualizer_senegal_regions.create_leaflet()
 
     map_visualizer_senegal = MapVisualizer(senegal2, isibf_departments_senegal_norm, label="ISIBF", type="département", lat=14.5, lon=-15, zoom=5.5, country="senegal")
     #map_visualizer_senegal.create_choropleth()
-    #map_visualizer_senegal.create_leaflet()
+    map_visualizer_senegal.create_leaflet()
 
     '''Indicator 2 : Demographic indicator'''
 
@@ -779,7 +779,7 @@ def main():
     
     map_visualizer_combined_departments = MapVisualizer(combined2, isibf_combined_department_norm, label="ISIBF", type="département", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined_departments.create_choropleth()
-    #map_visualizer_combined_departments.create_leaflet()
+    map_visualizer_combined_departments.create_leaflet()
     
 
 
@@ -787,7 +787,7 @@ def main():
     # Maps for normalization by countries
     map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="région", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined.create_choropleth()
-    #map_visualizer_combined.create_leaflet()
+    map_visualizer_combined.create_leaflet()
 
     mean_scores_countries={
         "Bénin": mean(isibf_regions_benin),
@@ -800,7 +800,9 @@ def main():
         "Sénégal": mean(isibf_regions_senegal)
     }
 
-
+    #order isibf_combined_norm by values
+    isibf_combined_norm2 = dict(sorted(isibf_combined_norm.items(), key=lambda item: item[1], reverse=True))
+    print(isibf_combined_norm2)
 
     map_visualizer_combined2 = MapVisualizer(combined0, mean_scores_countries, label="ISIBF", type="pays", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined2.create_choropleth()
