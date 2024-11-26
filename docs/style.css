@@ -69,7 +69,7 @@ header h1 {
 
 .service-card {
     width: 220px;
-    background: #FF7F00;
+    background: #fb952f;
     padding: 0 15px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -99,7 +99,7 @@ header h1 {
 
 .service-banner {
     width: 790px;
-    background: #ffa244;
+    background: #fb952f;
     color: white;
     padding: 0 15px;
     border-radius: 10px;
@@ -115,7 +115,7 @@ header h1 {
 
 .service-banner h3 {
     font-size: 1.4em;
-    color: black;
+    color: rgb(255, 255, 255);
     text-align: center;
 }
 
