@@ -64,3 +64,21 @@ def mean(scores):
     # .2f to keep only 2 decimal
     return round(mean, 2)
 
+def alpha_values(scores, min_alpha, max_alpha):
+    # calculate the alpha for each country based on scores of integration to infrastructures 
+    scores=normalize_scores(scores) # have reverse normalized scores of integration to infrastructures
+    scores_normalized = {city: 1-score for city, score in scores.items()}
+    # Trouver le min et max des scores normalisés
+    min_score = min(scores_normalized.values())
+    max_score = max(scores_normalized.values())
+    # Dictionary to store the alpha values
+    alpha_values = {}
+    for city, score in scores_normalized.items():
+        # set the minimum of scores_normalized to min_alpha and the maximum to max_alpha
+        alpha = min_alpha + score * (max_alpha - min_alpha) 
+        alpha_values[city] = alpha
+
+    return alpha_values
+
+
+    
