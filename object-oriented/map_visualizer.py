@@ -171,42 +171,7 @@ class MapVisualizer:
             highlight=True  # Make highlighted regions stand out when hovered over
         ).add_to(my_map)
 
-        # Iterate over each country and style external borders
-        for country in self.geo_data['country'].unique():
-            # Identify external borders (regions where the 'country' is different from the current country)
-            external_borders = self.geo_data[self.geo_data['country'] != country]
-
-            # Add custom styling for external borders (borders with other countries)
-            folium.GeoJson(
-                external_borders.__geo_interface__,
-                style_function=lambda feature: {
-                    'fillColor': 'none',  # No fill color for external borders
-                    'color': 'black',  # Dark color for external borders
-                    'weight': 2,  # Thicker line weight for external borders
-                    'fillOpacity': 0.0  # Transparent fill
-                }
-            ).add_to(my_map)
-
-            # Internal borders (within the same country) - not external borders
-            internal_borders = self.geo_data[self.geo_data['country'] == country]
-
-            # Add custom styling for internal borders (same country regions)
-            folium.GeoJson(
-                internal_borders.__geo_interface__,
-                style_function=lambda feature: {
-                    'fillColor': 'Blues' if feature['properties'][f'{self.label}'] is not None else 'gray',
-                    'color': 'grey',
-                    'weight': 0.5,
-                    'fillOpacity': 0,
-                },
-                tooltip=folium.GeoJsonTooltip(
-                    fields=['admin1Name', f'{self.label}'],
-                    aliases=[f'{self.type}:', 'score:'],
-                    localize=True,
-                    sticky=True  # Makes the tooltip sticky on hover
-                )
-            ).add_to(my_map)
-
+        
         # Add a layer control if needed
         folium.LayerControl().add_to(my_map)
 
@@ -215,3 +180,6 @@ class MapVisualizer:
         my_map.save(folium_map_path)
 
         print(f"Leaflet map generated and saved at {folium_map_path}")
+
+
+    
