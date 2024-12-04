@@ -77,6 +77,9 @@ class MapVisualizer:
 
         self.geo_data = self.geo_data[['geometry', 'admin1Name', 'country', f'{self.label}']]
 
+        #save the geo_data as a shapefile
+        self.geo_data.to_file(f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/Shapefiles/{self.label}_{self.type}_{self.country}.shp')
+
         # Initialize a Folium map
         my_map = folium.Map(location=[self.lat, self.lon], zoom_start=self.zoom, scrollWheelZoom=False)
 

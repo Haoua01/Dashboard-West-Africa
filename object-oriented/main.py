@@ -24,7 +24,7 @@ import pandas as pd
 import numpy as np
 
 # Constants
-THRESHOLD = 200  # Distance threshold for neighbors
+THRESHOLD = 100  # Distance threshold for neighbors
 REF_INHABITANTS = 100000  # Reference number of inhabitants for demographic indicator
 
 # scores for access to infrastructures https://www.integrate-africa.org/fr/classements/dimensions/integration-des-infrastructures/
@@ -39,7 +39,7 @@ access_to_infrastructures = {
     'Sénégal': 0.241
 }
 
-alpha_countries = alpha_values(access_to_infrastructures, 1.015, 1.03)
+alpha_countries = alpha_values(access_to_infrastructures, 1.01, 1.04)
 
 
 #define the alpha value for each country as constants
@@ -488,7 +488,6 @@ def main():
     # Normalization by countries
     isibf_departments_civ_norm = format_scores(normalize_scores(isibf_departments_civ))
     isibf_regions_civ_norm = format_scores(mean_scores(normalize_scores(isibf_departments_civ), civ_data2.get_department_mapping()))
-
 
     
 
