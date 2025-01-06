@@ -161,7 +161,7 @@ const countryMapConfig = {
     },
     'combined': {
         maps: {
-            byDepartment: 'results/ISIBF_département_combined_leaflet.html',
+            byDepartment: 'results/ISIBF_département_combined_with_borders_leaflet.html',
             byDistrict: 'results/ISIBF_pays_combined_leaflet.html'
         },
         labels: {
