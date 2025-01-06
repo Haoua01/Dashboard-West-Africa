@@ -188,17 +188,23 @@ class MapVisualizer:
         ).add_to(my_map)
 
         # Plot the borders with a choropleth layer
-        folium.Choropleth(
+        c=folium.Choropleth(
             geo_data=geo_borders.__geo_interface__,
             name='choropleth2',
             data=geo_borders,
             columns=['country', 'Shape_Leng'],
             key_on='feature.properties.country',
-            fill_color='Blues',
             fill_opacity=0.8,
             line_opacity=0.7,
             line_weight=0.8,
-        ).add_to(my_map)
+            legend=False,
+        )
+        
+        #remove second legend
+        for key in c._children:
+            if key.startswith('color_map'):
+                del(c._children[key])
+        c.add_to(my_map)
 
 
 
