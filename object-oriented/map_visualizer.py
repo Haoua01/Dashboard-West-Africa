@@ -132,25 +132,22 @@ class MapVisualizer:
 
         print(f"Leaflet map generated")
 
-    def create_leaflet_combined(self):
-        """
-        Create a map using Leaflet with basic interactive features, Jawg Light tiles, and darker external borders.
-        """
+    def create_leaflet_combined(self, geo_borders):
         # Add the scores to the GeoDataFrame
         self.geo_data[f'{self.label}'] = self.geo_data['admin1Name'].map(self.scores)
-        print(self.geo_data.columns)
-        print(self.geo_data['country'])
+
+        self.geo_data['geometry'] = self.geo_data['geometry'].apply(lambda x: shape(x).simplify(0.01))
+
+        self.geo_data = self.geo_data[['geometry', 'admin1Name', 'country', f'{self.label}']]
+
+        #save the geo_data as a shapefile
+        self.geo_data.to_file(f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/Shapefiles/{self.label}_{self.type}_{self.country}.shp')
+
+        # Initialize a Folium map
+        my_map = folium.Map(location=[self.lat, self.lon], zoom_start=self.zoom, scrollWheelZoom=False)
 
         # Jawg access token (replace this with your own token)
         jawg_access_token = "dioMGYzKr2G5hw92MoTu8vvqmdOVm8zrb7lElgXzmBSo7pdqgvsTDCqV4UjS4hz2"
-
-        # Initialize a Folium map with Jawg Light tiles
-        my_map = folium.Map(
-            location=[self.lat, self.lon],
-            zoom_start=self.zoom,
-            control_scale=True, 
-            scrollWheelZoom=False
-        )
 
         # Add Jawg Light tiles with the access token
         folium.TileLayer(
@@ -166,23 +163,47 @@ class MapVisualizer:
             data=self.geo_data,
             columns=['admin1Name', f'{self.label}'],
             key_on='feature.properties.admin1Name',
-            fill_color='Blues',  # Color scale for the choropleth
-            fill_opacity=1,  # Set the opacity for internal borders
-            line_opacity=0.4,  # Set the opacity for internal borders
-            line_weight=0.7,  # Weight for internal borders
-            legend_name=f'{self.label}',
-            highlight=True  # Make highlighted regions stand out when hovered over
+            fill_color='Blues',
+            fill_opacity=1,
+            line_opacity=0.2,
+            line_weight=0.3,
+            legend_name='Score d\'accès',
+            highlight=True
         ).add_to(my_map)
 
-        
-        # Add a layer control if needed
-        folium.LayerControl().add_to(my_map)
+        # Add a tooltip to display information
+        folium.GeoJson(
+            self.geo_data.__geo_interface__,
+            style_function=lambda feature: {
+                'fillColor': 'Blues' if feature['properties'][f'{self.label}'] is not None else 'gray',
+                'color': 'grey',
+                'weight': 0.3,
+                'fillOpacity': 0,
+            },
+            tooltip=folium.GeoJsonTooltip(
+                fields=['admin1Name', f'{self.label}'],
+                aliases=[f'{self.type}:', 'score:'],
+                localize=True,
+            )
+        ).add_to(my_map)
+
+        # Plot the borders with a choropleth layer
+        folium.Choropleth(
+            geo_data=geo_borders.__geo_interface__,
+            name='choropleth2',
+            data=geo_borders,
+            columns=['country', 'Shape_Leng'],
+            key_on='feature.properties.country',
+            fill_color='Blues',
+            fill_opacity=0.8,
+            line_opacity=0.7,
+            line_weight=0.8,
+        ).add_to(my_map)
+
+
 
         # Save the map as an HTML file
-        folium_map_path = f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/{self.label}_{self.type}_{self.country}_leaflet.html'
+        folium_map_path = f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/{self.label}_{self.type}_{self.country}_with_borders_leaflet.html'
         my_map.save(folium_map_path)
 
-        print(f"Leaflet map generated and saved at {folium_map_path}")
-
-
-    
+        print(f"Leaflet map combined generated")

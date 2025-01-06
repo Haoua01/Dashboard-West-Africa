@@ -69,6 +69,8 @@ class IndicatorCalculator:
             
             # Calculate contribution from neighbors
             for neighbor, distance in self.neighbors.get(city, {}).items():
+                if city=='Soum':
+                    print(neighbor, distance)
                 if distance > 0:
                     total += np.log2(self.agency_counts[neighbor] + 1) / self.alpha ** distance
             
@@ -78,9 +80,35 @@ class IndicatorCalculator:
             
             # Calculate total ISIBF value for the city
             isibf_values[city] = total + own_contribution[city]
+            if city=='Soum':
+                print(own_contribution[city], neighbors_contributions[city], isibf_values[city])
             #print(own_contribution[city], neighbors_contributions[city], isibf_values[city])
             
         return isibf_values  # Return the city-level ISIBF values
+    
+    def calculate_isibf3(self):
+        """Calculates the ISIBF based on agency counts and neighboring distances."""
+        neighbors_contributions = {}
+        own_contribution = {}
+        isibf_values = {}
+
+        for city in self.agency_counts:
+            total = 0
+            
+            # Calculate contribution from neighbors
+            for neighbor, distance in self.neighbors.get(city, {}).items():
+                if distance > 0:
+                    total += np.log2(self.agency_counts[neighbor] + 1) / (self.alpha[neighbor] ** distance)
+            
+            # Calculate own contribution
+            own_contribution[city] = np.log2(self.agency_counts[city] + 1)
+            neighbors_contributions[city] = total
+            
+            # Calculate total ISIBF value for the city
+            isibf_values[city] = total + own_contribution[city]
+            #print(own_contribution[city], neighbors_contributions[city], isibf_values[city])
+            
+        return isibf_values
 
 
     """
