@@ -61,8 +61,7 @@ ALPHA_SENEGAL = alpha_countries['Sénégal']
 
 def load_country_shapefiles():
     benin = gpd.read_file('/Users/haouabenaliabbo/Downloads/ben_adm_1m_salb_2019_shapes/ben_admbnda_adm0_1m_salb_20190816.shp')
-    togo = gpd.read_file('/Users/haouabenaliabbo/Downloads/Shapefiles_togo/tgo_admbnda_adm0_inseed_itos_20210107.shp')
-    civ = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/civ_admbnda_adm0_cntig_20180706/civ_admbnda_adm0_cntig_20180706.shp')
+    togo = gpd.read_file('Dashboard-West-Africa/object-oriented/data/Togo_Shapefiles/tgo_admbnda_adm0_inseed_itos_20210107.shp')
     mali = gpd.read_file('/Users/haouabenaliabbo/Downloads/mali_adm_ab_shp/mli_admbnda_adm0_1m_gov_20211220.shp')
     burkina = gpd.read_file('/Users/haouabenaliabbo/Downloads/geoBoundaries-BFA-ADM0-all/geoBoundaries-BFA-ADM0_simplified.shp')
     niger = gpd.read_file('/Users/haouabenaliabbo/Downloads/ner_adm_ignn_20230720_ab_shp/NER_admbnda_adm0_IGNN_20230720.shp')
@@ -770,6 +769,8 @@ def main():
     # Calculate ISIBF values
     indicator_calculator_senegal = IndicatorCalculator(bank_agencies_senegal.get_agency_counts(), neighbors_senegal, senegal_data.get_adult_population(), alpha=ALPHA_SENEGAL, threshold=THRESHOLD, department_mapping=senegal_data.get_department_mapping(), area=senegal_data.get_area())
     isibf_departments_senegal = indicator_calculator_senegal.calculate_isibf2()
+
+    print(isibf_departments_senegal)
 
     # Normalization by country
     isibf_departments_senegal_norm = format_scores(normalize_scores(isibf_departments_senegal))
