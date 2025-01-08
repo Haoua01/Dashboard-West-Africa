@@ -60,13 +60,14 @@ ALPHA_SENEGAL = alpha_countries['Sénégal']
 #print('Access to infrastructures:', alpha_countries)
 
 def load_country_shapefiles():
-    benin = gpd.read_file('/Users/haouabenaliabbo/Downloads/ben_adm_1m_salb_2019_shapes/ben_admbnda_adm0_1m_salb_20190816.shp')
-    togo = gpd.read_file('Dashboard-West-Africa/object-oriented/data/Togo_Shapefiles/tgo_admbnda_adm0_inseed_itos_20210107.shp')
-    mali = gpd.read_file('/Users/haouabenaliabbo/Downloads/mali_adm_ab_shp/mli_admbnda_adm0_1m_gov_20211220.shp')
-    burkina = gpd.read_file('/Users/haouabenaliabbo/Downloads/geoBoundaries-BFA-ADM0-all/geoBoundaries-BFA-ADM0_simplified.shp')
-    niger = gpd.read_file('/Users/haouabenaliabbo/Downloads/ner_adm_ignn_20230720_ab_shp/NER_admbnda_adm0_IGNN_20230720.shp')
-    guinee = gpd.read_file('/Users/haouabenaliabbo/Downloads/gnb_admbnda_1m_salb_20210609_shp/gnb_admbnda_adm0_1m_salb_20210609.shp')
-    senegal = gpd.read_file('/Users/haouabenaliabbo/Downloads/sen_admbnd_anat_20240520_ab_shp/sen_admbnda_adm0_anat_20240520.shp')
+    benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Benin_Shapefiles/ben_admbnda_adm0_1m_salb_20190816.shp')
+    civ = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/CIV_Shapefiles/civ_admbnda_adm0_cntig_20180706')
+    togo = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Togo_Shapefiles/tgo_admbnda_adm0_inseed_itos_20210107.shp')
+    mali = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Mali_Shapefiles/mli_admbnda_adm0_1m_gov_20211220.shp')
+    burkina = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Burkina_Shapefiles/geoBoundaries-BFA-ADM0-all/geoBoundaries-BFA-ADM0_simplified.shp')
+    niger = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Niger_Shapefiles/NER_admbnda_adm0_IGNN_20230720.shp')
+    guinee = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Guinee_Shapefiles/gnb_admbnda_adm0_1m_salb_20210609.shp')
+    senegal = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Senegal_Shapefiles/sen_admbnda_adm0_anat_20240520.shp')
 
     benin['admin1Name']='Bénin'
     togo['admin1Name']='Togo'
@@ -86,27 +87,31 @@ def load_country_shapefiles():
     guinee['country'] = 'Guinée Bissau'
     senegal['country'] = 'Sénégal'
 
+    tchad = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Tchad_Shapefiles/tcd_admbnda_adm0_ocha/tcd_admbnda_adm0_ocha.shp')
+    tchad['country']='Tchad'
+
 
 
     combined = pd.concat([benin, togo, civ, mali, burkina, niger, guinee, senegal], ignore_index=True)
+    combined_with_td = pd.concat([benin, togo, civ, mali, burkina, niger, guinee, senegal, tchad], ignore_index=True)
 
     combined_with_borders = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/QGIS/uemoa_countries_borders.shp')
 
+    combined_with_borders_with_td = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/uemoa_and_tchad_borders.shp')
 
-    #combined.to_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/uemoa_countries.shp')
+    combined_with_td.to_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/uemoa_countries_and_tchad.shp')
 
-    return combined, combined_with_borders
+    return combined, combined_with_borders, combined_with_borders_with_td
 
 def load_shapefiles():
-    benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/ben_adm_1m_salb_2019_shapes') #change path once folder updated on GitHub
-    togo = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/Shapefiles_togo') #change path once folder updated on GitHub
-    civ = gpd.read_file("/Users/haouabenaliabbo/Downloads/202303_OSM2IGEO_COTE_D_IVOIRE_SHP_WGS84_4326/H_OSM_ADMINISTRATIF/DISTRICT.shp") #change path once folder updated on GitHub
-    mali = gpd.read_file('/Users/haouabenaliabbo/Downloads/mali_adm_ab_shp/mli_admbnda_adm1_1m_gov_20211220.shp')
-    burkina = gpd.read_file('/Users/haouabenaliabbo/Downloads/geoBoundaries-BFA-ADM1-all/geoBoundaries-BFA-ADM1_simplified.shp')
-    niger = gpd.read_file('/Users/haouabenaliabbo/Downloads/ner_adm_ignn_20230720_ab_shp/NER_admbnda_adm1_IGNN_20230720.shp')
-    guinee = gpd.read_file('/Users/haouabenaliabbo/Downloads/gnb_admbnda_1m_salb_20210609_shp/gnb_admbnda_adm1_1m_salb_20210609.shp')
-    senegal = gpd.read_file('/Users/haouabenaliabbo/Downloads/sen_admbnd_anat_20240520_ab_shp/sen_admbnda_adm1_anat_20240520.shp')
-
+    benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Benin_Shapefiles/ben_admbnda_adm1_1m_salb_20190816.shp')
+    civ = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/CIV_Shapefiles/civ_admbnda_adm1_cntig_ocha_itos_20180706')
+    togo = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Togo_Shapefiles/tgo_admbnda_adm1_inseed_itos_20210107.shp')
+    mali = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Mali_Shapefiles/mli_admbnda_adm1_1m_gov_20211220.shp')
+    burkina = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Burkina_Shapefiles/geoBoundaries-BFA-ADM1-all/geoBoundaries-BFA-ADM1_simplified.shp')
+    niger = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Niger_Shapefiles/NER_admbnda_adm1_IGNN_20230720.shp')
+    guinee = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Guinee_Shapefiles/gnb_admbnda_adm1_1m_salb_20210609.shp')
+    senegal = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Senegal_Shapefiles/sen_admbnda_adm1_anat_20240520.shp')
     # Add columns for country names
     togo['country'] = 'Togo'
     civ['country'] = "Côte d'Ivoire"
@@ -122,7 +127,7 @@ def load_shapefiles():
     #benin = benin.rename(columns={'adm0_name': 'country'})
     togo = togo.rename(columns={'ADM1_FR': 'admin1Name'})
     #togo = togo.rename(columns={'ADM1_REF': 'country'})
-    civ = civ.rename(columns={'NOM': 'admin1Name'})
+    civ = civ.rename(columns={'ADM0_FR': 'admin1Name'})
     mali = mali.rename(columns={'ADM1_FR': 'admin1Name'})
     burkina = burkina.rename(columns={'shapeName': 'admin1Name'})
     niger = niger.rename(columns={'ADM1_FR': 'admin1Name'})
@@ -146,7 +151,17 @@ def load_shapefiles():
     return benin, togo, civ, mali, burkina, niger, guinee, senegal, combined
 
 def load_department_shapefiles():
-    civ= gpd.read_file('/Users/haouabenaliabbo/Downloads/civ_admbnda_adm2_cntig_ocha_itos_20180706 (2)/civ_admbnda_adm2_cntig_ocha_itos_20180706.shp')
+
+    benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Benin_Shapefiles/ben_admbnda_adm2_1m_salb_20190816.shp')
+    civ = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/CIV_Shapefiles/civ_admbnda_adm2_cntig_ocha_itos_20180706')
+    togo = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Togo_Shapefiles/tgo_admbnda_adm2_inseed_itos_20210107.shp')
+    mali = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Mali_Shapefiles/mli_admbnda_adm2_1m_gov_20211220.shp')
+    burkina = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Burkina_Shapefiles/geoBoundaries-BFA-ADM2-all/geoBoundaries-BFA-ADM2_simplified.shp')
+    niger = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Niger_Shapefiles/NER_admbnda_adm2_IGNN_20230720.shp')
+    guinee = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Guinee_Shapefiles/gnb_admbnda_adm2_1m_salb_20210609.shp')
+    senegal = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Senegal_Shapefiles/sen_admbnda_adm2_anat_20240520.shp')
+    
+    #civ= gpd.read_file('/Users/haouabenaliabbo/Downloads/civ_admbnda_adm2_cntig_ocha_itos_20180706 (2)/civ_admbnda_adm2_cntig_ocha_itos_20180706.shp')
     civ = civ.rename(columns={'ADM2_FR': 'admin1Name'})
     civ['admin1Name'] = civ['admin1Name'].replace('Béttié', 'Bettié')
     civ['admin1Name'] = civ['admin1Name'].replace('Djekanou', 'Djékanou')
@@ -159,11 +174,11 @@ def load_department_shapefiles():
     civ['admin1Name'] = civ['admin1Name'].replace('Sandegue', 'Sandégué')
     civ['admin1Name'] = civ['admin1Name'].replace('Koun Fao', 'Koun-Fao')
 
-    mali= gpd.read_file('/Users/haouabenaliabbo/Downloads/mali_adm_ab_shp/mli_admbnda_adm2_1m_gov_20211220.shp')
+    #mali= gpd.read_file('/Users/haouabenaliabbo/Downloads/mali_adm_ab_shp/mli_admbnda_adm2_1m_gov_20211220.shp')
     mali= mali.rename(columns={'ADM2_FR': 'admin1Name'})
     mali['admin1Name'] = mali['admin1Name'].replace('Bafoulabe', 'Bafoulabé')
 
-    burkina=gpd.read_file('/Users/haouabenaliabbo/Downloads/geoBoundaries-BFA-ADM2-all/geoBoundaries-BFA-ADM2_simplified.shp')
+    #burkina=gpd.read_file('/Users/haouabenaliabbo/Downloads/geoBoundaries-BFA-ADM2-all/geoBoundaries-BFA-ADM2_simplified.shp')
     burkina = burkina.rename(columns={'shapeName': 'admin1Name'})
     burkina['admin1Name']=burkina['admin1Name'].replace('Komonjdjari', 'Komondjari')
     #burkina['admin1Name']=burkina['admin1Name'].replace('Kouritenga', 'Kourittenga')
@@ -192,7 +207,7 @@ def load_department_shapefiles():
     mali['country'] = "Mali"
     burkina['country'] = "Burkina Faso"
 
-    benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/ben_adm_1m_salb_2019_shapes/ben_admbnda_adm2_1m_salb_20190816.shp')
+    #benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/ben_adm_1m_salb_2019_shapes/ben_admbnda_adm2_1m_salb_20190816.shp')
     benin = benin.rename(columns={'adm2_name': 'admin1Name'})
     benin['country'] = 'Bénin'
     commune_replacements_benin = {'Djakotome': 'Djakotomey', 'Dogbo-tota': 'Dogbo-Tota', 'Kopargo': 'Copargo', 'Banikoara': 'Banikoara', 'Gogounou': 'Gogounou', 'Kandi': 'Kandi', 'Karimama': 'Karimama', 'Malanville': 'Malanville', 'Segbana': 'Segbana', 'Kerou': 'Kérou', 'Kobli': 'Cobly', 'Kouande': 'Kouandé', 'Materi': 'Matéri', 'Natitingou': 'Natitingou', 'Pehunco': 'Péhunco', 'Tanguieta': 'Tanguiéta', 'Allada': 'Allada', 'Kpomasse': 'Kpomassè', 'Ouidah': 'Ouidah', 'Toffo': 'Toffo', 'Ze': 'Zè', 'Bembereke': 'Bembéréké', 'Kalale': 'Kalalé', 'Nikki': 'Nikki', 'Parakou': 'Parakou', 'Perere': 'Pèrèrè', 'Sinende': 'Sinendé', 'Tchaourou': 'Tchaourou', 'Bante': 'Bantè', 'Glazoue': 'Glazoué', 'Ouesse': 'Ouèssè', 'Savalou': 'Savalou', 'Save': 'Savè', 'Aplahoue': 'Aplahoué', 'Klouekanme': 'Klouékanmè', 'Lalo': 'Lalo', 'Toviklin': 'Toviklin', 'Bassila': 'Bassila', 'Djougou': 'Djougou', 'Ouake': 'Ouaké', 'Cotonou': 'Cotonou', 'Athieme': 'Athiémé', 'Bopa': 'Bopa', 'Come': 'Comè', 'Houeyogbe': 'Houéyogbé', 'Lokossa': 'Lokossa', 'Adjohoun': 'Adjohoun', 'Avrankou': 'Avrankou', 'Bonou': 'Bonou', 'Dangbo': 'Dangbo', 'Ifangni': 'Ifangni', 'Ketou': 'Kétou', 'Pobe': 'Pobè', 'Sakete': 'Sakété', 'Abomey': 'Abomey', 'Agbangnizoun': 'Agbangnizoun', 'Bohicon': 'Bohicon', 'Cove': 'Covè', 'Djidja': 'Djidja', 'Ouinhi': 'Ouinhi', 'Zogbodomey': 'Zogbodomey', 'Aguegues': 'Aguégués', 'Boukoumbe': 'Boukoumbé', 'Toukountouna': 'Toucountouna', 'Abomey-calavi': 'Abomey-Calavi', 'So-ava': 'Sô-Ava', 'Tori-bossito': 'Tori-Bossito', 'Ndali': 'N\'Dali', 'Dassa': 'Dassa-Zoumé', 'Grand-popo': 'Grand-Popo', 'Adjara': 'Adjarra', 'Akpro-misserete': 'Akpro-Missérété', 'Porto-novo': 'Porto-Novo', 'Seme-kpodji': 'Sèmè-Kpodji', 'Adja-ouere': 'Adja-Ouèrè', 'Za-kpota': 'Za-Kpota', 'Zangnanado': 'Zagnanado'}
@@ -202,7 +217,7 @@ def load_department_shapefiles():
     for old_name, new_name in commune_replacements_benin.items():
         benin['admin1Name'] = benin['admin1Name'].replace(old_name, new_name)
 
-    togo = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/Shapefiles_togo/tgo_admbnda_adm2_inseed_itos_20210107.shp')
+    #togo = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/Shapefiles_togo/tgo_admbnda_adm2_inseed_itos_20210107.shp')
     togo = togo.rename(columns={'ADM2_FR': 'admin1Name'})
     togo['country'] = 'Togo'
 
@@ -225,14 +240,14 @@ def load_department_shapefiles():
     for old_name, new_name in togo_names_dict.items():
         togo['admin1Name'] = togo['admin1Name'].replace(old_name, new_name)
 
-    guinee = gpd.read_file('/Users/haouabenaliabbo/Downloads/gnb_admbnda_1m_salb_20210609_shp/gnb_admbnda_adm2_1m_salb_20210609.shp')
+    #guinee = gpd.read_file('/Users/haouabenaliabbo/Downloads/gnb_admbnda_1m_salb_20210609_shp/gnb_admbnda_adm2_1m_salb_20210609.shp')
     guinee = guinee.rename(columns={'ADM2_EN': 'admin1Name'})
     guinee['country'] = 'Guinée Bissau'
     secteurs_mapping = {'Gabu': 'Gabú', 'Gamamudo/Ganadu': 'Gamamundo', 'Cacheu/Calequisse': 'Cacheu', 'Caio': 'Caió', 'Boe': 'Boé', 'Gabu': 'Gabú', 'Bissora': 'Bissorã', 'Mansoa': 'Mansôa', 'Catio': 'Catió', 'Sector Autonomo de Bissau': 'Bissau', 'Prabis': 'Prábis', 'Quinhamel': 'Quinhámel', 'Galomaro/Cosse':'Galomaro'}
     for old_name, new_name in secteurs_mapping.items():
         guinee['admin1Name'] = guinee['admin1Name'].replace(old_name, new_name)
 
-    niger=gpd.read_file('/Users/haouabenaliabbo/Downloads/ner_adm_ignn_20230720_ab_shp/NER_admbnda_adm2_IGNN_20230720.shp')
+    #niger=gpd.read_file('/Users/haouabenaliabbo/Downloads/ner_adm_ignn_20230720_ab_shp/NER_admbnda_adm2_IGNN_20230720.shp')
     niger.rename(columns={'ADM2_FR': 'admin1Name'}, inplace=True)
     niger['country'] = 'Niger'
     niger['admin1Name']=niger['admin1Name'].replace('Ville de Maradi', 'Maradi')
@@ -251,8 +266,9 @@ def load_department_shapefiles():
     }
     for old, new in niger_department_mapping.items():
         niger['admin1Name'] = niger['admin1Name'].replace(old, new)
+    
 
-    senegal=gpd.read_file('/Users/haouabenaliabbo/Downloads/sen_admbnd_anat_20240520_ab_shp/sen_admbnda_adm2_anat_20240520.shp')
+    #senegal=gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Senegal_Shapefiles/sen_admbnda_adm2_anat_20240520.shp')
     senegal.rename(columns={'ADM2_FR': 'admin1Name'}, inplace=True)
     senegal['country'] = 'Sénégal'
 
@@ -263,9 +279,12 @@ def load_department_shapefiles():
 
 
 # Load geographic data
-combined0, combined_with_borders = load_country_shapefiles()
+combined0, combined_with_borders, combined_td = load_country_shapefiles()
 benin, togo, civ, mali, burkina, niger, guinee, senegal, combined = load_shapefiles()
 civ2, mali2, burkina2, benin2, togo2, guinee2, niger2, senegal2, combined2 = load_department_shapefiles()  
+geo_tchad = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/geo_tchad_isibf.shp')
+tchad = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Tchad_Shapefiles/tcd_admbnda_adm0_ocha/tcd_admbnda_adm0_ocha.shp')
+tchad = tchad.rename(columns={'admin0Name':'admin1Name'})
 
 
 
@@ -376,12 +395,16 @@ def main():
     # Calculate ISIBF values
     indicator_calculator_benin2 = IndicatorCalculator(bank_agencies_benin2.get_agency_counts(), neighbors_benin2, benin_data2.get_adult_population(), alpha=ALPHA_BENIN, threshold=THRESHOLD, department_mapping=benin_data2.get_department_mapping(), area=benin_data2.get_area())
     isibf_departments_benin = indicator_calculator_benin2.calculate_isibf2()
+
     # Global normalization and formatting
     isibf_regions_benin = mean_scores(isibf_departments_benin, benin_data2.get_department_mapping())
+
 
     # Normalization by countries
     isibf_departments_benin_norm = format_scores(normalize_scores(isibf_departments_benin))
     isibf_regions_benin_norm = format_scores(mean_scores(normalize_scores(isibf_departments_benin), benin_data2.get_department_mapping()))
+
+    print(isibf_regions_benin_norm)
 
     '''Map visualization for ISIBF score'''
 
@@ -770,11 +793,8 @@ def main():
     indicator_calculator_senegal = IndicatorCalculator(bank_agencies_senegal.get_agency_counts(), neighbors_senegal, senegal_data.get_adult_population(), alpha=ALPHA_SENEGAL, threshold=THRESHOLD, department_mapping=senegal_data.get_department_mapping(), area=senegal_data.get_area())
     isibf_departments_senegal = indicator_calculator_senegal.calculate_isibf2()
 
-    print(isibf_departments_senegal)
-
     # Normalization by country
     isibf_departments_senegal_norm = format_scores(normalize_scores(isibf_departments_senegal))
-
     isibf_regions_senegal_norm = format_scores(mean_scores(normalize_scores(isibf_departments_senegal), senegal_data.get_department_mapping()))
 
     # Global normalization and formatting
@@ -829,10 +849,10 @@ def main():
     
     map_visualizer_combined_departments = MapVisualizer(combined2, isibf_combined_department_norm, label="ISIBF", type="département", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined_departments.create_choropleth()
-    map_visualizer_combined_departments.create_leaflet()
+    #map_visualizer_combined_departments.create_leaflet()
 
     map_visualizer_combined_departments_with_borders = MapVisualizer(combined2, isibf_combined_department_norm, label="ISIBF", type="département", lat=15, lon=-4, zoom=5.45, country="combined_with_borders")
-    map_visualizer_combined_departments.create_leaflet_combined(combined_with_borders)
+    #map_visualizer_combined_departments.create_leaflet_combined(combined_with_borders)
     
 
     #print(isibf_combined_department_norm)
@@ -867,6 +887,19 @@ def main():
     map_visualizer_combined2 = MapVisualizer(combined0, mean_scores_countries, label="ISIBF", type="pays", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined2.create_choropleth()
     #map_visualizer_combined2.create_leaflet()
+
+
+    '''Maps combined with Tchad'''
+    isibf_regions_tchad = {"N'Djamena": 5.508046127770763, 'Ouaddaï': 2.880630720837979, 'Logone Occidental': 3.20090286343193, 'Moyen-Chari': 2.070372131646714, 'Salamat': 1.0333818923122666, 'Mayo-Kebbi Ouest': 1.8456656640568787, 'Guéra': 1.6124302397549715, 'Logone Oriental': 2.1925175850448966, 'Mayo-Kebbi Est': 1.3154519302757048, 'Wadi Fira': 1.1886780683709246, 'Lac': 1.4134860104756544, 'Kanem': 1.2100934407210915, 'Barh-El-Gazel': 0.1515574028241689, 'Batha': 0.16474096485537132, 'Borkou': 0.0008791171251454577, 'Chari-Baguirmi': 0.3796319514328078, 'Ennedi Est': 0.008052993607244645, 'Ennedi Ouest': 0.00602662856352827, 'Hadjer-Lamis': 0.6708420408750191, 'Mandoul': 0.7325523720119412, 'Sila': 0.1004561899738713, 'Tandjilé': 0.9376712447389833, 'Tibesti': 0.0}
+
+    mean_scores_tchad= mean(isibf_regions_tchad)
+    tchad['ISIBF'] = mean_scores_tchad
+
+    map_visualizer_combined_departments_with_td = MapVisualizer(combined2, isibf_combined_department_norm, label="ISIBF", type="département", lat=15, lon=1, zoom=5.45, country="combined_and_tchad")
+    map_visualizer_combined_departments_with_td.create_leaflet_combined_tchad(geo_tchad, combined_td)
+
+    map_visualizer_combined_with_td = MapVisualizer(combined0, mean_scores_countries, label="ISIBF", type="country", lat=15, lon=1, zoom=5.45, country="combined_and_tchad")
+    map_visualizer_combined_with_td.create_leaflet_combined_tchad(tchad, combined_td)
 
 
 
