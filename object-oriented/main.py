@@ -852,7 +852,7 @@ def main():
     #map_visualizer_combined_departments.create_leaflet()
 
     map_visualizer_combined_departments_with_borders = MapVisualizer(combined2, isibf_combined_department_norm, label="ISIBF", type="département", lat=15, lon=-4, zoom=5.45, country="combined_with_borders")
-    #map_visualizer_combined_departments.create_leaflet_combined(combined_with_borders)
+    map_visualizer_combined_departments.create_leaflet_combined(combined_with_borders)
     
 
     #print(isibf_combined_department_norm)
@@ -860,7 +860,7 @@ def main():
     # Maps for normalization by countries
     map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="région", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined.create_choropleth()
-    #map_visualizer_combined.create_leaflet()
+    map_visualizer_combined.create_leaflet()
 
     mean_scores_countries={
         "Bénin": mean(isibf_regions_benin),
@@ -896,10 +896,10 @@ def main():
     tchad['ISIBF'] = mean_scores_tchad
 
     map_visualizer_combined_departments_with_td = MapVisualizer(combined2, isibf_combined_department_norm, label="ISIBF", type="département", lat=15, lon=1, zoom=5.45, country="combined_and_tchad")
-    map_visualizer_combined_departments_with_td.create_leaflet_combined_tchad(geo_tchad, combined_td)
+    #map_visualizer_combined_departments_with_td.create_leaflet_combined_tchad(geo_tchad, combined_td)
 
     map_visualizer_combined_with_td = MapVisualizer(combined0, mean_scores_countries, label="ISIBF", type="country", lat=15, lon=1, zoom=5.45, country="combined_and_tchad")
-    map_visualizer_combined_with_td.create_leaflet_combined_tchad(tchad, combined_td)
+    #map_visualizer_combined_with_td.create_leaflet_combined_tchad(tchad, combined_td)
 
 
 

@@ -175,10 +175,15 @@ class MapVisualizer:
         folium.GeoJson(
             self.geo_data.__geo_interface__,
             style_function=lambda feature: {
-                'fillColor': 'Blues' if feature['properties'][f'{self.label}'] is not None else 'gray',
-                'color': 'grey',
-                'weight': 0.3,
-                'fillOpacity': 0,
+                'fillColor': 'gray',  # Set a neutral color for non-hovered regions (you can change this)
+                'color': 'transparent',  # Make the border invisible
+                'weight': 0,  # No border around the region
+                'fillOpacity': 0,  # Make the fill transparent
+            },
+            highlight_function=lambda feature: {
+                'color': 'grey',  # Set the border color on hover (optional)
+                'weight': 1,  # Thicker border on hover
+                'fillOpacity': 0,  # Set opacity when hovered
             },
             tooltip=folium.GeoJsonTooltip(
                 fields=['admin1Name', f'{self.label}'],
