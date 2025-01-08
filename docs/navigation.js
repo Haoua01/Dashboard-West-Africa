@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const departmentLabel = document.getElementById('department-label');
     const toggleSwitch = document.getElementById('toggle-switch');
 
-    iframe.src = 'results/ISIBF_pays_combined_and_tchad_leaflet.html'; // Carte par défaut
+    iframe.src = 'results/ISIBF_country_combined_and_tchad_with_borders_leaflet.html'; // Carte par défaut
     districtLabel.textContent = 'Pays'; 
     departmentLabel.textContent = 'Départements'; 
     districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
@@ -172,7 +172,7 @@ const countryMapConfig = {
     'combined_and_tchad': {
         maps: {
             byDepartment: 'results/ISIBF_département_combined_and_tchad_with_borders_leaflet.html',
-            byDistrict: 'results/ISIBF_pays_combined_and_tchad_leaflet.html'
+            byDistrict: 'results/ISIBF_country_combined_and_tchad_with_borders_leaflet.html'
         },
         labels: {
             department: 'Départements',
