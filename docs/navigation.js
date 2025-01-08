@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const departmentLabel = document.getElementById('department-label');
     const toggleSwitch = document.getElementById('toggle-switch');
 
-    iframe.src = 'results/ISIBF_pays_combined_leaflet.html'; // Carte par défaut
+    iframe.src = 'results/ISIBF_pays_combined_and_tchad_leaflet.html'; // Carte par défaut
     districtLabel.textContent = 'Pays'; 
     departmentLabel.textContent = 'Départements'; 
     districtLabel.style.fontWeight = 'bold'; // Highlight "Districts"
@@ -161,6 +161,16 @@ const countryMapConfig = {
     },
     'combined': {
         maps: {
+            byDepartment: 'results/ISIBF_département_combined_with_borders_leaflet.html',
+            byDistrict: 'results/ISIBF_pays_combined_leaflet.html'
+        },
+        labels: {
+            department: 'Départements',
+            district: 'Pays'
+        }
+    },
+    'combined_and_tchad': {
+        maps: {
             byDepartment: 'results/ISIBF_département_combined_and_tchad_with_borders_leaflet.html',
             byDistrict: 'results/ISIBF_pays_combined_and_tchad_leaflet.html'
         },
@@ -209,7 +219,7 @@ function showCountryMap1() {
 
     spinner.style.display = "block";  // Show the spinner when the map starts loading
 
-    const countriesWithToggle = ['benin', 'togo', 'civ', 'mali', 'burkina', 'guinee', 'niger', 'senegal', 'combined'];
+    const countriesWithToggle = ['benin', 'togo', 'civ', 'mali', 'burkina', 'guinee', 'niger', 'senegal', 'combined', 'combined_and_tchad'];
 
     if (countriesWithToggle.includes(countrySelect)) {
         updateSliderValue();
