@@ -69,7 +69,7 @@ ALPHA_SENEGAL = alpha_countries['Sénégal']
 
 
 #print('Access to infrastructures:', alpha_countries)
-
+"""
 def load_country_shapefiles():
     benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/Benin_Shapefiles/ben_admbnda_adm0_1m_salb_20190816.shp')
     civ = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/CIV_Shapefiles/civ_admbnda_adm0_cntig_20180706')
@@ -134,7 +134,7 @@ def load_shapefiles():
     senegal['country'] = 'Sénégal'
 
     # Rename columns for consistency
-    benin = benin.rename(columns={'adm1_name': 'admin1Name'})
+    benin = benin.rename(columns={'ADM1_FR': 'admin1Name'})
     #benin = benin.rename(columns={'adm0_name': 'country'})
     togo = togo.rename(columns={'ADM1_FR': 'admin1Name'})
     #togo = togo.rename(columns={'ADM1_REF': 'country'})
@@ -142,7 +142,7 @@ def load_shapefiles():
     mali = mali.rename(columns={'ADM1_FR': 'admin1Name'})
     burkina = burkina.rename(columns={'shapeName': 'admin1Name'})
     niger = niger.rename(columns={'ADM1_FR': 'admin1Name'})
-    guinee = guinee.rename(columns={'ADM1_EN': 'admin1Name'})
+    guinee = guinee.rename(columns={'ADM1_FR': 'admin1Name'})
     senegal = senegal.rename(columns={'ADM1_FR': 'admin1Name'})
 
     # Rename regions with common names to avoid conflicts
@@ -219,7 +219,7 @@ def load_department_shapefiles():
     burkina['country'] = "Burkina Faso"
 
     #benin = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/ben_adm_1m_salb_2019_shapes/ben_admbnda_adm2_1m_salb_20190816.shp')
-    benin = benin.rename(columns={'adm2_name': 'admin1Name'})
+    benin = benin.rename(columns={'ADM3_FR': 'admin1Name'})
     benin['country'] = 'Bénin'
     commune_replacements_benin = {'Djakotome': 'Djakotomey', 'Dogbo-tota': 'Dogbo-Tota', 'Kopargo': 'Copargo', 'Banikoara': 'Banikoara', 'Gogounou': 'Gogounou', 'Kandi': 'Kandi', 'Karimama': 'Karimama', 'Malanville': 'Malanville', 'Segbana': 'Segbana', 'Kerou': 'Kérou', 'Kobli': 'Cobly', 'Kouande': 'Kouandé', 'Materi': 'Matéri', 'Natitingou': 'Natitingou', 'Pehunco': 'Péhunco', 'Tanguieta': 'Tanguiéta', 'Allada': 'Allada', 'Kpomasse': 'Kpomassè', 'Ouidah': 'Ouidah', 'Toffo': 'Toffo', 'Ze': 'Zè', 'Bembereke': 'Bembéréké', 'Kalale': 'Kalalé', 'Nikki': 'Nikki', 'Parakou': 'Parakou', 'Perere': 'Pèrèrè', 'Sinende': 'Sinendé', 'Tchaourou': 'Tchaourou', 'Bante': 'Bantè', 'Glazoue': 'Glazoué', 'Ouesse': 'Ouèssè', 'Savalou': 'Savalou', 'Save': 'Savè', 'Aplahoue': 'Aplahoué', 'Klouekanme': 'Klouékanmè', 'Lalo': 'Lalo', 'Toviklin': 'Toviklin', 'Bassila': 'Bassila', 'Djougou': 'Djougou', 'Ouake': 'Ouaké', 'Cotonou': 'Cotonou', 'Athieme': 'Athiémé', 'Bopa': 'Bopa', 'Come': 'Comè', 'Houeyogbe': 'Houéyogbé', 'Lokossa': 'Lokossa', 'Adjohoun': 'Adjohoun', 'Avrankou': 'Avrankou', 'Bonou': 'Bonou', 'Dangbo': 'Dangbo', 'Ifangni': 'Ifangni', 'Ketou': 'Kétou', 'Pobe': 'Pobè', 'Sakete': 'Sakété', 'Abomey': 'Abomey', 'Agbangnizoun': 'Agbangnizoun', 'Bohicon': 'Bohicon', 'Cove': 'Covè', 'Djidja': 'Djidja', 'Ouinhi': 'Ouinhi', 'Zogbodomey': 'Zogbodomey', 'Aguegues': 'Aguégués', 'Boukoumbe': 'Boukoumbé', 'Toukountouna': 'Toucountouna', 'Abomey-calavi': 'Abomey-Calavi', 'So-ava': 'Sô-Ava', 'Tori-bossito': 'Tori-Bossito', 'Ndali': 'N\'Dali', 'Dassa': 'Dassa-Zoumé', 'Grand-popo': 'Grand-Popo', 'Adjara': 'Adjarra', 'Akpro-misserete': 'Akpro-Missérété', 'Porto-novo': 'Porto-Novo', 'Seme-kpodji': 'Sèmè-Kpodji', 'Adja-ouere': 'Adja-Ouèrè', 'Za-kpota': 'Za-Kpota', 'Zangnanado': 'Zagnanado'}
 
@@ -252,7 +252,7 @@ def load_department_shapefiles():
         togo['admin1Name'] = togo['admin1Name'].replace(old_name, new_name)
 
     #guinee = gpd.read_file('/Users/haouabenaliabbo/Downloads/gnb_admbnda_1m_salb_20210609_shp/gnb_admbnda_adm2_1m_salb_20210609.shp')
-    guinee = guinee.rename(columns={'ADM2_EN': 'admin1Name'})
+    guinee = guinee.rename(columns={'ADM3_FR': 'admin1Name'})
     guinee['country'] = 'Guinée Bissau'
     secteurs_mapping = {'Gabu': 'Gabú', 'Gamamudo/Ganadu': 'Gamamundo', 'Cacheu/Calequisse': 'Cacheu', 'Caio': 'Caió', 'Boe': 'Boé', 'Gabu': 'Gabú', 'Bissora': 'Bissorã', 'Mansoa': 'Mansôa', 'Catio': 'Catió', 'Sector Autonomo de Bissau': 'Bissau', 'Prabis': 'Prábis', 'Quinhamel': 'Quinhámel', 'Galomaro/Cosse':'Galomaro'}
     for old_name, new_name in secteurs_mapping.items():
@@ -298,13 +298,6 @@ tchad = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/
 tchad = tchad.rename(columns={'admin0Name':'admin1Name'})
 
 
-shp_civ=Shapefile('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Metropolis/numpoints_branches.shp')
-civ3=shp_civ.load_shapefile()
-
-civ_communes = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/CIV_Shapefiles/civ_admbnda_adm3_cntig_ocha_itos_20180706/civ_admbnda_adm3_cntig_ocha_itos_20180706.shp')
-civ_communes['country'] = "Côte d\'Ivoire"
-
-
 def main():
 
     '''Generic functions and initialisation'''
@@ -344,7 +337,7 @@ def main():
     )
 
 
-    """"Indicator 2 : Demographic indicator
+    Indicator 2 : Demographic indicator
     # Calculate demographic indicators
     demo_indicator_benin = round_scores(indicator_calculator_benin.demographic_indicator(REF_INHABITANTS))
     demo_indicator_togo = round_scores(indicator_calculator_togo.demographic_indicator(REF_INHABITANTS))
@@ -387,9 +380,9 @@ def main():
     #chart_visualizer_combined = ChartVisualizer(spatial_demo_indicator_combined, title=f"Nombres d'agences combiné", label="spatial_demographic_indicator", country="combined")
     #chart_visualizer_combined.create_bar_chart()
 
-    """
 
-    '''BENIN ADJUSTMENTS'''
+
+    BENIN ADJUSTMENTS
 
     # Initialize data classes
     benin_data2 = BeninDepartmentData(service_type='bank')
@@ -674,7 +667,7 @@ def main():
         
 
 
-    """MALI INTRODUCTION"""
+    MALI INTRODUCTION
 
     mali_data = MaliData(service_type='bank')
 
@@ -726,7 +719,7 @@ def main():
 
 
 
-    """BURKINA FASO INTRODUCTION"""
+    '''BURKINA FASO INTRODUCTION'''
 
     burkina_data = BurkinaDepartmentData(service_type='bank')
 
@@ -788,7 +781,7 @@ def main():
 
 
     
-    """SENEGAL INTRODUCTION"""
+    '''SENEGAL INTRODUCTION'''
 
     senegal_data = SenegalDepartmentData(service_type='bank')
 
@@ -853,7 +846,7 @@ def main():
 
 
     
-    """MAPS COMBINED VISUALIZATION"""
+    '''MAPS COMBINED VISUALIZATION'''
 
     # Normalization by countries
     isibf_combined_norm = {**isibf_regions_benin_norm, **isibf_regions_togo_norm, **isibf_regions_civ_norm, **isibf_regions_mali_norm, **isibf_regions_burkina_norm, **isibf_regions_niger_norm, **isibf_regions_guinee_norm, **isibf_regions_senegal_norm}
@@ -919,7 +912,7 @@ def main():
 
 
 
-    """CHARTS COMBINED VISUALIZATION"""
+    '''CHARTS COMBINED VISUALIZATION'''
 
     # demographic indicators
     demo_indicator_combined = {
@@ -956,10 +949,19 @@ def main():
 
     #print(isibf_departments_burkina, isibf_departments_burkina_norm)
 
+"""
+shp_civ=Shapefile('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Metropolis/uemoa_branches.shp')
+civ3=shp_civ.load_shapefile()
+civ3['country'] = "UEMOA"
+
+civ_communes = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Metropolis/uemoa_adm3.shp')
+civ_communes['country'] = "UEMOA"
+
+
 def main2():
     # Initialize data classes
-    shp_branch=Shapefile('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Metropolis/numpoints_branches.shp')
-    shp_atm=Shapefile('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Metropolis/numpoints_atm.shp')
+    shp_branch=Shapefile('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Metropolis/uemoa_branches.shp')
+    shp_atm=Shapefile('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Metropolis/uemoa_atm.shp')
     civ_data3 = CIVCommuneData(service_type='bank', shp=shp_branch)
     civ_data_atm3 = CIVCommuneData(service_type='atm', shp=shp_atm)
 
@@ -1006,7 +1008,7 @@ def main2():
     '''Map visualization for ISIBF score'''
 
     # Maps for normalization by countries
-    map_visualizer_civ_communes = MapVisualizer(civ_communes, isibf_communes_civ_mean, label="ISIBF_all", type="commune", lat=7.5, lon=-5.5, zoom=6.5, country="civ")
+    map_visualizer_civ_communes = MapVisualizer(civ_communes, isibf_communes_civ_mean, label="ISIBF_all", type="commune", lat=7.5, lon=-5.5, zoom=6.5, country="uemoa")
     map_visualizer_civ_communes.create_leaflet_commune()
 
 
