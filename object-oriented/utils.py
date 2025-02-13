@@ -82,3 +82,47 @@ def alpha_values(scores, min_alpha, max_alpha):
 
 
     
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+# URL of the page to scrape
+
+def get_population_data(country):
+    url = f"https://www.citypopulation.de/en/{country}/admin/"
+
+    # Send an HTTP request to get the content of the page
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+    # Find the table containing the population and area data
+    table = soup.find('table', {'class': 'data'})
+
+    # Initialize lists to store data
+    regions = []
+    populations = []
+    areas = []
+
+    # Loop through the table rows (skip header row)
+    for row in table.find_all('tr')[1:]:
+        cells = row.find_all('td')
+        if len(cells) >= 3:
+            region_name = cells[0].get_text(strip=True)
+            population = cells[1].get_text(strip=True).replace(',', '')  # Remove commas for numerical values
+            area = cells[2].get_text(strip=True).replace(',', '')  # Remove commas for numerical values
+            
+            # Append data to respective lists
+            regions.append(region_name)
+            populations.append(population)
+            areas.append(area)
+
+    # Display the extracted data
+    for region, pop, area in zip(regions, populations, areas):
+        print(f"Region: {region}, Population: {pop}, Area: {area} km²")
+
+
+    df = pd.DataFrame({'Region': regions, 'Population': populations, 'Area': areas})
+
+    df.to_csv(f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/{country}_population.csv', index=False)
+
+

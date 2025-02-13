@@ -17,11 +17,22 @@ from data.togo_department_data import TogoDepartmentData
 from data.guinee_department_data import GuineeDepartmentData
 from data.niger_department_data import NigerDepartmentData
 from data.senegal_department_data import SenegalDepartmentData
+from shapefile import Shapefile
+from data.civ_commune_data import CIVCommuneData
+
 
 # Import necessary Python libraries
 import geopandas as gpd
 import pandas as pd
 import numpy as np
+import requests
+import os
+from dotenv import load_dotenv
+import time
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv()
+API_KEY = os.getenv("GOOGLE_GEOCODING_API_KEY")
 
 # Constants
 THRESHOLD = 100  # Distance threshold for neighbors
@@ -287,7 +298,11 @@ tchad = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/
 tchad = tchad.rename(columns={'admin0Name':'admin1Name'})
 
 
+shp_civ=Shapefile('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Metropolis/numpoints_branches.shp')
+civ3=shp_civ.load_shapefile()
 
+civ_communes = gpd.read_file('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/CIV_Shapefiles/civ_admbnda_adm3_cntig_ocha_itos_20180706/civ_admbnda_adm3_cntig_ocha_itos_20180706.shp')
+civ_communes['country'] = "Côte d\'Ivoire"
 
 
 def main():
@@ -852,7 +867,7 @@ def main():
     #map_visualizer_combined_departments.create_leaflet()
 
     map_visualizer_combined_departments_with_borders = MapVisualizer(combined2, isibf_combined_department_norm, label="ISIBF", type="département", lat=15, lon=-4, zoom=5.45, country="combined_with_borders")
-    map_visualizer_combined_departments.create_leaflet_combined(combined_with_borders)
+    #map_visualizer_combined_departments.create_leaflet_combined(combined_with_borders)
     
 
     #print(isibf_combined_department_norm)
@@ -860,7 +875,7 @@ def main():
     # Maps for normalization by countries
     map_visualizer_combined = MapVisualizer(combined, isibf_combined_norm, label="ISIBF", type="région", lat=15, lon=-4, zoom=5.45, country="combined")
     #map_visualizer_combined.create_choropleth()
-    map_visualizer_combined.create_leaflet()
+    #map_visualizer_combined.create_leaflet()
 
     mean_scores_countries={
         "Bénin": mean(isibf_regions_benin),
@@ -940,6 +955,62 @@ def main():
 
 
     #print(isibf_departments_burkina, isibf_departments_burkina_norm)
-   
+
+def main2():
+    # Initialize data classes
+    shp_branch=Shapefile('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Metropolis/numpoints_branches.shp')
+    shp_atm=Shapefile('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Metropolis/numpoints_atm.shp')
+    civ_data3 = CIVCommuneData(service_type='bank', shp=shp_branch)
+    civ_data_atm3 = CIVCommuneData(service_type='atm', shp=shp_atm)
+
+    # Initialize BankAgencies instances
+    bank_agencies_civ3 = BankAgencies(
+        civ_data3.get_agency_counts(),
+        civ_data3.get_department_mapping(),
+        civ_data3.get_coordinates()
+    )
+
+    bank_atm_civ3 = BankAgencies(
+        civ_data_atm3.get_agency_counts(),
+        civ_data_atm3.get_department_mapping(),
+        civ_data_atm3.get_coordinates()
+    )
+
+    geographic_data_civ3 = GeographicData(civ_data3.get_coordinates())
+    geographic_data_atm_civ3 = GeographicData(civ_data_atm3.get_coordinates())
+
+    neighbors_civ3 = geographic_data_civ3.compute_neighbors(distance_threshold=50)
+    count_civ=bank_agencies_civ3.get_agency_counts()
+    count_atm_civ=bank_atm_civ3.get_agency_counts()
+
+    '''Indicator 1 : ISIBF score'''
+
+    # Calculate ISIBF values
+
+    indicator_calculator_civ3 = IndicatorCalculator(count_civ, neighbors_civ3, civ_data3.get_adult_population(), alpha=1.01, threshold=50, department_mapping=civ_data3.get_department_mapping(), area=civ_data3.get_area())
+    indicator_calculator_civ3_atm = IndicatorCalculator(count_atm_civ, neighbors_civ3, civ_data3.get_adult_population(), alpha=1.01, threshold=50, department_mapping=civ_data3.get_department_mapping(), area=civ_data3.get_area())
+    isibf_communes_civ = indicator_calculator_civ3.calculate_isibf2()
+    isibf_communes_civ_atm = indicator_calculator_civ3_atm.calculate_isibf2()
+
+    # compute the mean of the two indicators 
+    isibf_communes_civ_mean = {}
+    for key in isibf_communes_civ.keys():
+        isibf_communes_civ_mean[key] = (isibf_communes_civ[key] + isibf_communes_civ_atm[key])/2
+
+
+
+    # Normalization by country
+    #isibf_communes_civ_norm = format_scores(normalize_scores(isibf_communes_civ))
+    #isibf_regions_civ_norm = format_scores(mean_scores(normalize_scores(isibf_communes_civ), civ_data3.get_department_mapping()))
+
+    '''Map visualization for ISIBF score'''
+
+    # Maps for normalization by countries
+    map_visualizer_civ_communes = MapVisualizer(civ_communes, isibf_communes_civ_mean, label="ISIBF_all", type="commune", lat=7.5, lon=-5.5, zoom=6.5, country="civ")
+    map_visualizer_civ_communes.create_leaflet_commune()
+
+
+ 
+
 if __name__ == "__main__":
-    main()
+    main2()

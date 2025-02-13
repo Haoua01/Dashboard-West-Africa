@@ -1,6 +1,9 @@
 import folium
 import plotly.express as px
 from shapely.geometry import shape
+import os 
+from dotenv import load_dotenv
+load_dotenv()
 
 class MapVisualizer:
 
@@ -84,7 +87,7 @@ class MapVisualizer:
         my_map = folium.Map(location=[self.lat, self.lon], zoom_start=self.zoom, scrollWheelZoom=False)
 
         # Jawg access token (replace this with your own token)
-        jawg_access_token = "dioMGYzKr2G5hw92MoTu8vvqmdOVm8zrb7lElgXzmBSo7pdqgvsTDCqV4UjS4hz2"
+        jawg_access_token = os.getenv("JAWG_ACCESS_TOKEN")
 
         # Add Jawg Light tiles with the access token
         folium.TileLayer(
@@ -147,7 +150,7 @@ class MapVisualizer:
         my_map = folium.Map(location=[self.lat, self.lon], zoom_start=self.zoom, scrollWheelZoom=False)
 
         # Jawg access token (replace this with your own token)
-        jawg_access_token = "dioMGYzKr2G5hw92MoTu8vvqmdOVm8zrb7lElgXzmBSo7pdqgvsTDCqV4UjS4hz2"
+        jawg_access_token = os.getenv("JAWG_ACCESS_TOKEN")
 
         # Add Jawg Light tiles with the access token
         folium.TileLayer(
@@ -234,7 +237,7 @@ class MapVisualizer:
         my_map = folium.Map(location=[self.lat, self.lon], zoom_start=self.zoom, scrollWheelZoom=False)
 
         # Jawg access token (replace this with your own token)
-        jawg_access_token = "dioMGYzKr2G5hw92MoTu8vvqmdOVm8zrb7lElgXzmBSo7pdqgvsTDCqV4UjS4hz2"
+        jawg_access_token = os.getenv("JAWG_ACCESS_TOKEN")
 
         # Add Jawg Light tiles with the access token
         folium.TileLayer(
@@ -342,3 +345,70 @@ class MapVisualizer:
         my_map.save(folium_map_path)
 
         print(f"Leaflet map combined with Tchad generated")
+
+
+    def create_leaflet_commune(self):
+        """
+        Create a map using Leaflet with basic interactive features.
+        """
+        # Add the scores to the GeoDataFrame
+        self.geo_data[f'{self.label}'] = self.geo_data['ADM3_FR'].map(self.scores)
+
+        self.geo_data['geometry'] = self.geo_data['geometry'].apply(lambda x: shape(x).simplify(0.01))
+
+        self.geo_data = self.geo_data[['geometry', 'ADM3_FR', 'country', f'{self.label}']]
+
+        #save the geo_data as a shapefile
+        self.geo_data.to_file(f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Dashboard/Shapefiles/{self.label}_{self.type}_{self.country}.shp')
+
+        # Initialize a Folium map
+        my_map = folium.Map(location=[self.lat, self.lon], zoom_start=self.zoom, scrollWheelZoom=False)
+
+        # Jawg access token (replace this with your own token)
+        jawg_access_token = os.getenv("JAWG_ACCESS_TOKEN")
+
+        # Add Jawg Light tiles with the access token
+        folium.TileLayer(
+            tiles="https://{s}.tile.jawg.io/jawg-light/{z}/{x}/{y}.png?access-token=" + jawg_access_token,
+            attr="Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, &copy; <a href='https://jawg.io/'>Jawg</a>",
+            name="Jawg Light"
+        ).add_to(my_map)
+
+        # Plot the map with a choropleth layer
+        folium.Choropleth(
+            geo_data=self.geo_data.__geo_interface__,
+            name='choropleth',
+            data=self.geo_data,
+            columns=['ADM3_FR', f'{self.label}'],
+            key_on='feature.properties.ADM3_FR',
+            fill_color='Blues',
+            fill_opacity=1,
+            line_opacity=0.1,
+            line_weight=0.1,
+            legend_name='Score d\'accès',
+            highlight=True
+        ).add_to(my_map)
+
+        # Add a tooltip to display information
+        folium.GeoJson(
+            self.geo_data.__geo_interface__,
+            style_function=lambda feature: {
+                'fillColor': 'Blues' if feature['properties'][f'{self.label}'] is not None else 'gray',
+                'color': 'grey',
+                'weight': 0.1,
+                'fillOpacity': 0,
+            },
+            tooltip=folium.GeoJsonTooltip(
+                fields=['ADM3_FR', f'{self.label}'],
+                aliases=[f'{self.type}:', 'score:'],
+                localize=True,
+            )
+        ).add_to(my_map)
+
+
+
+        # Save the map as an HTML file
+        folium_map_path = f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/docs/results/{self.label}_{self.type}_{self.country}_leaflet.html'
+        my_map.save(folium_map_path)
+
+        print(f"Leaflet commune map generated")

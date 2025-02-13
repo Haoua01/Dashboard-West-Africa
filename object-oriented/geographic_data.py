@@ -27,6 +27,8 @@ class GeographicData:
                     distance = great_circle(coords1, coords2).kilometers
                     if distance <= distance_threshold:
                         neighbors[city1][city2] = distance
+            
+                        
         #print("Neighbor's distances successfully computed.")
         return neighbors
     
@@ -54,5 +56,9 @@ class GeographicData:
                 time.sleep(1)
 
         return department_coordinates
+    
+
+    
+
 
 
