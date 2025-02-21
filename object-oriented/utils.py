@@ -20,7 +20,7 @@ def format_scores(scores):
     Returns:
         dict: A dictionary with city names as keys and formatted scores as values.
     """
-    return {city: round(score, 2) for city, score in scores.items()}  # Format scores to two decimal places
+    return {city: round(score, 3) for city, score in scores.items()}  # Format scores to two decimal places
 
 def round_scores(scores):
     """Rounds the scores to the nearest integer.
