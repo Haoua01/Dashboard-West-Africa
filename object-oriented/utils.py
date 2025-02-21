@@ -126,3 +126,14 @@ def get_population_data(country):
     df.to_csv(f'/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Dashboard-West-Africa/object-oriented/data/{country}_population.csv', index=False)
 
 
+import numpy as np
+def log_transform(scores):
+    """Applies a log transformation to the scores.
+
+    Args:
+        scores (dict): A dictionary of scores with city names as keys.
+
+    Returns:
+        dict: A dictionary with city names as keys and log-transformed scores as values.
+    """
+    return {city: np.log2(score+1e-5) for city, score in scores.items()}
