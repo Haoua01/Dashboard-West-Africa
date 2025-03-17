@@ -950,7 +950,7 @@ def main():
     #print(isibf_departments_burkina, isibf_departments_burkina_norm)
 
 """
-shp_civ=Shapefile('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/GitHub/Metropolis/Cleaning and results/data_all_clean.shp')
+shp_civ=Shapefile('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Econometrics/Note 2/data_all_clean_communes_latest_v2.shp')
 civ3=shp_civ.load_shapefile()
 civ3['country'] = "UEMOA"
 
@@ -970,9 +970,9 @@ def main2():
 
     geographic_data_civ3 = GeographicData(civ_data3.get_coordinates())
 
-    neighbors_civ3 = geographic_data_civ3.compute_neighbors(distance_threshold=50)
-    count_civ=bank_agencies_civ3.get_agency_counts()
-
+    neighbors_civ3 = geographic_data_civ3.compute_neighbors2(distance_threshold=100, countries=["benin", "burkina", "civ", "guinee", "mali", "niger", "senegal", "togo"])
+    #count_civ=bank_agencies_civ3.get_agency_counts()
+    """
 
     '''Indicator 1 : ISIBF score'''
 
@@ -990,10 +990,10 @@ def main2():
     '''Map visualization for ISIBF score'''
 
     # Maps for normalization by countries
-    map_visualizer_civ_communes = MapVisualizer(civ3, isibf_communes_civ_norm, label="ISIBF", type="commune_log2", lat=15, lon=-4, zoom=5.45, country="uemoa")
+    map_visualizer_civ_communes = MapVisualizer(civ3, isibf_communes_civ_norm, label="ISIBF", type="commune_log2_v3", lat=15, lon=-4, zoom=5.45, country="uemoa")
     map_visualizer_civ_communes.create_leaflet_commune()
 
-
+    """
  
 
 if __name__ == "__main__":

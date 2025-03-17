@@ -1,8 +1,9 @@
 from geopy.distance import great_circle
-
+from shapefile import Shapefile
 from geopy.geocoders import Nominatim
 import time
-import logging
+import requests
+import json
 
 class GeographicData:
     """
@@ -18,7 +19,7 @@ class GeographicData:
     def __init__(self, coordinates):
         self.coordinates = coordinates  # Expecting a dictionary of coordinates
 
-    def compute_neighbors(self, distance_threshold):
+    def compute_neighbors_new(self, distance_threshold, api_key):
         neighbors = {}
         for city1, coords1 in self.coordinates.items():
             neighbors[city1] = {}
@@ -26,9 +27,60 @@ class GeographicData:
                 if city1 != city2:
                     distance = great_circle(coords1, coords2).kilometers
                     if distance <= distance_threshold:
-                        neighbors[city1][city2] = distance
+                        origins = f"{coords1[0]},{coords1[1]}"
+                        destinations = f"{coords2[0]},{coords2[1]}"
+                        url = f'https://maps.googleapis.com/maps/api/distancematrix/json?origins={origins}&destinations={destinations}&key={api_key}'
+                        try:
+                            response = requests.get(url)
+                            data = response.json()
+                            if response.status_code != 200 or 'rows' not in data or not data['rows']:
+                                print(f"No valid distance matrix data for {city1} to {city2}")
+                                continue
+                            for i, element in enumerate(data['rows'][0]['elements']):
+                                if element['status'] == 'OK':
+                                    duration = element['duration']['value'] // 60
+                                    neighbors[city1][city2] = duration
+                                    break
+                        except requests.exceptions.RequestException as e:
+                            print(f"Request error for {city1} to {city2}: {e}")
+                            continue
+        #save as json
+        with open('neighbors.json', 'w') as f:
+            json.dump(neighbors, f)
+
+
+    def compute_neighbors2(self, distance_threshold, countries):
+        neighbors = {}
+        # Loop over countries
+        for country in countries:
+            neighbors[country] = {}  # Initialize country key
             
+            # Loop over each city in the country
+            for city1, coords1 in self.coordinates[country].items():
+                neighbors[country][city1] = {}  # Initialize city1 key within the country
+                
+                # Loop over each city again for comparison (to check neighbors)
+                for city2, coords2 in self.coordinates[country].items():
+                    if city1 != city2:  # Skip if it's the same city
+                        # Calculate the distance between the two cities
+                        distance = great_circle(coords1, coords2).kilometers
                         
+                        # If the distance is within the threshold, consider it a neighbor
+                        if distance <= distance_threshold:
+                            neighbors[country][city1][city2] = distance  # Add city2 as a neighbor of city1
+        
+        with open('neighbors_great_circle2.json', 'w') as f:
+            json.dump(neighbors, f)
+
+    def compute_neighbors(self, distance_threshold, countries):
+        neighbors = {}
+        for city1, coords1 in self.coordinates.items():
+            neighbors[city1] = {}
+            for city2, coords2 in self.coordinates.items():
+                if city1 != city2:
+                    distance = great_circle(coords1, coords2).kilometers
+                    if distance <= distance_threshold:
+                            neighbors[city1][city2] = distance    
         #print("Neighbor's distances successfully computed.")
         return neighbors
     

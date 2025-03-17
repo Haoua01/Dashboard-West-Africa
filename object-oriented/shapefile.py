@@ -12,22 +12,37 @@ class Shapefile:
     def load_shapefile(self):
         return self.data
     
+    def get_commune_coordinates2(self):  
+        """ Create a dictionary of commune coordinates from the shapefile data. """
+        countries=self.data['Country'].unique()
+        commune_coordinates = {}
+        for country in countries:
+            commune_coordinates[country] = {}
+            commune_countries = self.data[self.data['Country'] == country]
+            for index, row in commune_countries.iterrows():
+                commune = row['ADM3_FR']
+                latitude = row['Latitude']
+                longitude = row['Longitude']
+                commune_coordinates[country][commune] = (latitude, longitude)
+        return commune_coordinates
+    
     def get_commune_coordinates(self):  
         """ Create a dictionary of commune coordinates from the shapefile data. """
         commune_coordinates = {}
         for index, row in self.data.iterrows():
             commune = row['ADM3_FR']
-            latitude = row['joint_Lati']
-            longitude = row['joint_Long']
+            latitude = row['Latitude']
+            longitude = row['Longitude']
             commune_coordinates[commune] = (latitude, longitude)
         return commune_coordinates
+    
     
     def get_population(self):
         """ Create a dictionary of commune populations from the shapefile data. """
         commune_population = {}
         for index, row in self.data.iterrows():
             commune = row['ADM3_FR']
-            population = row['joint_Tota']
+            population = row['Population']
             commune_population[commune] = population
         return commune_population
 
@@ -36,7 +51,7 @@ class Shapefile:
         """ Create a dictionary mapping department to their respective communes. """
         department_mapping = {}
         for index, row in self.data.iterrows():
-            department = row['joint_laye']
+            department = row['Country']
             commune = row['ADM3_FR']
             if department in department_mapping:
                 department_mapping[department].append(commune)
@@ -48,7 +63,7 @@ class Shapefile:
         country_mapping = {}
         
         for index, row in self.data.iterrows():
-            country = row['joint_laye']
+            country = row['Country']
             commune = row['ADM3_FR']
             
             # Initialize the list if the country key doesn't exist

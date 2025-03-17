@@ -1,0 +1,58 @@
+---
+title: "Equipments"
+author: "Haoua"
+date: "2025-03-17"
+format: 
+  pdf: 
+    number-sections: true  # Number the sections
+editor: visual
+
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| echo: false
+#install.packages("tidyr")
+library(readr)
+library(dplyr)
+library(tidyr)
+library(stargazer)
+library(ggplot2)
+library(kableExtra)
+#install.packages("gt")
+library(gt)
+#install.packages("car")
+library(car)
+#install.packages("AER")
+library(ivreg)
+library(tibble)
+#install.packages("OneR")
+#install.packages("stringr")
+library(OneR)
+library(stringr)
+library(kableExtra)
+```
+
+You can add options to executable code like this
+
+```{r}
+data<-read.csv('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Econometrics/Note 2/equipments_table.csv')
+```
+
+```{r}
+colnames(data)<-c('Pays', 'Agences bancaires', 'DAB', 'Total EB')
+```
+
+```{r}
+kable(data, align = c('l', 'c', 'c', 'c'), digits = 3) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    font_size = 12,  # Adjust the font size
+    full_width = FALSE  # Ensure the table is not stretched over the entire page
+  ) %>%
+  row_spec(0, bold = FALSE, color = "Black") %>%  # Header row
+  column_spec(1, bold = TRUE, color = "Black")
+```
