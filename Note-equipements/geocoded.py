@@ -28,7 +28,8 @@ country_code = df['Country'].unique()
 # Loop over each country and calculate the metrics
 for country_name, code in country_dict1.items():
     country = code[0]
-    coba = code[1]
+    coba_branch = code[1]
+    coba_atm = code[2]
     # Count the total number of branches in each country
     count = df[df['Country'] == country]
     branch_count = count["Total_bran"].sum()
@@ -36,8 +37,8 @@ for country_name, code in country_dict1.items():
     #branch_count to_int
     branch_count = int(branch_count)
     atm_count = int(atm_count)
-    precision = round((abs(branch_count-coba)/ coba),2)
-    precision2 = round((abs(atm_count-coba)/ coba),2)
+    precision = round((abs(branch_count-coba_branch)/ coba_branch),2)
+    precision2 = round((abs(atm_count-coba_atm)/ coba_atm),2)
     #to int Total_geoc
     geocoded = int(count["Total_geoc"].sum())
 
@@ -45,8 +46,8 @@ for country_name, code in country_dict1.items():
     percent_geocoded = round((geocoded / branch_count) * 100, 1)
     
     # Append the results to the list
-    results1.append([country_name, coba, branch_count, precision])
-    results11.append([country_name, coba, atm_count, precision2])
+    results1.append([country_name, coba_branch, branch_count, precision])
+    results11.append([country_name, coba_atm, atm_count, precision2])
     results2.append([country_name, branch_count, geocoded, percent_geocoded])
 
 # Create a DataFrame from the results list

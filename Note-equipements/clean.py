@@ -2,7 +2,7 @@ import pandas as pd
 import json
 
 # Load data
-df = pd.read_csv('data_all_clean_communes_latest_v2.csv')
+df = pd.read_csv('data_all_clean_communes_latest_v6_geoc.csv')
 #distance_matrix = neighbors.json
 distance_matrix = json.load(open('neighbors.json'))
 
