@@ -1,0 +1,9 @@
+Pays,Seuil (km),% Communes,% Superficie,% Population,Nombre communes exclues
+benin,60,98.7,94.6,99.3,1
+burkina,60,95.3,94.6,98.2,12
+mali,70,91.4,67.5,95.5,38
+niger,80,90.8,29.9,95.4,19
+civ,40,90.7,85.7,96.3,42
+guinee,50,97.4,91.5,99.3,1
+senegal,50,95.2,88.2,97.7,6
+togo,30,93.2,90.8,96.2,8

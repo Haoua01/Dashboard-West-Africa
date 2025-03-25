@@ -69,7 +69,7 @@ class GeographicData:
                         if distance <= distance_threshold:
                             neighbors[country][city1][city2] = distance  # Add city2 as a neighbor of city1
         
-        with open('neighbors_great_circle2.json', 'w') as f:
+        with open('neighbors_great_circle4.json', 'w') as f:
             json.dump(neighbors, f)
 
     def compute_neighbors(self, distance_threshold, countries):

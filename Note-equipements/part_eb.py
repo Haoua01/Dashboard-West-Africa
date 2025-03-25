@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Load commune data
-df = pd.read_csv('data_all_clean_communes_latest_v4.csv')
+df = pd.read_csv('data_all_clean_communes_latest_v6_geoc.csv')
 df['Equipments']=df['Total_bran']+df['Total_ATMs']
 country_dict1 = {
     "Bénin": ["benin", "Communes"],
@@ -24,14 +24,15 @@ sizes_bran = df.groupby('Country')['Total_bran'].sum()
 sizes_dab = df.groupby('Country')['Total_ATMs'].sum()
 
 #define a nuance of blues according to sizes
-colors = plt.cm.Reds(np.linspace(0.1, 0.8, len(sizes_bran)))
+colors_reds = plt.cm.Reds(np.linspace(0.1, 0.8, len(sizes_bran)))
+colors_blues = plt.cm.Blues(np.linspace(0.1, 0.8, len(sizes_dab)))
 
 
-# Créer le diagramme en camembert
-plt.pie(sizes_bran, labels=labels, colors=colors,autopct='%1.1f%%', startangle=140)
-
+# Créer le diagramme en camembert avec les labels des pays seulement en gras
+#plt.pie(sizes_bran, labels=labels, colors=colors_reds,autopct='%1.1f%%', startangle=140, textprops={'weight': 'bold'})
+plt.pie(sizes_dab, labels=labels, colors=colors_blues,autopct='%1.1f%%', startangle=140, textprops={'weight': 'bold'}, )
 # Ajouter un titre
-plt.title('Répartition des agences bancaires par pays', fontsize=14, fontweight='bold', ha='center', va='top', pad=40)
+plt.title('DAB', fontsize=14, fontweight='bold', ha='center', va='top', pad=40)
 
 
 # Afficher le graphique

@@ -1,0 +1,9 @@
+Country,Distance Threshold,Communes Covered,Area Covered,Population Covered,Uncovered Communes
+benin,60,98.7,94.6,99.3,['Karimama']
+burkina,60,95.3,94.6,98.2,"['Arbinda', 'Baraboulé', 'Bartiébougou', 'Batié', 'Boundoré', 'Déou', 'Diguel', 'Djigouè', 'Foutouri', 'Kompienga', 'Koutougou', 'Madjoari']"
+mali,70,91.4,67.5,95.5,"['Boura', 'Koumbia', 'Karakoro', 'Sagalo', 'Sahel', 'Yinindougou', 'Mondoro', 'Hombori', 'Yoro', 'Ber', 'Razelma', 'Bamba', 'Salam', 'Tin Aicha', 'Gossi', 'Ansongo', 'Bourem', 'Ménaka', 'Andéramboukane', 'Anefif', 'Abéïbara', 'Tessalit', 'Talataye', 'Tarkint', 'Téméra', 'Inékar', 'Tessit', 'Bourra', 'Tin Hama', 'Tidermène', 'Essouk', 'Alzounoub', 'Ouattagouna', 'Bamba', 'Boghassa', 'Tinzawatène', 'Adjelhoc', 'Timtaghene']"
+niger,80,90.8,29.9,95.4,"['Aderbissinat', 'Gougaram', 'Bilma', 'Dirkou', 'Djado', 'Fachi', 'Iferouane', 'Timia', 'Ingall', 'Goudoumaria', ""N'Gourti"", 'Gangara', 'Abalak', 'Tamaya', 'Tassara', 'Tillia', 'Abala', 'Filingué', 'Tesker']"
+civ,40,90.7,85.7,96.3,"['Gogo', 'Anianou', 'Arikokaha', 'Badikaha', 'Bako', 'Bakoubly', 'Biankouma', 'Bilimono', 'Boahia', 'Bogofa', 'Bonguéra', 'Booko', 'Borotou', 'Bouandougou', 'Dianra', 'Dianra-Village', 'Diboké', 'Dikodougou', 'Dioman', 'Dioulatiedougou', 'Djibrosso', 'Djouroutou', 'Fadiadougou', 'Fengolo', 'Foumbolo', 'Foungbesso', 'Gbéléban', 'Gbèlo', 'Gouékan', 'Kakpin', 'Kanoroba', 'Kimbirila-Nord', 'Koonan', 'Koutouba', 'Laoudi-Ba', 'Marandallah', 'Nassian', 'Niokosso', 'Ouaninou', 'Parc National de Bona', 'Saboudougou', 'Sominassé']"
+guinee,50,97.4,91.5,99.3,['Boe']
+senegal,50,95.2,88.2,97.7,"['Dar Salam', 'Ndorna', 'Barkédji', 'Ouro Sidi', 'Kéniéba', 'Dianké Makan']"
+togo,30,93.2,90.8,96.2,"['Amou 1', 'Mô 2', 'Ogou 4', 'Mô 1', 'Kpendjal 2', 'Kpendjal 1', 'Tchamba 3', 'Tchamba 2']"

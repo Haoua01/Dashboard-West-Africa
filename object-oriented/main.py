@@ -970,7 +970,7 @@ def main2():
 
     geographic_data_civ3 = GeographicData(civ_data3.get_coordinates())
 
-    neighbors_civ3 = geographic_data_civ3.compute_neighbors2(distance_threshold=100, countries=["benin", "burkina", "civ", "guinee", "mali", "niger", "senegal", "togo"])
+    neighbors_civ3 = geographic_data_civ3.compute_neighbors2(distance_threshold=180, countries=["benin", "burkina", "civ", "guinee", "mali", "niger", "senegal", "togo"])
     #count_civ=bank_agencies_civ3.get_agency_counts()
     """
 
