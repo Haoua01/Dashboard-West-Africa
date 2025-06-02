@@ -1,0 +1,778 @@
+---
+title: "Determinants of bank branch outreach"
+author: "Haoua"
+date: "2025-05-21"
+format: 
+  pdf: 
+    number-sections: true  # Number the sections
+editor: visual
+
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| echo: false
+#install.packages("tidyr")
+library(readr)
+library(dplyr)
+library(tidyr)
+library(stargazer)
+library(ggplot2)
+library(kableExtra)
+#install.packages("gt")
+library(gt)
+#install.packages("car")
+library(car)
+#install.packages("AER")
+library(ivreg)
+library(tibble)
+#install.packages("OneR")
+#install.packages("stringr")
+library(OneR)
+library(stringr)
+#install.packages("psych")
+#library(psych)
+library(kableExtra)
+```
+
+```{r}
+data <- read_csv('/Users/haouabenaliabbo/Desktop/M2 IREN/ALTERNANCE/Mai/regression3.csv')
+```
+
+**Employment (Section 4)**:
+
+```{r}
+#| echo: false
+# Create a vector with the meanings of the predictors (excluding the redundant ones)
+predictor_meaning <- c(
+  'Branch of activity', 
+  'Socioprofessional category', 
+  'Main occupation',
+  'Secondary occupation', 
+  'Employment code', 
+  'Activity code', 
+  'Payslip received?', 
+  'Salary amount', 
+  'Annual income from work'
+)
+
+# Function to calculate the mode
+get_mode <- function(x) {
+  ux <- unique(x)  # Get unique values
+  ux[which.max(tabulate(match(x, ux)))]  # Return the value with the highest frequency
+}
+
+# Remove the redundant variables from the data
+desc_stats <- data.frame(
+  Variable = c('s04q18a', 's04q18b', 's04q28a', 's04q28b', 's04q29b', 's04q30c', 's04q42', 's04q43', 's04q58'),
+  Meaning = predictor_meaning,  # Add the meanings of the predictors
+    Mode = sapply(data[, c('s04q18a', 's04q18b', 's04q28a', 's04q28b', 's04q29b', 's04q30c', 's04q42', 's04q43', 's04q58')], get_mode),
+  Mean = sapply(data[, c('s04q18a', 's04q18b', 's04q28a', 's04q28b', 's04q29b', 's04q30c', 's04q42', 's04q43', 's04q58')], mean, na.rm = TRUE),
+  SD = sapply(data[, c('s04q18a', 's04q18b', 's04q28a', 's04q28b', 's04q29b', 's04q30c', 's04q42', 's04q43', 's04q58')], sd, na.rm = TRUE),
+  Min = sapply(data[, c('s04q18a', 's04q18b', 's04q28a', 's04q28b', 's04q29b', 's04q30c', 's04q42', 's04q43', 's04q58')], min, na.rm = TRUE),
+  Max = sapply(data[, c('s04q18a', 's04q18b', 's04q28a', 's04q28b', 's04q29b', 's04q30c', 's04q42', 's04q43', 's04q58')], max, na.rm = TRUE)
+)
+
+# Display the table using gt for nice formatting, excluding the redundant columns
+desc_stats %>%
+  gt() %>%
+  tab_header(
+    title = "Descriptive Statistics for Employment Variables"
+  ) %>%
+  cols_label(
+    Variable = "Predictor",
+    Meaning = "Meaning of Predictor",
+    Mode = "Mode",
+    Mean = "Mean",
+    SD = "Std. Deviation",
+    Min = "Minimum",
+    Max = "Maximum"
+  ) %>%
+  fmt_number(
+    columns = vars(Mode, Mean, SD, Min, Max),
+    decimals = 3
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) %>%
+  tab_options(
+    table.width = pct(100)
+  )
+```
+
+```{r}
+# Fit a linear regression model 
+est1 = lm(Total_bran ~ s04q18a + s04q18b + s04q28a + s04q28b + s04q29b + s04q30c + s04q42 + s04q43 + s04q58, data = data)
+
+# Get the summary of the regression model
+ols_summary1 <- summary(est1)
+
+# Extract the coefficients matrix
+coef_matrix1 <- ols_summary1$coefficients
+
+# Convert the coefficients matrix to a data frame
+coef_table1 <- as.data.frame(coef_matrix1)
+
+# Create a vector with the meanings of the predictors
+predictor_meaning <- c(
+  'Intercept',
+  'Branch of activity', 
+  'Socioprofessional category', 
+  'Main occupation',
+  'Secondary occupation', 
+  'Employment code', 
+  'Activity code', 
+  'Payslip received?', 
+  'Salary amount', 
+  'Annual income from work'
+)
+
+# Add the meanings to the coefficient table
+coef_table1$Meaning <- c(
+  'Intercept',
+  'Branch of activity', 
+  'Socioprofessional category', 
+  'Main occupation',
+  'Secondary occupation', 
+  'Employment code', 
+  'Activity code', 
+  'Payslip received?', 
+  'Salary amount', 
+  'Annual income from work'
+)
+
+# Convert row names to a column for better formatting
+coef_table1 <- tibble::rownames_to_column(coef_table1, var = "Variable")
+
+# Add a column to highlight significant variables based on p-value
+coef_table1 <- coef_table1 %>%
+  mutate(
+    Significant = ifelse(`Pr(>|t|)` < 0.05, "Significant", "Not Significant")
+  )
+
+
+# Display using gt
+gt(coef_table1) %>%
+  tab_header(title = "OLS Regression Results - Employment Variables") %>%
+  cols_label(
+    Variable = "Predictor",
+    Meaning = "Meaning of Predictor",  # Add a column for the meaning of each predictor
+    Estimate = "Estimate",
+    #`Std. Error` = "Standard Error",
+    `t value` = "t-value",
+    `Pr(>|t|)` = "p-value"
+  ) %>%
+  fmt_number(
+    columns = c(Estimate, `Std. Error`, `t value`, `Pr(>|t|)`),
+    decimals = 3
+  ) %>%
+  cols_align(
+    align = "left",
+    columns = c(Variable, Meaning)
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgreen"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Significant")
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgray"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Not Significant")
+  ) %>% 
+  tab_options(
+    table.width = pct(100)  # Adjust the width to 80% of the page
+  )
+
+```
+
+**Saving and Credits (Section 6)**:
+
+```{r}
+#| echo: false
+# Variables for Saving and Credits (Section 6)
+saving_credits_vars <- c('s06q01__1', 's06q01__2', 's06q01__3', 's06q01__4', 's06q01__5', 's06q02', 's06q03', 's06q05', 's06q07', 's06q12')
+
+# Meaning of the predictors for Saving and Credits
+predictor_meaning_saving_credits <- c(
+  'Bank account', 
+  'Postal account', 
+  'Microfinance account', 
+  'Mobile money', 
+  'Prepaid card', 
+  'Saved money', 
+  'Requested credit', 
+  'Took out a loan', 
+  'Member of a tontine', 
+  'Source of loan'
+)
+
+# Create a data frame for Descriptive Statistics using sapply
+desc_stats_saving_credits <- data.frame(
+  Variable = saving_credits_vars,
+  Meaning = predictor_meaning_saving_credits,
+  Mode = sapply(data[, saving_credits_vars], get_mode),
+  Mean = sapply(data[, saving_credits_vars], mean, na.rm = TRUE),
+  SD = sapply(data[, saving_credits_vars], sd, na.rm = TRUE),
+  Min = sapply(data[, saving_credits_vars], min, na.rm = TRUE),
+  Max = sapply(data[, saving_credits_vars], max, na.rm = TRUE)
+)
+
+# Display the table using gt for nice formatting
+desc_stats_saving_credits %>%
+  gt() %>%
+  tab_header(
+    title = "Descriptive Statistics for Saving and Credits"
+  ) %>%
+  cols_label(
+    Variable = "Predictor",
+    Mode = "Mode",
+    Meaning = "Meaning of Predictor",
+    Mean = "Mean",
+    SD = "Std. Deviation",
+    Min = "Minimum",
+    Max = "Maximum"
+  ) %>%
+  fmt_number(
+    columns = vars(Mode, Mean, SD, Min, Max),
+    decimals = 3
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) %>%
+  tab_options(
+    table.width = pct(100)
+  )
+
+
+```
+
+\
+
+```{r}
+# Fit an OLS regression model for Saving and Credits (you need to specify the dependent variable)
+est2 = lm(Total_bran ~ s06q01__1 + s06q01__2 + s06q01__3 + s06q01__4 + s06q01__5 + s06q02 + s06q03 + s06q05 + s06q07 + s06q12, data = data)
+
+# Get the summary of the regression model
+ols_summary2 <- summary(est2)
+
+# Extract the coefficients matrix
+coef_matrix2 <- ols_summary2$coefficients
+
+# Convert the coefficients matrix to a data frame
+coef_table2 <- as.data.frame(coef_matrix2)
+
+# Create a vector with the meanings of the predictors (for section 6)
+predictor_meaning_6 <- c(
+  'Intercept',
+  'Bank account', 
+  'Postal account', 
+  'Microfinance account', 
+  'Mobile money', 
+  'Prepaid card', 
+  'Saved money', 
+  'Requested credit', 
+  'Took out a loan', 
+  'Member of a tontine', 
+  'Source of loan'
+)
+
+# Add the meanings to the coefficient table (using the meanings defined earlier)
+coef_table2$Meaning <- predictor_meaning_6
+
+# Convert row names to a column for better formatting
+coef_table2 <- tibble::rownames_to_column(coef_table2, var = "Variable")
+
+# Add a column to highlight significant variables based on p-value
+coef_table2 <- coef_table2 %>%
+  mutate(
+    Significant = ifelse(`Pr(>|t|)` < 0.05, "Significant", "Not Significant")
+  )
+
+# Display using gt with color highlights for significant variables
+gt(coef_table2) %>%
+  tab_header(title = "OLS Regression Results - Saving and Credits") %>%
+  cols_label(
+    Variable = "Predictor",
+    Meaning = "Meaning of Predictor",  # Add a column for the meaning of each predictor
+    Estimate = "Estimate",
+    #`Std. Error` = "Standard Error",
+    `t value` = "t-value",
+    `Pr(>|t|)` = "p-value",
+    Significant = "Significance"
+  ) %>%
+  fmt_number(
+    columns = c(Estimate, `Std. Error`, `t value`, `Pr(>|t|)`),
+    decimals = 3
+  ) %>%
+  cols_align(
+    align = "left",
+    columns = c(Variable, Meaning)
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgreen"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Significant")
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgray"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Not Significant")
+  )
+
+```
+
+```{r}
+# PCA on the correlated variables
+pca_model <- prcomp(data[, c("s06q01__1", "s06q01__2", "s06q01__3", "s06q01__5")], scale = TRUE)
+# Add the first principal component (PC1) to your data
+data$PC1 <- pca_model$x[, 1]
+
+# Fit an OLS regression model for Saving and Credits (you need to specify the dependent variable)
+est22 = lm(Total_bran ~ PC1 + s06q02 + s06q03 + s06q05 + s06q07 + s06q12, data = data)
+
+# Get the summary of the regression model
+ols_summary22 <- summary(est22)
+
+# Extract the coefficients matrix
+coef_matrix22 <- ols_summary22$coefficients
+
+# Convert the coefficients matrix to a data frame
+coef_table22 <- as.data.frame(coef_matrix22)
+
+# Create a vector with the meanings of the predictors (for section 6)
+predictor_meaning_62 <- c(
+  'Intercept',
+  'Account ownership', 
+  'Saved money', 
+  'Requested credit', 
+  'Took out a loan', 
+  'Member of a tontine', 
+  'Source of loan'
+)
+
+# Add the meanings to the coefficient table (using the meanings defined earlier)
+coef_table22$Meaning <- predictor_meaning_62
+
+# Convert row names to a column for better formatting
+coef_table22 <- tibble::rownames_to_column(coef_table22, var = "Variable")
+
+# Add a column to highlight significant variables based on p-value
+coef_table22 <- coef_table22 %>%
+  mutate(
+    Significant = ifelse(`Pr(>|t|)` < 0.05, "Significant", "Not Significant")
+  )
+
+# Display using gt with color highlights for significant variables
+gt(coef_table22) %>%
+  tab_header(title = "OLS Regression Results - Saving and Credits (Postal account)") %>%
+  cols_label(
+    Variable = "Predictor",
+    Meaning = "Meaning of Predictor",  # Add a column for the meaning of each predictor
+    Estimate = "Estimate",
+    #`Std. Error` = "Standard Error",
+    `t value` = "t-value",
+    `Pr(>|t|)` = "p-value",
+    Significant = "Significance"
+  ) %>%
+  fmt_number(
+    columns = c(Estimate, `Std. Error`, `t value`, `Pr(>|t|)`),
+    decimals = 3
+  ) %>%
+  cols_align(
+    align = "left",
+    columns = c(Variable, Meaning)
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgreen"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Significant")
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgray"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Not Significant")
+  )
+```
+
+```{r}
+# PCA on the correlated variables
+pca_model <- prcomp(data[, c("s06q01__1", "s06q01__2", "s06q01__3", "s06q01__5")], scale = TRUE)
+
+# Summary of PCA
+summary(pca_model)
+# Print the loadings of PC1
+pca_model$rotation[, 1]
+
+
+```
+
+**Nonagricultural Enterprises (Section 10a & 10b)**:
+
+```{r}
+#| echo: false
+# Variables for Nonagricultural Enterprises (Section 10a & 10b)
+nonagricultural_vars <- c('s10q04', 's10q05', 's10q06', 's10q08', 's10q17a', 's10q31', 's10q34')
+
+# Meaning of the predictors for Nonagricultural Enterprises
+predictor_meaning_nonagricultural <- c(
+  'Construction business', 
+  'Retail business', 
+  'Liberal profession', 
+  'Restaurant ownership', 
+  'Business activity branch', 
+  'Business registered?', 
+  'Source of business funding'
+)
+
+# Create a data frame for Descriptive Statistics using sapply
+desc_stats_nonagricultural <- data.frame(
+  Variable = nonagricultural_vars,
+  Meaning = predictor_meaning_nonagricultural,
+  Mode =  sapply(data[, nonagricultural_vars], get_mode),
+  Mean = sapply(data[, nonagricultural_vars], mean, na.rm = TRUE),
+  SD = sapply(data[, nonagricultural_vars], sd, na.rm = TRUE),
+  Min = sapply(data[, nonagricultural_vars], min, na.rm = TRUE),
+  Max = sapply(data[, nonagricultural_vars], max, na.rm = TRUE)
+)
+
+# Display the table using gt for nice formatting
+desc_stats_nonagricultural %>%
+  gt() %>%
+  tab_header(
+    title = "Descriptive Statistics for Nonagricultural Enterprises"
+  ) %>%
+  cols_label(
+    Variable = "Predictor",
+    Meaning = "Meaning of Predictor",
+    Mode = "Mode",
+    Mean = "Mean",
+    SD = "Std. Deviation",
+    Min = "Minimum",
+    Max = "Maximum"
+  ) %>%
+  fmt_number(
+    columns = vars(Mode, Mean, SD, Min, Max),
+    decimals = 3
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) %>%
+  tab_options(
+    table.width = pct(100)
+  )
+
+```
+
+```{r}
+# Fit an OLS regression model for Nonagricultural Enterprises (you need to specify the dependent variable)
+est3 = lm(Total_bran ~ s10q04 + s10q05 + s10q06 + s10q08 + s10q17a + s10q31 + s10q34, data = data)
+
+# Get the summary of the regression model
+ols_summary3 <- summary(est3)
+
+# Extract the coefficients matrix
+coef_matrix3 <- ols_summary3$coefficients
+
+# Convert the coefficients matrix to a data frame
+coef_table3 <- as.data.frame(coef_matrix3)
+
+# Create a vector with the meanings of the predictors (for section 10a and 10b)
+predictor_meaning_10 <- c(
+  'Intercept',
+  'Construction business', 
+  'Retail business', 
+  'Liberal profession', 
+  'Restaurant ownership', 
+  'Business activity branch', 
+  'Business registered?', 
+  'Source of business funding'
+)
+
+
+# Add the meanings to the coefficient table (using the meanings defined earlier)
+coef_table3$Meaning <- predictor_meaning_10
+
+# Convert row names to a column for better formatting
+coef_table3 <- tibble::rownames_to_column(coef_table3, var = "Variable")
+
+# Add a column to highlight significant variables based on p-value
+coef_table3 <- coef_table3 %>%
+  mutate(
+    Significant = ifelse(`Pr(>|t|)` < 0.05, "Significant", "Not Significant")
+  )
+
+# Display using gt with color highlights for significant variables
+gt(coef_table3) %>%
+  tab_header(title = "OLS Regression Results - Nonagricultural Enterprises") %>%
+  cols_label(
+    Variable = "Predictor",
+    Meaning = "Meaning of Predictor",  # Add a column for the meaning of each predictor
+    Estimate = "Estimate",
+    #`Std. Error` = "Standard Error",
+    `t value` = "t-value",
+    `Pr(>|t|)` = "p-value",
+    Significant = "Significance"
+  ) %>%
+  fmt_number(
+    columns = c(Estimate, `Std. Error`, `t value`, `Pr(>|t|)`),
+    decimals = 3
+  ) %>%
+  cols_align(
+    align = "left",
+    columns = c(Variable, Meaning)
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgreen"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Significant")
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgray"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Not Significant")
+  )
+
+```
+
+**Household's Assets (Section 12)**:
+
+```{r}
+#| echo: false
+# Create a data frame for Descriptive Statistics
+desc_stats <- data.frame(
+  Variable = c('s12q02'),
+  Meaning = c('Functional equipments?'),
+  Mean = mean(data$s12q02, na.rm = TRUE),  
+  SD = sd(data$s12q02, na.rm = TRUE),     
+  Min = min(data$s12q02, na.rm = TRUE),  
+  Max = max(data$s12q02, na.rm = TRUE)     
+)
+
+# Display the table using gt for nice formatting, excluding the redundant columns
+desc_stats %>%
+  gt() %>%
+  tab_header(
+    title = "Descriptive Statistics for Household Assets"
+  ) %>%
+  cols_label(
+    Variable = "Predictor",
+    Meaning = "Meaning of Predictor",
+    Mean = "Mean",
+    SD = "Std. Deviation",
+    Min = "Minimum",
+    Max = "Maximum"
+  ) %>%
+  fmt_number(
+    columns = vars(Mean, SD, Min, Max),
+    decimals = 3
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) %>%
+  tab_options(
+    table.width = pct(100)
+  )
+
+```
+
+\
+
+```{r}
+# Fit an OLS regression model for Household's Assets (you need to specify the dependent variable)
+est4 = lm(Total_bran ~ s12q02, data = data)
+
+# Get the summary of the regression model
+ols_summary4 <- summary(est4)
+
+# Extract the coefficients matrix
+coef_matrix4 <- ols_summary4$coefficients
+
+# Convert the coefficients matrix to a data frame
+coef_table4 <- as.data.frame(coef_matrix4)
+
+predictor_meaning_12 <- c(
+  'Intercept',
+  'Functional equipments?'
+)
+
+# Add the meanings to the coefficient table (using the meanings defined earlier)
+coef_table4$Meaning <- predictor_meaning_12
+
+# Convert row names to a column for better formatting
+coef_table4 <- tibble::rownames_to_column(coef_table4, var = "Variable")
+
+# Add a column to highlight significant variables based on p-value
+coef_table4 <- coef_table4 %>%
+  mutate(
+    Significant = ifelse(`Pr(>|t|)` < 0.05, "Significant", "Not Significant")
+  )
+
+# Display using gt with color highlights for significant variables
+gt(coef_table4) %>%
+  tab_header(title = "OLS Regression Results - Household's Assets") %>%
+  cols_label(
+    Variable = "Predictor",
+    Meaning = "Meaning of Predictor",  # Add a column for the meaning of each predictor
+    Estimate = "Estimate",
+    #`Std. Error` = "Standard Error",
+    `t value` = "t-value",
+    `Pr(>|t|)` = "p-value",
+    Significant = "Significance"
+  ) %>%
+  fmt_number(
+    columns = c(Estimate, `Std. Error`, `t value`, `Pr(>|t|)`),
+    decimals = 3
+  ) %>%
+  cols_align(
+    align = "left",
+    columns = c(Variable, Meaning)
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgreen"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Significant")
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgray"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Not Significant")
+  )
+
+```
+
+**Transfers (Section 13_1 & 13_2)**:
+
+```{r}
+#| echo: false
+# Variables for Transfers (Section 13_1 & 13_2)
+transfers_vars <- c('s13q09', 's13q20', 's13q21', 's13q22a', 's13q22b')
+
+# Meaning of the predictors for Transfers
+predictor_meaning_transfers <- c(
+  'Transfer received',
+  'Reason for the transfer',
+  'Mode of transfer',
+  'Amount received',
+  'Frequency of transfers'
+)
+
+# Create a data frame for Descriptive Statistics using sapply
+desc_stats_transfers <- data.frame(
+  Variable = transfers_vars,
+  Meaning = predictor_meaning_transfers,
+  Mode = sapply(data[, transfers_vars], get_mode),
+  Mean = sapply(data[, transfers_vars], mean, na.rm = TRUE),
+  SD = sapply(data[, transfers_vars], sd, na.rm = TRUE),
+  Min = sapply(data[, transfers_vars], min, na.rm = TRUE),
+  Max = sapply(data[, transfers_vars], max, na.rm = TRUE)
+)
+
+# Display the table using gt for nice formatting
+desc_stats_transfers %>%
+  gt() %>%
+  tab_header(
+    title = "Descriptive Statistics for Transfers"
+  ) %>%
+  cols_label(
+    Variable = "Predictor",
+    Meaning = "Meaning of Predictor",
+    Mode = "Mode",
+    Mean = "Mean",
+    SD = "Std. Deviation",
+    Min = "Minimum",
+    Max = "Maximum"
+  ) %>%
+  fmt_number(
+    columns = vars(Mode,Mean, SD, Min, Max),
+    decimals = 3
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) %>%
+  tab_options(
+    table.width = pct(100)
+  )
+
+```
+
+```{r}
+# Fit an OLS regression model for Transfers (you need to specify the dependent variable)
+est5 = lm(Total_bran ~ s13q09 + s13q20 + s13q21 + s13q22a + s13q22b, data = data)
+
+# Get the summary of the regression model
+ols_summary5 <- summary(est5)
+
+# Extract the coefficients matrix
+coef_matrix5 <- ols_summary5$coefficients
+
+# Convert the coefficients matrix to a data frame
+coef_table5 <- as.data.frame(coef_matrix5)
+
+predictor_meaning_13 <- c(
+  'Intercept',
+  'Transfer received',
+  'Reason for the transfer',
+  'Mode of transfer',
+  'Amount received',
+  'Frequency of transfers'
+)
+# Add the meanings to the coefficient table (using the meanings defined earlier)
+coef_table5$Meaning <- predictor_meaning_13
+
+# Convert row names to a column for better formatting
+coef_table5 <- tibble::rownames_to_column(coef_table5, var = "Variable")
+
+# Add a column to highlight significant variables based on p-value
+coef_table5 <- coef_table5 %>%
+  mutate(
+    Significant = ifelse(`Pr(>|t|)` < 0.05, "Significant", "Not Significant")
+  )
+
+# Display using gt with color highlights for significant variables
+gt(coef_table5) %>%
+  tab_header(title = "OLS Regression Results - Transfers") %>%
+  cols_label(
+    Variable = "Predictor",
+    Meaning = "Meaning of Predictor",  # Add a column for the meaning of each predictor
+    Estimate = "Estimate",
+    #`Std. Error` = "Standard Error",
+    `t value` = "t-value",
+    `Pr(>|t|)` = "p-value",
+    Significant = "Significance"
+  ) %>%
+  fmt_number(
+    columns = c(Estimate, `Std. Error`, `t value`, `Pr(>|t|)`),
+    decimals = 3
+  ) %>%
+  cols_align(
+    align = "left",
+    columns = c(Variable, Meaning)
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgreen"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Significant")
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgray"),
+    locations = cells_body(columns = "Significant", rows = Significant == "Not Significant")
+  )
+
+```
+
+```{r}
+vif(est1)
+vif(est2)
+vif(est3)
+vif(est5)
+```
+
+VIF values greater than 10 often suggest that the corresponding variables are highly correlated with other predictors in the model.
+
+`s06q01__1` has a VIF of **152.11**
+
+`s06q01__2` has a VIF of **626.68**
+
+`s06q01__3` has a VIF of **203.24**
+
+`s06q01__5` has a VIF of **505.47**
+
+To mitigate the issue, we employ PCA (see above).
